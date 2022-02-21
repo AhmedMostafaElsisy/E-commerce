@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-//
 class _ToastAnimatedWidget extends StatefulWidget {
-  const _ToastAnimatedWidget({Key? key, required this.child}) : super(key: key);
+  const _ToastAnimatedWidget(
+      {Key? key, required this.child, required this.isVisible})
+      : super(key: key);
 
   final Widget child;
+  final bool isVisible;
 
   @override
   _ToastWidgetState createState() => _ToastWidgetState();
@@ -12,7 +16,7 @@ class _ToastAnimatedWidget extends StatefulWidget {
 
 class _ToastWidgetState extends State<_ToastAnimatedWidget>
     with SingleTickerProviderStateMixin {
-  bool get _isVisible => true; //update this value later
+  bool get _isVisible => widget.isVisible;
 
   @override
   void initState() {
@@ -31,32 +35,28 @@ class _ToastWidgetState extends State<_ToastAnimatedWidget>
   }
 }
 
-class Toast {
-  static void show(
-    String msg,
-    BuildContext context, {
-    Color backgroundColor = const Color.fromRGBO(0, 0, 0, 0.6),
-    Color textColor = Colors.white,
-  }) {
+class CustomToast {
+  static void show(String msg, BuildContext context,
+      {Color backgroundColor = const Color.fromRGBO(0, 0, 0, 0.6),
+      Color textColor = Colors.white}) {
     dismiss();
-    Toast._createView(msg, context, backgroundColor, textColor);
+    CustomToast._createView(msg, context, backgroundColor, textColor);
   }
 
   static OverlayEntry? _overlayEntry;
   static bool isVisible = false;
 
-  static void _createView(
-    String msg,
-    BuildContext context,
-    Color background,
-    Color textColor,
-  ) async {
+  static void _createView(String msg, BuildContext context, Color background,
+      Color textColor) async {
     OverlayState? overlayState = Overlay.of(context);
 
     final themeData = Theme.of(context);
 
+    isVisible = true;
+
     _overlayEntry = OverlayEntry(
       builder: (BuildContext context) => _ToastAnimatedWidget(
+        isVisible: isVisible,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Container(
@@ -81,7 +81,7 @@ class Toast {
         ),
       ),
     );
-    isVisible = true;
+
     overlayState!.insert(_overlayEntry!);
   }
 
@@ -90,6 +90,6 @@ class Toast {
       return;
     }
     isVisible = false;
-    _overlayEntry!.remove();
+    Timer(const Duration(milliseconds: 2500), () => _overlayEntry!.remove());
   }
 }

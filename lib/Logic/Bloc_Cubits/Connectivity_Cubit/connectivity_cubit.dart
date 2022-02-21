@@ -75,9 +75,7 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
   /// check the connection between the wifi and internet
   Future<void> checkConnection() async {
     try {
-      Response response = await DioHelper.dio.get(
-        'https://www.google.com',
-      );
+      Response response = await DioHelper.dio.get('https://www.google.com');
       if (response.statusCode == 200) {
         emit(InternetConnected());
       } else {

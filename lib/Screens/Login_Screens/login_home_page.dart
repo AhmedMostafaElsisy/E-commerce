@@ -1,11 +1,12 @@
 import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Data/enums.dart';
-import 'package:default_repo_app/Data/validators.dart';
+import 'package:default_repo_app/Data/Validators/enums.dart';
+import 'package:default_repo_app/Data/Validators/validators.dart';
 import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'package:default_repo_app/Screens/App_Main_Page/app_main_page.dart';
+import 'package:default_repo_app/Widgets/Toast_Widgets/common_toast_wiaget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:default_repo_app/Widgets/common_text_form_field_widget.dart';
@@ -119,10 +120,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
               getSpaceHeight(20),
               MaterialButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(const SnackBar(content: Text('Done')));
-                  }
+                  // if (_formKey.currentState!.validate()) {
+                  //   ScaffoldMessenger.of(context)
+                  //       .showSnackBar(const SnackBar(content: Text('Done')));
+                  // }
+
+                  CustomToast.show('msg', context);
                 },
                 child: Text(AppLocalizations.of(context)!.lblValidate),
               ),

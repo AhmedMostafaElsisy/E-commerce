@@ -1,6 +1,3 @@
-// class Validators {
-import 'package:flutter/material.dart';
-
 import 'enums.dart';
 
 final RegExp emailRegExp = RegExp(
@@ -76,5 +73,3 @@ PasswordValidationResults validatePassword(String password) {
   }
   return PasswordValidationResults.valid;
 }
-
-// }

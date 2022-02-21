@@ -7,7 +7,7 @@ import 'route_names.dart';
 
 class RouteGenerator {
   static Route generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       case RouteNames.splashPageRoute:

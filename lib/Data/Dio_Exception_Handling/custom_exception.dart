@@ -1,3 +1,5 @@
+import 'exception_enums.dart';
+
 class CustomException implements Exception {
   CustomStatusCodeErrorType type;
   String errorMassage;
@@ -9,19 +11,4 @@ class CustomException implements Exception {
   String toString() {
     return 'SomeThing Wrong Happen: \n$type';
   }
-}
-
-enum CustomStatusCodeErrorType {
-  init,
-  server,
-  internet,
-  gatWay,
-  redirection,
-  connectTimeout,
-  receiveTimeout,
-  sendTimeout,
-  badRequest,
-  unExcepted,
-  unVerified,
-  notFound,
 }

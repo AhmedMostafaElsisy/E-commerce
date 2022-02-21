@@ -48,7 +48,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MultiBlocProvidersPage(body: HomeMaterialApp());
+    return const MultiBlocProvidersPage(
+      body: HomeMaterialApp(),
+    );
   }
 }
 
@@ -58,6 +60,7 @@ class HomeMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ConnectivityCubit, ConnectivityState>(
+      listener: (connectivityCxt, connectivityState) {},
       builder: (connectivityCxt, connectivityState) {
         return BlocConsumer<LangCubit, LangState>(
           listener: (context, appState) {},
@@ -79,6 +82,7 @@ class HomeMaterialApp extends StatelessWidget {
                   SharedText.deviceType = deviceInfo;
                   SharedText.currentLocale =
                       LangCubit.get(context).appLocal!.languageCode;
+
                   return const SplashHomePage();
                 },
               ),
@@ -86,7 +90,6 @@ class HomeMaterialApp extends StatelessWidget {
           },
         );
       },
-      listener: (connectivityCxt, connectivityState) {},
     );
   }
 }

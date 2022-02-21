@@ -1,10 +1,11 @@
+import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class TriangleCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = const Color.fromARGB(255, 243, 33, 36)
+      ..color = AppConstants.mainColor
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 

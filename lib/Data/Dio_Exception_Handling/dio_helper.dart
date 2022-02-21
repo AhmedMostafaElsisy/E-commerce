@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'custom_exception.dart';
 import 'dio_exception.dart';
+import 'exception_enums.dart';
 
 class DioHelper {
   static late Dio dio;

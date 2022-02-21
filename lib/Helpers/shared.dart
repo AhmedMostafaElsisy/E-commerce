@@ -66,30 +66,3 @@ SizedBox getSpaceWidth(double width) {
   double currentWidth = SharedText.screenWidth * (width / 375);
   return SizedBox(width: currentWidth);
 }
-
-// /// Phone Number Validation
-// String? phoneValidator(String phoneNumber) {
-//   String pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
-//   RegExp regExp = RegExp(pattern);
-//   if (phoneNumber.isEmpty) {
-//     return 'Please enter mobile number';
-//   } else if (!regExp.hasMatch(phoneNumber)) {
-//     return 'Please enter a valid mobile number';
-//   } else {
-//     return null;
-//   }
-// }
-//
-// /// Email Validation
-// String? emailValidator(String email) {
-//   String pattern =
-//       r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-//   RegExp regExp = RegExp(pattern);
-//   if (email.isEmpty) {
-//     return 'Please enter an email';
-//   } else if (!regExp.hasMatch(email)) {
-//     return 'Please enter a valid email';
-//   } else {
-//     return null;
-//   }
-// }

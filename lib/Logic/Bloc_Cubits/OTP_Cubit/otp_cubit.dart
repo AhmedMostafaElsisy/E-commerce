@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_exception.dart';
-import 'package:default_repo_app/Data/Dio_Exception_Handling/dio_helper.dart';
+
+import 'package:default_repo_app/Data/Dio_Exception_Handling/exception_enums.dart';import 'package:default_repo_app/Data/Dio_Exception_Handling/dio_helper.dart';
 import 'package:default_repo_app/Helpers/flutter_secured_storage.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Models/user_base_model.dart';

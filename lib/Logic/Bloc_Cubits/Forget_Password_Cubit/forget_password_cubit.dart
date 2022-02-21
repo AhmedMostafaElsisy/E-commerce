@@ -1,5 +1,5 @@
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_exception.dart';
+import 'package:default_repo_app/Data/Dio_Exception_Handling/exception_enums.dart';
 import 'package:default_repo_app/Logic/Repositories/forget_password_repository.dart';
 import 'package:default_repo_app/Logic/Repositories/user_repository.dart';
 import 'package:flutter/material.dart';

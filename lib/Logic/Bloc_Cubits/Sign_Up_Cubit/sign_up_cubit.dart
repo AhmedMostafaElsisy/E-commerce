@@ -1,8 +1,4 @@
-import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_exception.dart';
-import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:default_repo_app/Logic/Models/user_base_model.dart';
-import 'package:default_repo_app/Logic/Repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'sign_up_states.dart';
@@ -15,7 +11,7 @@ class SignUpCubit extends Cubit<SignUpStates> {
   SignUpCubit() : super(SignUpStatesInit());
 
   static SignUpCubit get(context) => BlocProvider.of(context);
-  final UserRepository _userRepo = UserRepository();
+  // final UserRepository _userRepo = UserRepository();
 
   /// user singUp
   // singUp() async {
