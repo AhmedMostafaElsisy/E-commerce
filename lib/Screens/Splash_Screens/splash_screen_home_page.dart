@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:default_repo_app/Screens/App_Main_Page/app_main_page.dart';
+import 'package:default_repo_app/Widgets/Loader_Widgets/scale_transition_loader_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:default_repo_app/Helpers/shared.dart';
@@ -20,7 +21,7 @@ class _SplashPageState extends State<SplashHomePage>
 
   Future goToHomePage() async {
     Timer(
-        const Duration(milliseconds: 3500),
+        const Duration(milliseconds: 10000),
         () => Navigator.pushReplacementNamed(
             context, RouteNames.loginHomePageRoute));
   }
@@ -30,7 +31,7 @@ class _SplashPageState extends State<SplashHomePage>
     super.initState();
 
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2000));
+        vsync: this, duration: const Duration(milliseconds: 10000));
     scaleAnimation =
         CurvedAnimation(parent: controller!, curve: Curves.easeInOutCirc);
 
@@ -46,26 +47,27 @@ class _SplashPageState extends State<SplashHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPage(
-      pageContent: Center(
-        child: Material(
-          color: Colors.transparent,
-          child: ScaleTransition(
-            scale: scaleAnimation!,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/splash.png',
-                    fit: BoxFit.contain,
-                    height: getWidgetHeight(78),
-                    width: getWidgetWidth(237)),
-                getSpaceHeight(getWidgetHeight(90.86)),
-                Text(AppLocalizations.of(context)!.title),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return const AppMainPage(
+      pageContent: ScaleTransitionAnimation(),
+      // pageContent: Center(
+      //   child: Material(
+      //     color: Colors.transparent,
+      //     child: ScaleTransition(
+      //       scale: scaleAnimation!,
+      //       child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           Image.asset('assets/images/splash.png',
+      //               fit: BoxFit.contain,
+      //               height: getWidgetHeight(78),
+      //               width: getWidgetWidth(237)),
+      //           getSpaceHeight(getWidgetHeight(90.86)),
+      //           Text(AppLocalizations.of(context)!.title),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

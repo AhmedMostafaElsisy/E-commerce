@@ -6,7 +6,9 @@ import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'package:default_repo_app/Screens/App_Main_Page/app_main_page.dart';
-import 'package:default_repo_app/Widgets/Toast_Widgets/common_toast_wiaget.dart';
+import 'package:default_repo_app/Widgets/Loader_Widgets/circle_loader_widget.dart';
+import 'package:default_repo_app/Widgets/Loader_Widgets/common_toast_wiaget.dart';
+import 'package:default_repo_app/Widgets/Loader_Widgets/scale_transition_loader_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:default_repo_app/Widgets/common_text_form_field_widget.dart';
@@ -125,7 +127,13 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   //       .showSnackBar(const SnackBar(content: Text('Done')));
                   // }
 
-                  CustomToast.show('msg', context);
+                  // CustomToast.show('msg', context);
+
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Loader();
+                      });
                 },
                 child: Text(AppLocalizations.of(context)!.lblValidate),
               ),
