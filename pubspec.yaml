@@ -76,6 +76,9 @@ dependencies:
   # Icons
   fluttericon: ^2.0.0
 
+  # Socket
+  flutter_io_socket: ^0.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
