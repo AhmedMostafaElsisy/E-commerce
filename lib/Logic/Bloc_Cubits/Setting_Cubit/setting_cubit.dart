@@ -1,10 +1,9 @@
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-
-import 'package:default_repo_app/Data/Dio_Exception_Handling/exception_enums.dart';import 'package:default_repo_app/Logic/Models/faq_model.dart';
-import 'package:default_repo_app/Logic/Models/terms_model.dart';
-import 'package:default_repo_app/Logic/Repositories/setting_repository.dart';
+import 'package:default_repo_app/Data/Enums/exception_enums.dart';
+import 'package:default_repo_app/Data/Models/faq_model.dart';
+import 'package:default_repo_app/Data/Models/terms_model.dart';
+import 'package:default_repo_app/Data/Repositories/setting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'setting_states.dart';
 
 class SettingCubit extends Cubit<SettingCubitStates> {

@@ -2,6 +2,7 @@ import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'Data/Repositories/user_repository.dart';
 import 'Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'Logic/Bloc_Cubits/Help_Cubit/help_cubit.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
@@ -10,7 +11,6 @@ import 'Logic/Bloc_Cubits/OTP_Cubit/otp_cubit.dart';
 import 'Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'Logic/Bloc_Cubits/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'Logic/Repositories/user_repository.dart';
 
 class MultiBlocProvidersPage extends StatefulWidget {
   final Widget body;

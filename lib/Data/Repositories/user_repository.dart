@@ -1,7 +1,7 @@
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_exception.dart';
 import 'package:default_repo_app/Data/Dio_Exception_Handling/dio_helper.dart';
-import 'package:default_repo_app/Logic/Models/base_model.dart';
+import 'package:default_repo_app/Data/Models/base_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

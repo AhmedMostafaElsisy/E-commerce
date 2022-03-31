@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
 
-import 'package:default_repo_app/Data/Dio_Exception_Handling/exception_enums.dart';import 'package:default_repo_app/Data/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Enums/exception_enums.dart';import 'package:default_repo_app/Data/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/Data/Repositories/otp_repository.dart';
 import 'package:default_repo_app/Helpers/flutter_secured_storage.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
-import 'package:default_repo_app/Logic/Models/user_base_model.dart';
-import 'package:default_repo_app/Logic/Repositories/otp_repository.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'otp_states.dart';

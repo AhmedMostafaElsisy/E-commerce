@@ -1,6 +1,7 @@
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Logic/Models/faq_model.dart';
-import 'package:default_repo_app/Logic/Models/terms_model.dart';
+import 'package:default_repo_app/Data/Models/faq_model.dart';
+import 'package:default_repo_app/Data/Models/terms_model.dart';
+
 
 abstract class SettingCubitStates {}
 

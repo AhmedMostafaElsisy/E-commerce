@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:default_repo_app/Logic/Models/user_base_model.dart';
+import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:flutter/material.dart';
 
 import 'flutter_secured_storage.dart';

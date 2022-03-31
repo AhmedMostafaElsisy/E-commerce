@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:default_repo_app/Data/Dio_Exception_Handling/custom_error.dart';
-
-import 'package:default_repo_app/Data/Dio_Exception_Handling/exception_enums.dart';import 'package:default_repo_app/Helpers/flutter_secured_storage.dart';
+import 'package:default_repo_app/Data/Enums/exception_enums.dart';
+import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/Data/Repositories/user_repository.dart';
+import 'package:default_repo_app/Helpers/flutter_secured_storage.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
-import 'package:default_repo_app/Logic/Models/user_base_model.dart';
-import 'package:default_repo_app/Logic/Repositories/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';

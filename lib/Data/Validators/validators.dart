@@ -1,4 +1,5 @@
-import 'enums.dart';
+import 'package:default_repo_app/Data/Enums/auth_validations_enmu.dart';
+
 
 final RegExp emailRegExp = RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]+");
