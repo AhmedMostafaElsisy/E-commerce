@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:default_repo_app/Shapes/circle_loader_shape.dart';
+import 'package:default_repo_app/Presentation/Shapes/circle_loader_shape.dart';
 import 'package:flutter/material.dart';
 
 class Loader extends StatefulWidget {

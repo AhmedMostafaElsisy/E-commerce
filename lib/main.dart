@@ -24,7 +24,6 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
-
   BlocOverrides.runZoned(
     () => runApp(const MyApp()),
     blocObserver: MyBlocObserver(),

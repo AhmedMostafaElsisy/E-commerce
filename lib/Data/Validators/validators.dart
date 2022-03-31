@@ -1,4 +1,4 @@
-import 'package:default_repo_app/Data/Enums/auth_validations_enmu.dart';
+import 'package:default_repo_app/Constants/Enums/auth_validations_enmu.dart';
 
 
 final RegExp emailRegExp = RegExp(

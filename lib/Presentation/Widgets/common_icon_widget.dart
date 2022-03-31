@@ -1,4 +1,4 @@
-import 'package:default_repo_app/Helpers/Responsive_UI/enums.dart';
+import 'package:default_repo_app/Constants/Enums/device_enums.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:flutter/material.dart';
 

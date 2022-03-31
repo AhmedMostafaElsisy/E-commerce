@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:flutter/material.dart';
 
-import 'flutter_secured_storage.dart';
+import '../Data/Source/flutter_secured_storage.dart';
 import 'shared_texts.dart';
 
-TextEditingController nameController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
-TextEditingController phoneController = TextEditingController();
 
 /// Hide Keyboard
 void hideKeyboard(BuildContext context) =>
