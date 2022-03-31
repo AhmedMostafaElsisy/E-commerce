@@ -78,13 +78,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
         ));
       } else {
         baseUser = UserBaseModel.fromJson(result.data);
-        String jEncode = json.encode(baseUser.toJson());
-
-        await DefaultSecuredStorage.setUserMap(jEncode);
-
-        await DefaultSecuredStorage.setIsLogged('true');
-
-        SharedText.currentUser = baseUser;
+         _repo.updateLocalUser(baseUser: baseUser);
 
         emit(ProfileUpdateSuccessState(massage: result.message));
 

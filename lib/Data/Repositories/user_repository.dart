@@ -1,10 +1,14 @@
 import 'package:default_repo_app/Data/Models/base_model.dart';
+import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
 import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_exception.dart';
 import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Source/flutter_secured_storage.dart';
+import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
 
 class UserRepository {
   BaseModel baseModel = BaseModel();
@@ -202,5 +206,15 @@ class UserRepository {
           type: ex.type, imgPath: ex.imgPath, errorMassage: ex.errorMassage);
       return baseModel;
     }
+  }
+///Update local user map
+  void updateLocalUser({required UserBaseModel baseUser})async{
+    String jEncode = json.encode(baseUser.toJson());
+
+    await DefaultSecuredStorage.setUserMap(jEncode);
+
+    await DefaultSecuredStorage.setIsLogged('true');
+
+    SharedText.currentUser = baseUser;
   }
 }
