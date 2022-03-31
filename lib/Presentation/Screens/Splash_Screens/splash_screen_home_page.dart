@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'package:default_repo_app/Screens/App_Main_Page/app_main_page.dart';
-import 'package:default_repo_app/Widgets/Loader_Widgets/scale_transition_loader_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'package:default_repo_app/Helpers/shared.dart';
-import 'package:default_repo_app/Routes/route_names.dart';
+import 'package:default_repo_app/Presentation/Routes/route_names.dart';
+import 'package:default_repo_app/Presentation/Screens/App_Main_Page/app_main_page.dart';
+import 'package:default_repo_app/Presentation/Widgets/Loader_Widgets/scale_transition_loader_widget.dart';
 import 'package:flutter/material.dart';
 
 class SplashHomePage extends StatefulWidget {

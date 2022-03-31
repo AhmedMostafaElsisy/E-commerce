@@ -1,5 +1,6 @@
-import 'package:default_repo_app/Screens/Login_Screens/login_home_page.dart';
-import 'package:default_repo_app/Screens/Splash_Screens/splash_screen_home_page.dart';
+
+import 'package:default_repo_app/Presentation/Screens/Login_Screens/login_home_page.dart';
+import 'package:default_repo_app/Presentation/Screens/Splash_Screens/splash_screen_home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'route_animation.dart';

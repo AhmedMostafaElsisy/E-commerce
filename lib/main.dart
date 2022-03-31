@@ -13,8 +13,8 @@ import 'Helpers/Responsive_UI/ui_components.dart';
 import 'Helpers/shared_texts.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_states.dart';
-import 'Routes/route_generator.dart';
-import 'Screens/Splash_Screens/splash_screen_home_page.dart';
+import 'Presentation/Routes/route_generator.dart';
+import 'Presentation/Screens/Splash_Screens/splash_screen_home_page.dart';
 import 'multi_bloc_provider_page.dart';
 
 void main() async {
