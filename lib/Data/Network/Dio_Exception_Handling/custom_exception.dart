@@ -1,4 +1,5 @@
-import '../Enums/exception_enums.dart';
+import 'package:default_repo_app/Data/Enums/exception_enums.dart';
+
 
 class CustomException implements Exception {
   CustomStatusCodeErrorType type;

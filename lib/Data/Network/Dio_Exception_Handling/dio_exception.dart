@@ -1,7 +1,7 @@
+import 'package:default_repo_app/Data/Enums/exception_enums.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../Enums/exception_enums.dart';
 
 class DioExceptions implements Exception {
   /// custom Exceptions message
