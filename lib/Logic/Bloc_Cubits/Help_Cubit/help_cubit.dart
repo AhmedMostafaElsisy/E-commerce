@@ -1,8 +1,8 @@
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 
 import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
-import 'package:default_repo_app/Data/Repositories/help_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Data/Remote_Data/Repositories/help_repository.dart';
 import 'help_cubit_states.dart';
 
 class HelpCubit extends Cubit<HelpStates> {

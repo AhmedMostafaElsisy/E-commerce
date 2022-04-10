@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
-
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
-import 'package:default_repo_app/Data/Repositories/otp_repository.dart';
-import 'package:default_repo_app/Data/Source/flutter_secured_storage.dart';
+import 'package:default_repo_app/Data/Remote_Data/Repositories/otp_repository.dart';
+import 'package:default_repo_app/Data/local_source/flutter_secured_storage.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Data/Interfaces/otp_interface.dart';
 import 'otp_states.dart';
 
 class OtpCubit extends Cubit<OtpStates> {
@@ -17,11 +16,11 @@ class OtpCubit extends Cubit<OtpStates> {
 
   UserBaseModel get getUserModel => userModel;
 
-  OtpCubit() : super(OtpStatesInit());
+  OtpCubit(this._repo) : super(OtpStatesInit());
 
   static OtpCubit get(context) => BlocProvider.of(context);
 
-  final OtpRepository _repo = OtpRepository();
+  final OtpRepositoryInterface _repo ;
 
   /// user singUp
   verifyAccountOtp(
@@ -36,24 +35,19 @@ class OtpCubit extends Cubit<OtpStates> {
           error: _repo.errorMsg,
         ));
       } else {
-        UserBaseModel baseUser = UserBaseModel.fromJson(result.data["user"]);
-        debugPrint("user from response json is ${baseUser.name}");
-        userModel.id = baseUser.id;
-        userModel.image = baseUser.image;
-        userModel.name = baseUser.name;
-        userModel.phone = baseUser.phone;
-        userModel.email = baseUser.email;
-        userModel.accessToken = result.data['access_token'];
+        userModel= UserBaseModel.fromJson(result.data["user"]);
+        debugPrint("user from response json is ${userModel.name}");
+
         debugPrint("user after  is ${userModel.name}");
 
         DioHelper.dio.options.headers
-            .addAll({"Authorization": "Bearer ${userModel.accessToken}"});
+            .addAll({"Authorization": "Bearer ${result.data['access_token']}"});
         String jEncode = json.encode(userModel.toJson());
 
         await DefaultSecuredStorage.setUserMap(jEncode);
-        await DefaultSecuredStorage.setAccessToken(userModel.accessToken);
+        await DefaultSecuredStorage.setAccessToken(result.data['access_token']);
         await DefaultSecuredStorage.setIsLogged('true');
-        SharedText.userToken = userModel.accessToken!;
+        SharedText.userToken =result.data['access_token'];
         debugPrint("user model from response is ${userModel.name}");
         SharedText.currentUser = userModel;
         debugPrint("shared text model is ${SharedText.currentUser!.name}");

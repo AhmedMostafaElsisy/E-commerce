@@ -1,22 +1,20 @@
-import 'dart:convert';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
-import 'package:default_repo_app/Data/Repositories/user_repository.dart';
-import 'package:default_repo_app/Data/Source/flutter_secured_storage.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
+import '../../../Data/Interfaces/password_interface.dart';
+import '../../../Data/Interfaces/profile_interface.dart';
 import 'profile_states.dart';
 
 class ProfileCubit extends Cubit<ProfileCubitStates> {
-  ProfileCubit() : super(ProfileStatesInit());
+  ProfileCubit(this._repo,this._passwordRepo) : super(ProfileStatesInit());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
-  final UserRepository _repo = UserRepository();
+  final ProfileRepositoryInterface _repo ;
+  final PasswordRepositoryInterface _passwordRepo ;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -25,26 +23,6 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   bool isLoading = false;
   UserBaseModel baseUser = UserBaseModel();
 
-  set _imageFile(XFile? value) {
-    imageXFile = value;
-  }
-
-  pickImage() async {
-    try {
-      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile == null) {
-        imgChange = false;
-        emit(ProfileSuccessState(baseUser));
-      } else {
-        _imageFile = pickedFile;
-        imgChange = true;
-        emit(ProfileSuccessState(baseUser));
-      }
-    } catch (e) {
-      imgChange = false;
-      debugPrint('Error Fetching Image: $e');
-    }
-  }
 
   /// user Profile_Cubit data
   getUserProfileData() async {
@@ -78,7 +56,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
         ));
       } else {
         baseUser = UserBaseModel.fromJson(result.data);
-         _repo.updateLocalUser(baseUser: baseUser);
+         _repo.setLocalUserData(baseUser: baseUser);
 
         emit(ProfileUpdateSuccessState(massage: result.message));
 
@@ -98,7 +76,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
       isLoading = false;
       if (newPassword == confirmPassword) {
         isLoading = true;
-        var result = await _repo.changePassword(
+        var result = await _passwordRepo.changePassword(
             currentPassword: currentPassword,
             newPassword: newPassword,
             confirmPassword: confirmPassword);
@@ -124,4 +102,26 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
           error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
     }
   }
+
+  set _imageFile(XFile? value) {
+    imageXFile = value;
+  }
+
+  pickImage() async {
+    try {
+      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile == null) {
+        imgChange = false;
+        emit(ProfileSuccessState(baseUser));
+      } else {
+        _imageFile = pickedFile;
+        imgChange = true;
+        emit(ProfileSuccessState(baseUser));
+      }
+    } catch (e) {
+      imgChange = false;
+      debugPrint('Error Fetching Image: $e');
+    }
+  }
+
 }

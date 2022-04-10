@@ -15,62 +15,62 @@ final RegExp emailStartsSpecial = RegExp(
 RegExp myRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9]");
 
 /// Email Validation
-String? emailValidator(String email) {
+bool emailValidator(String email) {
   if (email.isEmpty) {
-    return 'Please enter an email';
+    return  false;
   } else if (!emailRegExp.hasMatch(email)) {
-    return 'Please enter a valid email';
+    return false;
   } else {
-    return null;
+    return true;
   }
 }
 
 /// Phone Number Validation
-String? phoneValidator(String phoneNumber) {
+bool phoneValidator(String phoneNumber) {
   if (phoneNumber.isEmpty) {
-    return 'Please enter mobile number';
+    return false;
   } else if (!phoneRegExp.hasMatch(phoneNumber)) {
-    return 'Please enter a valid mobile number';
+    return false;
   } else {
-    return null;
+    return true;
   }
 }
 
 /// Phone Validation
-PhoneValidationResults validatePhone(String phone) {
+bool validatePhone(String phone) {
   if (phone.isEmpty) {
-    return PhoneValidationResults.emptyPhone;
+    return false;
   }
   if (phone.length < 11) {
-    return PhoneValidationResults.tooShort;
+    return false;
   }
   if (!phoneRegExp.hasMatch(phone)) {
-    return PhoneValidationResults.notMatched;
+    return false;
   }
-  return PhoneValidationResults.valid;
+  return true;
 }
 
 /// Email Validation
-EmailValidationResults validateEmail(String email) {
+bool validateEmail(String email) {
   if (email.isEmpty) {
-    return EmailValidationResults.emptyEmail;
+    return false;
   }
   if (!emailRegExp.hasMatch(email)) {
-    return EmailValidationResults.notValid;
+    return false;
   }
   if (!email.startsWith(myRegExp, 0)) {
-    return EmailValidationResults.emailStartWith;
+    return false;
   }
-  return EmailValidationResults.valid;
+  return true;
 }
 
 /// Password Validation
-PasswordValidationResults validatePassword(String password) {
+bool validatePassword(String password) {
   if (password.isEmpty) {
-    return PasswordValidationResults.emptyPassword;
+    return false;
   }
   if (password.length < 6) {
-    return PasswordValidationResults.tooShort;
+    return false;
   }
-  return PasswordValidationResults.valid;
+  return true;
 }

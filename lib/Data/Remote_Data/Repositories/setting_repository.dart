@@ -1,15 +1,12 @@
-
 import 'package:default_repo_app/Data/Models/base_model.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_exception.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'package:dio/dio.dart';
+import '../Network/Dio_Exception_Handling/custom_exception.dart';
+import '../Network/Dio_Exception_Handling/dio_helper.dart';
+import '../Network/Dio_Exception_Handling/custom_error.dart';
+import '../../Interfaces/settings_interface.dart';
 
-class SettingRepository {
-  BaseModel baseModel = BaseModel();
-  CustomError? errorMsg;
-  bool isError = false;
-
+class SettingRepository extends SettingInterfaceRepository {
+  @override
   Future<BaseModel> getTermsAndConditions() async {
     isError = false;
 
@@ -34,6 +31,7 @@ class SettingRepository {
     }
   }
 
+  @override
   Future<BaseModel> getFqa() async {
     isError = false;
 

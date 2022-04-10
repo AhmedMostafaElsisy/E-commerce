@@ -54,7 +54,7 @@ class CommonTextFormFieldClass {
                 border: InputBorder.none,
                 hintText: hintText,
                 hintStyle: const TextStyle(color: Colors.grey),
-                prefixIcon: commonIcon(icon, prefixColor, 20.0, 40.0),
+                prefixIcon: commonIcon(icon, prefixColor, 20.0),
               ),
               validator: validator,
             ),

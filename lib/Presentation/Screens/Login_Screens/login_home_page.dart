@@ -1,6 +1,5 @@
 import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:default_repo_app/Constants/Enums/auth_validations_enmu.dart';
-import 'package:default_repo_app/Data/Validators/validators.dart';
 import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
@@ -15,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
+import '../../../Helpers/Validators/validators.dart';
+import '../../../Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
+
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);
 
@@ -27,6 +29,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<SettingCubit>(context).getFqaData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(

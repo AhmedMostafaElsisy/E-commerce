@@ -1,5 +1,5 @@
 import 'package:default_repo_app/Constants/Enums/auth_validations_enmu.dart';
-import 'package:default_repo_app/Data/Validators/validators.dart';
+import 'package:default_repo_app/Helpers/Validators/validators.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

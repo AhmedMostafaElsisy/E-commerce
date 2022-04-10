@@ -2,7 +2,11 @@ import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'Data/Repositories/user_repository.dart';
+import 'Data/Remote_Data/Repositories/ProfileRepository.dart';
+import 'Data/Remote_Data/Repositories/auth_repository.dart';
+import 'Data/Remote_Data/Repositories/otp_repository.dart';
+import 'Data/Remote_Data/Repositories/password_repository.dart';
+import 'Data/Remote_Data/Repositories/setting_repository.dart';
 import 'Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'Logic/Bloc_Cubits/Help_Cubit/help_cubit.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
@@ -17,6 +21,7 @@ class MultiBlocProvidersPage extends StatefulWidget {
 
   const MultiBlocProvidersPage({Key? key, required this.body})
       : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _MultiBlocProvidersPageState();
 }
@@ -32,13 +37,15 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             lazy: false, create: (_) => ConnectivityCubit()..initConnection()),
         BlocProvider<LoginCubit>(
             lazy: false,
-            create: (_) => LoginCubit(UserRepository())..startApp()),
-        BlocProvider<SignUpCubit>(create: (_) => SignUpCubit()),
-        BlocProvider<OtpCubit>(create: (_) => OtpCubit()),
-        BlocProvider<ForgetPasswordCubit>(create: (_) => ForgetPasswordCubit()),
-        BlocProvider<ProfileCubit>(create: (_) => ProfileCubit()),
+            create: (_) => LoginCubit(AuthRepository())..startApp()),
+        BlocProvider<SignUpCubit>(create: (_) => SignUpCubit(AuthRepository())),
+        BlocProvider<OtpCubit>(create: (_) => OtpCubit(OtpRepository())),
+        BlocProvider<ForgetPasswordCubit>(create: (_) => ForgetPasswordCubit(PasswordRepository())),
+        BlocProvider<ProfileCubit>(
+            create: (_) =>
+                ProfileCubit(ProfileRepository(), PasswordRepository())),
         BlocProvider<HelpCubit>(create: (_) => HelpCubit()),
-        BlocProvider<SettingCubit>(create: (_) => SettingCubit()),
+        BlocProvider<SettingCubit>(create: (_) => SettingCubit( SettingRepository())),
       ],
       child: widget.body,
     );

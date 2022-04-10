@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_exception.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_exception.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

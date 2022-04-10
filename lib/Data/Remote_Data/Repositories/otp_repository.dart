@@ -1,16 +1,17 @@
 import 'package:default_repo_app/Data/Models/base_model.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_exception.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../Interfaces/otp_interface.dart';
+import '../Network/Dio_Exception_Handling/custom_exception.dart';
+import '../Network/Dio_Exception_Handling/dio_helper.dart';
+import '../Network/Dio_Exception_Handling/custom_error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class OtpRepository {
-  BaseModel baseModel = BaseModel();
-  CustomError? errorMsg;
-  bool isError = false;
+
+class OtpRepository extends OtpRepositoryInterface {
+
 
   /// Verify OTP
+  @override
   Future<BaseModel> verifyAccount(
       {required String phoneNumber, required String code}) async {
     isError = false;
@@ -41,6 +42,7 @@ class OtpRepository {
   }
 
   /// singUp user to app
+  @override
   Future<BaseModel> forgetAccount({
     required String phoneNumber,
     required String code,

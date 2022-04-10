@@ -1,17 +1,17 @@
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
 import 'package:default_repo_app/Data/Models/faq_model.dart';
 import 'package:default_repo_app/Data/Models/terms_model.dart';
-import 'package:default_repo_app/Data/Repositories/setting_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Data/Interfaces/settings_interface.dart';
 import 'setting_states.dart';
 
 class SettingCubit extends Cubit<SettingCubitStates> {
-  SettingCubit() : super(SettingCubitStatesInit());
+  SettingCubit(this._repo) : super(SettingCubitStatesInit());
 
   static SettingCubit get(context) => BlocProvider.of(context);
 
-  final SettingRepository _repo = SettingRepository();
+  final SettingInterfaceRepository _repo;
 
   List<FqaModel> fqaList = [];
   TermsModel termsModel = TermsModel();
@@ -27,6 +27,7 @@ class SettingCubit extends Cubit<SettingCubitStates> {
         ));
       } else {
         fqaList = fqaListFromJson(result.data);
+        print("this fqa result data ${result.data}");
         emit(SettingCubitFqaSuccessState(fqaList: fqaList));
       }
     } catch (e) {

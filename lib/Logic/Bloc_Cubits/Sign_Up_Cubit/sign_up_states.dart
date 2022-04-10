@@ -1,5 +1,5 @@
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 
 abstract class SignUpStates {}
 

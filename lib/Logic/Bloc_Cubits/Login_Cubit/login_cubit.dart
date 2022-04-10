@@ -1,40 +1,33 @@
 import 'dart:convert';
 import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
-import 'package:default_repo_app/Data/Repositories/user_repository.dart';
-import 'package:default_repo_app/Data/Source/flutter_secured_storage.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/Data/local_source/flutter_secured_storage.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Data/Interfaces/auth_interface.dart';
 import 'login_states.dart';
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
 class LoginCubit extends Cubit<LoginStates> {
-  bool isLoading = false;
-  String message = '';
+  LoginCubit(this._userRepo) : super(LoginStatesInit());
 
   UserBaseModel userModel = UserBaseModel();
   UserBaseModel get getUserModel => userModel;
 
-  final UserRepository _userRepo;
-
-  LoginCubit(this._userRepo) : super(LoginStatesInit());
+  final AuthRepositoryInterface _userRepo;
 
   static LoginCubit get(context) => BlocProvider.of(context);
-
   startApp() async {
     emit(LoginIfFoundLoading());
-    isLoading = true;
 
     var result = await DefaultSecuredStorage.getIsLogged() ?? 'false';
 
     debugPrint("auth result is $result");
 
     if (result == 'true') {
-      isLoading = false;
-      message = 'Success';
       await updateUserDataFromLocalCached();
-      // print("token from local ${userModel.accessToken}");
+
       SharedText.userToken = (await DefaultSecuredStorage.getAccessToken())!;
       debugPrint("token from local ${SharedText.userToken}");
       DioHelper.dio.options.headers
@@ -43,9 +36,6 @@ class LoginCubit extends Cubit<LoginStates> {
           " here is option header${DioHelper.dio.options.headers.toString()}");
       emit(LoginSuccess(userModel));
     } else {
-      isLoading = false;
-      message = 'Failed';
-
       emit(LoginFailed());
     }
   }
@@ -57,11 +47,9 @@ class LoginCubit extends Cubit<LoginStates> {
 
     debugPrint("user from local   $userString");
     SharedText.currentUser = userModel;
-    userModel.accessToken = baseUserMap["access_token"];
     debugPrint('userModelFrom authentication ${userModel.name}');
   }
 
-  /// doctor to login
   login({required String phoneNumber, required String userPassword}) async {
     emit(UserLoginLoadingState());
     try {
@@ -84,17 +72,15 @@ class LoginCubit extends Cubit<LoginStates> {
 
         userModel = UserBaseModel.fromJson(result.data["user"]);
 
-        userModel.accessToken = result.data['access_token'];
 
         String jEncode = json.encode(userModel.toJson());
         DioHelper.dio.options.headers
-            .addAll({"Authorization": "Bearer ${userModel.accessToken}"});
+            .addAll({"Authorization": "Bearer ${result.data['access_token']}"});
         await DefaultSecuredStorage.setUserMap(jEncode);
-        await DefaultSecuredStorage.setAccessToken(userModel.accessToken);
+        await DefaultSecuredStorage.setAccessToken(result.data['access_token']);
         await DefaultSecuredStorage.setIsLogged('true');
-        SharedText.userToken = userModel.accessToken!;
+        SharedText.userToken =result.data['access_token'];
         SharedText.currentUser = userModel;
-        debugPrint("here i am ");
         emit(UserLogInSuccessState(userModel));
       }
     } catch (e) {
@@ -103,7 +89,6 @@ class LoginCubit extends Cubit<LoginStates> {
     }
   }
 
-  ///doctor logout
   logOut() async {
     try {
       emit(UserLoginLoadingState());

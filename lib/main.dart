@@ -1,4 +1,3 @@
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_states.dart';
 import 'package:flutter/gestures.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'Constants/app_theme.dart';
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'Helpers/Observers/bloc_observer.dart';
 import 'Helpers/Responsive_UI/ui_components.dart';
 import 'Helpers/shared_texts.dart';

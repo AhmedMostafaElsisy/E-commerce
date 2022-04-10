@@ -1,4 +1,4 @@
-import 'package:default_repo_app/Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 
 abstract class ForgetPasswordStates {}
 

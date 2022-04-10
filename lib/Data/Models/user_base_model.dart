@@ -14,7 +14,7 @@ class UserBaseModel {
   String? address;
   int? active;
   int? verified;
-  String? accessToken;
+
   int? id;
   String? image;
 
@@ -25,7 +25,7 @@ class UserBaseModel {
       this.address,
       this.active,
       this.verified,
-      this.accessToken,
+
       this.id,
       this.image});
 
@@ -38,7 +38,6 @@ class UserBaseModel {
         address: json["address"],
         active: json["active"],
         verified: json["verified"],
-        accessToken: json["token"],
         id: json["id"],
         image: json["image"],
       );
