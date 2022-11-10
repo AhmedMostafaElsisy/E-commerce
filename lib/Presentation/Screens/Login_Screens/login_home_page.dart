@@ -1,17 +1,15 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:default_repo_app/Constants/Enums/auth_validations_enmu.dart';
+import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'package:default_repo_app/Presentation/Screens/App_Main_Page/app_main_page.dart';
-import 'package:default_repo_app/Presentation/Widgets/Loader_Widgets/circle_loader_widget.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_text_form_field_widget.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 import '../../../Helpers/Validators/validators.dart';
@@ -34,7 +32,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<SettingCubit>(context).getFqaData();
+    // BlocProvider.of<SettingCubit>(context).getFqaData();
   }
 
   @override
@@ -133,18 +131,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
               getSpaceHeight(20),
               MaterialButton(
                 onPressed: () {
-                  // if (_formKey.currentState!.validate()) {
-                  //   ScaffoldMessenger.of(context)
-                  //       .showSnackBar(const SnackBar(content: Text('Done')));
-                  // }
-
-                  // CustomToast.show('msg', context);
-
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const Loader();
-                      });
+                  BlocProvider.of<SettingCubit>(context).getTermsAndCondition();
                 },
                 child: Text(AppLocalizations.of(context)!.lblValidate),
               ),

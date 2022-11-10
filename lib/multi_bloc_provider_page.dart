@@ -15,6 +15,7 @@ import 'Logic/Bloc_Cubits/OTP_Cubit/otp_cubit.dart';
 import 'Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'Logic/Bloc_Cubits/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
   final Widget body;
@@ -40,12 +41,13 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => LoginCubit(AuthRepository())..startApp()),
         BlocProvider<SignUpCubit>(create: (_) => SignUpCubit(AuthRepository())),
         BlocProvider<OtpCubit>(create: (_) => OtpCubit(OtpRepository())),
-        BlocProvider<ForgetPasswordCubit>(create: (_) => ForgetPasswordCubit(PasswordRepository())),
+        BlocProvider<ForgetPasswordCubit>(
+            create: (_) => ForgetPasswordCubit(PasswordRepository())),
         BlocProvider<ProfileCubit>(
             create: (_) =>
                 ProfileCubit(ProfileRepository(), PasswordRepository())),
         BlocProvider<HelpCubit>(create: (_) => HelpCubit()),
-        BlocProvider<SettingCubit>(create: (_) => SettingCubit( SettingRepository())),
+        BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
       ],
       child: widget.body,
     );
