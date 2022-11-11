@@ -8,7 +8,7 @@ class CommonTitleText extends StatelessWidget {
   final String drName;
   final Color textColor;
 
-  final FontWeight textWidget;
+  final FontWeight textWeight;
 
   final double textFontSize;
   final double minTextFontSize;
@@ -23,7 +23,7 @@ class CommonTitleText extends StatelessWidget {
     required this.textKey,
     this.drName = '',
     this.textColor = AppConstants.lightBlackColor,
-    this.textWidget = FontWeight.normal,
+    this.textWeight = FontWeight.normal,
     this.textFontSize = AppConstants.normalFontSize,
     this.minTextFontSize = 9,
     this.textAlignment = TextAlign.center,
@@ -38,11 +38,11 @@ class CommonTitleText extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       minFontSize: minTextFontSize,
       style: Theme.of(context).textTheme.headline4?.copyWith(
-            color: textColor,
-            fontSize: textFontSize,
-            fontWeight: textWidget,
-            overflow: textOverflow,
-          ),
+        color: textColor,
+        fontSize: textFontSize,
+        fontWeight: textWeight,
+        overflow: textOverflow,
+      ),
       textAlign: textAlignment,
       maxLines: lines,
     );

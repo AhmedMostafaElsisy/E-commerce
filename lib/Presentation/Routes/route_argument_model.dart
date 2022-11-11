@@ -4,6 +4,7 @@ class RouteArgument {
   String? id;
   String? sourcePage;
   String? imagePath;
+  String? emailAddress;
 
   Widget? mainBody;
   PreferredSizeWidget? appBarWidget;
@@ -29,6 +30,7 @@ class RouteArgument {
       this.withAppBar = false,
       // this.doctorModel,
       this.imagePath,
+      this.emailAddress,
       this.onTap});
 
   @override

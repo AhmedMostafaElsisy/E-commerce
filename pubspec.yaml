@@ -82,6 +82,11 @@ dependencies:
   get_it: ^7.2.0
   #dartz:
   dartz: ^0.10.1
+  #svg_icon:
+  flutter_svg: ^1.0.3
+  #pin_code_fields:
+  pin_code_fields: ^7.4.0
+
 
 
 dev_dependencies:

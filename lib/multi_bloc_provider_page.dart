@@ -6,7 +6,6 @@ import 'Data/Remote_Data/Repositories/ProfileRepository.dart';
 import 'Data/Remote_Data/Repositories/auth_repository.dart';
 import 'Data/Remote_Data/Repositories/otp_repository.dart';
 import 'Data/Remote_Data/Repositories/password_repository.dart';
-import 'Data/Remote_Data/Repositories/setting_repository.dart';
 import 'Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'Logic/Bloc_Cubits/Help_Cubit/help_cubit.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
@@ -45,7 +44,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => ForgetPasswordCubit(PasswordRepository())),
         BlocProvider<ProfileCubit>(
             create: (_) =>
-                ProfileCubit(ProfileRepository(), PasswordRepository())),
+                ProfileCubit(ProfileRepository())),
         BlocProvider<HelpCubit>(create: (_) => HelpCubit()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
       ],

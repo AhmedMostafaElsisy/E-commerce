@@ -1,8 +1,15 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:default_repo_app/Presentation/Routes/route_names.dart';
-import 'package:default_repo_app/Presentation/Screens/App_Main_Page/app_main_page.dart';
-import 'package:default_repo_app/Presentation/Widgets/Loader_Widgets/scale_transition_loader_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../../Constants/app_constants.dart';
+import '../../../Data/Models/user_base_model.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../Data/local_source/flutter_secured_storage.dart';
+import '../../../Helpers/shared.dart';
+import '../../../Helpers/shared_texts.dart';
+import '../../Widgets/common_asset_svg_image_widget.dart';
 
 class SplashHomePage extends StatefulWidget {
   const SplashHomePage({Key? key}) : super(key: key);
@@ -13,58 +20,87 @@ class SplashHomePage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashHomePage>
     with SingleTickerProviderStateMixin {
-  AnimationController? controller;
-  Animation<double>? scaleAnimation;
+  late AnimationController controller;
 
-  Future goToHomePage() async {
-    Timer(
-        const Duration(milliseconds: 10000),
-        () => Navigator.pushReplacementNamed(
-            context, RouteNames.loginHomePageRoute));
+  Future goToNextPage() async {
+    await DefaultSecuredStorage.getAccessToken().then((value) async {
+      if (value != null && value.isNotEmpty) {
+        DioHelper.dio.options.headers
+            .addAll({"Authorization": "Bearer $value"});
+        await DefaultSecuredStorage.getUserMap().then((value) {
+          SharedText.currentUser = UserBaseModel.fromJson(json.decode(value!));
+          Timer(
+              const Duration(milliseconds: 2500),
+              () => Navigator.pushNamedAndRemoveUntil(context,
+                  RouteNames.homePageRoute, (route) => false));
+        });
+      } else {
+        Timer(
+            const Duration(milliseconds: 2500),
+            () => Navigator.pushReplacementNamed(
+                context, RouteNames.chooseLoginSignupScreenRoute));
+      }
+    });
   }
 
   @override
   void initState() {
     super.initState();
-
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 10000));
-    scaleAnimation =
-        CurvedAnimation(parent: controller!, curve: Curves.easeInOutCirc);
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    )..addListener(() {
+        setState(() {});
+      });
 
-    controller!.forward();
-    goToHomePage();
+    controller.forward();
+
+    goToNextPage();
   }
 
   @override
   dispose() {
-    controller!.dispose(); // you need this
+    controller.dispose(); // you need this
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const AppMainPage(
-      pageContent: ScaleTransitionAnimation(),
-      // pageContent: Center(
-      //   child: Material(
-      //     color: Colors.transparent,
-      //     child: ScaleTransition(
-      //       scale: scaleAnimation!,
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Image.asset('assets/images/splash.png',
-      //               fit: BoxFit.contain,
-      //               height: getWidgetHeight(78),
-      //               width: getWidgetWidth(237)),
-      //           getSpaceHeight(getWidgetHeight(90.86)),
-      //           Text(AppLocalizations.of(context)!.title),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
+    return Scaffold(
+      backgroundColor: AppConstants.lightWhiteColor,
+      body: Center(
+        child: SizedBox(
+          width: SharedText.screenWidth,
+          height: SharedText.screenHeight,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              commonAssetSvgImageWidget(
+                imageString: "splash_logo.svg",
+                height: 200,
+                width: 200,
+              ),
+              getSpaceHeight(56),
+              Container(
+                color: Colors.transparent,
+                width: getWidgetWidth(238),
+                height: getWidgetHeight(12),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                      Radius.circular(AppConstants.borderRadius)),
+                  child: LinearProgressIndicator(
+                    value: controller.value,
+                    semanticsLabel: 'Linear progress indicator',
+                    backgroundColor: AppConstants.lightWhiteColor,
+                    color: AppConstants.mainColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

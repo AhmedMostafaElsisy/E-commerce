@@ -50,42 +50,36 @@ class LoginCubit extends Cubit<LoginStates> {
     debugPrint('userModelFrom authentication ${userModel.name}');
   }
 
-  login({required String phoneNumber, required String userPassword}) async {
+  login({required String email, required String password,required String token}) async {
     emit(UserLoginLoadingState());
     try {
       var result = await _userRepo.loginUser(
-        phoneNumber: phoneNumber,
-        password: userPassword,
+          email: email,
+          password: password,
+          token: token
       );
 
-      debugPrint("here is result of user repo $result");
+
       if (_userRepo.isError) {
-        if (_userRepo.errorMsg!.type == CustomStatusCodeErrorType.unVerified) {
-          emit(LoginUnVerifiedState(userPhone: phoneNumber));
-        } else {
-          emit(UserLoginErrorState(
-              error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
-        }
+        emit(UserLoginErrorState(error: _userRepo.errorMsg!));
       } else {
-        debugPrint('baseUser: ${result.data["user"]}');
-        debugPrint('baseUser: ${result.data["access_token"]}');
 
-        userModel = UserBaseModel.fromJson(result.data["user"]);
-
-
+        userModel = UserBaseModel.fromJson(result.data["customer"]);
         String jEncode = json.encode(userModel.toJson());
         DioHelper.dio.options.headers
-            .addAll({"Authorization": "Bearer ${result.data['access_token']}"});
+            .addAll({"Authorization": "Bearer ${result.data['token']}"});
         await DefaultSecuredStorage.setUserMap(jEncode);
-        await DefaultSecuredStorage.setAccessToken(result.data['access_token']);
+        await DefaultSecuredStorage.setAccessToken(result.data['token']);
         await DefaultSecuredStorage.setIsLogged('true');
-        SharedText.userToken =result.data['access_token'];
+        SharedText.userToken = result.data['token'];
         SharedText.currentUser = userModel;
         emit(UserLogInSuccessState(userModel));
       }
     } catch (e) {
       emit(UserLoginErrorState(
-          error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
+          error: CustomError(
+              type: CustomStatusCodeErrorType.unExcepted,
+              errorMassage: e.toString())));
     }
   }
 

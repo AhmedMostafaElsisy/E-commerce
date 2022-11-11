@@ -1,5 +1,6 @@
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../Constants/Enums/exception_enums.dart';
 import '../../../Data/Interfaces/auth_interface.dart';
 import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
@@ -16,35 +17,48 @@ class SignUpCubit extends Cubit<SignUpStates> {
   final AuthRepositoryInterface _userRepo;
 
   singUp(
-      {required String userPhoneNumber,
-      required String userPassword,
-      required String userEmail,
-      required String userName}) async {
+      {required String username,
+      required String email,
+      required String phone,
+      required String password,
+      required String confirmPassword,
+      required String token}) async {
     emit(UserSignUpLoadingState());
     try {
       var result = await _userRepo.userSingUp(
-          phoneNumber: userPhoneNumber,
-          password: userPassword,
-          email: userEmail,
-          name: userName);
+          userName: username,
+          emailAddress: email,
+          phoneNumber: phone,
+          password: password,
+          confirmPassword: confirmPassword,
+          userImage: imageXFile,
+          token: token);
 
       if (_userRepo.isError) {
         emit(UserSignUpErrorState(
           error: _userRepo.errorMsg,
         ));
       } else {
-        UserBaseModel baseUser = UserBaseModel.fromJson(result.data);
+        userModel = UserBaseModel.fromJson(result.data);
 
-        userModel.id = baseUser.id;
-        userModel.image = baseUser.image;
-        userModel.name = baseUser.name;
-        userModel.phone = baseUser.phone;
-        userModel.email = baseUser.email;
         emit(UserSignUpSuccessState(userModel));
       }
     } catch (e) {
       emit(UserSignUpErrorState(
-          error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
+          error: CustomError(
+              type: CustomStatusCodeErrorType.unExcepted,
+              errorMassage: e.toString())));
     }
+  }
+
+  set _imageFile(XFile? value) {
+    imageXFile = value;
+  }
+
+  XFile? imageXFile;
+
+  photoPicked(XFile xFile) {
+    _imageFile = xFile;
+    emit(UploadingUserImageLoadingState());
   }
 }

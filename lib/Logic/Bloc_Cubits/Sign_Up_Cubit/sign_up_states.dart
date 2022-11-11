@@ -40,3 +40,4 @@ class UserSignUpErrorState extends SignUpStates {
     this.error,
   });
 }
+class UploadingUserImageLoadingState extends SignUpStates {}

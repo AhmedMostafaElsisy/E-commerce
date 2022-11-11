@@ -4,17 +4,15 @@ import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../Data/Interfaces/password_interface.dart';
 import '../../../Data/Interfaces/profile_interface.dart';
 import 'profile_states.dart';
 
 class ProfileCubit extends Cubit<ProfileCubitStates> {
-  ProfileCubit(this._repo,this._passwordRepo) : super(ProfileStatesInit());
+  ProfileCubit(this._repo) : super(ProfileStatesInit());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
   final ProfileRepositoryInterface _repo ;
-  final PasswordRepositoryInterface _passwordRepo ;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -68,40 +66,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
     }
   }
 
-  changePassword(
-      {required String currentPassword,
-      required String newPassword,
-      required String confirmPassword}) async {
-    try {
-      isLoading = false;
-      if (newPassword == confirmPassword) {
-        isLoading = true;
-        var result = await _passwordRepo.changePassword(
-            currentPassword: currentPassword,
-            newPassword: newPassword,
-            confirmPassword: confirmPassword);
 
-        if (_repo.isError) {
-          isLoading = false;
-          emit(ProfileErrorState(
-            error: _repo.errorMsg,
-          ));
-          emit(ProfileSuccessState(baseUser));
-        } else {
-          isLoading = false;
-          emit(ProfileUpdateSuccessState(massage: result.message));
-          emit(ProfileSuccessState(baseUser));
-        }
-      } else {
-        isLoading = false;
-        emit(ChangePasswordNotMatchState());
-        emit(ProfileSuccessState(baseUser));
-      }
-    } catch (e) {
-      emit(ProfileErrorState(
-          error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
-    }
-  }
 
   set _imageFile(XFile? value) {
     imageXFile = value;

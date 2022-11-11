@@ -13,7 +13,7 @@ class LoaderCanvas extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
     Paint _arc2 = Paint()
-      ..color = AppConstants.lightBlackGrayColor
+      ..color = AppConstants.lightBlackColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
@@ -45,7 +45,7 @@ class LoaderCanvas extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(LoaderCanvas oldPaint) {
+  bool shouldRepaint(LoaderCanvas oldDelegate) {
     return true;
   }
 }
