@@ -1,5 +1,4 @@
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
 
 abstract class OtpStates {}
 
@@ -12,9 +11,8 @@ class OtpForgetSuccessState extends OtpStates {}
 
 /// go to home after success
 class OtpSuccessState extends OtpStates {
-  UserBaseModel user;
 
-  OtpSuccessState(this.user);
+  OtpSuccessState();
 }
 
 /// show failed OTP_Cubit for user
@@ -25,3 +23,11 @@ class OtpErrorState extends OtpStates {
     this.error,
   });
 }
+/// show loader for user login
+class ResendOtpLoadingState extends OtpStates {}
+
+class ResendOtpForgetSuccessState extends OtpStates {}
+
+/// go to home after success
+class ResendOtpSuccessState extends OtpStates {}
+

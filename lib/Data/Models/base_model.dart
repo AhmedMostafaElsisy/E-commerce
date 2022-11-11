@@ -27,4 +27,9 @@ class BaseModel {
         "message": message,
         "data": data,
       };
+
+  @override
+  String toString() {
+    return 'BaseModel{code: $code, message: $message, data: $data}';
+  }
 }

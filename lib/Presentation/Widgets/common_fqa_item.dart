@@ -41,7 +41,7 @@ class _CommonFqaState extends State<CommonFqa> {
               Expanded(
                 child: CommonTitleText(
                   textKey: widget.model.question!,
-                  textWidget: FontWeight.w400,
+                  textWeight: FontWeight.w400,
                   textFontSize: 11,
                   lines: 50,
                   textColor: AppConstants.mainColor,
@@ -50,7 +50,7 @@ class _CommonFqaState extends State<CommonFqa> {
               ),
             ],
           ),
-          textColor: AppConstants.lightBlackGrayColor,
+          textColor: AppConstants.lightBlackColor,
           collapsedTextColor: AppConstants.darkOffWhiteColor,
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
@@ -66,40 +66,38 @@ class _CommonFqaState extends State<CommonFqa> {
           children: <Widget>[
             widget.isExpanded
                 ? FittedBox(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Container(
+                    child: Column(
+                      children: [
+                        Container(
 
-                            padding: EdgeInsets.symmetric(
-                                horizontal: getWidgetHeight(28)),
-                            width: getWidgetWidth(375),
-                            decoration: BoxDecoration(
-                                color: AppConstants.lightWhiteColor,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: CommonTitleText(
-                                    textKey: widget.model.answer!,
-                                    textWidget: FontWeight.w400,
-                                    textFontSize: 11,
-                                    lines: 50,
-                                    textColor:
-                                        AppConstants.greyColor,
-                                    textOverflow: TextOverflow.ellipsis,textAlignment: TextAlign.start,
-                                  ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getWidgetHeight(28)),
+                          width: getWidgetWidth(375),
+                          decoration: BoxDecoration(
+                              color: AppConstants.lightWhiteColor,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: CommonTitleText(
+                                  textKey: widget.model.answer!,
+                                  textWeight: FontWeight.w400,
+                                  textFontSize: 11,
+                                  lines: 50,
+                                  textColor:
+                                      AppConstants.greyColor,
+                                  textOverflow: TextOverflow.ellipsis,textAlignment: TextAlign.start,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           ],
           onExpansionChanged: (bool expanded) {
             setState(() => _customTileExpanded = expanded);

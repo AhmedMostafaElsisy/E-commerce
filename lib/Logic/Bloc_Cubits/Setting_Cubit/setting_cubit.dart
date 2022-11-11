@@ -45,12 +45,12 @@ class SettingCubit extends Cubit<SettingCubitStates> {
       var result = await repo.call();
 
       result.fold((failure) {
-        log("here from failed case ${failure}");
+        log("here from failed case $failure");
         emit(SettingCubitErrorState(
           error: failure,
         ));
       }, (success) {
-        log("here from success case ${success}");
+        log("here from success case $success");
         termsModel = TermsModel.fromJson(success.data);
         emit(SettingCubitTermsSuccessState(model: termsModel));
       });

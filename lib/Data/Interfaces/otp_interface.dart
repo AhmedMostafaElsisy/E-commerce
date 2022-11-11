@@ -5,12 +5,12 @@ import 'base_interface.dart';
 
 abstract class OtpRepositoryInterface extends BaseInterface{
 
-
   Future<BaseModel> verifyAccount(
-      {required String phoneNumber, required String code});
+      {required String email, required String code});
 
   Future<BaseModel> forgetAccount({
     required String phoneNumber,
     required String code,
   });
+  Future<BaseModel> resendOTP({required String email});
 }

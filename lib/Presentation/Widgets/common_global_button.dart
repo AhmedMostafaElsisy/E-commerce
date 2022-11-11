@@ -1,11 +1,8 @@
+import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../Constants/app_constants.dart';
 import '../../Helpers/shared.dart';
-import 'common_icon_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'common_title_text.dart';
 
 class CommonGlobalButton extends StatelessWidget {
@@ -27,6 +24,9 @@ class CommonGlobalButton extends StatelessWidget {
   final IconData? iconData;
   final double? spaceSize;
   final bool isLoading;
+  final bool isEnable;
+  final bool showBorder;
+  final Color? borderColor;
 
   const CommonGlobalButton({
     Key? key,
@@ -44,10 +44,13 @@ class CommonGlobalButton extends StatelessWidget {
     this.buttonTextFontWeight = FontWeight.normal,
     this.buttonTextSize = 14,
     this.iconData,
-    this.radius = 45.0,
+    this.radius = AppConstants.smallRadius,
     this.iconSize = 13.0,
     this.spaceSize = 13.0,
     this.isLoading = false,
+    this.isEnable = true,
+    this.showBorder = false,
+    this.borderColor = AppConstants.mainColor
   }) : super(key: key);
 
   @override
@@ -56,9 +59,15 @@ class CommonGlobalButton extends StatelessWidget {
     double buttonHeight = getWidgetHeight(height!);
 
     return ElevatedButton(
-      onPressed: isLoading ? null : onPressedFunction,
+      onPressed: isLoading || !isEnable ? null : onPressedFunction,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation!),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            width: 1,
+            color: showBorder ? borderColor! : AppConstants.lightWhiteColor,
+          ),
+        ),
         shadowColor: MaterialStateProperty.all(
           shadowBackgroundColor ?? AppConstants.greyColor.withOpacity(.3),
         ),
@@ -71,41 +80,47 @@ class CommonGlobalButton extends StatelessWidget {
           ),
         ),
         fixedSize:
-            MaterialStateProperty.all<Size>(Size(buttonWidth, buttonHeight)),
-        backgroundColor:isLoading? MaterialStateProperty.all(
-          AppConstants.greyColor):MaterialStateProperty.all(
+        MaterialStateProperty.all<Size>(Size(buttonWidth, buttonHeight)),
+        backgroundColor: isLoading || !isEnable
+            ? MaterialStateProperty.all(AppConstants.greyColor)
+            : MaterialStateProperty.all(
             buttonBackgroundColor ?? AppConstants.mainColor),
       ),
       child: withIcon
           ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                commonIcon(
-                  iconData ?? Icons.arrow_forward,
-                  iconColor!,
-                  iconSize!,
-                ),
-                getSpaceWidth(spaceSize!),
-                Expanded(
-                  child: CommonTitleText(
-                    textKey: isLoading
-                        ? AppLocalizations.of(context)!.lblLoading
-                        : buttonText,
-                    textColor: buttonTextColor!,
-                    textFontSize: buttonTextSize!,
-                    textWidget: buttonTextFontWeight!,
-                  ),
-                ),
-              ],
-            )
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonTitleText(
+            textKey: isLoading
+                ? AppLocalizations.of(context)!.lblLoading
+                : buttonText,
+            textColor: isEnable
+                ? isLoading
+                ? AppConstants.lightWhiteColor
+                : buttonTextColor!
+                : AppConstants.lightWhiteColor,
+            textFontSize: buttonTextSize!,
+            textWeight: buttonTextFontWeight!,
+          ),
+          getSpaceWidth(spaceSize!),
+          commonAssetSvgImageWidget(imageString: "right_arrow.svg", height: 8, width: 14)
+
+
+
+        ],
+      )
           : CommonTitleText(
-              textKey: isLoading
-                  ? AppLocalizations.of(context)!.lblLoading
-                  : buttonText,
-              textColor: buttonTextColor!,
-              textFontSize: buttonTextSize!,
-              textWidget: buttonTextFontWeight!,
-            ),
+        textKey: isLoading
+            ? AppLocalizations.of(context)!.lblLoading
+            : buttonText,
+        textColor: isEnable
+            ? isLoading
+            ? AppConstants.lightWhiteColor
+            : buttonTextColor!
+            : AppConstants.lightWhiteColor,
+        textFontSize: buttonTextSize!,
+        textWeight: buttonTextFontWeight!,
+      ),
     );
   }
 }

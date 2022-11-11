@@ -1,66 +1,167 @@
-import 'package:default_repo_app/Helpers/shared_texts.dart';
+import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
 
-import 'common_icon_widget.dart';
+class CommonTextFormField extends StatelessWidget {
+  String? hintKey;
+  TextEditingController? controller;
+  TextInputType? keyboardType;
+  Color? textInputColor;
+  Function()? onTap;
+  bool enabled;
+  bool isSelected;
+  bool withPrefixIcon;
+  bool evaluation;
+  bool isObscureText;
+  bool isDigitOnly;
+  String? Function(String?)? validator;
+  bool withSuffixIcon;
+  double? fieldWidth;
+  double? fieldHeight;
+  int minLines;
+  int maxLines;
+  Widget? prefixIcon;
 
-class CommonTextFormFieldClass {
-  static Widget textFormField(
-    BuildContext context, {
-    String? hintText,
-    TextEditingController? controller,
-    IconData? prefixIcon,
-    Color? prefixIconColor,
-    int minLines = 1,
-    int maxLines = 1,
-    double radius = 50.0,
-    Color borderColor = Colors.transparent,
-    Color bgColor = Colors.transparent,
-    Widget? suffixIcon,
-    bool withSuffix = false,
-    bool obscureText = false,
-    bool enabled = true,
-    Function()? onTap,
-    TextInputType keyboardType = TextInputType.text,
-    List<TextInputFormatter>? inputFormatters,
-    String? Function(String?)? validator,
-  }) {
-    IconData icon = prefixIcon ?? FontAwesome5.user;
-    Color prefixColor = prefixIconColor ?? borderColor;
+  Widget? suffixIcon;
+  String? Function(String?)? onChanged;
+  Function()? onSaved;
+  Color? borderColor;
+  Color? filledColor;
+  Color? labelHintStyle;
+  Color? labelErrorStyle;
+  List<TextInputFormatter>? inputFormatter;
+  bool? isReadOnly;
+  TextInputAction? action;
+  TextAlign? labelHintTextAlign;
+  double? radius;
+  bool? alignMultipleLines;
+  FocusNode? fieldFocusNode;
 
+  CommonTextFormField(
+      {Key? key,
+      this.hintKey,
+      this.controller,
+      this.keyboardType = TextInputType.name,
+      this.onTap,
+      this.enabled = true,
+      this.isSelected = false,
+      this.withPrefixIcon = true,
+      this.isObscureText = false,
+      this.evaluation = true,
+      this.withSuffixIcon = false,
+      this.fieldWidth,
+      this.fieldHeight,
+      this.isDigitOnly = false,
+      this.minLines = 1,
+      this.maxLines = 4,
+      this.validator,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.onChanged,
+      this.onSaved,
+      this.borderColor,
+      this.filledColor = AppConstants.lightWhiteColor,
+      this.textInputColor =  AppConstants.lightBlackColor,
+      this.labelHintStyle = AppConstants.greyColor,
+      this.labelErrorStyle = AppConstants.lightRedColor,
+      this.inputFormatter,
+      this.isReadOnly = false,
+      this.action = TextInputAction.next,
+      this.labelHintTextAlign = TextAlign.start,
+      this.radius = 12.0,
+      this.alignMultipleLines = false,
+      this.fieldFocusNode})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: SharedText.screenWidth,
-      padding: EdgeInsets.symmetric(horizontal: SharedText.screenWidth * 0.015),
-      decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(radius),
-          border: Border.all(color: borderColor)),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: TextFormField(
-              controller: controller,
-              maxLines: maxLines,
-              minLines: minLines,
-              obscureText: obscureText,
-              keyboardType: keyboardType,
-              inputFormatters: inputFormatters,
-              onTap: onTap,
-              enabled: enabled,
-              style: const TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: hintText,
-                hintStyle: const TextStyle(color: Colors.grey),
-                prefixIcon: commonIcon(icon, prefixColor, 20.0),
+      height: fieldHeight,
+      width: fieldWidth,
+      alignment: Alignment.center,
+      child: Center(
+        child: TextFormField(
+          textAlignVertical: TextAlignVertical.center,
+          controller: controller,
+          minLines: minLines,
+          maxLines: maxLines,
+          enabled: enabled,
+          onEditingComplete: onSaved,
+          keyboardType: keyboardType,
+          obscureText: isObscureText,
+          onChanged: onChanged,
+          readOnly: isReadOnly!,
+          textAlign: labelHintTextAlign!,
+          focusNode: fieldFocusNode,
+          textInputAction: action,
+          style: Theme.of(context).textTheme.headline2!.copyWith(
+                color: textInputColor,
               ),
-              validator: validator,
+          inputFormatters: inputFormatter,
+          validator: validator,
+          cursorColor: AppConstants.mainColor,
+          decoration: InputDecoration(
+            hintText: hintKey,
+            hintStyle: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(fontSize: 14, fontWeight: FontWeight.w400)
+                .apply(
+                  color: labelHintStyle,
+                ),
+            alignLabelWithHint: alignMultipleLines,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius!),
+              borderSide:
+                  const BorderSide(color: AppConstants.greyColor, width: 0.3),
             ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius!),
+              borderSide: BorderSide(
+                color: borderColor ?? AppConstants.greyColor.withOpacity(0.3),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius!),
+              borderSide: const BorderSide(
+                color: AppConstants.mainColor,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius!),
+              borderSide: BorderSide(
+                color: borderColor ?? AppConstants.greyColor.withOpacity(0.3),
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(radius!)),
+                borderSide: const BorderSide(
+                    color: AppConstants.lightRedColor, width: 0)),
+            errorStyle:
+                const TextStyle(fontSize: 11, fontWeight: FontWeight.w400)
+                    .apply(
+              color: labelErrorStyle,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            fillColor: filledColor!,
+            isDense: true,
+            filled: true,
+            prefixIcon: withPrefixIcon ? prefixIcon : null,
+            labelStyle: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                )
+                .apply(
+                  color: AppConstants.greyColor,
+                ),
+            suffixIcon: withSuffixIcon ? suffixIcon : null,
           ),
-          if (withSuffix) suffixIcon!
-        ],
+        ),
       ),
     );
   }

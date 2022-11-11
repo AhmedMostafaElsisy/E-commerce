@@ -15,8 +15,6 @@ Widget commonCachedImageWidget(
   double imageHeight = getWidgetHeight(height!);
   double imageWidth = getWidgetWidth(width!);
 
-  print('image url : $imageUrl');
-
   return CachedNetworkImage(
     imageUrl: imageUrl,
     imageBuilder: (context, imageProvider) => Container(

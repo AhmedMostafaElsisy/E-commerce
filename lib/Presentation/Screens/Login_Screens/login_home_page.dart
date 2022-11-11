@@ -1,19 +1,18 @@
-import 'package:default_repo_app/Constants/Enums/auth_validations_enmu.dart';
 import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:default_repo_app/Helpers/shared_texts.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
-import 'package:default_repo_app/Presentation/Screens/App_Main_Page/app_main_page.dart';
-import 'package:default_repo_app/Presentation/Widgets/common_text_form_field_widget.dart';
+import 'package:default_repo_app/Logic/Bloc_Cubits/Login_Cubit/login_cubit.dart';
+import 'package:default_repo_app/Logic/Bloc_Cubits/Login_Cubit/login_states.dart';
+import 'package:default_repo_app/Presentation/Routes/route_names.dart';
+import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
+import 'package:default_repo_app/Presentation/Widgets/common_global_button.dart';
+import 'package:default_repo_app/Presentation/Widgets/common_title_text.dart';
+import 'package:default_repo_app/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
-
 import '../../../Helpers/Validators/validators.dart';
-import '../../../Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
+import '../../../Helpers/shared.dart';
+import '../../Widgets/common_text_form_field_widget.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);
@@ -23,136 +22,290 @@ class LoginHomePage extends StatefulWidget {
 }
 
 class _LoginHomePageState extends State<LoginHomePage> {
-  final _formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  bool hidePassword = true;
+  late TextEditingController emailController;
+
+  late TextEditingController passwordController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // BlocProvider.of<SettingCubit>(context).getFqaData();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: AppMainPage(
-        pageContent: SizedBox(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              /// Connectivity
-              Text(context
-                  .watch<ConnectivityCubit>()
-                  .getConnectionStatus
-                  .toString()),
-              Container(
-                height: 5.0,
-                width: SharedText.screenWidth,
-                color: context.watch<ConnectivityCubit>().getConnectionStatus ==
-                        'ConnectivityResult.none'
-                    ? Colors.red
-                    : Colors.green,
-              ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: BlocConsumer<LoginCubit, LoginStates>(
+        listener: (loginCtx, loginState) {
+          if (loginState is UserLogInSuccessState) {
+            Navigator.pushReplacementNamed(context, RouteNames.homePageRoute);
+          }
+          if (loginState is UserLoginErrorState) {
+            showSnackBar(
+              context: loginCtx,
+              title: loginState.error!.errorMassage!,
+            );
+          }
+        },
+        builder: (loginCtx, loginState) {
+          return GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: SharedText.screenWidth,
+                  height: SharedText.screenHeight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      getSpaceHeight(150),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppConstants.pagePadding),
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            children: [
+                              /// Title
+                              Row(
+                                children: [
+                                  CommonTitleText(
+                                    textKey:
+                                        AppLocalizations.of(context)!.lblLogin,
+                                    textColor: AppConstants.lightBlackColor,
+                                    textFontSize: 16,
+                                    textWeight: FontWeight.w700,
+                                  ),
+                                ],
+                              ),
 
-              /// Validations
-              CommonTextFormFieldClass.textFormField(
-                context,
-                controller: phoneController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                hintText: 'enter phone number',
-                prefixIcon: FontAwesome.mail,
-                bgColor: AppConstants.lightGreyBackGround,
-                prefixIconColor: AppConstants.lightRedColor,
-                validator: (value) {
-                  if (validatePhone(value!) ==
-                      PhoneValidationResults.emptyPhone) {
-                    return 'empty phone number';
-                  } else if (validatePhone(value) ==
-                      PhoneValidationResults.tooShort) {
-                    return 'enter a valid phone number';
-                  } else if (validatePhone(value) ==
-                      PhoneValidationResults.notMatched) {
-                    return 'invalid phone number';
-                  }
+                              ///spacer
 
-                  return null;
-                },
-              ),
-              getSpaceHeight(20),
-              CommonTextFormFieldClass.textFormField(
-                context,
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                hintText: 'enter an email address',
-                prefixIcon: FontAwesome.mail,
-                bgColor: AppConstants.lightGreyBackGround,
-                prefixIconColor: AppConstants.lightRedColor,
-                validator: (value) {
-                  if (validateEmail(value!) ==
-                      EmailValidationResults.emptyEmail) {
-                    return 'empty email address';
-                  } else if (validateEmail(value) ==
-                      EmailValidationResults.notValid) {
-                    return 'enter a valid email address';
-                  } else if (validateEmail(value) ==
-                      EmailValidationResults.emailStartWith) {
-                    return 'email must not start with special chars';
-                  }
+                              getSpaceHeight(16),
 
-                  return null;
-                },
-              ),
-              getSpaceHeight(20),
-              CommonTextFormFieldClass.textFormField(
-                context,
-                controller: passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                hintText: 'enter a password',
-                prefixIcon: FontAwesome.mail,
-                bgColor: AppConstants.lightGreyBackGround,
-                prefixIconColor: AppConstants.lightRedColor,
-                validator: (value) {
-                  if (validatePassword(value!) ==
-                      PasswordValidationResults.emptyPassword) {
-                    return 'empty password';
-                  } else if (validatePassword(value) ==
-                      PasswordValidationResults.tooShort) {
-                    return 'enter a valid password';
-                  }
+                              Form(
+                                key: formKey,
+                                child: Column(
+                                  children: [
+                                    /// Email
+                                    CommonTextFormField(
+                                      controller: emailController,
+                                      radius: AppConstants.smallBorderRadius,
+                                      hintKey: AppLocalizations.of(context)!
+                                          .lblEmail,
+                                      keyboardType: TextInputType.emailAddress,
+                                      labelHintStyle:
+                                          AppConstants.mainTextColor,
+                                      borderColor:
+                                          AppConstants.borderInputColor,
+                                      prefixIcon: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 17, horizontal: 12),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "email_icon.svg",
+                                            fit: BoxFit.fill,
+                                            height: 16,
+                                            width: 16),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isNotEmpty) {
+                                          if (!validateEmail(value)) {
+                                            return AppLocalizations.of(context)!
+                                                .lblEmailBadFormat;
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {});
+                                        return null;
+                                      },
+                                    ),
 
-                  return null;
-                },
-              ),
-              getSpaceHeight(20),
-              MaterialButton(
-                onPressed: () {
-                  BlocProvider.of<SettingCubit>(context).getTermsAndCondition();
-                },
-                child: Text(AppLocalizations.of(context)!.lblValidate),
-              ),
-              getSpaceHeight(20.0),
-              IconButton(
-                  onPressed: () async {
-                    var langCubit = LangCubit.get(context);
-                    String lang = langCubit.currentLang;
-                    debugPrint('lang: $lang');
-                    if (lang == "ar") {
-                      await langCubit.changeLang('en', context);
-                    } else if (lang == "en") {
-                      await langCubit.changeLang('ar', context);
-                    }
+                                    ///spacer
 
-                    setState(() {});
-                  },
-                  icon: const Icon(Icons.language))
-            ],
-          ),
-        ),
+                                    getSpaceHeight(16),
+
+                                    /// Password
+                                    CommonTextFormField(
+                                      withSuffixIcon: true,
+                                      controller: passwordController,
+                                      suffixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            hidePassword = !hidePassword;
+                                          });
+                                        },
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: commonAssetSvgImageWidget(
+                                                imageString: hidePassword
+                                                    ? "eye_open.svg"
+                                                    : "eye_close.svg",
+                                                height: 16,
+                                                width: 16,
+                                                fit: BoxFit.fill)),
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      isObscureText: hidePassword,
+                                      radius: AppConstants.smallBorderRadius,
+                                      hintKey: AppLocalizations.of(context)!
+                                          .lblPassword,
+                                      labelHintStyle:
+                                          AppConstants.mainTextColor,
+                                      borderColor:
+                                          AppConstants.borderInputColor,
+                                      prefixIcon: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13, horizontal: 15),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "lock_icon.svg",
+                                            fit: BoxFit.fill,
+                                            height: 16,
+                                            width: 16),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordIsEmpty;
+                                        } else if (value.length < 8) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordMustBeMoreThan;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {});
+                                        return null;
+                                      },
+                                    ),
+
+                                    getSpaceHeight(4),
+
+                                    /// Forget Password Button
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                                context,
+                                                RouteNames
+                                                    .forgetPasswordPageRoute);
+                                          },
+                                          child: CommonTitleText(
+                                            textKey:
+                                                AppLocalizations.of(context)!
+                                                    .lblForgetPassword,
+                                            textColor:
+                                                AppConstants.lightBlackColor,
+                                            textFontSize: 12,
+                                            textWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(16),
+
+                                    ///login button
+                                    CommonGlobalButton(
+                                        height: 48,
+                                        buttonBackgroundColor:
+                                            AppConstants.mainColor,
+                                        isEnable: emailController
+                                                .text.isNotEmpty &&
+                                            passwordController.text.isNotEmpty,
+                                        isLoading:
+                                            loginState is UserLoginLoadingState,
+                                        radius: AppConstants.smallBorderRadius,
+                                        buttonTextSize: 18,
+                                        buttonTextFontWeight: FontWeight.w400,
+                                        buttonText:
+                                            AppLocalizations.of(context)!
+                                                .lblLogin,
+                                        onPressedFunction: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            FocusScope.of(context)
+                                                .requestFocus(FocusNode());
+                                            loginCtx.read<LoginCubit>().login(
+                                                email:
+                                                    emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                                token: SharedText.deviceToken);
+                                          }
+                                        },
+                                        withIcon: false),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ///don't have and account button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CommonTitleText(
+                          textKey:
+                              AppLocalizations.of(context)!.lblDoNotHaveAccount,
+                          textColor: AppConstants.lightBlackColor,
+                          textFontSize: 13,
+                          textWeight: FontWeight.w400,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, RouteNames.singUpPageRoute);
+                          },
+                          child: CommonTitleText(
+                            textKey: AppLocalizations.of(context)!.lblJoinNow,
+                            textColor: AppConstants.lightBlackColor,
+                            textFontSize: 14,
+                            textWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    getSpaceHeight(50),
+                  ],
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

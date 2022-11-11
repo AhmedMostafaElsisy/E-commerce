@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'package:default_repo_app/Data/Models/user_base_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../Constants/Enums/exception_enums.dart';
 import '../Data/local_source/flutter_secured_storage.dart';
+import '../Logic/Bloc_Cubits/Login_Cubit/login_cubit.dart';
+import '../Presentation/Routes/route_names.dart';
 import 'shared_texts.dart';
 
 
@@ -9,6 +13,17 @@ import 'shared_texts.dart';
 void hideKeyboard(BuildContext context) =>
     FocusScope.of(context).requestFocus(FocusNode());
 
+checkUserAuth(
+    {required BuildContext context,
+      required CustomStatusCodeErrorType errorType}) {
+  if (errorType == CustomStatusCodeErrorType.unVerified) {
+    LoginCubit loginCubit = BlocProvider.of<LoginCubit>(context);
+    loginCubit.logOut();
+
+    Navigator.pushNamedAndRemoveUntil(
+        context, RouteNames.loginHomePageRoute, (route) => false);
+  }
+}
 /// Fetch Current Locales
 fetchLocale() async {
   SharedText.currentLocale = await DefaultSecuredStorage.getLang() ?? 'en';

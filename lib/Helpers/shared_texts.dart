@@ -11,6 +11,7 @@ class SharedText {
 
   static String currentLocale = 'en';
   static String userToken = '';
+  static String deviceToken = 'asdasdasdads';
 
   /// On_Will_Pop app close time
   static DateTime? currentBackPressTime;
