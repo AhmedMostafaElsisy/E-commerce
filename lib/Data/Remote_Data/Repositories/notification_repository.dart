@@ -82,7 +82,7 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   }
 
   @override
-  Future<BaseModel> markNotificationAsRead(
+  Future<BaseModel>  markNotificationAsRead(
       {required int notificationId}) async {
     try {
       String _notificationUrl =ApiKeys.notificationKey+'/$notificationId'+ApiKeys.readNotificationKey ;
