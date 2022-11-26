@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../Constants/app_constants.dart';
 import '../../Data/Models/faq_model.dart';
-import '../../Helpers/shared.dart';
+import '../../core/Helpers/shared.dart';
+import '../../core/Constants/app_constants.dart';
 import 'common_title_text.dart';
 
 class CommonFqa extends StatefulWidget {

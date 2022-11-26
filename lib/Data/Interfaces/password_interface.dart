@@ -1,5 +1,5 @@
 import '../Models/base_model.dart';
-import 'base_interface.dart';
+import '../../core/Base_interface/base_interface.dart';
 
 abstract class PasswordRepositoryInterface extends BaseInterface {
   Future<BaseModel> sendVerificationCodeToEmail({required String email});

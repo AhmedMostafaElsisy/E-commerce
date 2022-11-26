@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../Helpers/shared.dart';
+import 'package:default_repo_app/core/Helpers/shared.dart';
+
 
 Widget commonAssetImageWidget({
   required String imageString,

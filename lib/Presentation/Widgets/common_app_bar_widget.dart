@@ -1,7 +1,7 @@
 import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:flutter/material.dart';
-import '../../Constants/app_constants.dart';
-import '../../Helpers/shared.dart';
+import '../../../core/Constants/app_constants.dart';
+import 'package:default_repo_app/core/Helpers/shared.dart';
 import '../Routes/route_names.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {

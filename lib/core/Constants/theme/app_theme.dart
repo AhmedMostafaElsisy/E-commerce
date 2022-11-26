@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_constants.dart';
+import '../app_constants.dart';
 
 ThemeData lightTheme = ThemeData(
   /// Font Family

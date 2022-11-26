@@ -1,5 +1,5 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared.dart';
+import '../../core/Constants/app_constants.dart';
+import '../../core/Helpers/shared.dart';
 import 'package:flutter/material.dart';
 
 void showBottomModalSheet(

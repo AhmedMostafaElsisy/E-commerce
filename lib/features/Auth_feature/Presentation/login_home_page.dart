@@ -1,7 +1,5 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Login_Cubit/login_cubit.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Login_Cubit/login_states.dart';
+import '../../../Presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../core/Constants/app_constants.dart';
 import 'package:default_repo_app/Presentation/Routes/route_names.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_global_button.dart';
@@ -10,9 +8,11 @@ import 'package:default_repo_app/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../Helpers/Validators/validators.dart';
-import '../../../Helpers/shared.dart';
-import '../../Widgets/common_text_form_field_widget.dart';
+import '../../../core/Helpers/Validators/validators.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
+import 'Login_Cubit/login_cubit.dart';
+import 'Login_Cubit/login_states.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);

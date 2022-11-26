@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../Constants/app_constants.dart';
-import '../../Helpers/shared.dart';
+import '../../../core/Constants/app_constants.dart';
+import 'package:default_repo_app/core/Helpers/shared.dart';
 
 Widget commonCachedImageWidget(
   BuildContext context,

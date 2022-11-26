@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:default_repo_app/Data/Interfaces/settings_interface.dart';
 import 'package:default_repo_app/Data/Models/base_model.dart';
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
 
 class SettingUesCase {
   final SettingInterfaceRepository repository;

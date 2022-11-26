@@ -1,7 +1,7 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
+import '../../core/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../core/Helpers/shared_texts.dart';
 import 'custom_flutter_toast.dart';
 onWillPop(BuildContext context) async {
   DateTime now = DateTime.now();

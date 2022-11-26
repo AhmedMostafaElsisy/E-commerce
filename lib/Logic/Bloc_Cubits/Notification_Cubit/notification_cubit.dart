@@ -1,11 +1,11 @@
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
+import '../../../core/Constants/Enums/exception_enums.dart';
 import 'package:default_repo_app/Data/Interfaces/notification_interface.dart';
 import 'package:default_repo_app/Data/Models/notification_model.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Notification_Cubit/notification_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../../core/Error_Handling/custom_error.dart';
 
 class NotificationCubit extends Cubit<NotificationStates> {
   NotificationCubit(this._repo) : super(NotificationStateInit());

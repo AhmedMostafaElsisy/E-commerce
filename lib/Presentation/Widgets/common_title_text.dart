@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../Constants/app_constants.dart';
+import '../../core/Constants/app_constants.dart';
 
 class CommonTitleText extends StatelessWidget {
   final String textKey;

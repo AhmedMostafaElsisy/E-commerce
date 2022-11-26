@@ -1,6 +1,6 @@
 import 'package:default_repo_app/Data/Models/base_model.dart';
 
-import 'base_interface.dart';
+import '../../core/Base_interface/base_interface.dart';
 
 
 abstract class OtpRepositoryInterface extends BaseInterface{

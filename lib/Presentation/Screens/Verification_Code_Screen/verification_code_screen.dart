@@ -1,7 +1,9 @@
+
 import 'dart:async';
 
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
+import '../../../core/Constants/app_constants.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/OTP_Cubit/otp_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/OTP_Cubit/otp_states.dart';
 import 'package:default_repo_app/Presentation/Routes/route_argument_model.dart';
@@ -15,7 +17,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../Helpers/shared.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
   final RouteArgument routeArgument;

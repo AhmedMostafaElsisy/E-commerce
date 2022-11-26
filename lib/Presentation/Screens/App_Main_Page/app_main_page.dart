@@ -1,6 +1,7 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/Constants/app_constants.dart';
+import '../../../core/Helpers/shared_texts.dart';
 
 class AppMainPage extends StatefulWidget {
   final Widget pageContent;

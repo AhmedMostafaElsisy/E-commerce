@@ -1,5 +1,5 @@
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 
 abstract class ProfileCubitStates {}
 
@@ -16,7 +16,7 @@ class ProfileUpdateSuccessState extends ProfileCubitStates {
 }
 
 class ProfileSuccessState extends ProfileCubitStates {
-  UserBaseModel user;
+  UserBaseEntity user;
 
   ProfileSuccessState(this.user);
 }

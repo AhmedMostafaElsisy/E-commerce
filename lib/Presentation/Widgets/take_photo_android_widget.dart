@@ -1,10 +1,9 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
+import '../../core/Constants/app_constants.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../Helpers/shared.dart';
+import '../../core/Helpers/shared.dart';
 
 
 Widget takePhotoDialog(

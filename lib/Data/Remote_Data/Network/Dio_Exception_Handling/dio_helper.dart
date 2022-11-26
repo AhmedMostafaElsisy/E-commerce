@@ -1,10 +1,10 @@
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../Constants/base_urls.dart';
-import 'custom_exception.dart';
-import 'dio_exception.dart';
+import '../../../../core/Constants/Enums/exception_enums.dart';
+import '../../../../core/Constants/base_urls.dart';
+import '../../../../core/Error_Handling/custom_exception.dart';
+import '../../../../core/Error_Handling/dio_exception.dart';
 
 class DioHelper {
   static late Dio dio;

@@ -1,8 +1,8 @@
 import 'package:default_repo_app/Data/local_source/flutter_secured_storage.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:default_repo_app/core/Helpers/shared_texts.dart';
 import 'language_states.dart';
 
 class LangCubit extends Cubit<LangState> {

@@ -1,5 +1,5 @@
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
+import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
 
 abstract class SignUpStates {}
 
@@ -10,7 +10,7 @@ class SignUpLoading extends SignUpStates {}
 
 /// Go To HomePage with User Data
 class SignUpSuccess extends SignUpStates {
-  UserBaseModel user;
+  UserBaseEntity user;
 
   SignUpSuccess(this.user);
 }
@@ -20,7 +20,7 @@ class UserSignUpLoadingState extends SignUpStates {}
 
 /// Go to home after success
 class UserSignUpSuccessState extends SignUpStates {
-  UserBaseModel user;
+  UserBaseEntity user;
 
   UserSignUpSuccessState(this.user);
 }

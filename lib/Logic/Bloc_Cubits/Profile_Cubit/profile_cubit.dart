@@ -1,6 +1,6 @@
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
+import '../../../core/Constants/Enums/exception_enums.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +19,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   XFile? imageXFile;
   bool imgChange = false;
   bool isLoading = false;
-  UserBaseModel baseUser = UserBaseModel();
+  UserBaseEntity baseUser = UserBaseEntity();
 
 
   /// user Profile_Cubit data
@@ -33,7 +33,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
           error: _repo.errorMsg,
         ));
       } else {
-        baseUser = UserBaseModel.fromJson(result.data);
+        baseUser = UserBaseEntity.fromJson(result.data);
         emit(ProfileSuccessState(baseUser));
       }
     } catch (e) {
@@ -53,7 +53,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
           error: _repo.errorMsg,
         ));
       } else {
-        baseUser = UserBaseModel.fromJson(result.data);
+        baseUser = UserBaseEntity.fromJson(result.data);
          _repo.setLocalUserData(baseUser: baseUser);
 
         emit(ProfileUpdateSuccessState(massage: result.message));

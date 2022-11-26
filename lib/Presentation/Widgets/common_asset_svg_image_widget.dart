@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../Helpers/shared.dart';
+import 'package:default_repo_app/core/Helpers/shared.dart';
 
 Widget commonAssetSvgImageWidget({
   required String imageString,

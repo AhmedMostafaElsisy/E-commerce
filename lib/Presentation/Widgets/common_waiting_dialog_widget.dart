@@ -1,4 +1,4 @@
-import 'package:default_repo_app/Helpers/shared.dart';
+import '../../core/Helpers/shared.dart';
 import 'package:flutter/material.dart';
 
 showWaitingDialog(BuildContext context) async {

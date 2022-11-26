@@ -1,5 +1,4 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
+import '../../../core/Constants/app_constants.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_states.dart';
 import 'package:default_repo_app/Presentation/Routes/route_argument_model.dart';
@@ -13,9 +12,9 @@ import 'package:default_repo_app/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../Helpers/Validators/validators.dart';
-import '../../../Helpers/shared.dart';
-
+import '../../../core/Helpers/Validators/validators.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
 class NewPasswordScreen extends StatefulWidget {
   final RouteArgument argument;
 

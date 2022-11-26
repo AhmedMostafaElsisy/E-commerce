@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../Helpers/shared_texts.dart';
+import 'package:default_repo_app/core/Helpers/shared_texts.dart';
 import '../../Interfaces/profile_interface.dart';
 import '../../Models/base_model.dart';
-import '../../Models/user_base_model.dart';
+import '../../../features/Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../local_source/flutter_secured_storage.dart';
-import '../Network/Dio_Exception_Handling/custom_error.dart';
-import '../Network/Dio_Exception_Handling/custom_exception.dart';
+import '../../../core/Error_Handling/custom_error.dart';
+import '../../../core/Error_Handling/custom_exception.dart';
 import '../Network/Dio_Exception_Handling/dio_helper.dart';
 
 class ProfileRepository extends ProfileRepositoryInterface  {
@@ -84,7 +84,7 @@ class ProfileRepository extends ProfileRepositoryInterface  {
 
   ///Update local user map
   @override
-  void setLocalUserData({required UserBaseModel baseUser}) async {
+  void setLocalUserData({required UserBaseEntity baseUser}) async {
     String jEncode = json.encode(baseUser.toJson());
 
     await DefaultSecuredStorage.setUserMap(jEncode);

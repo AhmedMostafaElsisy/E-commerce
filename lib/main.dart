@@ -6,14 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'Constants/app_theme.dart';
-import 'Helpers/Observers/bloc_observer.dart';
-import 'Helpers/Responsive_UI/ui_components.dart';
-import 'Helpers/shared_texts.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'Logic/Bloc_Cubits/Language_Cubit/language_states.dart';
 import 'Presentation/Routes/route_generator.dart';
 import 'Presentation/Screens/Splash_Screens/splash_screen_home_page.dart';
+import 'core/Constants/theme/app_theme.dart';
+import 'core/Helpers/Observers/bloc_observer.dart';
+import 'core/Helpers/Responsive_UI/ui_components.dart';
+import 'core/Helpers/shared_texts.dart';
 import 'injection_container.dart' as di;
 import 'multi_bloc_provider_page.dart';
 

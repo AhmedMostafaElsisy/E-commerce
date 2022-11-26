@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../Constants/app_constants.dart';
+import '../../../core/Constants/app_constants.dart';
 import '../../../Data/Models/notification_model.dart';
-import '../../../Helpers/shared.dart';
+import '../../../core/Helpers/shared.dart';
 import '../../Widgets/common_cached_image_widget.dart';
 import '../../Widgets/common_title_text.dart';
 

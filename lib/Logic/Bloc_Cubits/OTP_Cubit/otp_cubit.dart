@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
+import '../../../core/Constants/Enums/exception_enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../Data/Interfaces/otp_interface.dart';
-import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../../core/Error_Handling/custom_error.dart';
 import 'otp_states.dart';
 
 class OtpCubit extends Cubit<OtpStates> {

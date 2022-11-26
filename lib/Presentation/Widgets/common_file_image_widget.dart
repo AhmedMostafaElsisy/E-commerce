@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../Helpers/shared.dart';
+import '../../core/Helpers/shared.dart';
 
 Widget commonFileImageWidget({
   required String imageString,

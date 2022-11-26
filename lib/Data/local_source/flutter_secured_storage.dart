@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../../Constants/Keys/local_keys.dart';
+import '../../core/Constants/Keys/local_keys.dart';
 
 class DefaultSecuredStorage {
   static const _securedStorage = FlutterSecureStorage();

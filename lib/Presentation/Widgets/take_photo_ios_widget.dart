@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../Constants/app_constants.dart';
+import '../../core/Constants/app_constants.dart';
 
 class TakePhotoIos extends StatelessWidget {
   final Function(XFile)? getImageFunction;

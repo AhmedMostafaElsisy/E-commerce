@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_exception.dart';
 import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/Error_Handling/custom_exception.dart';
 import 'connectivity_states.dart';
 
 /// connectivity Controller

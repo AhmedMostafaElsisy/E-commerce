@@ -1,5 +1,6 @@
-import 'package:default_repo_app/Helpers/shared.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/Helpers/shared.dart';
 
 class ScaleTransitionAnimation extends StatefulWidget {
   const ScaleTransitionAnimation({Key? key}) : super(key: key);

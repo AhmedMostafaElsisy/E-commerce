@@ -1,5 +1,6 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/Constants/app_constants.dart';
 
 class CommonLoadingWidget extends StatelessWidget {
   const CommonLoadingWidget({Key? key}) : super(key: key);

@@ -1,11 +1,11 @@
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 
 import 'Responsive_UI/device_info.dart';
 
 class SharedText {
   static double screenWidth = 0.0;
   static double screenHeight = 0.0;
-  static UserBaseModel? currentUser;
+  static UserBaseEntity? currentUser;
 
   static DeviceInfo? deviceType;
 

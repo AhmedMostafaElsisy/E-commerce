@@ -1,5 +1,5 @@
 import '../../Data/Models/base_model.dart';
-import 'base_interface.dart';
+import '../../core/Base_interface/base_interface.dart';
 
 abstract class NotificationListRepositoryInterface extends BaseInterface {
   Future<BaseModel> getNotificationList({required int page});

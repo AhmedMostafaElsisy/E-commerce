@@ -1,4 +1,4 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
+import '../../core/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

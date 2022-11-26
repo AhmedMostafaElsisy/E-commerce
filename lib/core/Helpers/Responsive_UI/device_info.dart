@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:default_repo_app/Constants/Enums/device_enums.dart';
+import '../../Constants/Enums/device_enums.dart';
+
 
 class DeviceInfo {
   final Orientation orientation;

@@ -1,15 +1,15 @@
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../Constants/Enums/exception_enums.dart';
-import '../../../Data/Interfaces/auth_interface.dart';
-import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../../core/Constants/Enums/exception_enums.dart';
+import '../../../features/Auth_feature/Domain/repository/auth_interface.dart';
+import '../../../core/Error_Handling/custom_error.dart';
 import 'sign_up_states.dart';
 
 class SignUpCubit extends Cubit<SignUpStates> {
-  UserBaseModel userModel = UserBaseModel();
+  UserBaseEntity userModel = UserBaseEntity();
 
-  UserBaseModel get getUserModel => userModel;
+  UserBaseEntity get getUserModel => userModel;
 
   SignUpCubit(this._userRepo) : super(SignUpStatesInit());
 
@@ -39,7 +39,7 @@ class SignUpCubit extends Cubit<SignUpStates> {
           error: _userRepo.errorMsg,
         ));
       } else {
-        userModel = UserBaseModel.fromJson(result.data);
+        userModel = UserBaseEntity.fromJson(result.data);
 
         emit(UserSignUpSuccessState(userModel));
       }

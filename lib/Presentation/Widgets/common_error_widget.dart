@@ -3,8 +3,8 @@ import 'package:default_repo_app/Presentation/Widgets/common_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../Constants/app_constants.dart';
-import '../../Helpers/shared.dart';
+import '../../core/Constants/app_constants.dart';
+import '../../core/Helpers/shared.dart';
 import 'common_asset_svg_image_widget.dart';
 
 class CommonError extends StatelessWidget {

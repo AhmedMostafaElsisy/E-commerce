@@ -1,5 +1,5 @@
-import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
-import 'package:default_repo_app/Data/Models/user_base_model.dart';
+import '../../../../core/Error_Handling/custom_error.dart';
+import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 
 abstract class LoginStates {}
 
@@ -10,7 +10,7 @@ class LoginIfFoundLoading extends LoginStates {}
 
 /// Go To HomePage with User Data
 class LoginSuccess extends LoginStates {
-  UserBaseModel user;
+  UserBaseEntity user;
 
   LoginSuccess(this.user);
 }
@@ -23,9 +23,6 @@ class UserLoginLoadingState extends LoginStates {}
 
 /// go to home after success
 class UserLogInSuccessState extends LoginStates {
-  UserBaseModel user;
-
-  UserLogInSuccessState(this.user);
 }
 
 class UserLogoutSuccessState extends LoginStates {

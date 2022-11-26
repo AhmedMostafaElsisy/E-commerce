@@ -1,4 +1,5 @@
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
+
+import '../Constants/Enums/exception_enums.dart';
 
 
 class CustomError {

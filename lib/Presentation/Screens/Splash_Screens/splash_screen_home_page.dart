@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:default_repo_app/Presentation/Routes/route_names.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Constants/app_constants.dart';
-import '../../../Data/Models/user_base_model.dart';
+import '../../../core/Constants/app_constants.dart';
+import '../../../features/Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../Data/local_source/flutter_secured_storage.dart';
-import '../../../Helpers/shared.dart';
-import '../../../Helpers/shared_texts.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
 import '../../Widgets/common_asset_svg_image_widget.dart';
 
 class SplashHomePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashHomePage>
         DioHelper.dio.options.headers
             .addAll({"Authorization": "Bearer $value"});
         await DefaultSecuredStorage.getUserMap().then((value) {
-          SharedText.currentUser = UserBaseModel.fromJson(json.decode(value!));
+          SharedText.currentUser = UserBaseEntity.fromJson(json.decode(value!));
           Timer(
               const Duration(milliseconds: 2500),
               () => Navigator.pushNamedAndRemoveUntil(context,

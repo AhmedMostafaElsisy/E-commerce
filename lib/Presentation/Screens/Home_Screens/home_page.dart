@@ -1,9 +1,8 @@
-import 'package:default_repo_app/Constants/app_constants.dart';
-import 'package:default_repo_app/Helpers/shared.dart';
-import 'package:default_repo_app/Helpers/shared_texts.dart';
+import '../../../core/Constants/app_constants.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:default_repo_app/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
-import 'package:default_repo_app/Presentation/Screens/App_Main_Page/app_main_page.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_app_bar_widget.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_title_text.dart';
 import 'package:flutter/material.dart';

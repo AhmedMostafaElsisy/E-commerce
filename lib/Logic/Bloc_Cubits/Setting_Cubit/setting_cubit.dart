@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:default_repo_app/Constants/Enums/exception_enums.dart';
+import '../../../core/Constants/Enums/exception_enums.dart';
 import 'package:default_repo_app/Data/Models/faq_model.dart';
 import 'package:default_repo_app/Data/Models/terms_model.dart';
-import 'package:default_repo_app/Data/Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
 import 'package:default_repo_app/Domain/UesCases/setting_ues_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

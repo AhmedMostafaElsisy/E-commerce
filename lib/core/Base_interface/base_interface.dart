@@ -1,5 +1,5 @@
-import '../Models/base_model.dart';
-import '../Remote_Data/Network/Dio_Exception_Handling/custom_error.dart';
+import '../../Data/Models/base_model.dart';
+import '../Error_Handling/custom_error.dart';
 
 abstract class BaseInterface{
   BaseModel baseModel = BaseModel();
