@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Data/local_source/flutter_secured_storage.dart';
 import '../../Presentation/Routes/route_names.dart';
 import '../../features/Auth_feature/Domain/entities/base_user_entity.dart';
-import '../../features/Auth_feature/Presentation/Login_Cubit/login_cubit.dart';
+import '../../features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../Constants/Enums/exception_enums.dart';
 import 'shared_texts.dart';
 

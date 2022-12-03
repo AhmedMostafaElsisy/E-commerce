@@ -1,4 +1,4 @@
-arb-dir: lib/Helpers/l10n
+arb-dir: lib/core/Helpers/l10n
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 untranslated-messages-file: desiredFileName.txt

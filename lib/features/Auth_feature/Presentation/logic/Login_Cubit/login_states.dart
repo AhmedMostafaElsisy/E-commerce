@@ -1,5 +1,6 @@
-import '../../../../core/Error_Handling/custom_error.dart';
 import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
+
+import '../../../../../core/Error_Handling/custom_error.dart';
 
 abstract class LoginStates {}
 

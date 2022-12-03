@@ -1,12 +1,11 @@
 import 'dart:convert';
-import '../../Domain/repository/auth_interface.dart';
-import '../../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
-import '../../../../core/Constants/Enums/exception_enums.dart';
-import '../../../../core/Error_Handling/custom_error.dart';
+import '../../../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
+
 import 'package:default_repo_app/Data/local_source/flutter_secured_storage.dart';
 import 'package:default_repo_app/core/Helpers/shared_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Domain/use_cases/login_use_case.dart';
 import 'login_states.dart';
 import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 
@@ -17,7 +16,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   UserBaseEntity get getUserModel => userModel;
 
-  final AuthRepositoryInterface _userRepo;
+  final LoginUesCase _userRepo;
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
@@ -58,34 +57,19 @@ class LoginCubit extends Cubit<LoginStates> {
       required String password,
       required String token}) async {
     emit(UserLoginLoadingState());
-    try {
-      var result = await _userRepo.loginUser(
-          email: email, password: password, token: token);
+    var result = await _userRepo.callUserLogin(
+        email: email, password: password, deviceToken:  token);
 
-      result.fold((failure) => emit(UserLoginErrorState(error: failure)),
-          (success) => emit(UserLogInSuccessState()));
-    } catch (e) {
-      emit(UserLoginErrorState(
-          error: CustomError(
-              type: CustomStatusCodeErrorType.unExcepted,
-              errorMassage: e.toString())));
-    }
+    result.fold((failure) => emit(UserLoginErrorState(error: failure)),
+        (success) => emit(UserLogInSuccessState()));
   }
 
   logOut() async {
-    try {
-      emit(UserLoginLoadingState());
+    emit(UserLoginLoadingState());
 
-      var result = await _userRepo.logout(
-        );
+    var result = await _userRepo.callUserLogout();
 
-      result.fold((failure) => emit(UserLoginErrorState(error: failure)),
-              (success) => emit(UserLogoutSuccessState()));
-
-      emit(UserLogoutSuccessState());
-    } catch (e) {
-      emit(UserLoginErrorState(
-          error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
-    }
+    result.fold((failure) => emit(UserLoginErrorState(error: failure)),
+        (success) => emit(UserLogoutSuccessState()));
   }
 }

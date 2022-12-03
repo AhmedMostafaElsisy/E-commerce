@@ -1,5 +1,6 @@
-import 'package:default_repo_app/features/Auth_feature/Domain/entities/base_user_entity.dart';
 import 'package:default_repo_app/core/Error_Handling/custom_error.dart';
+
+import '../../../../../Data/Models/base_model.dart';
 
 abstract class SignUpStates {}
 
@@ -10,7 +11,7 @@ class SignUpLoading extends SignUpStates {}
 
 /// Go To HomePage with User Data
 class SignUpSuccess extends SignUpStates {
-  UserBaseEntity user;
+  BaseModel user;
 
   SignUpSuccess(this.user);
 }
@@ -20,7 +21,7 @@ class UserSignUpLoadingState extends SignUpStates {}
 
 /// Go to home after success
 class UserSignUpSuccessState extends SignUpStates {
-  UserBaseEntity user;
+  BaseModel user;
 
   UserSignUpSuccessState(this.user);
 }

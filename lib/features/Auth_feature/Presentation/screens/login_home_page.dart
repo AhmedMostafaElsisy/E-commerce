@@ -1,5 +1,5 @@
-import '../../../Presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../core/Constants/app_constants.dart';
+import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/Constants/app_constants.dart';
 import 'package:default_repo_app/Presentation/Routes/route_names.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_global_button.dart';
@@ -8,11 +8,11 @@ import 'package:default_repo_app/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../core/Helpers/Validators/validators.dart';
-import '../../../core/Helpers/shared.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import 'Login_Cubit/login_cubit.dart';
-import 'Login_Cubit/login_states.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
+import '../logic/Login_Cubit/login_states.dart';
+import '../logic/Login_Cubit/login_cubit.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);
@@ -50,7 +50,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
       body: BlocConsumer<LoginCubit, LoginStates>(
         listener: (loginCtx, loginState) {
           if (loginState is UserLogInSuccessState) {
-            Navigator.pushReplacementNamed(context, RouteNames.homePageRoute);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouteNames.homePageRoute,
+              (route) => false,
+            );
           }
           if (loginState is UserLoginErrorState) {
             showSnackBar(
@@ -253,8 +257,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                             FocusScope.of(context)
                                                 .requestFocus(FocusNode());
                                             loginCtx.read<LoginCubit>().login(
-                                                email:
-                                                    emailController.text,
+                                                email: emailController.text,
                                                 password:
                                                     passwordController.text,
                                                 token: SharedText.deviceToken);

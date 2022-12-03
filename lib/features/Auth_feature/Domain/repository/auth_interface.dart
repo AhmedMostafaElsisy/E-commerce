@@ -9,7 +9,7 @@ abstract class AuthRepositoryInterface extends BaseInterface {
 
 
   ///User Create A new Account
-  Future<BaseModel> userSingUp(
+  Future<Either<CustomError, BaseModel>> userSingUp(
       {
         required String userName,
         required String emailAddress,

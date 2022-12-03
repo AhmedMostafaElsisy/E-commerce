@@ -46,6 +46,7 @@ class UserBaseModel extends UserBaseEntity {
     }
   }
 
+  @override
   Map<String, dynamic> toJson() => {
     "name": name,
     "email": email,

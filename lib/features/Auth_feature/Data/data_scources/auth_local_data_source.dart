@@ -27,7 +27,7 @@ class AuthLocalDataSourceImp extends AuthLocalDataSourceInterface {
       {required UserBaseEntity user, required String token}) async {
     String jEncode = json.encode(user.toJson());
     SharedText.currentUser = user;
-
+    SharedText.userToken = token;
     await DefaultSecuredStorage.setUserMap(jEncode);
     await DefaultSecuredStorage.setAccessToken(token);
     await DefaultSecuredStorage.setIsLogged('true');

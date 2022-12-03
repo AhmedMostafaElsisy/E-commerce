@@ -1,6 +1,4 @@
-import '../../../core/Constants/app_constants.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'package:default_repo_app/Logic/Bloc_Cubits/Sign_Up_Cubit/sign_up_states.dart';
+
 import 'package:default_repo_app/Presentation/Routes/route_names.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:default_repo_app/Presentation/Widgets/common_global_button.dart';
@@ -12,11 +10,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../core/Helpers/Validators/validators.dart';
-import '../../../core/Helpers/shared.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import '../../Widgets/common_file_image_widget.dart';
-import '../../Widgets/take_photo_widget.dart';
+import '../../../../Presentation/Widgets/common_file_image_widget.dart';
+import '../../../../Presentation/Widgets/take_photo_widget.dart';
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
+import '../logic/Sign_Up_Cubit/sign_up_states.dart';
+import '../logic/Sign_Up_Cubit/sign_up_cubit.dart';
+
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
