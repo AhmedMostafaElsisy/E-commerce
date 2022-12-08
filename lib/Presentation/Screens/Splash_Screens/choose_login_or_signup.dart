@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
+import '../../Widgets/common_asset_image_widget.dart';
 import '../../Widgets/common_asset_svg_image_widget.dart';
 
 class ChooseLoginSignupScreen extends StatefulWidget {
@@ -30,10 +31,10 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              commonAssetSvgImageWidget(
-                imageString: "splash_logo.svg",
+              commonAssetImageWidget(
+                imageString: "splash_logo.png",
                 height: 200,
-                  width: 200
+                width: 200,
               ),
               getSpaceHeight(56),
 

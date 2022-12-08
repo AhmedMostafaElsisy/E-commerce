@@ -67,7 +67,7 @@ class HomeMaterialApp extends StatelessWidget {
           builder: (langContext, appState) {
             return MaterialApp(
               onGenerateRoute: RouteGenerator.generateRoute,
-              title: 'App Title',
+              title: 'Captain Omda',
               theme: lightTheme,
               debugShowCheckedModeBanner: false,
               locale: LangCubit.get(langContext).appLocal,

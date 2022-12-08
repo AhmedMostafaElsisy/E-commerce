@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
+import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/Constants/app_constants.dart';
@@ -76,8 +77,8 @@ class _SplashPageState extends State<SplashHomePage>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              commonAssetSvgImageWidget(
-                imageString: "splash_logo.svg",
+              commonAssetImageWidget(
+                imageString: "splash_logo.png",
                 height: 200,
                 width: 200,
               ),
