@@ -70,7 +70,7 @@ class CommonTextFormField extends StatelessWidget {
       this.filledColor = AppConstants.lightWhiteColor,
       this.textInputColor = AppConstants.lightBlackColor,
       this.labelHintStyle = AppConstants.transparent,
-      this.labelErrorStyle = AppConstants.lightRedColor,
+      this.labelErrorStyle = AppConstants.errorColor,
       this.inputFormatter,
       this.isReadOnly = false,
       this.action = TextInputAction.next,
@@ -169,10 +169,11 @@ class CommonTextFormField extends StatelessWidget {
                   errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius!)),
                       borderSide: const BorderSide(
-                          color: AppConstants.lightRedColor, width: 0)),
-                  errorStyle:
-                      const TextStyle(fontSize: 11, fontWeight: FontWeight.w400)
-                          .apply(
+                          color: AppConstants.errorColor, width: 0)),
+                  errorStyle: const TextStyle(
+                          fontSize: AppConstants.xSmallFontSize,
+                          fontWeight: FontWeight.w500)
+                      .apply(
                     color: labelErrorStyle,
                   ),
                   contentPadding: const EdgeInsets.symmetric(
