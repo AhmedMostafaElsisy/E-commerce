@@ -4,7 +4,7 @@ import '../app_constants.dart';
 
 ThemeData lightTheme = ThemeData(
   /// Font Family
-  fontFamily: 'Montserrat',
+  fontFamily: 'Cairo',
   visualDensity: VisualDensity.adaptivePlatformDensity,
 
   /// Colors
