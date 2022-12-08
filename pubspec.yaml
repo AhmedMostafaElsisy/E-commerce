@@ -128,9 +128,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # change font family name and font icon moon
   fonts:
-    - family: CustomIcons
-      fonts:
-        - asset: assets/icons/icomoon.ttf
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf

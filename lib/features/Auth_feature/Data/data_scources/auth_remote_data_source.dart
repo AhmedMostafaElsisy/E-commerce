@@ -1,11 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:default_repo_app/Data/Models/base_model.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Constants/Keys/api_keys.dart';
+import '../../../../core/Error_Handling/custom_error.dart';
+import '../../../../core/Error_Handling/custom_exception.dart';
 
 abstract class AuthRemoteDataSourceInterface {
-  Future<BaseModel> loginUser(
+  Future<Either<CustomError, BaseModel>> loginUser(
       {required String email, required String password, required String token});
 
   Future<BaseModel> logOut();
@@ -37,25 +40,29 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
   }
 
   @override
-  Future<BaseModel> loginUser(
+  Future<Either<CustomError, BaseModel>> loginUser(
       {required String email,
       required String password,
       required String token}) async {
-    FormData staticData = FormData();
-    staticData.fields.clear();
-    String loginUrl = ApiKeys.loginKey;
-    staticData.fields.add(MapEntry('email', email));
-    staticData.fields.add(MapEntry('password', password));
-    staticData.fields.add(MapEntry('device_token', token));
+    try {
+      FormData staticData = FormData();
+      staticData.fields.clear();
+      String loginUrl = ApiKeys.loginKey;
+      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('password', password));
+      staticData.fields.add(MapEntry('device_token', token));
 
-    Response response =
-        await DioHelper.postData(url: loginUrl, data: staticData);
+      Response response =
+          await DioHelper.postData(url: loginUrl, data: staticData);
 
-    ///save user token and cash your data
-    DioHelper.dio.options.headers
-        .addAll({"Authorization": "Bearer ${response.data['token']}"});
-
-    return BaseModel.fromJson(response.data);
+      ///save user token and cash your data
+      DioHelper.dio.options.headers
+          .addAll({"Authorization": "Bearer ${response.data['token']}"});
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
   }
 
   @override
@@ -79,7 +86,6 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
 
     Response response =
         await DioHelper.postData(url: _pathUrl, data: staticData);
-
 
     return BaseModel.fromJson(response.data);
   }

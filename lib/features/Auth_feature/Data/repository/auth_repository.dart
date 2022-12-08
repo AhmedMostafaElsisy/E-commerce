@@ -12,20 +12,18 @@ class AuthRepository extends AuthRepositoryInterface {
   final AuthLocalDataSourceInterface localDataSourceInterface;
   final AuthRemoteDataSourceInterface remoteDataSourceInterface;
 
-  AuthRepository(
-      {required this.localDataSourceInterface,
-      required this.remoteDataSourceInterface});
+  AuthRepository({required this.localDataSourceInterface,
+    required this.remoteDataSourceInterface});
 
   /// singUp user to app
   @override
-  Future<Either<CustomError, BaseModel>> userSingUp(
-      {required String userName,
-      required String emailAddress,
-      required String phoneNumber,
-      required String password,
-      required String confirmPassword,
-      XFile? userImage,
-      required String token}) async {
+  Future<Either<CustomError, BaseModel>> userSingUp({required String userName,
+    required String emailAddress,
+    required String phoneNumber,
+    required String password,
+    required String confirmPassword,
+    XFile? userImage,
+    required String token}) async {
     try {
       ///login user in remote data source
       var baseModel = await remoteDataSourceInterface.userSingUp(
@@ -36,7 +34,6 @@ class AuthRepository extends AuthRepositoryInterface {
           emailAddress: emailAddress,
           password: password,
           token: token);
-
 
       ///return the right side of either (base model)
       return right(baseModel);
@@ -51,29 +48,21 @@ class AuthRepository extends AuthRepositoryInterface {
 
   /// login user to app
   @override
-  Future<Either<CustomError, BaseModel>> loginUser(
-      {required String email,
-      required String password,
-      required String token}) async {
-    try {
-      ///login user in remote data source
-      var baseModel = await remoteDataSourceInterface.loginUser(
-          email: email, password: password, token: token);
-
-      ///save the user model in cache
-      localDataSourceInterface.cacheUser(
-          user: UserBaseEntity.fromJson(baseModel.data["customer"]),
-          token: baseModel.data["token"]);
-
-      ///return the right side of either (base model)
-      return right(baseModel);
-    } on CustomException catch (ex) {
-      ///catch the exception throw by the remote data
-      ///return the left side of either (customer error)
-      errorMsg = CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath);
-      return Left(errorMsg!);
-    }
+  Future<Either<CustomError, BaseModel>> loginUser({required String email,
+    required String password,
+    required String token}) async {
+    ///login user in remote data source
+    return await remoteDataSourceInterface.loginUser(
+        email: email, password: password, token: token).then((value) =>
+        value.fold((failure) {
+          return left(failure);
+        }, (success) {
+          ///save the user model in cache
+          localDataSourceInterface.cacheUser(
+              user: UserBaseEntity.fromJson(success.data["customer"]),
+              token: success.data["token"]);
+          return right(success);
+        }));
   }
 
   @override
