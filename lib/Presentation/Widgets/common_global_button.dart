@@ -6,7 +6,7 @@ import 'common_asset_svg_image_widget.dart';
 import 'common_title_text.dart';
 
 class CommonGlobalButton extends StatelessWidget {
-  final bool withIcon;
+  final bool? withIcon;
   final String buttonText;
   final Function() onPressedFunction;
   final Color? buttonBackgroundColor;
@@ -32,7 +32,7 @@ class CommonGlobalButton extends StatelessWidget {
       {Key? key,
       required this.buttonText,
       required this.onPressedFunction,
-      required this.withIcon,
+       this.withIcon=false,
       this.buttonBackgroundColor,
       this.onPressedColor,
       this.shadowBackgroundColor,
@@ -44,7 +44,7 @@ class CommonGlobalButton extends StatelessWidget {
       this.buttonTextFontWeight = FontWeight.normal,
       this.buttonTextSize = 14,
       this.iconData,
-      this.radius = AppConstants.smallRadius,
+      this.radius = AppConstants.containerBorderRadius,
       this.iconSize = 13.0,
       this.spaceSize = 13.0,
       this.isLoading = false,
@@ -86,7 +86,7 @@ class CommonGlobalButton extends StatelessWidget {
             : MaterialStateProperty.all(
                 buttonBackgroundColor ?? AppConstants.mainColor),
       ),
-      child: withIcon
+      child: withIcon!
           ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

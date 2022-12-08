@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppConstants {
   /// Colors in Light Version ...
   static const Color mainColor = Color(0xFFC00319);
-  static const Color mainTextColor = Color(0xFF666666);
+  static const Color mainTextColor = Color(0xFF595959);
   static const Color verificationCodeColor = Color(0xFFFBF6F7);
   static const Color borderInputColor = Color(0xFF6E6E6E);
   static const Color lightBlackColor = Color(0xFF000000);
@@ -18,7 +18,7 @@ class AppConstants {
   static const Color backGroundColor = Color(0xFFFFF8F5);
 
   static const Color lightRedColor = Color(0xFFCE2925);
-  static const Color lightBlueColor = Color(0xFFF7F9FD);
+  static const Color lightBlueColor = Color(0xFF3243CD);
   static const Color lightShadowColor = Color(0xFFACACAC);
   static const Color lightBorderColor = Color(0xFFD9D9D9);
   static const Color lightContentColor = Color(0xFFD5D5D5);
@@ -36,6 +36,7 @@ class AppConstants {
   static const Color lightButtonGrayColor = Color(0xFFF2F9FF);
   static const Color lightGrayColor = Color(0xFF575757);
   static const Color formFillColor = Color(0xFFEFF5F4);
+  static const Color shadowColor = Color(0xFF505588);
 
   /// Colors in Dark Version ...
   static const Color darkOffWhiteColor = Color(0XFFF6F6F6);
@@ -53,15 +54,16 @@ class AppConstants {
   /// Border Radius
   static const double smallRadius = 4.0;
   static const double smallBorderRadius = 4.0;
-  static const double borderRadius = 15.0;
+  static const double borderRadius = 20.0;
   static const double containerBorderRadius = 6.0;
   static const double containerOfListTitleBorderRadius = 10;
   static const double buttonBorderRadius = 25.0;
   static const double bottomSheetBorderRadius = 25.0;
 
   /// Page Padding
+  static const double smallPadding = 8.0;
   static const double pagePadding = 16.0;
-  static const double pagePaddingDouble = 20.0;
+  static const double pagePaddingDouble = 24.0;
 
   ///phone length
   static const int phoneLength = 11;

@@ -10,7 +10,7 @@ class LangCubit extends Cubit<LangState> {
   Locale? appLocal;
 
   static LangCubit get(context) => BlocProvider.of(context);
-  String currentLang = "en";
+  String currentLang = "ar";
 
   /// change lang with the new lang selected
   Future<void> changeLang(newLang, context) async {
