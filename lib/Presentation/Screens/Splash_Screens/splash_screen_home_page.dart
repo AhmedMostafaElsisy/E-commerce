@@ -8,9 +8,7 @@ import '../../../core/Constants/app_constants.dart';
 import '../../../features/Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../Data/local_source/flutter_secured_storage.dart';
-import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
-import '../../Widgets/common_asset_svg_image_widget.dart';
 
 class SplashHomePage extends StatefulWidget {
   const SplashHomePage({Key? key}) : super(key: key);
@@ -21,8 +19,6 @@ class SplashHomePage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashHomePage>
     with SingleTickerProviderStateMixin {
-  late AnimationController controller;
-
   Future goToNextPage() async {
     await DefaultSecuredStorage.getAccessToken().then((value) async {
       if (value != null && value.isNotEmpty) {
@@ -32,14 +28,14 @@ class _SplashPageState extends State<SplashHomePage>
           SharedText.currentUser = UserBaseEntity.fromJson(json.decode(value!));
           Timer(
               const Duration(milliseconds: 2500),
-              () => Navigator.pushNamedAndRemoveUntil(context,
-                  RouteNames.homePageRoute, (route) => false));
+              () => Navigator.pushNamedAndRemoveUntil(
+                  context, RouteNames.homePageRoute, (route) => false));
         });
       } else {
         Timer(
             const Duration(milliseconds: 2500),
             () => Navigator.pushReplacementNamed(
-                context, RouteNames.chooseLoginSignupScreenRoute));
+                context, RouteNames.loginHomePageRoute));
       }
     });
   }
@@ -47,28 +43,14 @@ class _SplashPageState extends State<SplashHomePage>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2000),
-    )..addListener(() {
-        setState(() {});
-      });
-
-    controller.forward();
 
     goToNextPage();
   }
 
   @override
-  dispose() {
-    controller.dispose(); // you need this
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConstants.lightWhiteColor,
+      backgroundColor: AppConstants.backGroundColor,
       body: Center(
         child: SizedBox(
           width: SharedText.screenWidth,
@@ -79,24 +61,8 @@ class _SplashPageState extends State<SplashHomePage>
             children: [
               commonAssetImageWidget(
                 imageString: "splash_logo.png",
-                height: 200,
-                width: 200,
-              ),
-              getSpaceHeight(56),
-              Container(
-                color: Colors.transparent,
-                width: getWidgetWidth(238),
-                height: getWidgetHeight(12),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                      Radius.circular(AppConstants.borderRadius)),
-                  child: LinearProgressIndicator(
-                    value: controller.value,
-                    semanticsLabel: 'Linear progress indicator',
-                    backgroundColor: AppConstants.lightWhiteColor,
-                    color: AppConstants.mainColor,
-                  ),
-                ),
+                height: 250,
+                width: 250,
               ),
             ],
           ),

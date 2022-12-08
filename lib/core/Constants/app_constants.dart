@@ -15,6 +15,7 @@ class AppConstants {
   static const Color starRatingColor = Color(0xffFFD000);
   static const Color darkFieldColor = Color(0XFF2F2F2F);
   static const Color darkTextColor = Color(0XFFEDEDED);
+  static const Color backGroundColor = Color(0xFFFFF8F5);
 
   static const Color lightRedColor = Color(0xFFCE2925);
   static const Color lightBlueColor = Color(0xFFF7F9FD);
