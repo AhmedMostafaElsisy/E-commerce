@@ -184,24 +184,22 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         });
                                       },
                                       child: SizedBox(
-                                        width: getWidgetWidth(40),
-                                        height: getWidgetHeight(40),
+                                        width: getWidgetWidth(30),
+                                        height: getWidgetHeight(30),
                                         child: Center(
                                           child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 10),
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 15),
                                               child: commonAssetSvgImageWidget(
-                                                  imageString: hidePassword
+                                                  imageString:
+                                                  hidePassword
                                                       ? "eye_open.svg"
                                                       : "eye_close.svg",
                                                   height: 30,
                                                   width: 30,
                                                   fit: BoxFit.contain)),
                                         ),
-                                      ),
-                                    ),
+                                      ),                                    ),
                                     keyboardType: TextInputType.text,
                                     minLines: 1,
                                     maxLines: 1,
@@ -309,7 +307,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     buttonText: AppLocalizations.of(context)!
                                         .lblCreateAccount,
                                     onPressedFunction: () {
-                                      Navigator.pushReplacementNamed(
+                                      Navigator.pushNamed(
                                           context, RouteNames.singUpPageRoute);
                                     },
                                   ),
