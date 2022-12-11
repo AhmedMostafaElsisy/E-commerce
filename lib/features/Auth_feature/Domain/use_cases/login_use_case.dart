@@ -4,10 +4,10 @@ import '../../../../Data/Models/base_model.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../repository/auth_interface.dart';
 
-class LoginUesCase {
+class AuthUserCase {
   final AuthRepositoryInterface repository;
 
-  LoginUesCase({required this.repository});
+  AuthUserCase({required this.repository});
 
   Future<Either<CustomError, BaseModel>> callUserLogin({
     required String email,

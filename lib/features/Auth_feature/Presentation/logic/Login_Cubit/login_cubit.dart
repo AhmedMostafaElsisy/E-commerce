@@ -9,7 +9,7 @@ class LoginCubit extends Cubit<LoginStates> {
   UserBaseModel userModel = UserBaseModel();
 
   UserBaseModel get getUserModel => userModel;
-  final LoginUesCase _userUseCases;
+  final AuthUserCase _userUseCases;
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
