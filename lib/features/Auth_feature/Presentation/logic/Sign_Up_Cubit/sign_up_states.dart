@@ -1,4 +1,3 @@
-
 import '../../../../../Data/Models/base_model.dart';
 import '../../../../../core/Error_Handling/custom_error.dart';
 
@@ -41,4 +40,9 @@ class UserSignUpErrorState extends SignUpStates {
     this.error,
   });
 }
+
 class UploadingUserImageLoadingState extends SignUpStates {}
+
+class ShowOrHidePasswordState extends SignUpStates {}
+
+class CheckInputValidationState extends SignUpStates {}
