@@ -7,6 +7,7 @@
   "lblNoData": "No data",
   "lblSignup": "Signup",
   "lblName": "Name",
+  "lblEnterName": "Enter user name",
   "lblEmail": "Email",
   "lblPassword": "Password",
   "lblPhone": "Phone number",
@@ -71,5 +72,6 @@
   "lblNotification": "Notification",
   "lblClearAll": "Clear All",
   "lblNoNotification": "No Notification Found",
-  "lblNoNotificationDescription": "you do not have any notification yet"
+  "lblNoNotificationDescription": "you do not have any notification yet",
+  "lblEnterPhoneNumber": "Enter phone number"
 }
