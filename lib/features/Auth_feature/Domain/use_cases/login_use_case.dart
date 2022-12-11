@@ -39,4 +39,7 @@ class LoginUesCase {
   Future<Either<CustomError, BaseModel>> callUserLogout() async {
     return await repository.logout();
   }
+  Future<Either<CustomError, BaseModel>> callStartApp() async {
+    return await repository.startApp();
+  }
 }
