@@ -5,7 +5,6 @@ import '../../core/Constants/app_constants.dart';
 
 class CommonTitleText extends StatelessWidget {
   final String textKey;
-  final String drName;
   final Color textColor;
 
   final FontWeight textWeight;
@@ -21,7 +20,6 @@ class CommonTitleText extends StatelessWidget {
   const CommonTitleText({
     Key? key,
     required this.textKey,
-    this.drName = '',
     this.textColor = AppConstants.lightBlackColor,
     this.textWeight = FontWeight.normal,
     this.textFontSize = AppConstants.normalFontSize,
@@ -34,7 +32,7 @@ class CommonTitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
-      textKey + ' ' + drName,
+      textKey ,
       overflow: TextOverflow.ellipsis,
       minFontSize: minTextFontSize,
       style: Theme.of(context).textTheme.headline4?.copyWith(
