@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +24,10 @@ abstract class AuthRemoteDataSourceInterface {
       required String confirmPassword,
       XFile? userImage,
       required String token});
+
+  void saveAuthToken({required String token});
+
+  void deleteAuthToken();
 }
 
 class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
@@ -32,9 +38,11 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
     staticData.fields.clear();
     String loginUrl = ApiKeys.logOutKey;
 
-    Response response = await DioHelper.getDate(url: loginUrl);
+    Response response =
+        await DioHelper.postData(url: loginUrl, data: FormData());
 
-    DioHelper.dio.options.headers.remove("Authorization");
+    ///delete user token from Auth header
+    deleteAuthToken();
 
     return BaseModel.fromJson(response.data);
   }
@@ -56,8 +64,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
           await DioHelper.postData(url: loginUrl, data: staticData);
 
       ///save user token and cash your data
-      DioHelper.dio.options.headers
-          .addAll({"Authorization": "Bearer ${response.data['token']}"});
+      saveAuthToken(token: response.data["data"]['token']);
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
@@ -88,5 +95,15 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
         await DioHelper.postData(url: _pathUrl, data: staticData);
 
     return BaseModel.fromJson(response.data);
+  }
+
+  @override
+  void deleteAuthToken() {
+    DioHelper.dio.options.headers.remove("Authorization");
+  }
+
+  @override
+  void saveAuthToken({required String token}) {
+    DioHelper.dio.options.headers.addAll({"Authorization": "Bearer $token"});
   }
 }
