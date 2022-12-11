@@ -1,3 +1,5 @@
+import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
@@ -137,7 +139,7 @@ class _HomePageState extends State<HomePage> {
             getSpaceHeight(20),
             MaterialButton(
               onPressed: () {
-                BlocProvider.of<SettingCubit>(context).getTermsAndCondition();
+                BlocProvider.of<LoginCubit>(context).logOut();
               },
               child: Text(AppLocalizations.of(context)!.lblValidate),
             ),
