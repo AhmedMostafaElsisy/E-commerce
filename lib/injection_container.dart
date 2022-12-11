@@ -23,7 +23,7 @@ Future<void> init() async {
 
   ///User case
   sl.registerLazySingleton(() => SettingUesCase(repository: sl()));
-  sl.registerLazySingleton(() => LoginUesCase(repository: sl()));
+  sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
 
   ///repo
   sl.registerLazySingleton<SettingInterfaceRepository>(
