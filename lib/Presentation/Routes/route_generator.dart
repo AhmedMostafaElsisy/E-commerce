@@ -3,12 +3,12 @@ import 'package:captien_omda_customer/Presentation/Screens/Splash_Screens/splash
 import 'package:flutter/material.dart';
 import '../../features/Auth_feature/Presentation/screens/login_home_page.dart';
 import '../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
+import '../../features/Otp_feature/Presentation/Verification_Code_Screen/verification_code_screen.dart';
 import '../Screens/Forget_Password_Screen/forget_password_screen.dart';
 import '../Screens/Forget_Password_Screen/new_password_screen.dart';
 import '../Screens/Home_Screens/home_page.dart';
 import '../Screens/Notification_Screen/notification_screen.dart';
 import '../Screens/Splash_Screens/choose_login_or_signup.dart';
-import '../Screens/Verification_Code_Screen/verification_code_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 

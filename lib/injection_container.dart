@@ -9,9 +9,14 @@ import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
 import 'features/Auth_feature/Data/repository/auth_repository.dart';
 import 'features/Auth_feature/Domain/repository/auth_interface.dart';
-import 'features/Auth_feature/Domain/use_cases/login_use_case.dart';
+import 'features/Auth_feature/Domain/use_cases/auth_use_case.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'features/Otp_feature/Data/data_scources/remote_data_scources.dart';
+import 'features/Otp_feature/Data/repository/otp_repository.dart';
+import 'features/Otp_feature/Domain/repository/otp_interface.dart';
+import 'features/Otp_feature/Domain/use_case/otp_ues_cases.dart';
+import 'features/Otp_feature/Presentation/OTP_Cubit/otp_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -20,14 +25,18 @@ Future<void> init() async {
   sl.registerFactory(() => SettingCubit(repo: sl()));
   sl.registerFactory(() => LoginCubit(sl()));
   sl.registerFactory(() => SignUpCubit(sl()));
+  sl.registerFactory(() => OtpCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => SettingUesCase(repository: sl()));
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
+  sl.registerLazySingleton(() => OtpUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<SettingInterfaceRepository>(
       () => SettingRepository());
+  sl.registerLazySingleton<OtpRepositoryInterface>(
+      () => OtpRepository(sl()));
   sl.registerLazySingleton<AuthRepositoryInterface>(() => AuthRepository(
       localDataSourceInterface: sl(), remoteDataSourceInterface: sl()));
 
@@ -38,6 +47,8 @@ Future<void> init() async {
   ///auth remote data source interface
   sl.registerLazySingleton<AuthRemoteDataSourceInterface>(
       () => AuthRemoteDataSourceImp());
+ sl.registerLazySingleton<OtpRemoteDataSourceInterface>(
+      () => OtpRemoteDataSourceImp());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

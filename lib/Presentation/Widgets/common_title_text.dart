@@ -16,31 +16,34 @@ class CommonTitleText extends StatelessWidget {
 
   final int lines;
   final TextOverflow textOverflow;
+  final bool? isUnderLine;
 
-  const CommonTitleText({
-    Key? key,
-    required this.textKey,
-    this.textColor = AppConstants.lightBlackColor,
-    this.textWeight = FontWeight.normal,
-    this.textFontSize = AppConstants.normalFontSize,
-    this.minTextFontSize = 9,
-    this.textAlignment = TextAlign.center,
-    this.lines = 1,
-    this.textOverflow = TextOverflow.visible,
-  }) : super(key: key);
+  const CommonTitleText(
+      {Key? key,
+      required this.textKey,
+      this.textColor = AppConstants.lightBlackColor,
+      this.textWeight = FontWeight.normal,
+      this.textFontSize = AppConstants.normalFontSize,
+      this.minTextFontSize = 9,
+      this.textAlignment = TextAlign.center,
+      this.lines = 1,
+      this.textOverflow = TextOverflow.visible,
+      this.isUnderLine = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
-      textKey ,
+      textKey,
       overflow: TextOverflow.ellipsis,
       minFontSize: minTextFontSize,
       style: Theme.of(context).textTheme.headline4?.copyWith(
-        color: textColor,
-        fontSize: textFontSize,
-        fontWeight: textWeight,
-        overflow: textOverflow,
-      ),
+            color: textColor,
+            fontSize: textFontSize,
+            fontWeight: textWeight,
+            overflow: textOverflow,
+            decoration: isUnderLine! ? TextDecoration.underline:null,
+          ),
       textAlign: textAlignment,
       maxLines: lines,
     );

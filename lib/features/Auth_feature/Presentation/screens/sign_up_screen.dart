@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_app_bar_widget.dart';
+import 'package:captien_omda_customer/features/Auth_feature/Data/model/base_user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,8 +90,16 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocConsumer<SignUpCubit, SignUpStates>(
         listener: (loginCtx, signUpState) {
           if (signUpState is UserSignUpSuccessState) {
+            log("this the ${signUpState.user.data}");
             Navigator.pushReplacementNamed(
-                context, RouteNames.loginHomePageRoute);
+                context, RouteNames.verificationCodePageRoute,
+                arguments: RouteArgument(
+
+                    ///Todo : change this parsing
+                    emailAddress: emailAddressController.text,
+                    otp: UserBaseModel.fromJson(signUpState.user.data["customer"])
+                        .otp!
+                        .toString()));
             showSnackBar(
               context: loginCtx,
               color: AppConstants.lightOffBlueColor,

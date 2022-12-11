@@ -1,14 +1,7 @@
-
 import 'dart:async';
 
-import '../../../core/Constants/app_constants.dart';
-import '../../../core/Helpers/shared.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/OTP_Cubit/otp_cubit.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/OTP_Cubit/otp_states.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
@@ -16,7 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
+import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
+import '../OTP_Cubit/otp_cubit.dart';
+import '../OTP_Cubit/otp_states.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
   final RouteArgument routeArgument;
@@ -72,14 +70,27 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppConstants.lightWhiteColor,
+      appBar: CommonAppBar(
+        elevation: 0,
+        withBack: true,
+        showBottomIcon: false,
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblVerificationCodeSt,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w700,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
       body: BlocConsumer<OtpCubit, OtpStates>(
         listener: (context, state) {
           if (state is OtpSuccessState) {
-            Navigator.pushNamedAndRemoveUntil(context,
-                RouteNames.newPasswordPageRoute, (route) => route.isFirst,
-                arguments: RouteArgument(
-                  emailAddress: widget.routeArgument.emailAddress!,
-                ));
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouteNames.loginHomePageRoute,
+              (route) => false,
+            );
           }
         },
         builder: (otpCtx, otpState) {
@@ -87,106 +98,62 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             onTap: () {
               FocusScope.of(otpCtx).requestFocus(FocusNode());
             },
-            child: Container(
+            child: SizedBox(
               width: SharedText.screenWidth,
               height: SharedText.screenHeight,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/bg2.png",
-                      ),
-                      fit: BoxFit.fill)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// Logo
-                  Stack(
-                    children: [
-                      Stack(children: [
-                        commonAssetImageWidget(
-                            imageString: "elipse-pattern.png",
-                            height: getWidgetHeight(200),
-                            width: SharedText.screenWidth,
-                            fit: BoxFit.fill),
-                        Positioned(
-                            top: getWidgetHeight(50),
-                            left: getWidgetWidth(16),
-                            child: InkWell(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                width: getWidgetWidth(40),
-                                height: getWidgetHeight(40),
-                                decoration: BoxDecoration(
-                                  color: AppConstants.lightWhiteColor,
-                                  borderRadius: BorderRadius.circular(
-                                      AppConstants.smallRadius),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: commonAssetSvgImageWidget(
-                                        imageString: "back_arrow_icon.svg",
-                                        height: 14,
-                                        width: 7,
-                                        imageColor: AppConstants.mainColor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                      ]),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.only(top: 90),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                commonAssetSvgImageWidget(
-                                  imageString: "email_verifiy_icon.svg",
-                                  height: 48,
-                                  width: 48,
-                                  fit: BoxFit.fill,
-                                ),
-                              ],
-                            ),
-                          ),
-                          getSpaceHeight(8),
-                          CommonTitleText(
-                            textKey: AppLocalizations.of(otpCtx)!
-                                .lblVerificationCodeSt,
-                            textColor: AppConstants.lightWhiteColor,
-                            textFontSize: 18,
-                            textWeight: FontWeight.w700,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                  getSpaceHeight(60),
+                  getSpaceHeight(20),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.pagePadding),
+                              horizontal: AppConstants.pagePadding) +
+                          EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                          ),
                       child: ListView(
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
+                          commonAssetSvgImageWidget(
+                              imageString: "sucess_otp.svg",
+                              height: (350),
+                              width: 300,
+                              fit: BoxFit.contain),
+                          getSpaceHeight(AppConstants.pagePadding),
+
                           /// Title
-                          Row(
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CommonTitleText(
                                 textKey: AppLocalizations.of(otpCtx)!
                                     .lblEnterVerificationCode,
                                 textColor: AppConstants.lightBlackColor,
-                                textFontSize: 16,
+                                textFontSize: AppConstants.normalFontSize,
                                 textWeight: FontWeight.w700,
+                              ),
+                              getSpaceHeight(AppConstants.smallPadding),
+                              CommonTitleText(
+                                textKey: AppLocalizations.of(otpCtx)!
+                                    .lblSendToYourEmail,
+                                textColor: AppConstants.mainTextColor,
+                                textFontSize: AppConstants.smallFontSize,
+                                textWeight: FontWeight.w600,
+                              ),
+                              getSpaceHeight(AppConstants.smallPadding / 2),
+                              CommonTitleText(
+                                textKey:
+                                    "${widget.routeArgument.emailAddress!}-${widget.routeArgument.otp!}",
+                                textColor: AppConstants.mainTextColor,
+                                textFontSize: AppConstants.smallFontSize,
+                                textWeight: FontWeight.w600,
                               ),
                             ],
                           ),
 
-
-                          getSpaceHeight(24),
+                          getSpaceHeight(AppConstants.pagePadding),
 
                           Column(
                             children: [
@@ -205,16 +172,18 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                 pinTheme: PinTheme(
                                   shape: PinCodeFieldShape.box,
                                   borderRadius: BorderRadius.circular(
-                                      AppConstants.smallBorderRadius),
+                                      AppConstants.containerBorderRadius),
                                   fieldHeight: 48,
                                   fieldWidth: 48,
                                   borderWidth: 1,
-                                  activeFillColor: AppConstants.lightWhiteColor,
+                                  activeFillColor: AppConstants.backGroundColor,
                                   inactiveColor: AppConstants.borderInputColor,
-                                  selectedColor: AppConstants.mainColor,
+                                  selectedColor: AppConstants.backGroundColor,
                                   activeColor: AppConstants.borderInputColor,
-                                  inactiveFillColor: Colors.white,
-                                  selectedFillColor: Colors.transparent,
+                                  inactiveFillColor:
+                                      AppConstants.backGroundColor,
+                                  selectedFillColor:
+                                      AppConstants.backGroundColor,
                                 ),
                                 animationDuration:
                                     const Duration(milliseconds: 300),
@@ -244,16 +213,14 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               /// Resend code
                               _start != 0
                                   ? SizedBox(
-                                      height: getWidgetHeight(80),
+                                      height: getWidgetHeight(60),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           CommonTitleText(
-                                            textKey: _start.toString() +
-                                                " " +
-                                                AppLocalizations.of(context)!
-                                                    .lblSecond,
+                                            textKey:
+                                                "$_start ${AppLocalizations.of(context)!.lblSecond}",
                                             textColor:
                                                 AppConstants.lightBlackColor,
                                             textFontSize:
@@ -269,7 +236,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
 
                               _start == 0
                                   ? SizedBox(
-                                      height: getWidgetHeight(80),
+                                      height: getWidgetHeight(60),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -279,10 +246,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                                 AppLocalizations.of(context)!
                                                     .lblDontRecieveCode,
                                             textColor:
-                                                AppConstants.mainTextColor,
+                                                AppConstants.lightBlackColor,
                                             textFontSize:
                                                 AppConstants.normalFontSize,
-                                            textWeight: FontWeight.w500,
+                                            textWeight: FontWeight.w600,
                                           ),
                                           getSpaceWidth(4),
                                           GestureDetector(
@@ -315,10 +282,12 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                               textKey:
                                                   AppLocalizations.of(context)!
                                                       .lblResend,
-                                              textColor: AppConstants.mainColor,
+                                              textColor:
+                                                  AppConstants.lightBlueColor,
                                               textFontSize:
                                                   AppConstants.normalFontSize,
-                                              textWeight: FontWeight.w500,
+                                              textWeight: FontWeight.w700,
+                                              isUnderLine: true,
                                             ),
                                           ),
                                         ],

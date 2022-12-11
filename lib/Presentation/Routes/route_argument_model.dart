@@ -17,6 +17,7 @@ class RouteArgument {
 
   /// Functions
   Function()? onTap;
+  String? otp;
 
   RouteArgument(
       {this.id,
@@ -31,7 +32,8 @@ class RouteArgument {
       // this.doctorModel,
       this.imagePath,
       this.emailAddress,
-      this.onTap});
+      this.onTap,
+      this.otp});
 
   @override
   String toString() {

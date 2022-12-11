@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/features/Auth_feature/Data/model/base_user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../Data/Models/base_model.dart';
@@ -39,6 +40,7 @@ class AuthUserCase {
   Future<Either<CustomError, BaseModel>> callUserLogout() async {
     return await repository.logout();
   }
+
   Future<Either<CustomError, BaseModel>> callStartApp() async {
     return await repository.startApp();
   }

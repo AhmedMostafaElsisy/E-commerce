@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../Domain/entities/base_user_entity.dart';
-import '../../../Domain/use_cases/login_use_case.dart';
+import '../../../Domain/use_cases/auth_use_case.dart';
 import 'sign_up_states.dart';
 
 class SignUpCubit extends Cubit<SignUpStates> {
