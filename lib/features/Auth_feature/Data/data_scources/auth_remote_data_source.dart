@@ -84,7 +84,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
     try {
       FormData staticData = FormData();
       staticData.fields.clear();
-      String _pathUrl = ApiKeys.singUpKey;
+      String pathUrl = ApiKeys.singUpKey;
       staticData.fields.add(MapEntry('name', userName));
       staticData.fields.add(MapEntry('email', emailAddress));
       staticData.fields.add(MapEntry('phone', phoneNumber));
@@ -93,7 +93,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('device_token', token));
 
       Response response =
-          await DioHelper.postData(url: _pathUrl, data: staticData);
+          await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(

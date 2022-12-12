@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -84,13 +83,16 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
         ),
       ),
       body: BlocConsumer<OtpCubit, OtpStates>(
-        listener: (context, state) {
-          if (state is OtpSuccessState) {
+        listener: (otpCtx, otpState) {
+          if (otpState is OtpSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
-              context,
+              otpCtx,
               RouteNames.loginHomePageRoute,
               (route) => false,
             );
+          } else if (otpState is ResendOtpSuccessState) {
+
+            widget.routeArgument.otp = otpState.otp;
           }
         },
         builder: (otpCtx, otpState) {
@@ -117,7 +119,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         physics: const BouncingScrollPhysics(),
                         children: [
                           commonAssetSvgImageWidget(
-                              imageString: "sucess_otp.svg",
+                              imageString: otpState is OtpErrorState ? "failed_otp.svg": "sucess_otp.svg",
                               height: (350),
                               width: 300,
                               fit: BoxFit.contain),
@@ -211,31 +213,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               ],
 
                               /// Resend code
-                              _start != 0
-                                  ? SizedBox(
-                                      height: getWidgetHeight(60),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CommonTitleText(
-                                            textKey:
-                                                "$_start ${AppLocalizations.of(context)!.lblSecond}",
-                                            textColor:
-                                                AppConstants.lightBlackColor,
-                                            textFontSize:
-                                                AppConstants.smallFontSize,
-                                            textWeight: FontWeight.w700,
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : const SizedBox(),
-
-                              // getSpaceHeight(16),
-
-                              _start == 0
-                                  ? SizedBox(
+                              SizedBox(
                                       height: getWidgetHeight(60),
                                       child: Row(
                                         mainAxisAlignment:
@@ -252,6 +230,25 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                             textWeight: FontWeight.w600,
                                           ),
                                           getSpaceWidth(4),
+                                          _start != 0
+                                              ? SizedBox(
+                                            height: getWidgetHeight(60),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              children: [
+                                                CommonTitleText(
+                                                  textKey:
+                                                  "$_start ${AppLocalizations.of(context)!.lblSecond}",
+                                                  textColor:
+                                                  AppConstants.lightBlueColor,
+                                                  textFontSize:
+                                                  AppConstants.smallFontSize,
+                                                  textWeight: FontWeight.w700,
+                                                ),
+                                              ],
+                                            ),
+                                          ):
                                           GestureDetector(
                                             onTap: () {
                                               if (_start != 0) {
@@ -293,7 +290,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                         ],
                                       ),
                                     )
-                                  : const SizedBox(),
+                                  ,
 
                               getSpaceHeight(16),
 

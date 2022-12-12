@@ -1,8 +1,8 @@
-import 'package:captien_omda_customer/features/Auth_feature/Data/model/base_user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../Data/Models/base_model.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
+import '../entities/base_user_entity.dart';
 import '../repository/auth_interface.dart';
 
 class AuthUserCase {
@@ -19,7 +19,7 @@ class AuthUserCase {
         email: email, password: password, token: deviceToken);
   }
 
-  Future<Either<CustomError, BaseModel>> callUserSignUp(
+  Future<Either<CustomError, String>> callUserSignUp(
       {required String userName,
       required String emailAddress,
       required String phoneNumber,
@@ -34,7 +34,14 @@ class AuthUserCase {
         userImage: userImage,
         emailAddress: emailAddress,
         password: password,
-        token: token);
+        token: token).then((value) => value.fold((failure) {
+      return left(failure);
+    }, (success) {
+
+      return right( UserBaseEntity.fromJson(success.data["customer"]).otp!);
+    })
+
+    );
   }
 
   Future<Either<CustomError, BaseModel>> callUserLogout() async {

@@ -13,11 +13,18 @@ class OtpUesCases {
     return repositoryInterface.verifyAccount(email: email, code: code);
   }
 
-  Future<Either<CustomError, BaseModel>> callResendCode({
+  Future<Either<CustomError, String>> callResendCode({
     required String email,
   }) {
     return repositoryInterface.resendOTP(
       email: email,
+    ).then((value) => value.fold((failure) {
+      return left(failure);
+    }, (success) {
+
+      return right( success.otp.toString());
+    })
+
     );
   }
 

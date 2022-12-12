@@ -1,9 +1,5 @@
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../Domain/repository/otp_interface.dart';
-import '../../../../core/Constants/Enums/exception_enums.dart';
-import '../../../../core/Error_Handling/custom_error.dart';
 import '../../Domain/use_case/otp_ues_cases.dart';
 import 'otp_states.dart';
 
@@ -23,9 +19,9 @@ class OtpCubit extends Cubit<OtpStates> {
     emit(OtpLoadingState());
     var result =
         await _otpUesCases.callVerifyAccount(email: emailAddress, code: otp);
-    result.fold((faulier) {
+    result.fold((failure) {
       emit(OtpErrorState(
-        error: faulier,
+        error: failure,
       ));
     }, (r) => emit(OtpSuccessState()));
   }
@@ -34,10 +30,10 @@ class OtpCubit extends Cubit<OtpStates> {
   resendOTP({required String email}) async {
     emit(ResendOtpLoadingState());
     var result = await _otpUesCases.callResendCode(email: email);
-    result.fold((faulier) {
+    result.fold((failure) {
       emit(OtpErrorState(
-        error: faulier,
+        error: failure,
       ));
-    }, (r) => emit(ResendOtpSuccessState()));
+    }, (otp) => emit(ResendOtpSuccessState(otp)));
   }
 }

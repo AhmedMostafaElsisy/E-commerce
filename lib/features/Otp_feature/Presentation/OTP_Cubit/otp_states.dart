@@ -30,5 +30,9 @@ class ResendOtpLoadingState extends OtpStates {}
 class ResendOtpForgetSuccessState extends OtpStates {}
 
 /// go to home after success
-class ResendOtpSuccessState extends OtpStates {}
+class ResendOtpSuccessState extends OtpStates {
+  String otp;
+
+  ResendOtpSuccessState(this.otp);
+}
 

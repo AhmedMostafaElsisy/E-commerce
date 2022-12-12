@@ -20,9 +20,9 @@ class UserSignUpLoadingState extends SignUpStates {}
 
 /// Go to home after success
 class UserSignUpSuccessState extends SignUpStates {
-  BaseModel user;
+  String otp;
 
-  UserSignUpSuccessState(this.user);
+  UserSignUpSuccessState(this.otp);
 }
 
 /// Show loader for user login

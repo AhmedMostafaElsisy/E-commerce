@@ -10,7 +10,6 @@ import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       appBar: const CommonAppBar(
         withNotification: true,
         showBottomIcon:false,
-        withBack: true,
+        withBack: false,
         titleWidget: CommonTitleText(
           textKey: "Home",
           textColor: AppConstants.lightBlackColor,
