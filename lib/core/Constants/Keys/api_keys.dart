@@ -18,6 +18,7 @@ class ApiKeys {
   static const String resetPasswordKey = "$userTypeKey/resetPassword";
 
   ///Otp Keys
+  static const String checkAndVerifyKey = "$userTypeKey/register-verify";
   static const String checkOtpKey = "$userTypeKey/otp-check";
   static const String reSendOtpKey = "$userTypeKey/resend-otp";
 
