@@ -105,10 +105,10 @@ class _SignUpPageState extends State<SignUpPage> {
             );
           }
         },
-        builder: (context, state) {
+        builder: (signUpCtx, signUpstate) {
           return GestureDetector(
             onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(signUpCtx).requestFocus(FocusNode());
             },
             child: SizedBox(
               width: SharedText.screenWidth,
@@ -121,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       padding: const EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePadding) +
                           EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                            bottom: MediaQuery.of(signUpCtx).viewInsets.bottom,
                           ),
                       child: ListView(
                         padding: EdgeInsets.zero,
@@ -135,10 +135,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  selectedPhoto(
-                                    context,
-                                    takePhoto: _signUpCubit.photoPicked,
-                                  );
+                                  takePhotoBottomSheet(
+                                      context: signUpCtx,
+                                      getPhoto: signUpCtx.read<SignUpCubit>().photoPicked);
                                 },
                                 child: Stack(
                                   children: [
@@ -216,10 +215,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 CommonTextFormField(
                                   radius: AppConstants.smallBorderRadius,
                                   controller: userNameController,
-                                  hintKey: AppLocalizations.of(context)!
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblEnterName,
                                   labelText:
-                                      AppLocalizations.of(context)!.lblName,
+                                      AppLocalizations.of(signUpCtx)!.lblName,
                                   keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   withSuffixIcon: true,
@@ -234,13 +233,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameIsEmpty;
                                     } else if (nameValidator(value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameBadFormat;
                                     } else if (value.length < 2) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameLength;
                                     } else {
                                       return null;
@@ -260,10 +259,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 CommonTextFormField(
                                   radius: AppConstants.smallBorderRadius,
                                   controller: emailAddressController,
-                                  hintKey: AppLocalizations.of(context)!
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblEnterEmail,
                                   labelText:
-                                      AppLocalizations.of(context)!.lblEmail,
+                                      AppLocalizations.of(signUpCtx)!.lblEmail,
                                   keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   withSuffixIcon: true,
@@ -279,7 +278,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   validator: (value) {
                                     if (value!.isNotEmpty) {
                                       if (!validateEmail(value)) {
-                                        return AppLocalizations.of(context)!
+                                        return AppLocalizations.of(signUpCtx)!
                                             .lblEmailBadFormat;
                                       } else {
                                         return null;
@@ -302,10 +301,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 CommonTextFormField(
                                   controller: phoneNumberController,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(context)!
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblEnterPhoneNumber,
                                   labelText:
-                                      AppLocalizations.of(context)!.lblPhone,
+                                      AppLocalizations.of(signUpCtx)!.lblPhone,
                                   keyboardType: TextInputType.phone,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   inputFormatter: [
@@ -323,11 +322,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPhoneIsEmpty;
                                     } else if (value.length <
                                         AppConstants.phoneLength) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPhoneValidate;
                                     } else {
                                       return null;
@@ -375,10 +374,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                   maxLines: 1,
                                   isObscureText: _signUpCubit.hidePassword,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(context)!
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblEnterComplexPassword,
                                   labelText:
-                                      AppLocalizations.of(context)!.lblPassword,
+                                      AppLocalizations.of(signUpCtx)!.lblPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   suffixIcon: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -391,18 +390,18 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordIsEmpty;
                                     } else if (value.length < 8) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordMustBeMoreThan;
                                     } else if (complexValidationLowerAndUpperCaseValidator(
                                         value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblComplexPasswordValidationUpperAndLower;
                                     } else if (complexValidationSpecialCharactersValidator(
                                         value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblComplexPasswordValidationSc;
                                     } else {
                                       return null;
@@ -453,8 +452,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                       _signUpCubit.hideConfirmPassword,
                                   radius: AppConstants.smallBorderRadius,
                                   labelText:
-                                      AppLocalizations.of(context)!.lblPassword,
-                                  hintKey: AppLocalizations.of(context)!
+                                      AppLocalizations.of(signUpCtx)!.lblPassword,
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblConfirmPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   suffixIcon: Padding(
@@ -468,14 +467,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordIsEmpty;
                                     } else if (value.length < 8) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordMustBeMoreThan;
                                     } else if (value !=
                                         passwordController.text) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordDontMatch;
                                     } else {
                                       return null;
@@ -498,15 +497,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                     buttonBackgroundColor:
                                         AppConstants.mainColor,
                                     isEnable: _signUpCubit.isDataFound,
-                                    isLoading: state is UserSignUpLoadingState,
+                                    isLoading: signUpstate is UserSignUpLoadingState,
                                     radius: AppConstants.smallBorderRadius,
                                     buttonTextSize: 18,
                                     buttonTextFontWeight: FontWeight.w400,
-                                    buttonText: AppLocalizations.of(context)!
+                                    buttonText: AppLocalizations.of(signUpCtx)!
                                         .lblCreateAccount,
                                     onPressedFunction: () {
                                       if (formKey.currentState!.validate()) {
-                                        FocusScope.of(context)
+                                        FocusScope.of(signUpCtx)
                                             .requestFocus(FocusNode());
                                         _signUpCubit.singUp(
                                             email: emailAddressController.text,
