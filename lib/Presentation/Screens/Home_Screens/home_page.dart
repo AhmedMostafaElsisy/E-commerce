@@ -1,9 +1,9 @@
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 
+import '../../../core/Connectivity_Cubit/connectivity_cubit.dart';
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
 import 'package:captien_omda_customer/Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_app_bar_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';

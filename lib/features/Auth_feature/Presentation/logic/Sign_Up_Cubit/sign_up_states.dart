@@ -1,4 +1,4 @@
-import '../../../../../Data/Models/base_model.dart';
+import '../../../../../core/model/base_model.dart';
 import '../../../../../core/Error_Handling/custom_error.dart';
 
 abstract class SignUpStates {}

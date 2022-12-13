@@ -252,7 +252,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         },
                                         child: CommonTitleText(
                                           textKey: AppLocalizations.of(context)!
-                                              .lblForgetPassword,
+                                              .lblIsForgetPassword,
                                           textColor:
                                               AppConstants.lightBlueColor,
                                           textFontSize: 12,

@@ -1,6 +1,4 @@
 import '../../../core/Constants/app_constants.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_states.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_widget.dart';
@@ -15,6 +13,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Helpers/Validators/validators.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
+import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
+import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_states.dart';
 class NewPasswordScreen extends StatefulWidget {
   final RouteArgument argument;
 
@@ -338,16 +338,16 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                       if (formKey.currentState!.validate()) {
                                         FocusScope.of(passwordCtx)
                                             .requestFocus(FocusNode());
-                                        passwordCtx
-                                            .read<ForgetPasswordCubit>()
-                                            .changeNewPassword(
-                                                email: widget
-                                                    .argument.emailAddress!,
-                                                confirmPassword:
-                                                    confirmPasswordController
-                                                        .text,
-                                                password:
-                                                    passwordController.text);
+                                        // passwordCtx
+                                        //     .read<ForgetPasswordCubit>()
+                                        //     .changeNewPassword(
+                                        //         email: widget
+                                        //             .argument.emailAddress!,
+                                        //         confirmPassword:
+                                        //             confirmPasswordController
+                                        //                 .text,
+                                        //         password:
+                                        //             passwordController.text);
                                       }
                                     },
                                     withIcon: false)

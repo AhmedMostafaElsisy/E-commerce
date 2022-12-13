@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../Data/Models/base_model.dart';
+import '../../../../core/model/base_model.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Helpers/shared_texts.dart';
