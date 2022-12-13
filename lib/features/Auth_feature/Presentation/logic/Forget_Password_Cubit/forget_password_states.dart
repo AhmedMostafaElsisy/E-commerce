@@ -1,4 +1,4 @@
-import '../../../core/Error_Handling/custom_error.dart';
+import '../../../../../core/Error_Handling/custom_error.dart';
 
 abstract class ForgetPasswordStates {}
 
@@ -26,7 +26,9 @@ class SendVerificationToEmailStateError extends ForgetPasswordStates {
 }
 
 class SendVerificationToEmailStateSuccess extends ForgetPasswordStates {
+  String code;
 
+  SendVerificationToEmailStateSuccess(this.code);
 }
 
 /// Change Password
