@@ -1,4 +1,4 @@
-import 'package:captien_omda_customer/Data/Models/base_model.dart';
+import 'package:captien_omda_customer/core/model/base_model.dart';
 
 import 'package:captien_omda_customer/core/Error_Handling/custom_error.dart';
 
@@ -13,13 +13,6 @@ class OtpRepository extends OtpRepositoryInterface {
   OtpRepository(this.remoteDataSourceInterface);
 
   @override
-  Future<Either<CustomError, BaseModel>> forgetAccount(
-      {required String phoneNumber, required String code}) {
-    return remoteDataSourceInterface.forgetAccount(code: code,phoneNumber: phoneNumber);
-
-  }
-
-  @override
   Future<Either<CustomError, BaseModel>> resendOTP({required String email}) {
     return remoteDataSourceInterface.resendOTP(email: email);
   }
@@ -27,6 +20,18 @@ class OtpRepository extends OtpRepositoryInterface {
   @override
   Future<Either<CustomError, BaseModel>> verifyAccount(
       {required String email, required String code}) {
-   return remoteDataSourceInterface.verifyAccount(email: email, code: code);
+    return remoteDataSourceInterface.verifyAccount(email: email, code: code);
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> checkOtp(
+      {required String email, required String code}) {
+    return remoteDataSourceInterface.checkOtp(email: email, code: code);
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> sendVerificationCodeToEmail(
+      {required String email}) {
+    return remoteDataSourceInterface.sendOtp(email: email);
   }
 }

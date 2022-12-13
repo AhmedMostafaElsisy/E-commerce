@@ -1,6 +1,6 @@
 import '../repository/otp_interface.dart';
 import 'package:dartz/dartz.dart';
-import '../../../../Data/Models/base_model.dart';
+import '../../../../core/model/base_model.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 
 class OtpUesCases {
@@ -16,16 +16,14 @@ class OtpUesCases {
   Future<Either<CustomError, String>> callResendCode({
     required String email,
   }) {
-    return repositoryInterface.resendOTP(
-      email: email,
-    ).then((value) => value.fold((failure) {
-      return left(failure);
-    }, (success) {
-
-      return right( success.otp.toString());
-    })
-
-    );
+    return repositoryInterface
+        .resendOTP(
+          email: email,
+        )
+        .then((value) => value.fold((failure) {
+              return left(failure);
+            }, (success) {
+              return right(success.otp.toString());
+            }));
   }
-
 }
