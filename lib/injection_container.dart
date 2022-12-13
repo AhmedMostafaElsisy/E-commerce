@@ -7,16 +7,16 @@ import 'Domain/UesCases/setting_ues_case.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
+import 'features/Auth_feature/Data/data_scources/otp_remote_data_scources.dart';
 import 'features/Auth_feature/Data/repository/auth_repository.dart';
 import 'features/Auth_feature/Domain/repository/auth_interface.dart';
 import 'features/Auth_feature/Domain/use_cases/auth_use_case.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'features/Otp_feature/Data/data_scources/remote_data_scources.dart';
-import 'features/Otp_feature/Data/repository/otp_repository.dart';
-import 'features/Otp_feature/Domain/repository/otp_interface.dart';
-import 'features/Otp_feature/Domain/use_case/otp_ues_cases.dart';
-import 'features/Otp_feature/Presentation/OTP_Cubit/otp_cubit.dart';
+import 'features/Auth_feature/Data/repository/otp_repository.dart';
+import 'features/Auth_feature/Domain/repository/otp_interface.dart';
+import 'features/Auth_feature/Domain/use_cases/otp_ues_cases.dart';
 
 final sl = GetIt.instance;
 

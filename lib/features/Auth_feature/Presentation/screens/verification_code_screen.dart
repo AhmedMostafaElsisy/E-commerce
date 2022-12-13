@@ -12,8 +12,9 @@ import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
-import '../OTP_Cubit/otp_cubit.dart';
-import '../OTP_Cubit/otp_states.dart';
+import '../logic/OTP_Cubit/otp_cubit.dart';
+import '../logic/OTP_Cubit/otp_states.dart';
+
 
 class VerificationCodeScreen extends StatefulWidget {
   final RouteArgument routeArgument;

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../Domain/use_case/otp_ues_cases.dart';
+import '../../../Domain/use_cases/otp_ues_cases.dart';
 import 'otp_states.dart';
 
 class OtpCubit extends Cubit<OtpStates> {

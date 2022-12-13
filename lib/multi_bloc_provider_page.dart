@@ -11,8 +11,8 @@ import 'Logic/Bloc_Cubits/Notification_Cubit/notification_cubit.dart';
 import 'Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'features/Otp_feature/Presentation/OTP_Cubit/otp_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
