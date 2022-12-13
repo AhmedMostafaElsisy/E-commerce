@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -14,7 +15,6 @@ import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../logic/OTP_Cubit/otp_cubit.dart';
 import '../logic/OTP_Cubit/otp_states.dart';
-
 
 class VerificationCodeScreen extends StatefulWidget {
   final RouteArgument routeArgument;
@@ -86,13 +86,22 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
       body: BlocConsumer<OtpCubit, OtpStates>(
         listener: (otpCtx, otpState) {
           if (otpState is OtpSuccessState) {
-            Navigator.pushNamedAndRemoveUntil(
-              otpCtx,
-              RouteNames.loginHomePageRoute,
-              (route) => false,
-            );
+            if (widget.routeArgument.sourcePage == "forget") {
+              Navigator.pushReplacementNamed(
+                otpCtx,
+                RouteNames.newPasswordPageRoute,
+                arguments: RouteArgument(
+                    emailAddress: widget.routeArgument.emailAddress,
+                    otp: widget.routeArgument.otp),
+              );
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                otpCtx,
+                RouteNames.loginHomePageRoute,
+                (route) => false,
+              );
+            }
           } else if (otpState is ResendOtpSuccessState) {
-
             widget.routeArgument.otp = otpState.otp;
           }
         },
@@ -120,7 +129,9 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         physics: const BouncingScrollPhysics(),
                         children: [
                           commonAssetSvgImageWidget(
-                              imageString: otpState is OtpErrorState ? "failed_otp.svg": "sucess_otp.svg",
+                              imageString: otpState is OtpErrorState
+                                  ? "failed_otp.svg"
+                                  : "sucess_otp.svg",
                               height: (350),
                               width: 300,
                               fit: BoxFit.contain),
@@ -215,42 +226,38 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
 
                               /// Resend code
                               SizedBox(
-                                      height: getWidgetHeight(60),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          CommonTitleText(
-                                            textKey:
-                                                AppLocalizations.of(context)!
-                                                    .lblDontRecieveCode,
-                                            textColor:
-                                                AppConstants.lightBlackColor,
-                                            textFontSize:
-                                                AppConstants.normalFontSize,
-                                            textWeight: FontWeight.w600,
-                                          ),
-                                          getSpaceWidth(4),
-                                          _start != 0
-                                              ? SizedBox(
+                                height: getWidgetHeight(60),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CommonTitleText(
+                                      textKey: AppLocalizations.of(context)!
+                                          .lblDontRecieveCode,
+                                      textColor: AppConstants.lightBlackColor,
+                                      textFontSize: AppConstants.normalFontSize,
+                                      textWeight: FontWeight.w600,
+                                    ),
+                                    getSpaceWidth(4),
+                                    _start != 0
+                                        ? SizedBox(
                                             height: getWidgetHeight(60),
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 CommonTitleText(
                                                   textKey:
-                                                  "$_start ${AppLocalizations.of(context)!.lblSecond}",
-                                                  textColor:
-                                                  AppConstants.lightBlueColor,
-                                                  textFontSize:
-                                                  AppConstants.smallFontSize,
+                                                      "$_start ${AppLocalizations.of(context)!.lblSecond}",
+                                                  textColor: AppConstants
+                                                      .lightBlueColor,
+                                                  textFontSize: AppConstants
+                                                      .smallFontSize,
                                                   textWeight: FontWeight.w700,
                                                 ),
                                               ],
                                             ),
-                                          ):
-                                          GestureDetector(
+                                          )
+                                        : GestureDetector(
                                             onTap: () {
                                               if (_start != 0) {
                                                 return;
@@ -288,10 +295,9 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                               isUnderLine: true,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    )
-                                  ,
+                                  ],
+                                ),
+                              ),
 
                               getSpaceHeight(16),
 
@@ -307,10 +313,19 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   buttonText:
                                       AppLocalizations.of(otpCtx)!.lblConfirm,
                                   onPressedFunction: () {
-                                    otpCtx.read<OtpCubit>().verifyAccount(
-                                        emailAddress:
-                                            widget.routeArgument.emailAddress!,
-                                        otp: otpController.text);
+                                    if (widget.routeArgument.sourcePage ==
+                                        "forget") {
+                                      log("call the check otp func");
+                                      otpCtx.read<OtpCubit>().checkOtp(
+                                          emailAddress: widget
+                                              .routeArgument.emailAddress!,
+                                          otp: otpController.text);
+                                    } else {
+                                      otpCtx.read<OtpCubit>().verifyAccount(
+                                          emailAddress: widget
+                                              .routeArgument.emailAddress!,
+                                          otp: otpController.text);
+                                    }
                                   },
                                   withIcon: false)
                             ],

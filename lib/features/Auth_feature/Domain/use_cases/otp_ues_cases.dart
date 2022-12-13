@@ -26,4 +26,11 @@ class OtpUesCases {
               return right(success.otp.toString());
             }));
   }
+
+  Future<Either<CustomError, BaseModel>> callCheckOtp({
+    required String email,
+    required String code,
+  }) {
+    return repositoryInterface.checkOtp(email: email, code: code);
+  }
 }

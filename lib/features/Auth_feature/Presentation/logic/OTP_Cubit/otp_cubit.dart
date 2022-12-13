@@ -25,6 +25,18 @@ class OtpCubit extends Cubit<OtpStates> {
     }, (r) => emit(OtpSuccessState()));
   }
 
+  ///check otp
+  checkOtp({required String emailAddress, required String otp}) async {
+    emit(OtpLoadingState());
+    var result =
+        await _otpUesCases.callCheckOtp(email: emailAddress, code: otp);
+    result.fold((failure) {
+      emit(OtpErrorState(
+        error: failure,
+      ));
+    }, (r) => emit(OtpSuccessState()));
+  }
+
   ///re send
   resendOTP({required String email}) async {
     emit(ResendOtpLoadingState());
