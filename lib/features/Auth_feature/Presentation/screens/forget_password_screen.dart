@@ -61,7 +61,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           if (forgetState is SendVerificationToEmailStateSuccess) {
             Navigator.pushNamed(forgetCtx, RouteNames.verificationCodePageRoute,
                 arguments: RouteArgument(
-                    emailAddress: emailController.text, otp: forgetState.code));
+                    sourcePage: "forget",
+                    emailAddress: emailController.text,
+                    otp: forgetState.code));
           }
         },
         builder: (context, state) {
@@ -71,116 +73,126 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             },
             child: Stack(
               children: [
-                SizedBox(
-                  width: SharedText.screenWidth,
-                  height: SharedText.screenHeight,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      getSpaceHeight(AppConstants.pagePadding),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.pagePaddingDouble),
-                        child: commonAssetSvgImageWidget(
-                            imageString: "forget_password.svg",
-                            height: 350,
-                            width: 300,
-                            fit: BoxFit.contain),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.pagePadding),
-                        child: Form(
-                          key: formKey,
-                          child: Column(
-                            children: [
-                              /// Email
-                              CommonTextFormField(
-                                labelText:
-                                    AppLocalizations.of(context)!.lblEmail,
-                                controller: emailController,
-                                radius: AppConstants.smallBorderRadius,
-                                hintKey:
-                                    AppLocalizations.of(context)!.lblEnterEmail,
-                                keyboardType: TextInputType.emailAddress,
-                                labelHintStyle: AppConstants.mainTextColor,
-                                withSuffixIcon: true,
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 12),
-                                  child: commonAssetSvgImageWidget(
-                                      imageString: "email_icon.svg",
-                                      fit: BoxFit.contain,
-                                      height: 22,
-                                      width: 22),
-                                ),
-                                validator: (value) {
-                                  if (value!.isNotEmpty) {
-                                    if (!validateEmail(value)) {
-                                      return AppLocalizations.of(context)!
-                                          .lblEmailBadFormat;
+                GestureDetector(
+                  onTap: (){
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: SizedBox(
+                    width: SharedText.screenWidth,
+                    height: SharedText.screenHeight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        getSpaceHeight(AppConstants.pagePadding),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppConstants.pagePaddingDouble),
+                          child: commonAssetSvgImageWidget(
+                              imageString: "forget_password.svg",
+                              height: 350,
+                              width: 300,
+                              fit: BoxFit.contain),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppConstants.pagePadding),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              children: [
+                                /// Email
+                                CommonTextFormField(
+                                  labelText:
+                                      AppLocalizations.of(context)!.lblEmail,
+                                  controller: emailController,
+                                  radius: AppConstants.smallBorderRadius,
+                                  hintKey:
+                                      AppLocalizations.of(context)!.lblEnterEmail,
+                                  keyboardType: TextInputType.emailAddress,
+                                  labelHintStyle: AppConstants.mainTextColor,
+                                  withSuffixIcon: true,
+                                  suffixIcon: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    child: commonAssetSvgImageWidget(
+                                        imageString: "email_icon.svg",
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
+                                  ),
+                                  validator: (value) {
+                                    if (value!.isNotEmpty) {
+                                      if (!validateEmail(value)) {
+                                        return AppLocalizations.of(context)!
+                                            .lblEmailBadFormat;
+                                      } else {
+                                        return null;
+                                      }
                                     } else {
                                       return null;
                                     }
-                                  } else {
+                                  },
+                                  onChanged: (value) {
+                                    setState(() {});
                                     return null;
-                                  }
-                                },
-                                onChanged: (value) {
-                                  setState(() {});
-                                  return null;
-                                },
-                              ),
-                              if (state
-                                  is SendVerificationToEmailStateError) ...[
-                                getSpaceHeight(8),
-                                CommonTitleText(
-                                  textKey: state.error!.errorMassage ??
-                                      AppLocalizations.of(context)!
-                                          .lblWrongHappen,
-                                  textColor: AppConstants.mainColor,
-                                  textWeight: FontWeight.w700,
-                                  textFontSize: AppConstants.smallFontSize,
-                                )
+                                  },
+                                ),
+                                if (state
+                                    is SendVerificationToEmailStateError) ...[
+                                  getSpaceHeight(8),
+                                  CommonTitleText(
+                                    textKey: state.error!.errorMassage ??
+                                        AppLocalizations.of(context)!
+                                            .lblWrongHappen,
+                                    textColor: AppConstants.mainColor,
+                                    textWeight: FontWeight.w700,
+                                    textFontSize: AppConstants.smallFontSize,
+                                  )
+                                ],
                               ],
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CommonGlobalButton(
-                            height: 48,
-                            buttonBackgroundColor: AppConstants.mainColor,
-                            radius: AppConstants.smallBorderRadius,
-                            buttonTextSize: 18,
-                            isEnable: emailController.text.isNotEmpty,
-                            isLoading:
-                                state is SendVerificationToEmailStateLoading,
-                            buttonTextFontWeight: FontWeight.w400,
-                            buttonText: AppLocalizations.of(context)!.lblSubmit,
-                            onPressedFunction: () {
-                              if (formKey.currentState!.validate()) {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                _forgetPasswordCubit
-                                    .sendVerificationCodeToEmail(
-                                        email: emailController.text);
-                              }
-                            },
-                            withIcon: false),
                       ],
                     ),
-                    getSpaceHeight(50),
-                  ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CommonGlobalButton(
+                              height: 48,
+                              buttonBackgroundColor: AppConstants.mainColor,
+                              radius: AppConstants.smallBorderRadius,
+                              buttonTextSize: 18,
+                              isEnable: emailController.text.isNotEmpty,
+                              isLoading:
+                                  state is SendVerificationToEmailStateLoading,
+                              buttonTextFontWeight: FontWeight.w400,
+                              buttonText: AppLocalizations.of(context)!.lblSubmit,
+                              onPressedFunction: () {
+                                if (formKey.currentState!.validate()) {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  _forgetPasswordCubit
+                                      .sendVerificationCodeToEmail(
+                                          email: emailController.text);
+                                }
+                              },
+                              withIcon: false),
+                        ],
+                      ),
+                      getSpaceHeight(50),
+                    ],
+                  ),
                 )
               ],
             ),

@@ -29,7 +29,6 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       {required String email,
       required String code,
       required String password,
-
       required String confirmPassword}) async {
     emit(ChangePasswordStateLoading());
     var result = await _forgetUserCase.callChangeNewPassword(

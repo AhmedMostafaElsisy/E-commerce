@@ -55,12 +55,10 @@ class PasswordRemoteDataSourceImpl extends PasswordRemoteDataSourceInterface {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.resetPasswordKey;
-      staticData.fields.add(MapEntry('new_password', newPassword));
-      staticData.fields
-          .add(MapEntry('new_password_confirmation', confirmPassword));
+      staticData.fields.add(MapEntry('password', newPassword));
+      staticData.fields.add(MapEntry('password_confirmation', confirmPassword));
       staticData.fields.add(MapEntry('email', email));
-      staticData.fields.add(MapEntry('otp_code', code));
-
+      staticData.fields.add(MapEntry('otp_code', code.toString()));
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));
