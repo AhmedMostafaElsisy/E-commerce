@@ -4,9 +4,9 @@ import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_wi
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/Constants/app_constants.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import '../../../features/Auth_feature/Presentation/logic/Login_Cubit/login_states.dart';
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/shared_texts.dart';
+import '../logic/Login_Cubit/login_states.dart';
 
 class SplashHomePage extends StatefulWidget {
   const SplashHomePage({Key? key}) : super(key: key);
