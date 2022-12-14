@@ -12,7 +12,8 @@ import 'features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_pa
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'features/Home_feature/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
+import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
+import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
@@ -48,6 +49,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<NotificationCubit>(
             create: (_) => NotificationCubit(NotificationListRepository())),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
+        BlocProvider<RequestCubit>(create: (_) => di.sl<RequestCubit>()),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
 
       ],
