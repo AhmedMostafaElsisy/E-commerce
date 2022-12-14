@@ -78,5 +78,7 @@
   "lblHello": "Hello ,",
   "lblSelectDestination": "Select destination",
   "lblWhereToGo": "Where to go ?...",
-  "lblReorder": "Re order"
+  "lblReorder": "Re order",
+  "lblHome": "Home",
+  "lblTrips": "Trips"
 }

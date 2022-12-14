@@ -79,5 +79,7 @@
   "lblHello": "مرحبا,",
   "lblSelectDestination": "تحديد الوجهة",
   "lblWhereToGo":"رايح فين ؟...",
-  "lblReorder": "اعادة الطلب"
+  "lblReorder": "اعادة الطلب",
+  "lblHome": "الرئيسية",
+  "lblTrips": "رحلاتي"
 }
