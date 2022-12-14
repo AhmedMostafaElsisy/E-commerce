@@ -84,8 +84,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         getSpaceHeight(AppConstants.pagePadding),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePaddingDouble),
                           child: commonAssetSvgImageWidget(
                               imageString: "forget_password.svg",
@@ -111,8 +111,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   keyboardType: TextInputType.emailAddress,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   withSuffixIcon: true,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "email_icon.svg",

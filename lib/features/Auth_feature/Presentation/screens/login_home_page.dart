@@ -142,8 +142,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     keyboardType: TextInputType.emailAddress,
                                     labelHintStyle: AppConstants.mainTextColor,
                                     withSuffixIcon: true,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "email_icon.svg",
@@ -210,8 +210,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     hintKey: AppLocalizations.of(context)!
                                         .lblEnterPassword,
                                     labelHintStyle: AppConstants.mainTextColor,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "lock_icon.svg",

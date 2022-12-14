@@ -101,7 +101,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                               /// Logo
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: const [
                                   commonAssetSvgImageWidget(
                                     imageString: "password_lock_iconb.svg",
                                     height: 90,
@@ -157,8 +157,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                           .lblEnterPassword,
                                       labelHintStyle:
                                           AppConstants.mainTextColor,
-                                      suffixIcon: Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                      suffixIcon: const Padding(
+                                        padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
                                         child: commonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
@@ -236,8 +236,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                           .lblEnterPassword,
                                       labelHintStyle:
                                           AppConstants.mainTextColor,
-                                      suffixIcon: Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                      suffixIcon: const Padding(
+                                        padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
                                         child: commonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
