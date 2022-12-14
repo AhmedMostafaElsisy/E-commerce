@@ -5,6 +5,7 @@ import '../../features/Auth_feature/Presentation/screens/login_home_page.dart';
 import '../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
 import '../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
 import '../../features/Auth_feature/Presentation/screens/forget_password_screen.dart';
+import '../../features/Home_feature/presentation/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../features/Home_feature/presentation/Home_Screens/home_page.dart';
 import '../Screens/Forget_Password_Screen/new_password_screen.dart';
 import '../Screens/Notification_Screen/notification_screen.dart';
@@ -39,6 +40,9 @@ class RouteGenerator {
       case RouteNames.notificationPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const NotificationListScreen());
+      case RouteNames.mainBottomNavPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const BottomNavBar());
 
       default:
         return MaterialPageRoute(
