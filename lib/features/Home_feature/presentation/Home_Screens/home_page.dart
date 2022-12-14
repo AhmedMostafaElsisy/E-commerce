@@ -1,8 +1,5 @@
-import 'package:captien_omda_customer/Presentation/Widgets/common_app_bar_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
 import 'package:flutter/material.dart';
@@ -29,38 +26,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppConstants.lightWhiteColor,
-        appBar: CommonAppBar(
-          withNotification: true,
-          showBottomIcon: false,
-          withBack: false,
-          showLeadingWidget: true,
-          leadingWidget: commonCachedImageWidget(
-              context, SharedText.currentUser!.image!,
-              isProfile: true,
-              isCircular: true,
-              height: 30,
-              width: 30,
-              radius: 1000,
-              fit: BoxFit.contain),
-          titleWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CommonTitleText(
-                textKey: AppLocalizations.of(context)!.lblHello,
-                textColor: AppConstants.mainTextColor,
-                textWeight: FontWeight.w500,
-                textFontSize: AppConstants.smallFontSize,
-              ),
-              CommonTitleText(
-                textKey:
-                    SharedText.currentUser!.name!.getStringWithoutSpacings(),
-                textColor: AppConstants.mainColor,
-                textWeight: FontWeight.w700,
-                textFontSize: AppConstants.smallFontSize,
-              ),
-            ],
-          ),
-        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -84,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             getSpaceHeight(50),
             Container(
               width: SharedText.screenWidth,
-              height: SharedText.screenHeight - getWidgetHeight(316),
+              height: SharedText.screenHeight - getWidgetHeight(388),
               decoration: BoxDecoration(
                   color: AppConstants.lightWhiteColor,
                   boxShadow: [
