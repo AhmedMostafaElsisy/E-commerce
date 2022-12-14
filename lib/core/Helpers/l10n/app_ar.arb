@@ -78,5 +78,6 @@
   "lblEnterPhoneNumber": "ادخل رقم الهاتف",
   "lblHello": "مرحبا,",
   "lblSelectDestination": "تحديد الوجهة",
-  "lblWhereToGo":"رايح فين ؟..."
+  "lblWhereToGo":"رايح فين ؟...",
+  "lblReorder": "اعادة الطلب"
 }

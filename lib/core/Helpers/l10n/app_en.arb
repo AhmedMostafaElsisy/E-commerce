@@ -77,5 +77,6 @@
   "lblEnterPhoneNumber": "Enter phone number",
   "lblHello": "Hello ,",
   "lblSelectDestination": "Select destination",
-  "lblWhereToGo": "Where to go ?..."
+  "lblWhereToGo": "Where to go ?...",
+  "lblReorder": "Re order"
 }
