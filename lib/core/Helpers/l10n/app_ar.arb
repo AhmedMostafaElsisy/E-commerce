@@ -34,7 +34,7 @@
   "lblPhoneOtpIsEmpty": "رمز التاكيد فارغ",
   "lblLoading": "..تحميل",
   "lblMoreThan8Characters": "That is at least 8 Characters Long",
-  "lblPasswordMustBeMoreThan":"كلمة السر يجب ان تكون اكثر من 8 احرف",
+  "lblPasswordMustBeMoreThan": "كلمة السر يجب ان تكون اكثر من 8 احرف",
   "lblJoinNow": "Join Now",
   "lblPleaseConfirmOnTerms": "Agree to the terms and conditions",
   "lblCreateAccount": "انشاء حساب",
@@ -43,7 +43,7 @@
   "lblPasswordDontMatch": "Re-type password don`t match password",
   "lblRetypePassword": "Re-type Password",
   "lblComplexPasswordValidationUpperAndLower": "يجب أن تحتوي كلمة المرور على أحرف صغيرة وكبيرة ",
-  "lblComplexPasswordValidationSc":"كلمة السر يجب ان تحتوي علي حروف خاصة",
+  "lblComplexPasswordValidationSc": "كلمة السر يجب ان تحتوي علي حروف خاصة",
   "lblEnterComplexPassword": "ادخل كلمة المرور",
   "lblNameLength": "يجب ان يحتوي الاسم علي حرفين علي الاقل",
   "lblAddProfilePicture": "اضف صورة شخصية",
@@ -75,7 +75,8 @@
   "lblClearAll": "مسح الكل",
   "lblNoNotification": "لا يوجد اشعارات",
   "lblNoNotificationDescription": "لا يوجد اشعارات حتي الان",
-  "lblEnterPhoneNumber": "ادخل رقم الهاتف"
-
-
+  "lblEnterPhoneNumber": "ادخل رقم الهاتف",
+  "lblHello": "مرحبا,",
+  "lblSelectDestination": "تحديد الوجهة",
+  "lblWhereToGo":"رايح فين ؟..."
 }
