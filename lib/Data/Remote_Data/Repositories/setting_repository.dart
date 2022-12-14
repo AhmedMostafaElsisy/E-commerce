@@ -7,7 +7,7 @@ import '../../Interfaces/settings_interface.dart';
 import '../../../core/Error_Handling/custom_error.dart';
 import '../../../core/Error_Handling/custom_exception.dart';
 import '../../../core/model/base_model.dart';
-import '../../../core/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 
 class SettingRepository extends SettingInterfaceRepository {
   @override

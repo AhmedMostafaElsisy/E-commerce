@@ -2,7 +2,7 @@ import 'package:captien_omda_customer/core/Constants/Keys/api_keys.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../../core/model/base_model.dart';
-import '../../../../core/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/Error_Handling/custom_exception.dart';
-import '../Network/Dio_Exception_Handling/dio_helper.dart';
+import '../Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import 'connectivity_states.dart';
 
 /// connectivity Controller
@@ -80,6 +80,9 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
         emit(InternetDisconnected());
       }
     } on CustomException catch (e) {
+      emit(InternetDisconnected());
+      debugPrint('catch DioError google ${e.toString()}');
+    } on DioError catch (e){
       emit(InternetDisconnected());
       debugPrint('catch DioError google ${e.toString()}');
     }

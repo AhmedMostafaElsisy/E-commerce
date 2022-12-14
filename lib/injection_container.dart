@@ -2,9 +2,9 @@ import 'package:get_it/get_it.dart';
 
 import 'Data/Interfaces/settings_interface.dart';
 import 'Data/Remote_Data/Repositories/setting_repository.dart';
-import 'Data/local_source/flutter_secured_storage.dart';
 import 'Domain/UesCases/setting_ues_case.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
+import 'core/Data_source/local_source/flutter_secured_storage.dart';
 import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/otp_remote_data_scources.dart';
