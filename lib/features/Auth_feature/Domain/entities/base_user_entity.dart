@@ -39,7 +39,7 @@ class UserBaseEntity {
         active: json["active"],
         verified: json["verified"],
         id: json["id"],
-        image: json["image"],
+        image: json["image"]??"",
         otp: json["otp"],
       );
     } catch (e) {
