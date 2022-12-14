@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../Home_feature/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
 
@@ -55,9 +56,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
           if (loginState is UserLogInSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              RouteNames.homePageRoute,
+              RouteNames.mainBottomNavPageRoute,
               (route) => false,
             );
+            BlocProvider.of<BottomNavCubit>(context).selectItem(0);
           }
           if (loginState is UserLoginErrorState) {
             showSnackBar(
