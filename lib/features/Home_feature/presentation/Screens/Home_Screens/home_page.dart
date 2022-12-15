@@ -3,7 +3,6 @@ import 'package:captien_omda_customer/Presentation/Widgets/common_empty_widget.d
 import 'package:captien_omda_customer/Presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_loading_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
@@ -11,9 +10,6 @@ import 'package:captien_omda_customer/features/Home_feature/presentation/logic/r
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../../Presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../../Presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../../core/Constants/app_constants.dart';
 import 'request_item.dart';
 
@@ -38,38 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppConstants.lightWhiteColor,
-        appBar: CommonAppBar(
-          withNotification: true,
-          showBottomIcon: false,
-          withBack: false,
-          showLeadingWidget: true,
-          leadingWidget: commonCachedImageWidget(
-              context, SharedText.currentUser!.image!,
-              isProfile: true,
-              isCircular: true,
-              height: 30,
-              width: 30,
-              radius: 1000,
-              fit: BoxFit.contain),
-          titleWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CommonTitleText(
-                textKey: AppLocalizations.of(context)!.lblHello,
-                textColor: AppConstants.mainTextColor,
-                textWeight: FontWeight.w500,
-                textFontSize: AppConstants.smallFontSize,
-              ),
-              CommonTitleText(
-                textKey:
-                    SharedText.currentUser!.name!.getStringWithoutSpacings(),
-                textColor: AppConstants.mainColor,
-                textWeight: FontWeight.w700,
-                textFontSize: AppConstants.smallFontSize,
-              ),
-            ],
-          ),
-        ),
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -121,12 +86,6 @@ class _HomePageState extends State<HomePage> {
                   builder: (requestCtx, requestState) {
                     if (requestState is RequestHomeLoadingState) {
                       return const CommonLoadingWidget();
-                    } else if (requestState is RequestHomeEmptyState) {
-                      return const EmptyScreen(
-                          imageString: "car_icon.svg",
-                          titleKey: "no request found ",
-                          imageHeight: 50,
-                          imageWidth: 50);
                     } else if (requestState is RequestHomeFailedState) {
                       return CommonError(
                         errorMassage: requestState.error.errorMassage,
@@ -195,40 +154,52 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-
-                            ///Spacer
-                            getSpaceHeight(AppConstants.pagePaddingDouble),
-                            Expanded(
-                              child: ListView.separated(
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.zero,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return RequestItemWidget(
-                                      mainTitle: requestCtx
-                                          .read<RequestCubit>()
-                                          .requestList[index]
-                                          .fromLocation!
-                                          .locationName!,
-                                      subTitle: requestCtx
-                                          .read<RequestCubit>()
-                                          .requestList[index]
-                                          .toLocation!
-                                          .locationName!,
-                                      onReorderClick: () {
-                                        ///Todo: aad reorder func
-                                      },
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return getSpaceHeight(
-                                        AppConstants.pagePadding);
-                                  },
-                                  itemCount: requestCtx
-                                      .read<RequestCubit>()
-                                      .requestList
-                                      .length),
-                            ),
+                            if (requestState is RequestHomeEmptyState) ...[
+                              ///Spacer
+                              getSpaceHeight(AppConstants.pagePaddingDouble),
+                              EmptyScreen(
+                                  imageString: "car_icon.svg",
+                                  titleKey: AppLocalizations.of(context)!
+                                      .lblNoTripFound,
+                                  description: AppLocalizations.of(context)!
+                                      .lblNoTripFoundHomeDesc,
+                                  imageHeight: 50,
+                                  imageWidth: 50)
+                            ] else ...[
+                              ///Spacer
+                              getSpaceHeight(AppConstants.pagePaddingDouble),
+                              Expanded(
+                                child: ListView.separated(
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.zero,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return RequestItemWidget(
+                                        mainTitle: requestCtx
+                                            .read<RequestCubit>()
+                                            .requestList[index]
+                                            .fromLocation!
+                                            .locationName!,
+                                        subTitle: requestCtx
+                                            .read<RequestCubit>()
+                                            .requestList[index]
+                                            .toLocation!
+                                            .locationName!,
+                                        onReorderClick: () {
+                                          ///Todo: aad reorder func
+                                        },
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return getSpaceHeight(
+                                          AppConstants.pagePadding);
+                                    },
+                                    itemCount: requestCtx
+                                        .read<RequestCubit>()
+                                        .requestList
+                                        .length),
+                              ),
+                            ]
                           ]);
                     }
                   },
