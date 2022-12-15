@@ -42,4 +42,13 @@ class LoginCubit extends Cubit<LoginStates> {
     result.fold((failure) => emit(UserLoginErrorState(error: failure)),
         (success) => emit(UserLogoutSuccessState()));
   }
+
+  deleteAccount() async {
+    emit(UserDeleteAccountLoadingState());
+
+    var result = await _userUseCases.callUserDeleteAccount();
+
+    result.fold((failure) => emit(UserLoginErrorState(error: failure)),
+        (success) => emit(UserLogoutSuccessState()));
+  }
 }

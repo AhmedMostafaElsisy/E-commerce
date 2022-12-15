@@ -228,11 +228,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///Delete account
               CommonGlobalButton(
                   buttonText: AppLocalizations.of(context)!.lblDeleteAccount,
-                  onPressedFunction: () {},
+                  onPressedFunction: () {
+                    showAlertDialog(context, [
+                      CommonPopUpContent(
+                        title: AppLocalizations.of(context)!.lblDeleteAccount,
+                        subTitle:
+                        AppLocalizations.of(context)!.lblDeleteThisAccount,
+                        onSubmitClick: () {
+                          Navigator.of(context).pop();
+                          profileCtx.read<LoginCubit>().deleteAccount();
+                        },
+                      ),
+                    ]);
+                  },
                   height: 48,
                   elevation: 0,
                   showBorder: false,
-                  // isLoading: profileState is DeleteAccountLoadingState,
+                  isLoading: profileState is UserDeleteAccountLoadingState,
                   buttonBackgroundColor: AppConstants.lightSecondShadowColor,
                   buttonTextSize: AppConstants.largeFontSize,
                   buttonTextFontWeight: FontWeight.w700,
