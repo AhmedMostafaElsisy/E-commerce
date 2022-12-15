@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/Constants/app_constants.dart';
 import '../../core/Helpers/shared.dart';
+import '../../core/Helpers/shared_texts.dart';
 import '../Routes/route_names.dart';
 import 'common_asset_svg_image_widget.dart';
 
@@ -19,17 +19,17 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CommonAppBar(
       {Key? key,
-        this.withBack = true,
-        this.showLeadingWidget = false,
-        this.titleWidget,
-        this.withNotification = false,
-        this.centerTitle = true,
-        this.sourcePage = '',
-        this.showBottomIcon = true,
-        this.leadingWidget,
-        this.elevation = 1,
-        this.leadingWidth,
-        this.customActionWidget})
+      this.withBack = true,
+      this.showLeadingWidget = false,
+      this.titleWidget,
+      this.withNotification = false,
+      this.centerTitle = true,
+      this.sourcePage = '',
+      this.showBottomIcon = true,
+      this.leadingWidget,
+      this.elevation = 0,
+      this.leadingWidth,
+      this.customActionWidget})
       : super(key: key);
 
   @override
@@ -43,35 +43,39 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         leadingWidth: leadingWidth,
         leading: showBottomIcon == false
             ? withBack
-            ? FittedBox(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(width: 16),
-              InkWell(
-                onTap: () => Navigator.pop(context),
-                child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 22),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 20,
-                      color: AppConstants.arrowIconColor,
-                    )),
-              ),
-            ],
-          ),
-        )
-            : showLeadingWidget
-            ? Row(
-          children: [
-            getSpaceWidth(16),
+                ? FittedBox(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(width: 16),
+                        InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 22),
+                              child: RotatedBox(
+                                quarterTurns:
+                                    SharedText.currentLocale == "ar" ? 2 : 0,
+                                child: const commonAssetSvgImageWidget(
+                                    imageString: "back_arrow_icon.svg",
+                                    height: 40,
+                                    width: 40),
+                              )),
+                        ),
+                      ],
+                    ),
+                  )
+                : showLeadingWidget
+                    ? Row(
+                        children: [
+                          getSpaceWidth(16),
 
-            ///User profile image
-            ///Todo: add user profile
-            leadingWidget ?? const SizedBox()
-          ],
-        )
-            : const SizedBox()
+                          ///User profile image
+                          ///Todo: add user profile
+                          leadingWidget ?? const SizedBox()
+                        ],
+                      )
+                    : const SizedBox()
             : const SizedBox(),
         title: titleWidget,
         actions: [
@@ -79,13 +83,17 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             InkWell(
               onTap: () {
                 ///Todo: add navigation for notification page
-                Navigator.pushNamed(
-                    context, RouteNames.notificationPageRoute);
+                Navigator.pushNamed(context, RouteNames.notificationPageRoute);
               },
-              child: commonAssetSvgImageWidget(
-                imageString: 'notification_icon.svg',
-                height: 24,
-                width: 24,
+              child: const Padding(
+                padding:
+                EdgeInsets.symmetric(horizontal: 16),
+                child: commonAssetSvgImageWidget(
+                  imageString: 'notification_icon.svg',
+                  height: 25,
+                  width: 25,
+                  fit: BoxFit.cover
+                ),
               ),
             ),
           customActionWidget ?? const SizedBox(),

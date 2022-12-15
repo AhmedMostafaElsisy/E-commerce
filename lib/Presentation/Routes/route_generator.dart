@@ -1,14 +1,15 @@
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/Presentation/Screens/Splash_Screens/splash_screen_home_page.dart';
+import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'package:flutter/material.dart';
 import '../../features/Auth_feature/Presentation/screens/login_home_page.dart';
 import '../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
-import '../Screens/Forget_Password_Screen/forget_password_screen.dart';
+import '../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
+import '../../features/Auth_feature/Presentation/screens/forget_password_screen.dart';
+
+import '../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
+import '../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
 import '../Screens/Forget_Password_Screen/new_password_screen.dart';
-import '../Screens/Home_Screens/home_page.dart';
 import '../Screens/Notification_Screen/notification_screen.dart';
-import '../Screens/Splash_Screens/choose_login_or_signup.dart';
-import '../Screens/Verification_Code_Screen/verification_code_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -22,9 +23,6 @@ class RouteGenerator {
       case RouteNames.homePageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const HomePage());
-      case RouteNames.chooseLoginSignupScreenRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: const ChooseLoginSignupScreen());
       case RouteNames.loginHomePageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const LoginHomePage());
@@ -43,6 +41,9 @@ class RouteGenerator {
       case RouteNames.notificationPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const NotificationListScreen());
+      case RouteNames.mainBottomNavPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const BottomNavBar());
 
       default:
         return MaterialPageRoute(

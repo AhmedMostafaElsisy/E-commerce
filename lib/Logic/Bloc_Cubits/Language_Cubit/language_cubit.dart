@@ -1,8 +1,8 @@
-import 'package:captien_omda_customer/Data/local_source/flutter_secured_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
+import '../../../core/Data_source/local_source/flutter_secured_storage.dart';
 import 'language_states.dart';
 
 class LangCubit extends Cubit<LangState> {
@@ -10,7 +10,7 @@ class LangCubit extends Cubit<LangState> {
   Locale? appLocal;
 
   static LangCubit get(context) => BlocProvider.of(context);
-  String currentLang = "en";
+  String currentLang = "ar";
 
   /// change lang with the new lang selected
   Future<void> changeLang(newLang, context) async {

@@ -17,6 +17,7 @@ class UserBaseEntity {
 
   int? id;
   String? image;
+  String? otp;
 
   UserBaseEntity(
       {this.name,
@@ -26,7 +27,7 @@ class UserBaseEntity {
       this.active,
       this.verified,
       this.id,
-      this.image});
+      this.image,this.otp});
 
   factory UserBaseEntity.fromJson(Map<String, dynamic> json) {
     try {
@@ -38,7 +39,8 @@ class UserBaseEntity {
         active: json["active"],
         verified: json["verified"],
         id: json["id"],
-        image: json["image"],
+        image: json["image"]??"",
+        otp: json["otp"],
       );
     } catch (e) {
       debugPrint("here is the error in parsing UserBaseModel ${e.toString()}");
