@@ -30,5 +30,6 @@ abstract class AuthRepositoryInterface extends BaseInterface {
   });
 
   Future<Either<CustomError, BaseModel>> logout();
+  Future<Either<CustomError, BaseModel>> startApp();
 
 }

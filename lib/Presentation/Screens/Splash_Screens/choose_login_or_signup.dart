@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
 import '../../Widgets/common_asset_image_widget.dart';
-import '../../Widgets/common_asset_svg_image_widget.dart';
 
 class ChooseLoginSignupScreen extends StatefulWidget {
   const ChooseLoginSignupScreen({Key? key}) : super(key: key);

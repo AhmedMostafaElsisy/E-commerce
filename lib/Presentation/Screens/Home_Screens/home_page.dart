@@ -1,3 +1,5 @@
+import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
@@ -8,7 +10,6 @@ import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       appBar: const CommonAppBar(
         withNotification: true,
         showBottomIcon:false,
-        withBack: true,
+        withBack: false,
         titleWidget: CommonTitleText(
           textKey: "Home",
           textColor: AppConstants.lightBlackColor,
@@ -137,7 +138,7 @@ class _HomePageState extends State<HomePage> {
             getSpaceHeight(20),
             MaterialButton(
               onPressed: () {
-                BlocProvider.of<SettingCubit>(context).getTermsAndCondition();
+                BlocProvider.of<LoginCubit>(context).logOut();
               },
               child: Text(AppLocalizations.of(context)!.lblValidate),
             ),

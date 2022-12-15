@@ -3,28 +3,28 @@ class ApiKeys {
   static const String userTypeKey = "/customer";
 
   ///Auth Keys
-  static const String loginKey = userTypeKey + "/login";
-  static const String singUpKey = userTypeKey + "/register";
-  static const String logOutKey = userTypeKey + "/logout";
+  static const String loginKey = "$userTypeKey/login";
+  static const String singUpKey = "$userTypeKey/register";
+  static const String logOutKey = "$userTypeKey/logout";
 
   ///profile keys
-  static const String profileKey = userTypeKey + "/profile";
-  static const String updateProfileKey = userTypeKey + "/updateProfile";
-  static const String deleteProfileKey = userTypeKey + "/delete";
+  static const String profileKey = "$userTypeKey/profile";
+  static const String updateProfileKey = "$userTypeKey/updateProfile";
+  static const String deleteProfileKey = "$userTypeKey/delete";
 
   ///Password keys
-  static const String changePasswordKey = userTypeKey + "/changePassword";
-  static const String forgetPasswordKey = userTypeKey + "/forgetPassword";
-  static const String resetPasswordKey = userTypeKey + "/resetPassword";
+  static const String changePasswordKey = "$userTypeKey/changePassword";
+  static const String forgetPasswordKey = "$userTypeKey/forgetPassword";
+  static const String resetPasswordKey = "$userTypeKey/resetPassword";
 
   ///Otp Keys
-  static const String checkOtpKey = userTypeKey + "/otp-check";
-  static const String reSendOtpKey = userTypeKey + "/resend-otp";
+  static const String checkOtpKey = "$userTypeKey/otp-check";
+  static const String reSendOtpKey = "$userTypeKey/resend-otp";
 
   ///notification keys
   static const String notificationKey = "/notifications";
-  static const String clearNotificationKey = notificationKey + "/clear";
-  static const String toggleNotificationKey = notificationKey + "/toggle";
+  static const String clearNotificationKey = "$notificationKey/clear";
+  static const String toggleNotificationKey = "$notificationKey/toggle";
   static const String readNotificationKey = "/read";
 
   ///Setting keys

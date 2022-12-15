@@ -71,9 +71,9 @@ pickImage(
     required Function(XFile)? getImage,
     required ImageSource source}) async {
   try {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
 
-    final pickedFile = await _picker.pickImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
     if (pickedFile == null) {
     } else {
       getImage!(pickedFile);
