@@ -56,7 +56,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           if (loginState is UserLogInSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              RouteNames.loginHomePageRoute,
+              RouteNames.mainBottomNavPageRoute,
               (route) => false,
             );
             BlocProvider.of<BottomNavCubit>(context).selectItem(0);
