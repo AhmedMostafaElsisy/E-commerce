@@ -1,18 +1,20 @@
 import 'package:captien_omda_customer/features/Profile_feature/presentation/screens/profile_data_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
-import '../../../../Logic/Bloc_Cubits/Profile_Cubit/profile_states.dart';
+import '../../../../Presentation/Routes/route_names.dart';
 import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../Presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../Presentation/Widgets/common_global_button.dart';
 import '../../../../Presentation/Widgets/common_title_text.dart';
 import '../../../../Presentation/Widgets/custom_alert_dialog.dart';
+import '../../../../Presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/Constants/app_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+import '../../../Auth_feature/Presentation/logic/Login_Cubit/login_states.dart';
 import 'common_pop_up_content.dart';
 import 'common_profile_header_widget.dart';
 
@@ -28,18 +30,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppConstants.lightWhiteColor,
-      body: BlocConsumer<ProfileCubit, ProfileCubitStates>(
+      body: BlocConsumer<LoginCubit, LoginStates>(
         listener: (profileCtx, profileState) {
-          // if (profileState is DeleteAccountStatesError) {
-          //   showSnackBar(
-          //     context: profileCtx,
-          //     title: profileState.error!.errorMassage!,
-          //   );
-          // } else if (profileState is DeleteAccountStatesSuccess) {
-          //   Navigator.pushNamedAndRemoveUntil(
-          //       context, RouteNames.loginHomePageRoute, (route) => false);
-          //   // BlocProvider.of<BottomNavCubit>(context).selectItem(0);
-          // }
+          if (profileState is UserLoginErrorState) {
+            showSnackBar(
+              context: profileCtx,
+              title: profileState.error!.errorMassage!,
+            );
+          } else if (profileState is UserLogoutSuccessState) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, RouteNames.loginHomePageRoute, (route) => false);
+            // BlocProvider.of<BottomNavCubit>(context).selectItem(0);
+          }
         },
         builder: (profileCtx, profileState) {
           return Column(
@@ -94,7 +96,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               subTitle:
                                   AppLocalizations.of(context)!.lblIsLogOut,
                               onSubmitClick: () {
-
+                                Navigator.of(context).pop();
+                                profileCtx.read<LoginCubit>().logOut();
                               },
                             ),
                           ]);
