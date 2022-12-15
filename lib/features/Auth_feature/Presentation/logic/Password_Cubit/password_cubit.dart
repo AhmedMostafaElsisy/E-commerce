@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../Domain/use_cases/forget_password_user_case.dart';
-import 'forget_password_states.dart';
+import 'password_states.dart';
 
-class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
-  ForgetPasswordCubit(this._forgetUserCase) : super(ForgetPasswordStatesInit());
+class PasswordCubit extends Cubit<PasswordStates> {
+  PasswordCubit(this._forgetUserCase) : super(ForgetPasswordStatesInit());
 
-  static ForgetPasswordCubit get(context) => BlocProvider.of(context);
+  static PasswordCubit get(context) => BlocProvider.of(context);
 
-  final ForgetPasswordUesCases _forgetUserCase;
+  final PasswordUesCases _forgetUserCase;
 
   resetState() {
     emit(ForgetPasswordStatesInit());
@@ -32,8 +32,25 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       required String confirmPassword}) async {
     emit(ChangePasswordStateLoading());
     var result = await _forgetUserCase.callChangeNewPassword(
-      code: code,
-        email: email, password: password, confirmPassword: confirmPassword);
+        code: code,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword);
+
+    result.fold((failure) => emit(ChangePasswordStateError(error: failure)),
+        (success) => emit(ChangePasswordStateSuccess()));
+  }
+
+  /// Change  Password
+  changePassword(
+      {required String oldPassword,
+      required String password,
+      required String confirmPassword}) async {
+    emit(ChangePasswordStateLoading());
+    var result = await _forgetUserCase.callChangePassword(
+        oldPassword: oldPassword,
+        password: password,
+        confirmPassword: confirmPassword);
 
     result.fold((failure) => emit(ChangePasswordStateError(error: failure)),
         (success) => emit(ChangePasswordStateSuccess()));

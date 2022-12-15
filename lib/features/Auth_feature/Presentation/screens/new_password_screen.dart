@@ -12,8 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
-import '../logic/Forget_Password_Cubit/forget_password_cubit.dart';
-import '../logic/Forget_Password_Cubit/forget_password_states.dart';
+import '../logic/Password_Cubit/password_cubit.dart';
+import '../logic/Password_Cubit/password_states.dart';
 import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
 
 class NewPasswordScreen extends StatefulWidget {
@@ -63,7 +63,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           textFontSize: AppConstants.normalFontSize,
         ),
       ),
-      body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
+      body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (passwordCtx, passwordStates) {
           if (passwordStates is ChangePasswordStateSuccess) {
             Navigator.pushNamedAndRemoveUntil(
@@ -306,7 +306,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                   FocusScope.of(passwordCtx)
                                       .requestFocus(FocusNode());
                                   passwordCtx
-                                      .read<ForgetPasswordCubit>()
+                                      .read<PasswordCubit>()
                                       .changeNewPassword(
                                           code: widget.argument.otp!,
                                           email: widget.argument.emailAddress!,

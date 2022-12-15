@@ -8,9 +8,9 @@ import 'Logic/Bloc_Cubits/Notification_Cubit/notification_cubit.dart';
 import 'Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
 import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
-import 'features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
@@ -41,8 +41,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<SignUpCubit>(
             create: (_) => di.sl<SignUpCubit>()),
         BlocProvider<OtpCubit>(create: (_) => di.sl<OtpCubit>()),
-        BlocProvider<ForgetPasswordCubit>(
-            create: (_) => di.sl<ForgetPasswordCubit>()),
+        BlocProvider<PasswordCubit>(
+            create: (_) => di.sl<PasswordCubit>()),
         BlocProvider<ProfileCubit>(
             create: (_) => ProfileCubit(ProfileRepository())),
         BlocProvider<HelpCubit>(create: (_) => HelpCubit()),

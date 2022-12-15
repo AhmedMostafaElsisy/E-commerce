@@ -15,9 +15,9 @@ import 'features/Auth_feature/Domain/repository/auth_interface.dart';
 import 'features/Auth_feature/Domain/repository/password_interface.dart';
 import 'features/Auth_feature/Domain/use_cases/auth_use_case.dart';
 import 'features/Auth_feature/Domain/use_cases/forget_password_user_case.dart';
-import 'features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
 import 'features/Auth_feature/Data/repository/otp_repository.dart';
 import 'features/Auth_feature/Domain/repository/otp_interface.dart';
@@ -36,7 +36,7 @@ Future<void> init() async {
   sl.registerFactory(() => LoginCubit(sl()));
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => OtpCubit(sl()));
-  sl.registerFactory(() => ForgetPasswordCubit(sl()));
+  sl.registerFactory(() => PasswordCubit(sl()));
   sl.registerFactory(() => RequestCubit(sl()));
 
   ///User case
@@ -44,7 +44,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
   sl.registerLazySingleton(() => OtpUesCases(sl()));
   sl.registerLazySingleton(() => RequestUesCases(sl()));
-  sl.registerLazySingleton(() => ForgetPasswordUesCases(sl(), sl()));
+  sl.registerLazySingleton(() => PasswordUesCases(sl(), sl()));
 
   ///repo
   sl.registerLazySingleton<SettingInterfaceRepository>(
