@@ -1,4 +1,4 @@
-import '../../../core/Constants/app_constants.dart';
+import '../../../../core/Constants/app_constants.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -9,12 +9,12 @@ import 'package:captien_omda_customer/Presentation/Widgets/custom_snack_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../core/Helpers/Validators/validators.dart';
-import '../../../core/Helpers/shared.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
-import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_states.dart';
-import '../../Widgets/common_app_bar_widget.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
+import '../logic/Forget_Password_Cubit/forget_password_cubit.dart';
+import '../logic/Forget_Password_Cubit/forget_password_states.dart';
+import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   final RouteArgument argument;
