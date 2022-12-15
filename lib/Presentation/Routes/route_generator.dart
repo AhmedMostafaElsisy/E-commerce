@@ -8,6 +8,7 @@ import '../../features/Auth_feature/Presentation/screens/forget_password_screen.
 
 import '../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
+import '../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../Screens/Forget_Password_Screen/new_password_screen.dart';
 import '../Screens/Notification_Screen/notification_screen.dart';
 import 'route_animation.dart';
@@ -44,6 +45,9 @@ class RouteGenerator {
       case RouteNames.mainBottomNavPageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const BottomNavBar());
+        case RouteNames.profilePageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const ProfileScreen());
 
       default:
         return MaterialPageRoute(
