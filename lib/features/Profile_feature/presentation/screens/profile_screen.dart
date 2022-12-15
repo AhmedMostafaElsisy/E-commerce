@@ -211,7 +211,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CommonGlobalButton(
                   buttonText: AppLocalizations.of(context)!.lblChangePassWord,
                   onPressedFunction: () {
-                    ///Todo: add change password screen route
+
+                    Navigator.of(context)
+                        .pushNamed(RouteNames.changePasswordPageRoute);
                   },
                   height: 48,
                   elevation: 0,
@@ -233,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       CommonPopUpContent(
                         title: AppLocalizations.of(context)!.lblDeleteAccount,
                         subTitle:
-                        AppLocalizations.of(context)!.lblDeleteThisAccount,
+                            AppLocalizations.of(context)!.lblDeleteThisAccount,
                         onSubmitClick: () {
                           Navigator.of(context).pop();
                           profileCtx.read<LoginCubit>().deleteAccount();
