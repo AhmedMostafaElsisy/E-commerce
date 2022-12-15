@@ -90,5 +90,6 @@
   "lblNo": "No",
   "lblChangePassWord": "Change password",
   "lblLogOut": "Log out",
-  "lblIsLogOut":"Do you want to log out ?"
+  "lblIsLogOut": "Do you want to log out ?",
+  "lblOldPassword": "Old Password"
 }
