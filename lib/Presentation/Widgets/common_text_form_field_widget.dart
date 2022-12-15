@@ -177,7 +177,7 @@ class CommonTextFormField extends StatelessWidget {
                     color: labelErrorStyle,
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 10.0),
+                      vertical: 10.0, horizontal: 0.0),
                   fillColor: filledColor!,
                   isDense: true,
                   filled: true,

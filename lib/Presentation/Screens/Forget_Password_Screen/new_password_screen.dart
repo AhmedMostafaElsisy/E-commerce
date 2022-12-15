@@ -1,9 +1,6 @@
 import '../../../core/Constants/app_constants.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
-import 'package:captien_omda_customer/Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_states.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_text_form_field_widget.dart';
@@ -15,6 +12,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Helpers/Validators/validators.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
+import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
+import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_states.dart';
+import '../../Widgets/common_app_bar_widget.dart';
+
 class NewPasswordScreen extends StatefulWidget {
   final RouteArgument argument;
 
@@ -49,6 +50,19 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppConstants.lightWhiteColor,
+      appBar: CommonAppBar(
+        elevation: 0,
+        withBack: true,
+        showBottomIcon: false,
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblPassword,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w700,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
       body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
         listener: (passwordCtx, passwordStates) {
           if (passwordStates is ChangePasswordStateSuccess) {
@@ -67,296 +81,245 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             onTap: () {
               FocusScope.of(passwordCtx).requestFocus(FocusNode());
             },
-            child: Container(
+            child: SizedBox(
               width: SharedText.screenWidth,
               height: SharedText.screenHeight,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/bg2.png",
-                      ),
-                      fit: BoxFit.fill)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  /// Logo
-                  Stack(
+                  Column(
                     children: [
-                      Stack(children: [
-                        commonAssetImageWidget(
-                            imageString: "elipse-pattern.png",
-                            height: getWidgetHeight(200),
-                            width: SharedText.screenWidth,
-                            fit: BoxFit.fill),
-                        Positioned(
-                            top: getWidgetHeight(50),
-                            left: getWidgetWidth(16),
-                            child: InkWell(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                width: getWidgetWidth(40),
-                                height: getWidgetHeight(40),
-                                decoration: BoxDecoration(
-                                  color: AppConstants.lightWhiteColor,
-                                  borderRadius: BorderRadius.circular(
-                                      AppConstants.smallRadius),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: commonAssetSvgImageWidget(
-                                        imageString: "back_arrow_icon.svg",
-                                        height: 14,
-                                        width: 7,
-                                        imageColor: AppConstants.mainColor),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppConstants.pagePadding),
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            children: [
+                              getSpaceHeight(20),
+
+                              /// Logo
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  commonAssetSvgImageWidget(
+                                    imageString: "password_lock_iconb.svg",
+                                    height: 90,
+                                    width: 90,
+                                    fit: BoxFit.cover,
                                   ),
+                                ],
+                              ),
+
+                              getSpaceHeight(24),
+
+                              Form(
+                                key: formKey,
+                                child: Column(
+                                  children: [
+                                    /// Password
+                                    CommonTextFormField(
+                                      withSuffixIcon: true,
+                                      labelText:
+                                          AppLocalizations.of(passwordCtx)!
+                                              .lblNewPassword,
+                                      prefixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            hidePassword = !hidePassword;
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          width: getWidgetWidth(30),
+                                          height: getWidgetHeight(30),
+                                          child: Center(
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 15),
+                                                child: commonAssetSvgImageWidget(
+                                                    imageString: hidePassword
+                                                        ? "eye_open.svg"
+                                                        : "eye_close.svg",
+                                                    height: 30,
+                                                    width: 30,
+                                                    fit: BoxFit.contain)),
+                                          ),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      isObscureText: hidePassword,
+                                      radius: AppConstants.smallBorderRadius,
+                                      hintKey: AppLocalizations.of(passwordCtx)!
+                                          .lblEnterPassword,
+                                      labelHintStyle:
+                                          AppConstants.mainTextColor,
+                                      suffixIcon: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 12, horizontal: 12),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "lock_icon.svg",
+                                            fit: BoxFit.contain,
+                                            height: 22,
+                                            width: 22),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordIsEmpty;
+                                        } else if (value.length < 8) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordMustBeMoreThan;
+                                        } else if (complexValidationLowerAndUpperCaseValidator(
+                                            value)) {
+                                          return AppLocalizations.of(context)!
+                                              .lblComplexPasswordValidationUpperAndLower;
+                                        } else if (complexValidationSpecialCharactersValidator(
+                                            value)) {
+                                          return AppLocalizations.of(context)!
+                                              .lblComplexPasswordValidationSc;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {
+                                          passwordController.text = value!;
+                                        });
+                                        return null;
+                                      },
+                                    ),
+
+                                    getSpaceHeight(16),
+
+                                    /// Confirm Password
+                                    CommonTextFormField(
+                                      withSuffixIcon: true,
+                                      labelText:
+                                          AppLocalizations.of(passwordCtx)!
+                                              .lblConfirmPassword,
+                                      prefixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            hideConfirmPassword =
+                                                !hideConfirmPassword;
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          width: getWidgetWidth(30),
+                                          height: getWidgetHeight(30),
+                                          child: Center(
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 15),
+                                                child: commonAssetSvgImageWidget(
+                                                    imageString: hidePassword
+                                                        ? "eye_open.svg"
+                                                        : "eye_close.svg",
+                                                    height: 30,
+                                                    width: 30,
+                                                    fit: BoxFit.contain)),
+                                          ),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      isObscureText: hideConfirmPassword,
+                                      radius: AppConstants.smallBorderRadius,
+                                      hintKey: AppLocalizations.of(passwordCtx)!
+                                          .lblEnterPassword,
+                                      labelHintStyle:
+                                          AppConstants.mainTextColor,
+                                      suffixIcon: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 12, horizontal: 12),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "lock_icon.svg",
+                                            fit: BoxFit.contain,
+                                            height: 22,
+                                            width: 22),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(
+                                                  passwordCtx)!
+                                              .lblPasswordIsEmpty;
+                                        } else if (value.length < 8) {
+                                          return AppLocalizations.of(
+                                                  passwordCtx)!
+                                              .lblPasswordMustBeMoreThan;
+                                        } else if (value !=
+                                            passwordController.text) {
+                                          return AppLocalizations.of(
+                                                  passwordCtx)!
+                                              .lblPasswordDontMatch;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {
+                                          confirmPasswordController.text =
+                                              value!;
+                                        });
+                                        return null;
+                                      },
+                                    ),
+
+                                    /// Retype Password
+                                    getSpaceHeight(16),
+                                  ],
                                 ),
                               ),
-                            )),
-                      ]),
-
-                      /// Logo
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.only(top: 90),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                commonAssetSvgImageWidget(
-                                  imageString: "password_lock_icon.svg",
-                                  height: 48,
-                                  width: 48,
-                                  fit: BoxFit.fill,
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
-                          getSpaceHeight(8),
-                          CommonTitleText(
-                            textKey: AppLocalizations.of(passwordCtx)!
-                                .lblNewPassword,
-                            textColor: AppConstants.lightWhiteColor,
-                            textFontSize: 18,
-                            textWeight: FontWeight.w700,
-                          ),
-                        ],
-                      ),
+                        ),
+                      )
                     ],
                   ),
-
-                  getSpaceHeight(90),
-
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.pagePadding),
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          /// Title
-                          Row(
-                            children: [
-                              CommonTitleText(
-                                textKey: AppLocalizations.of(passwordCtx)!
-                                    .lblCreateNewPassword,
-                                textColor: AppConstants.lightBlackColor,
-                                textFontSize: 16,
-                                textWeight: FontWeight.w700,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              CommonTitleText(
-                                textKey: AppLocalizations.of(passwordCtx)!
-                                    .lblMoreThan8Characters,
-                                textColor: AppConstants.lightBlackColor,
-                                textFontSize: 16,
-                                textWeight: FontWeight.w700,
-                              ),
-                            ],
-                          ),
-
-                          getSpaceHeight(24),
-
-                          Form(
-                            key: formKey,
-                            child: Column(
-                              children: [
-                                /// Password
-                                CommonTextFormField(
-                                  withSuffixIcon: true,
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        hidePassword = !hidePassword;
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: commonAssetSvgImageWidget(
-                                          imageString: hidePassword
-                                              ? "eye_open.svg"
-                                              : "eye_close.svg",
-                                          height: 16,
-                                          width: 16,
-                                          fit: BoxFit.fill),
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  minLines: 1,
-                                  maxLines: 1,
-                                  isObscureText: hidePassword,
-                                  radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(passwordCtx)!
-                                      .lblEnterPassword,
-                                  labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13, horizontal: 15),
-                                    child: commonAssetSvgImageWidget(
-                                        imageString: "lock_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
-                                          .lblPasswordIsEmpty;
-                                    } else if (value.length < 8) {
-                                      return AppLocalizations.of(context)!
-                                          .lblPasswordMustBeMoreThan;
-                                    } else if (complexValidationLowerAndUpperCaseValidator(
-                                        value)) {
-                                      return AppLocalizations.of(context)!
-                                          .lblComplexPasswordValidationUpperAndLower;
-                                    }
-                                    else if (complexValidationSpecialCharactersValidator(
-                                        value)) {
-                                      return AppLocalizations.of(context)!
-                                          .lblComplexPasswordValidationSc;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      passwordController.text = value!;
-                                    });
-                                    return null;
-                                  },
-                                ),
-
-                                getSpaceHeight(16),
-
-                                /// Confirm Password
-                                CommonTextFormField(
-                                  withSuffixIcon: true,
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        hideConfirmPassword =
-                                            !hideConfirmPassword;
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: commonAssetSvgImageWidget(
-                                          imageString: hideConfirmPassword
-                                              ? "eye_open.svg"
-                                              : "eye_close.svg",
-                                          height: 16,
-                                          width: 16,
-                                          fit: BoxFit.fill),
-                                    ),
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  minLines: 1,
-                                  maxLines: 1,
-                                  isObscureText: hideConfirmPassword,
-                                  radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(passwordCtx)!
-                                      .lblRetypePassword,
-                                  labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13, horizontal: 15),
-                                    child: commonAssetSvgImageWidget(
-                                        imageString: "lock_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return AppLocalizations.of(passwordCtx)!
-                                          .lblPasswordIsEmpty;
-                                    } else if (value.length < 8) {
-                                      return AppLocalizations.of(passwordCtx)!
-                                          .lblPasswordMustBeMoreThan;
-                                    } else if (value !=
-                                        passwordController.text) {
-                                      return AppLocalizations.of(passwordCtx)!
-                                          .lblPasswordDontMatch;
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  onChanged: (value) {
-                                    setState(() {
-                                      confirmPasswordController.text = value!;
-                                    });
-                                    return null;
-                                  },
-                                ),
-
-                                /// Retype Password
-                                getSpaceHeight(16),
-
-                                CommonGlobalButton(
-                                    height: 48,
-                                    buttonBackgroundColor:
-                                        AppConstants.mainColor,
-                                    isEnable:
-                                        passwordController.text.isNotEmpty &&
-                                            confirmPasswordController
-                                                .text.isNotEmpty,
-                                    isLoading: passwordStates
-                                        is ChangePasswordStateLoading,
-                                    radius: AppConstants.smallBorderRadius,
-                                    buttonTextSize: 18,
-                                    buttonTextFontWeight: FontWeight.w400,
-                                    buttonText:
-                                        AppLocalizations.of(passwordCtx)!
-                                            .lblVerify,
-                                    onPressedFunction: () {
-                                      if (formKey.currentState!.validate()) {
-                                        FocusScope.of(passwordCtx)
-                                            .requestFocus(FocusNode());
-                                        passwordCtx
-                                            .read<ForgetPasswordCubit>()
-                                            .changeNewPassword(
-                                                email: widget
-                                                    .argument.emailAddress!,
-                                                confirmPassword:
-                                                    confirmPasswordController
-                                                        .text,
-                                                password:
-                                                    passwordController.text);
-                                      }
-                                    },
-                                    withIcon: false)
-                              ],
-                            ),
-                          ),
+                          CommonGlobalButton(
+                              height: 48,
+                              buttonBackgroundColor: AppConstants.mainColor,
+                              isEnable: passwordController.text.isNotEmpty &&
+                                  confirmPasswordController.text.isNotEmpty,
+                              isLoading:
+                                  passwordStates is ChangePasswordStateLoading,
+                              radius: AppConstants.smallBorderRadius,
+                              buttonTextSize: 18,
+                              buttonTextFontWeight: FontWeight.w400,
+                              buttonText:
+                                  AppLocalizations.of(passwordCtx)!.lblSubmit,
+                              onPressedFunction: () {
+                                if (formKey.currentState!.validate()) {
+                                  FocusScope.of(passwordCtx)
+                                      .requestFocus(FocusNode());
+                                  passwordCtx
+                                      .read<ForgetPasswordCubit>()
+                                      .changeNewPassword(
+                                          code: widget.argument.otp!,
+                                          email: widget.argument.emailAddress!,
+                                          confirmPassword:
+                                              confirmPasswordController.text,
+                                          password: passwordController.text);
+                                }
+                              },
+                             ),
                         ],
                       ),
-                    ),
+                      getSpaceHeight(50),
+                    ],
                   )
                 ],
               ),

@@ -103,7 +103,7 @@ class CommonGlobalButton extends StatelessWidget {
                   textWeight: buttonTextFontWeight!,
                 ),
                 getSpaceWidth(spaceSize!),
-                commonAssetSvgImageWidget(
+                const commonAssetSvgImageWidget(
                     imageString: "right_arrow.svg", height: 8, width: 14)
               ],
             )

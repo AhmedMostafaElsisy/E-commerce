@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
 
@@ -55,9 +56,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
           if (loginState is UserLogInSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              RouteNames.homePageRoute,
+              RouteNames.mainBottomNavPageRoute,
               (route) => false,
             );
+            BlocProvider.of<BottomNavCubit>(context).selectItem(0);
           }
           if (loginState is UserLoginErrorState) {
             showSnackBar(
@@ -142,8 +144,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     keyboardType: TextInputType.emailAddress,
                                     labelHintStyle: AppConstants.mainTextColor,
                                     withSuffixIcon: true,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "email_icon.svg",
@@ -184,24 +186,22 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         });
                                       },
                                       child: SizedBox(
-                                        width: getWidgetWidth(40),
-                                        height: getWidgetHeight(40),
+                                        width: getWidgetWidth(30),
+                                        height: getWidgetHeight(30),
                                         child: Center(
                                           child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 10),
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 15),
                                               child: commonAssetSvgImageWidget(
-                                                  imageString: hidePassword
+                                                  imageString:
+                                                  hidePassword
                                                       ? "eye_open.svg"
                                                       : "eye_close.svg",
                                                   height: 30,
                                                   width: 30,
                                                   fit: BoxFit.contain)),
                                         ),
-                                      ),
-                                    ),
+                                      ),                                    ),
                                     keyboardType: TextInputType.text,
                                     minLines: 1,
                                     maxLines: 1,
@@ -212,8 +212,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     hintKey: AppLocalizations.of(context)!
                                         .lblEnterPassword,
                                     labelHintStyle: AppConstants.mainTextColor,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "lock_icon.svg",
@@ -254,7 +254,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         },
                                         child: CommonTitleText(
                                           textKey: AppLocalizations.of(context)!
-                                              .lblForgetPassword,
+                                              .lblIsForgetPassword,
                                           textColor:
                                               AppConstants.lightBlueColor,
                                           textFontSize: 12,
@@ -309,7 +309,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     buttonText: AppLocalizations.of(context)!
                                         .lblCreateAccount,
                                     onPressedFunction: () {
-                                      Navigator.pushReplacementNamed(
+                                      Navigator.pushNamed(
                                           context, RouteNames.singUpPageRoute);
                                     },
                                   ),

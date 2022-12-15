@@ -1,19 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:captien_omda_customer/Presentation/Widgets/common_asset_image_widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/Constants/app_constants.dart';
+import '../../core/Constants/app_constants.dart';
 import '../../core/Helpers/shared.dart';
+import 'common_asset_svg_image_widget.dart';
 
 Widget commonCachedImageWidget(
-  BuildContext context,
-  String imageUrl, {
-  double radius = 10.0,
-  BoxFit fit = BoxFit.contain,
-  double? height,
-  double? width,
-}) {
-  double imageHeight = getWidgetHeight(height!);
-  double imageWidth = getWidgetWidth(width!);
+    BuildContext context,
+    String imageUrl, {
+      double radius = 0.0,
+      BoxFit fit = BoxFit.fill,
+      required double height,
+      required double width,
+      bool isCircular = false,
+      bool isProfile = false,
+    }) {
+  double imageHeight = getWidgetHeight(height);
+  double imageWidth =
+  isCircular ? getWidgetHeight(height) : getWidgetWidth(width);
 
   return CachedNetworkImage(
     imageUrl: imageUrl,
@@ -22,6 +26,7 @@ Widget commonCachedImageWidget(
       width: imageWidth,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(
           radius,
         ),
@@ -42,16 +47,23 @@ Widget commonCachedImageWidget(
       ),
       child: const Center(
           child: CircularProgressIndicator(
-        color: AppConstants.mainColor,
-      )),
+            color: AppConstants.mainColor,
+          )),
     ),
-    errorWidget: (context, url, error) => ClipOval(
-      child: Image.asset(
-        'assets/images/logo.png',
-        fit: BoxFit.fill,
-        height: imageHeight,
-        width: imageWidth,
-      ),
+    errorWidget: (context, url, error) => isProfile ?
+    commonAssetImageWidget(
+      imageString: 'avatar.png',
+      height: imageHeight,
+      width: imageWidth,
+      radius: radius,
+      fit: fit,
+    ):commonAssetSvgImageWidget(
+      imageString: 'logo.svg',
+      height: imageHeight,
+      width: imageWidth,
+      fit: fit,
+      radius: radius,
+      isCircular: isCircular,
     ),
   );
 }

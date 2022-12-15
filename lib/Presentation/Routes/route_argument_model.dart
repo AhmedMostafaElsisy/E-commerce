@@ -17,12 +17,14 @@ class RouteArgument {
 
   /// Functions
   Function()? onTap;
+  String? otp;
 
   RouteArgument(
       {this.id,
       this.sourcePage = '',
       this.appBarWidget = const PreferredSize(
-          child: SizedBox(), preferredSize: Size.fromHeight(0)),
+          preferredSize: Size.fromHeight(0),
+          child: SizedBox()),
       this.mainBody,
       this.titleWidget,
       this.withBack = false,
@@ -31,7 +33,8 @@ class RouteArgument {
       // this.doctorModel,
       this.imagePath,
       this.emailAddress,
-      this.onTap});
+      this.onTap,
+      this.otp});
 
   @override
   String toString() {

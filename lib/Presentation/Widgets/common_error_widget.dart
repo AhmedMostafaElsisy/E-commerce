@@ -22,7 +22,7 @@ class CommonError extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
+        const Center(
           child: commonAssetSvgImageWidget(
               imageString: "error_icon.svg",
               height: 80,

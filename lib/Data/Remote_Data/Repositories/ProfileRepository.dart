@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/Data_source/local_source/flutter_secured_storage.dart';
 import '../../../core/Helpers/shared_texts.dart';
 import '../../Interfaces/profile_interface.dart';
-import '../../Models/base_model.dart';
+import '../../../core/model/base_model.dart';
 import '../../../features/Auth_feature/Domain/entities/base_user_entity.dart';
-import '../../local_source/flutter_secured_storage.dart';
 import '../../../core/Error_Handling/custom_error.dart';
 import '../../../core/Error_Handling/custom_exception.dart';
-import '../Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 
 class ProfileRepository extends ProfileRepositoryInterface  {
   ///auth user Profile_Cubit data

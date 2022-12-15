@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../Data/Models/base_model.dart';
+import '../../../../core/model/base_model.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -27,26 +27,14 @@ class AuthRepository extends AuthRepositoryInterface {
       required String confirmPassword,
       XFile? userImage,
       required String token}) async {
-    try {
-      ///login user in remote data source
-      var baseModel = await remoteDataSourceInterface.userSingUp(
-          confirmPassword: confirmPassword,
-          phoneNumber: phoneNumber,
-          userName: userName,
-          userImage: userImage,
-          emailAddress: emailAddress,
-          password: password,
-          token: token);
-
-      ///return the right side of either (base model)
-      return right(baseModel);
-    } on CustomException catch (ex) {
-      ///catch the exception throw by the remote data
-      ///return the left side of either (customer error)
-      errorMsg = CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath);
-      return Left(errorMsg!);
-    }
+    return  await remoteDataSourceInterface.userSingUp(
+        confirmPassword: confirmPassword,
+        phoneNumber: phoneNumber,
+        userName: userName,
+        userImage: userImage,
+        emailAddress: emailAddress,
+        password: password,
+        token: token);
   }
 
   /// login user to app
