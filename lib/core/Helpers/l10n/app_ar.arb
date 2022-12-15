@@ -92,5 +92,6 @@
   "lblChangePassWord": "تغير كلمة المرور",
   "lblLogOut": "تسجيل الخروج",
   "lblIsLogOut": "هل تريد تسجيل الخروج ؟",
-  "lblOldPassword": "كلمة المرور القديمة"
+  "lblOldPassword": "كلمة المرور القديمة",
+  "lblSave": "حفظ"
 }
