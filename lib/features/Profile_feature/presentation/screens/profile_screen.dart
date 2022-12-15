@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/features/Profile_feature/presentation/screens/profile_data_item.dart';
+import 'package:captien_omda_customer/features/Profile_feature/presentation/screens/profile_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../Presentation/Routes/route_names.dart';
@@ -60,11 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 child: Stack(children: [
                   ///profile background
-                  Container(
-                    color: AppConstants.mainColor,
-                    width: SharedText.screenWidth,
-                    height: (140),
-                  ),
+                  const ProfileHeaderWidget(),
 
                   ///back arrow
                   Positioned(
@@ -117,8 +114,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                width: getWidgetHeight(125),
-                                height: getWidgetHeight(125),
+                                width: getWidgetHeight(98),
+                                height: getWidgetHeight(98),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -190,9 +187,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CommonGlobalButton(
                 buttonText: AppLocalizations.of(context)!.lblEdit,
                 onPressedFunction: () {
-                  ///Todo: edit profile screen route
-                  // Navigator.pushNamed(
-                  //     context, RouteNames.editProfilePageRoute);
+
+                  Navigator.pushNamed(
+                      context, RouteNames.editProfilePageRoute);
                 },
                 height: 48,
                 elevation: 0,
