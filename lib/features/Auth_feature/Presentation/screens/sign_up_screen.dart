@@ -156,9 +156,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                               width: 90,
                                               radius: 1000,
                                               fit: BoxFit.fill)
-                                          : Padding(
+                                          : const Padding(
                                               padding:
-                                                  const EdgeInsets.all(18.0),
+                                                  EdgeInsets.all(18.0),
                                               child: commonAssetSvgImageWidget(
                                                   imageString: "camera.svg",
                                                   height: 32,
@@ -185,9 +185,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     color:
                                                         AppConstants.mainColor,
                                                     shape: BoxShape.circle),
-                                                child: Padding(
+                                                child: const Padding(
                                                   padding:
-                                                      const EdgeInsets.all(5.0),
+                                                      EdgeInsets.all(5.0),
                                                   child:
                                                       commonAssetSvgImageWidget(
                                                           imageString:
@@ -222,8 +222,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   withSuffixIcon: true,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "person_icon.svg",
@@ -266,8 +266,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
                                   withSuffixIcon: true,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "email_icon.svg",
@@ -311,8 +311,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     FilteringTextInputFormatter.digitsOnly
                                   ],
                                   withSuffixIcon: true,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "phone_icon.svg",
@@ -379,8 +379,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   labelText:
                                       AppLocalizations.of(signUpCtx)!.lblPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",
@@ -456,8 +456,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblConfirmPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  suffixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
                                     child: commonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",

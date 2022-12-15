@@ -50,7 +50,7 @@ void takePhotoBottomSheet({
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   getSpaceWidth(18),
-                   commonAssetSvgImageWidget(imageString: 'camera.svg', height: 18, width: 20),
+                   const commonAssetSvgImageWidget(imageString: 'camera.svg', height: 18, width: 20),
                   getSpaceWidth(10),
                   CommonTitleText(
                     textKey: AppLocalizations.of(context)!.lblCamera,
@@ -74,7 +74,7 @@ void takePhotoBottomSheet({
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   getSpaceWidth(18),
-                   commonAssetSvgImageWidget(imageString: 'gallery.svg', height: 18, width: 20),
+                   const commonAssetSvgImageWidget(imageString: 'gallery.svg', height: 18, width: 20),
                   getSpaceWidth(10),
                   CommonTitleText(
                     textKey: AppLocalizations.of(context)!.lblGallery,

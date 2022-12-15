@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
 
@@ -55,9 +56,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
           if (loginState is UserLogInSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
-              RouteNames.homePageRoute,
+              RouteNames.mainBottomNavPageRoute,
               (route) => false,
             );
+            BlocProvider.of<BottomNavCubit>(context).selectItem(0);
           }
           if (loginState is UserLoginErrorState) {
             showSnackBar(
@@ -142,8 +144,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     keyboardType: TextInputType.emailAddress,
                                     labelHintStyle: AppConstants.mainTextColor,
                                     withSuffixIcon: true,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "email_icon.svg",
@@ -210,8 +212,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     hintKey: AppLocalizations.of(context)!
                                         .lblEnterPassword,
                                     labelHintStyle: AppConstants.mainTextColor,
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    suffixIcon: const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
                                       child: commonAssetSvgImageWidget(
                                           imageString: "lock_icon.svg",
@@ -252,7 +254,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         },
                                         child: CommonTitleText(
                                           textKey: AppLocalizations.of(context)!
-                                              .lblForgetPassword,
+                                              .lblIsForgetPassword,
                                           textColor:
                                               AppConstants.lightBlueColor,
                                           textFontSize: 12,

@@ -23,7 +23,8 @@ class RouteArgument {
       {this.id,
       this.sourcePage = '',
       this.appBarWidget = const PreferredSize(
-          child: SizedBox(), preferredSize: Size.fromHeight(0)),
+          preferredSize: Size.fromHeight(0),
+          child: SizedBox()),
       this.mainBody,
       this.titleWidget,
       this.withBack = false,

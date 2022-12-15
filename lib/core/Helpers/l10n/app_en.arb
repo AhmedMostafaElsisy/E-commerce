@@ -24,7 +24,8 @@
   "lblLogin": "Login",
   "lblPhoneValidate": "Your Phone must be 11 digit",
   "lblPasswordValidate": "Your password must be more than 6 character",
-  "lblForgetPassword": "Forget password?",
+  "lblIsForgetPassword": "Forget password?",
+  "lblForgetPassword": "Forget password",
   "lblDoNotHaveAccount": "Haven’t account?",
   "lblCurrentPassword": "Current Password",
   "lblNewPassword": "New Password",
@@ -73,5 +74,13 @@
   "lblClearAll": "Clear All",
   "lblNoNotification": "No Notification Found",
   "lblNoNotificationDescription": "you do not have any notification yet",
-  "lblEnterPhoneNumber": "Enter phone number"
+  "lblEnterPhoneNumber": "Enter phone number",
+  "lblHello": "Hello ,",
+  "lblSelectDestination": "Select destination",
+  "lblWhereToGo": "Where to go ?...",
+  "lblReorder": "Re order",
+  "lblHome": "Home",
+  "lblTrips": "Trips",
+  "lblNoTripFound": "No trips found",
+  "lblNoTripFoundHomeDesc": "Be ready for your first trip"
 }

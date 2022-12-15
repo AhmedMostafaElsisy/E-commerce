@@ -27,7 +27,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.sourcePage = '',
       this.showBottomIcon = true,
       this.leadingWidget,
-      this.elevation = 1,
+      this.elevation = 0,
       this.leadingWidth,
       this.customActionWidget})
       : super(key: key);
@@ -56,7 +56,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                               child: RotatedBox(
                                 quarterTurns:
                                     SharedText.currentLocale == "ar" ? 2 : 0,
-                                child: commonAssetSvgImageWidget(
+                                child: const commonAssetSvgImageWidget(
                                     imageString: "back_arrow_icon.svg",
                                     height: 40,
                                     width: 40),
@@ -85,10 +85,15 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ///Todo: add navigation for notification page
                 Navigator.pushNamed(context, RouteNames.notificationPageRoute);
               },
-              child: commonAssetSvgImageWidget(
-                imageString: 'notification_icon.svg',
-                height: 24,
-                width: 24,
+              child: const Padding(
+                padding:
+                EdgeInsets.symmetric(horizontal: 16),
+                child: commonAssetSvgImageWidget(
+                  imageString: 'notification_icon.svg',
+                  height: 25,
+                  width: 25,
+                  fit: BoxFit.cover
+                ),
               ),
             ),
           customActionWidget ?? const SizedBox(),

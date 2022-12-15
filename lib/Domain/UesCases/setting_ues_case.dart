@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../Data/Interfaces/settings_interface.dart';
-import '../../Data/Models/base_model.dart';
+import '../../core/model/base_model.dart';
 import '../../core/Error_Handling/custom_error.dart';
 
 class SettingUesCase {

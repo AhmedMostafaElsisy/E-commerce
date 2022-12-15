@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 
 import '../../../core/Constants/Keys/api_keys.dart';
 import '../../Interfaces/notification_interface.dart';
-import '../../Models/base_model.dart';
+import '../../../core/model/base_model.dart';
 import '../../../core/Error_Handling/custom_error.dart';
 import '../../../core/Error_Handling/custom_exception.dart';
-import '../Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 
 class NotificationListRepository extends NotificationListRepositoryInterface {
   @override

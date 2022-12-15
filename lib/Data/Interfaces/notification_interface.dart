@@ -1,4 +1,4 @@
-import '../../Data/Models/base_model.dart';
+import '../../core/model/base_model.dart';
 import '../../core/Base_interface/base_interface.dart';
 
 abstract class NotificationListRepositoryInterface extends BaseInterface {
