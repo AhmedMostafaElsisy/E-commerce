@@ -1,6 +1,7 @@
 import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'package:flutter/material.dart';
+import '../../features/Auth_feature/Presentation/screens/chanage_password_screen.dart';
 import '../../features/Auth_feature/Presentation/screens/login_home_page.dart';
 import '../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
 import '../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
@@ -9,7 +10,7 @@ import '../../features/Auth_feature/Presentation/screens/forget_password_screen.
 import '../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
 import '../../features/Profile_feature/presentation/screens/profile_screen.dart';
-import '../Screens/Forget_Password_Screen/new_password_screen.dart';
+import '../../features/Auth_feature/Presentation/screens/new_password_screen.dart';
 import '../Screens/Notification_Screen/notification_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
@@ -48,6 +49,9 @@ class RouteGenerator {
         case RouteNames.profilePageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const ProfileScreen());
+        case RouteNames.changePasswordPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const ChangePasswordScreen());
 
       default:
         return MaterialPageRoute(
