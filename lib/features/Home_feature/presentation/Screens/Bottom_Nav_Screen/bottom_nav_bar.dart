@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
 import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
@@ -13,7 +14,6 @@ import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
 import '../Home_Screens/home_page.dart';
 import 'bottom_nav_item.dart';
-
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -41,14 +41,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
             showBottomIcon: false,
             withBack: false,
             showLeadingWidget: true,
-            leadingWidget: commonCachedImageWidget(
-                context, SharedText.currentUser!.image!,
-                isProfile: true,
-                isCircular: true,
-                height: 30,
-                width: 30,
-                radius: 1000,
-                fit: BoxFit.contain),
+            leadingWidget: InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(RouteNames.profilePageRoute);
+              },
+              child: commonCachedImageWidget(
+                  context, SharedText.currentUser!.image!,
+                  isProfile: true,
+                  isCircular: true,
+                  height: 30,
+                  width: 30,
+                  radius: 1000,
+                  fit: BoxFit.contain),
+            ),
             titleWidget: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -60,7 +65,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
                 CommonTitleText(
                   textKey:
-                  SharedText.currentUser!.name!.getStringWithoutSpacings(),
+                      SharedText.currentUser!.name!.getStringWithoutSpacings(),
                   textColor: AppConstants.mainColor,
                   textWeight: FontWeight.w700,
                   textFontSize: AppConstants.smallFontSize,
@@ -84,29 +89,34 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         offset: const Offset(0, 0))
                   ]),
               child: Padding(
-                padding:  EdgeInsets.symmetric(vertical: getWidgetHeight(AppConstants.pagePadding)),
+                padding: EdgeInsets.symmetric(
+                    vertical: getWidgetHeight(AppConstants.pagePadding)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(0);
                       },
                       child: BottomBarItem(
                         image: "home.svg",
-                        isSelected: bottomNavCtx.read<BottomNavCubit>().selectedIndex==0,
+                        isSelected:
+                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
+                                0,
                         title: AppLocalizations.of(context)!.lblHome,
                       ),
                     ),
                     getSpaceWidth(AppConstants.pagePadding),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(1);
                       },
                       child: BottomBarItem(
                         image: "trips.svg",
-                        isSelected: bottomNavCtx.read<BottomNavCubit>().selectedIndex==1,
+                        isSelected:
+                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
+                                1,
                         title: AppLocalizations.of(context)!.lblTrips,
                       ),
                     )
