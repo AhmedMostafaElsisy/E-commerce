@@ -80,5 +80,7 @@
   "lblWhereToGo": "Where to go ?...",
   "lblReorder": "Re order",
   "lblHome": "Home",
-  "lblTrips": "Trips"
+  "lblTrips": "Trips",
+  "lblNoTripFound": "No trips found",
+  "lblNoTripFoundHomeDesc": "Be ready for your first trip"
 }

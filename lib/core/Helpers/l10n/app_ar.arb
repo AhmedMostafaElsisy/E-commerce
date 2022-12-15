@@ -70,7 +70,7 @@
   "lblSecond": "ثواني",
   "lblDontRecieveCode": "اعاده ارسال الرمز خلال ",
   "lblResend": "اعادة ارسال",
-  "lblRetry": "retry",
+  "lblRetry": "حاول مرة اخرة",
   "lblNotification": "اشعارات",
   "lblClearAll": "مسح الكل",
   "lblNoNotification": "لا يوجد اشعارات",
@@ -78,8 +78,10 @@
   "lblEnterPhoneNumber": "ادخل رقم الهاتف",
   "lblHello": "مرحبا,",
   "lblSelectDestination": "تحديد الوجهة",
-  "lblWhereToGo":"رايح فين ؟...",
+  "lblWhereToGo": "رايح فين ؟...",
   "lblReorder": "اعادة الطلب",
   "lblHome": "الرئيسية",
-  "lblTrips": "رحلاتي"
+  "lblTrips": "رحلاتي",
+  "lblNoTripFound": "لا توجد رحلات",
+  "lblNoTripFoundHomeDesc": "استعد للقيام برحلتك الاولة"
 }
