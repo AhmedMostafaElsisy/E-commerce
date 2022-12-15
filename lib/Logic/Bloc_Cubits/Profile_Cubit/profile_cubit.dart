@@ -1,5 +1,4 @@
 import '../../../core/Constants/Enums/exception_enums.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../Data/Interfaces/profile_interface.dart';
@@ -12,15 +11,17 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
-  final ProfileRepositoryInterface _repo ;
+  final ProfileRepositoryInterface _repo;
 
-  final ImagePicker _picker = ImagePicker();
+
+  set _imageFile(XFile? value) {
+    imageXFile = value;
+  }
 
   XFile? imageXFile;
   bool imgChange = false;
-  bool isLoading = false;
+  bool deleteImage = false;
   UserBaseEntity baseUser = UserBaseEntity();
-
 
   /// user Profile_Cubit data
   getUserProfileData() async {
@@ -42,51 +43,15 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
     }
   }
 
-  updateUserProfile({String? userName, String? userEmail}) async {
-    emit(ProfileLoadingState());
-    try {
-      var result = await _repo.updateProfile(
-          email: userEmail, name: userName, userImage: imageXFile);
-
-      if (_repo.isError) {
-        emit(ProfileErrorState(
-          error: _repo.errorMsg,
-        ));
-      } else {
-        baseUser = UserBaseEntity.fromJson(result.data);
-         _repo.setLocalUserData(baseUser: baseUser);
-
-        emit(ProfileUpdateSuccessState(massage: result.message));
-
-        emit(ProfileSuccessState(baseUser));
-      }
-    } catch (e) {
-      emit(ProfileErrorState(
-          error: CustomError(type: CustomStatusCodeErrorType.unExcepted)));
-    }
+  photoPicked(XFile xFile) {
+    _imageFile = xFile;
+    deleteImage=false;
+    emit(UploadingUserImageLoadingState());
   }
 
+  deleteImageFunc(bool value) {
+    deleteImage = value;
+    emit(UploadingUserImageLoadingState());
 
-
-  set _imageFile(XFile? value) {
-    imageXFile = value;
   }
-
-  pickImage() async {
-    try {
-      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile == null) {
-        imgChange = false;
-        emit(ProfileSuccessState(baseUser));
-      } else {
-        _imageFile = pickedFile;
-        imgChange = true;
-        emit(ProfileSuccessState(baseUser));
-      }
-    } catch (e) {
-      imgChange = false;
-      debugPrint('Error Fetching Image: $e');
-    }
-  }
-
 }

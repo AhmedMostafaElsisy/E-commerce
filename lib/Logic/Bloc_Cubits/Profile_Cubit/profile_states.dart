@@ -22,7 +22,7 @@ class ProfileSuccessState extends ProfileCubitStates {
   ProfileSuccessState(this.user);
 }
 
-class ChangePasswordNotMatchState extends ProfileCubitStates {}
+class UploadingUserImageLoadingState extends ProfileCubitStates {}
 
 /// show failed OTP_Cubit for user
 class ProfileErrorState extends ProfileCubitStates {
