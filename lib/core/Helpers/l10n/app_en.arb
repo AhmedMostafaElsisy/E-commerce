@@ -87,5 +87,8 @@
   "lblDeleteAccount": "Delete Account",
   "lblDeleteThisAccount": "Are you sure you wish to delete your Account\nDeleting your account removes all your \ninformation and requests",
   "lblYes": "Yes",
-  "lblChangePassWord": "Change password"
+  "lblNo": "No",
+  "lblChangePassWord": "Change password",
+  "lblLogOut": "Log out",
+  "lblIsLogOut":"Do you want to log out ?"
 }
