@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import 'common_pop_up_content.dart';
 import 'common_profile_header_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -87,7 +88,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         imageWidth: 24,
                         imageColor: AppConstants.mainColor,
                         onClick: () {
-                          // Navigator.pop(context);
+                          showAlertDialog(context, [
+                            CommonPopUpContent(
+                              title: AppLocalizations.of(context)!.lblLogOut,
+                              subTitle:
+                                  AppLocalizations.of(context)!.lblIsLogOut,
+                              onSubmitClick: () {
+
+                              },
+                            ),
+                          ]);
                         },
                       )),
 
@@ -215,81 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///Delete account
               CommonGlobalButton(
                   buttonText: AppLocalizations.of(context)!.lblDeleteAccount,
-                  onPressedFunction: () {
-                    showAlertDialog(context, [
-                      // Column(
-                      //   mainAxisSize: MainAxisSize.min,
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: [
-                      //     CommonTitleText(
-                      //       textKey:
-                      //           AppLocalizations.of(context)!.lblDeleteAccount,
-                      //       textColor: AppConstants.lightBlackColor,
-                      //       textFontSize: AppConstants.normalFontSize,
-                      //       textWeight: FontWeight.w400,
-                      //     ),
-                      //     getSpaceHeight(16),
-                      //     CommonTitleText(
-                      //       textKey: AppLocalizations.of(context)!
-                      //           .lblDeleteThisAccount,
-                      //       textColor: AppConstants.mainTextColor,
-                      //       lines: 3,
-                      //       textFontSize: AppConstants.smallFontSize,
-                      //       textWeight: FontWeight.w400,
-                      //     ),
-                      //     getSpaceHeight(16),
-                      //     Row(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       children: [
-                      //         /// Cancel
-                      //         CommonGlobalButton(
-                      //             showBorder: false,
-                      //             width: 80,
-                      //             buttonTextFontWeight: FontWeight.w400,
-                      //             buttonTextSize: AppConstants.smallFontSize,
-                      //             elevation: 0,
-                      //             buttonBackgroundColor:
-                      //                 AppConstants.mainTextColor,
-                      //             buttonText:
-                      //                 AppLocalizations.of(context)!.lblCancel,
-                      //             onPressedFunction: () {
-                      //               Navigator.of(context, rootNavigator: true)
-                      //                   .pop();
-                      //             },
-                      //             height: 36,
-                      //             radius: AppConstants.smallRadius,
-                      //             withIcon: false),
-                      //         getSpaceWidth(16),
-                      //
-                      //         /// OK
-                      //         CommonGlobalButton(
-                      //             showBorder: true,
-                      //             borderColor: AppConstants.mainColor,
-                      //             width: 80,
-                      //             buttonTextFontWeight: FontWeight.w400,
-                      //             buttonTextSize: AppConstants.smallFontSize,
-                      //             elevation: 0,
-                      //             buttonBackgroundColor:
-                      //                 AppConstants.lightWhiteColor,
-                      //             buttonTextColor: AppConstants.mainColor,
-                      //             buttonText:
-                      //                 AppLocalizations.of(context)!.lblYes,
-                      //             onPressedFunction: () {
-                      //               // Navigator.of(context, rootNavigator: true)
-                      //               //     .pop();
-                      //               // profileCtx
-                      //               //     .read<ProfileCubit>()
-                      //               //     .deleteAccount();
-                      //             },
-                      //             height: 36,
-                      //             radius: AppConstants.smallRadius,
-                      //             withIcon: false),
-                      //       ],
-                      //     )
-                      //   ],
-                      // )
-                    ]);
-                  },
+                  onPressedFunction: () {},
                   height: 48,
                   elevation: 0,
                   showBorder: false,
