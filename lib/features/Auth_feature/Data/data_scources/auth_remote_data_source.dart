@@ -115,6 +115,14 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('password', password));
       staticData.fields.add(MapEntry('password_confirmation', confirmPassword));
       staticData.fields.add(MapEntry('device_token', token));
+      if (userImage != null && userImage.path != "") {
+        staticData.files.add(MapEntry(
+            'image',
+            await MultipartFile.fromFile(
+              userImage.path,
+              filename: userImage.path.split("/").last.toString(),
+            )));
+      }
 
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);

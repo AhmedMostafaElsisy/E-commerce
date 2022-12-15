@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
-import '../../../../Logic/Bloc_Cubits/Profile_Cubit/profile_states.dart';
+import '../../../../Presentation/Routes/route_names.dart';
 import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../Presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../Presentation/Widgets/common_file_image_widget.dart';
 import '../../../../Presentation/Widgets/common_global_button.dart';
 import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../Presentation/Widgets/custom_snack_bar.dart';
 import '../../../../Presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
+import '../logic/Profile_Cubit/profile_cubit.dart';
+import '../logic/Profile_Cubit/profile_states.dart';
 import 'common_profile_header_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -32,7 +35,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   void initState() {
-    
     super.initState();
     userNameController = TextEditingController();
     phoneController = TextEditingController();
@@ -58,18 +60,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<ProfileCubit, ProfileCubitStates>(
         listener: (profileCtx, profileState) {
-          // if (profileState is EditProfileErrorState) {
-          //   showSnackBar(
-          //     context: profileCtx,
-          //     title: profileState.error!.errorMassage!,
-          //   );
-          // } else if (profileState is ProfileUpdateSuccessState) {
-          //   showSnackBar(
-          //       context: profileCtx,
-          //       title: AppLocalizations.of(context)!.lblProfileUpdateSuccess,
-          //       color: AppConstants.lightOffBlueColor);
-          //   Navigator.pop(context);
-          // }
+          if (profileState is ProfileUpdateFailedState) {
+            showSnackBar(
+              context: profileCtx,
+              title: profileState.error.errorMassage!,
+            );
+          } else if (profileState is ProfileUpdateSuccessState) {
+            showSnackBar(
+                context: profileCtx,
+                title: AppLocalizations.of(context)!.lblProfileUpdateSuccess,
+                color: AppConstants.lightOffBlueColor);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouteNames.mainBottomNavPageRoute,
+                  (route) => false,
+            );
+            BlocProvider.of<BottomNavCubit>(context).selectItem(0);
+          }
         },
         builder: (profileCtx, profileState) {
           return InkWell(
@@ -85,6 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+
                   ///profile background
                   Container(
                     width: getWidgetWidth(550),
@@ -97,6 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               AppConstants.bottomSheetBorderRadius)),
                     ),
                     child: Stack(children: [
+
                       ///profile background
                       const ProfileHeaderWidget(),
 
@@ -122,115 +131,117 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Stack(children: [
-                                profileCtx.read<ProfileCubit>().deleteImage
+                                profileCtx
+                                    .read<ProfileCubit>()
+                                    .deleteImage
                                     ? InkWell(
-                                        onTap: () {
-                                          takePhotoBottomSheet(
-                                              context: profileCtx,
-                                              getPhoto: profileCtx
-                                                  .read<ProfileCubit>()
-                                                  .photoPicked);
-                                        },
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Container(
-                                            width: getWidgetHeight(90),
-                                            height: getWidgetHeight(90),
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color:
-                                                  AppConstants.backGroundColor,
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(18.0),
-                                              child: commonAssetSvgImageWidget(
-                                                  imageString: "camera.svg",
-                                                  height: 32,
-                                                  width: 32,
-                                                  fit: BoxFit.contain,
-                                                  imageColor:
-                                                      AppConstants.mainColor),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Container(
-                                          width: getWidgetHeight(98),
-                                          height: getWidgetHeight(98),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: AppConstants
-                                                    .lightWhiteColor,
-                                                width: 5),
-                                          ),
-
-                                          ///user profile image
-                                          child: Stack(
-                                            fit: StackFit.expand,
-                                            children: [
-                                              profileCtx
-                                                          .read<ProfileCubit>()
-                                                          .imageXFile !=
-                                                      null
-                                                  ? commonFileImageWidget(
-                                                      imageString: profileCtx
-                                                          .read<ProfileCubit>()
-                                                          .imageXFile!
-                                                          .path,
-                                                      height: (98),
-                                                      width: (98),
-                                                      fit: BoxFit.fill,
-                                                      radius: 1000,
-                                                    )
-                                                  : commonCachedImageWidget(
-                                                      context,
-                                                      SharedText
-                                                          .currentUser!.image!,
-                                                      height: (98),
-                                                      width: (98),
-                                                      radius: 1000,
-                                                      isCircular: true,
-                                                      isProfile: true),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      profileCtx
-                                                          .read<ProfileCubit>()
-                                                          .deleteImageFunc(
-                                                              true);
-                                                    },
-                                                    child: Container(
-                                                      height:
-                                                          getWidgetHeight(24),
-                                                      width: getWidgetWidth(24),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              color: AppConstants
-                                                                  .mainColor,
-                                                              shape: BoxShape
-                                                                  .circle),
-                                                      child: const Padding(
-                                                        padding:
-                                                            EdgeInsets.all(5.0),
-                                                        child: commonAssetSvgImageWidget(
-                                                            imageString:
-                                                                "bin_icon.svg",
-                                                            height: 12,
-                                                            imageColor: AppConstants
-                                                                .lightWhiteColor,
-                                                            width: 12),
-                                                      ),
-                                                    ),
-                                                  )),
-                                            ],
-                                          ),
-                                        ),
+                                  onTap: () {
+                                    takePhotoBottomSheet(
+                                        context: profileCtx,
+                                        getPhoto: profileCtx
+                                            .read<ProfileCubit>()
+                                            .photoPicked);
+                                  },
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                      width: getWidgetHeight(90),
+                                      height: getWidgetHeight(90),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color:
+                                        AppConstants.backGroundColor,
                                       ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(18.0),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "camera.svg",
+                                            height: 32,
+                                            width: 32,
+                                            fit: BoxFit.contain,
+                                            imageColor:
+                                            AppConstants.mainColor),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                    : Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    width: getWidgetHeight(98),
+                                    height: getWidgetHeight(98),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: AppConstants
+                                              .lightWhiteColor,
+                                          width: 5),
+                                    ),
+
+                                    ///user profile image
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        profileCtx
+                                            .read<ProfileCubit>()
+                                            .imageXFile !=
+                                            null
+                                            ? commonFileImageWidget(
+                                          imageString: profileCtx
+                                              .read<ProfileCubit>()
+                                              .imageXFile!
+                                              .path,
+                                          height: (98),
+                                          width: (98),
+                                          fit: BoxFit.fill,
+                                          radius: 1000,
+                                        )
+                                            : commonCachedImageWidget(
+                                            context,
+                                            SharedText
+                                                .currentUser!.image!,
+                                            height: (98),
+                                            width: (98),
+                                            radius: 1000,
+                                            isCircular: true,
+                                            isProfile: true),
+                                        Align(
+                                            alignment:
+                                            Alignment.bottomRight,
+                                            child: InkWell(
+                                              onTap: () {
+                                                profileCtx
+                                                    .read<ProfileCubit>()
+                                                    .deleteImageFunc(
+                                                    true);
+                                              },
+                                              child: Container(
+                                                height:
+                                                getWidgetHeight(24),
+                                                width: getWidgetWidth(24),
+                                                decoration:
+                                                const BoxDecoration(
+                                                    color: AppConstants
+                                                        .mainColor,
+                                                    shape: BoxShape
+                                                        .circle),
+                                                child: const Padding(
+                                                  padding:
+                                                  EdgeInsets.all(5.0),
+                                                  child: commonAssetSvgImageWidget(
+                                                      imageString:
+                                                      "bin_icon.svg",
+                                                      height: 12,
+                                                      imageColor: AppConstants
+                                                          .lightWhiteColor,
+                                                      width: 12),
+                                                ),
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ]),
                             ]),
                       ),
@@ -251,7 +262,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       withSuffixIcon: true,
                       suffixIcon: const Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                        EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                         child: commonAssetSvgImageWidget(
                             imageString: "person_icon.svg",
                             fit: BoxFit.fill,
@@ -287,14 +298,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       radius: AppConstants.smallBorderRadius,
                       labelText: AppLocalizations.of(context)!.lblPhone,
                       hintKey:
-                          AppLocalizations.of(context)!.lblEnterPhoneNumber,
+                      AppLocalizations.of(context)!.lblEnterPhoneNumber,
                       keyboardType: TextInputType.phone,
                       labelHintStyle: AppConstants.mainTextColor,
                       inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                       withSuffixIcon: true,
                       suffixIcon: const Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 13, horizontal: 15),
+                        EdgeInsets.symmetric(vertical: 13, horizontal: 15),
                         child: commonAssetSvgImageWidget(
                             imageString: "phone_icon.svg",
                             fit: BoxFit.fill,
@@ -322,9 +333,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     buttonText: AppLocalizations.of(context)!.lblSave,
                     onPressedFunction: () {
                       if (formKey.currentState!.validate()) {
-                        // profileCtx.read<ProfileCubit>().updateUserProfile(
-                        //     userName: userNameController.text,
-                        //     userPhone: phoneController.text);
+                        profileCtx.read<ProfileCubit>().updateUserProfile(
+                            name: userNameController.text,
+                            phone: phoneController.text ==
+                                SharedText.currentUser!.phone! ? null :phoneController.text,
+                            image: profileCtx
+                                .read<ProfileCubit>()
+                                .imageXFile);
                       }
                     },
                     height: 48,
@@ -332,7 +347,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     showBorder: false,
                     isEnable: userNameController.text.isNotEmpty &&
                         phoneController.text.isNotEmpty,
-                    // isLoading: profileState is EditProfileLoadingState,
+                    isLoading: profileState is ProfileUpdateLoadingState,
                     buttonBackgroundColor: AppConstants.mainColor,
                     buttonTextSize: AppConstants.largeFontSize,
                     buttonTextFontWeight: FontWeight.w400,

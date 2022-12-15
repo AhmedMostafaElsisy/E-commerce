@@ -27,6 +27,11 @@ import 'features/Home_feature/Data/repository/request_repository.dart';
 import 'features/Home_feature/Domain/repository/request_interface.dart';
 import 'features/Home_feature/Domain/use_cases/request_use_case.dart';
 import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
+import 'features/Profile_feature/Data/data_scources/profile_remote_data_source.dart';
+import 'features/Profile_feature/Data/repository/profile_repository.dart';
+import 'features/Profile_feature/Domain/repository/profile_interface.dart';
+import 'features/Profile_feature/Domain/user_cases/profile_ues_case.dart';
+import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -38,12 +43,14 @@ Future<void> init() async {
   sl.registerFactory(() => OtpCubit(sl()));
   sl.registerFactory(() => PasswordCubit(sl()));
   sl.registerFactory(() => RequestCubit(sl()));
+  sl.registerFactory(() => ProfileCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => SettingUesCase(repository: sl()));
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
   sl.registerLazySingleton(() => OtpUesCases(sl()));
   sl.registerLazySingleton(() => RequestUesCases(sl()));
+  sl.registerLazySingleton(() => ProfileUesCases(sl()));
   sl.registerLazySingleton(() => PasswordUesCases(sl(), sl()));
 
   ///repo
@@ -52,6 +59,7 @@ Future<void> init() async {
   sl.registerLazySingleton<OtpRepositoryInterface>(() => OtpRepository(sl()));
   sl.registerLazySingleton<PasswordRepositoryInterface>(() => PasswordRepository(sl()));
   sl.registerLazySingleton<RequestRepositoryInterface>(() => RequestRepository(sl()));
+  sl.registerLazySingleton<ProfileRepositoryInterface>(() => ProfileRepository(sl(),sl()));
   sl.registerLazySingleton<AuthRepositoryInterface>(() => AuthRepository(
       localDataSourceInterface: sl(), remoteDataSourceInterface: sl()));
 
@@ -68,6 +76,8 @@ Future<void> init() async {
       () => PasswordRemoteDataSourceImpl());
   sl.registerLazySingleton<RequestRemoteDataSourceInterface>(
       () => RequestRemoteDataSourceImpl());
+  sl.registerLazySingleton<ProfileRemoteDataSourceInterface>(
+      () => ProfileRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
