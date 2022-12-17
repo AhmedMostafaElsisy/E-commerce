@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../Presentation/Widgets/common_global_button.dart';
-import '../../../../Presentation/Widgets/common_title_text.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
 
 class CommonPopUpContent extends StatelessWidget {
   final String title;

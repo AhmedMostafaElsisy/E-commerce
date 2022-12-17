@@ -1,18 +1,20 @@
-import '../../../../core/Constants/app_constants.dart';
-import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_text_form_field_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/Constants/app_constants.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 
-import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 

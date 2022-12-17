@@ -1,10 +1,10 @@
-import '../../../../Presentation/Routes/route_names.dart';
-import '../../../../Presentation/Widgets/common_asset_image_widget.dart';
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../Presentation/Widgets/common_global_button.dart';
-import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../../Presentation/Widgets/common_title_text.dart';
-import '../../../../Presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';

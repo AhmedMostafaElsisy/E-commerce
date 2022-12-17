@@ -1,9 +1,4 @@
 import 'package:get_it/get_it.dart';
-
-import 'Data/Interfaces/settings_interface.dart';
-import 'Data/Remote_Data/Repositories/setting_repository.dart';
-import 'Domain/UesCases/setting_ues_case.dart';
-import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
 import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
@@ -37,7 +32,6 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   ///Bloc
-  sl.registerFactory(() => SettingCubit(repo: sl()));
   sl.registerFactory(() => LoginCubit(sl()));
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => OtpCubit(sl()));
@@ -46,7 +40,6 @@ Future<void> init() async {
   sl.registerFactory(() => ProfileCubit(sl()));
 
   ///User case
-  sl.registerLazySingleton(() => SettingUesCase(repository: sl()));
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
   sl.registerLazySingleton(() => OtpUesCases(sl()));
   sl.registerLazySingleton(() => RequestUesCases(sl()));
@@ -54,8 +47,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => PasswordUesCases(sl(), sl()));
 
   ///repo
-  sl.registerLazySingleton<SettingInterfaceRepository>(
-      () => SettingRepository());
+
   sl.registerLazySingleton<OtpRepositoryInterface>(() => OtpRepository(sl()));
   sl.registerLazySingleton<PasswordRepositoryInterface>(() => PasswordRepository(sl()));
   sl.registerLazySingleton<RequestRepositoryInterface>(() => RequestRepository(sl()));

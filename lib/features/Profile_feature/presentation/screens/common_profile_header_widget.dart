@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 
 class CommonProfileHeaderWidget extends StatelessWidget {
   final String imagePath;
