@@ -8,42 +8,41 @@ import '../../Helpers/shared_texts.dart';
 import 'common_title_text.dart';
 
 class CommonTextFormField extends StatelessWidget {
-  String? labelText;
-  String? hintKey;
-  TextEditingController? controller;
-  TextInputType? keyboardType;
-  Color? textInputColor;
-  Function()? onTap;
-  bool enabled;
-  bool isSelected;
-  bool withPrefixIcon;
-  bool evaluation;
-  bool isObscureText;
-  bool isDigitOnly;
-  String? Function(String?)? validator;
-  bool withSuffixIcon;
-  double? fieldWidth;
-  double? fieldHeight;
-  int minLines;
-  int maxLines;
-  Widget? prefixIcon;
+final  String? labelText;
+final String? hintKey;
+final TextEditingController? controller;
+final TextInputType? keyboardType;
+final Color? textInputColor;
+final Function()? onTap;
+final bool enabled;
+final bool isSelected;
+final bool withPrefixIcon;
+final bool evaluation;
+final bool isObscureText;
+final bool isDigitOnly;
+final String? Function(String?)? validator;
+final bool withSuffixIcon;
+final double? fieldWidth;
+final double? fieldHeight;
+final int minLines;
+final int maxLines;
+final Widget? prefixIcon;
+final  Widget? suffixIcon;
+final  String? Function(String?)? onChanged;
+final  Function()? onSaved;
+final Color? borderColor;
+final Color? filledColor;
+final Color? labelHintStyle;
+final Color? labelErrorStyle;
+final List<TextInputFormatter>? inputFormatter;
+final bool? isReadOnly;
+final TextInputAction? action;
+final TextAlign? labelHintTextAlign;
+final double? radius;
+final  bool? alignMultipleLines;
+final  FocusNode? fieldFocusNode;
 
-  Widget? suffixIcon;
-  String? Function(String?)? onChanged;
-  Function()? onSaved;
-  Color? borderColor;
-  Color? filledColor;
-  Color? labelHintStyle;
-  Color? labelErrorStyle;
-  List<TextInputFormatter>? inputFormatter;
-  bool? isReadOnly;
-  TextInputAction? action;
-  TextAlign? labelHintTextAlign;
-  double? radius;
-  bool? alignMultipleLines;
-  FocusNode? fieldFocusNode;
-
-  CommonTextFormField(
+ const CommonTextFormField(
       {Key? key,
       this.labelText,
       this.hintKey,

@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../Helpers/shared.dart';
 
 
-class commonAssetSvgImageWidget extends StatelessWidget {
+class CommonAssetSvgImageWidget extends StatelessWidget {
   final String imageString;
   final double height;
   final double width;
@@ -13,7 +13,7 @@ class commonAssetSvgImageWidget extends StatelessWidget {
   final double radius;
   final BoxFit fit;
 
-  const commonAssetSvgImageWidget({
+  const CommonAssetSvgImageWidget({
     Key? key,
     required this.imageString,
     required this.height,

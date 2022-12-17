@@ -34,7 +34,7 @@ class CommonProfileHeaderWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppConstants.smallRadius),
         ),
         child: Center(
-          child: commonAssetSvgImageWidget(
+          child: CommonAssetSvgImageWidget(
               imageString: imagePath,
               height: imageHeight,
               width: imageWidth,

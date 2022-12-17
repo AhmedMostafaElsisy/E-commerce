@@ -89,7 +89,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         const Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePaddingDouble),
-                          child: commonAssetSvgImageWidget(
+                          child: CommonAssetSvgImageWidget(
                               imageString: "forget_password.svg",
                               height: 350,
                               width: 300,
@@ -116,7 +116,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "email_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,

@@ -58,7 +58,7 @@ Widget commonCachedImageWidget(
       width: imageWidth,
       radius: radius,
       fit: fit,
-    ):commonAssetSvgImageWidget(
+    ):CommonAssetSvgImageWidget(
       imageString: 'logo.svg',
       height: imageHeight,
       width: imageWidth,

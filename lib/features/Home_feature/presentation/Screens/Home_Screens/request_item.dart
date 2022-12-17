@@ -24,7 +24,7 @@ class RequestItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const commonAssetSvgImageWidget(
+        const CommonAssetSvgImageWidget(
           imageString: "history.svg",
           height: 24,
           width: 24,

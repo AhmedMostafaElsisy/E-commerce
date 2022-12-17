@@ -155,7 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                       child: const Padding(
                                         padding: EdgeInsets.all(18.0),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "camera.svg",
                                             height: 32,
                                             width: 32,
@@ -229,7 +229,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 child: const Padding(
                                                   padding:
                                                   EdgeInsets.all(5.0),
-                                                  child: commonAssetSvgImageWidget(
+                                                  child: CommonAssetSvgImageWidget(
                                                       imageString:
                                                       "bin_icon.svg",
                                                       height: 12,
@@ -264,7 +264,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       suffixIcon: const Padding(
                         padding:
                         EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        child: commonAssetSvgImageWidget(
+                        child: CommonAssetSvgImageWidget(
                             imageString: "person_icon.svg",
                             fit: BoxFit.fill,
                             height: 16,
@@ -307,7 +307,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       suffixIcon: const Padding(
                         padding:
                         EdgeInsets.symmetric(vertical: 13, horizontal: 15),
-                        child: commonAssetSvgImageWidget(
+                        child: CommonAssetSvgImageWidget(
                             imageString: "phone_icon.svg",
                             fit: BoxFit.fill,
                             height: 16,

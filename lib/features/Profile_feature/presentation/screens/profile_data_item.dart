@@ -29,7 +29,7 @@ class ProfileDataItem extends StatelessWidget {
           Row(
 
             children: [
-              commonAssetSvgImageWidget(
+              CommonAssetSvgImageWidget(
                   imageString: image,
                   width: 22,
                   height: 22,

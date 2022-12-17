@@ -151,7 +151,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     suffixIcon: const Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
-                                      child: commonAssetSvgImageWidget(
+                                      child: CommonAssetSvgImageWidget(
                                           imageString: "email_icon.svg",
                                           fit: BoxFit.contain,
                                           height: 22,
@@ -196,7 +196,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                           child: Padding(
                                               padding: const EdgeInsets.symmetric(
                                                   vertical: 15, horizontal: 15),
-                                              child: commonAssetSvgImageWidget(
+                                              child: CommonAssetSvgImageWidget(
                                                   imageString:
                                                   hidePassword
                                                       ? "eye_open.svg"
@@ -219,7 +219,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                     suffixIcon: const Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 12, horizontal: 12),
-                                      child: commonAssetSvgImageWidget(
+                                      child: CommonAssetSvgImageWidget(
                                           imageString: "lock_icon.svg",
                                           fit: BoxFit.contain,
                                           height: 22,

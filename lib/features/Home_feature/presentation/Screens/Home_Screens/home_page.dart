@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                commonAssetSvgImageWidget(
+                CommonAssetSvgImageWidget(
                   imageString: "car_icon.svg",
                   height: 135,
                   width: 200,
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                                       vertical: getWidgetWidth(
                                           AppConstants.pagePadding + 4)),
                                   child: Row(children: [
-                                    const commonAssetSvgImageWidget(
+                                    const CommonAssetSvgImageWidget(
                                       imageString: "location_from_icon.svg",
                                       height: 45,
                                       width: 45,

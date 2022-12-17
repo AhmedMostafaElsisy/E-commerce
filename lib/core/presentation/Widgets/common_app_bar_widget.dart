@@ -57,7 +57,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                               child: RotatedBox(
                                 quarterTurns:
                                     SharedText.currentLocale == "ar" ? 2 : 0,
-                                child: const commonAssetSvgImageWidget(
+                                child: const CommonAssetSvgImageWidget(
                                     imageString: "back_arrow_icon.svg",
                                     height: 40,
                                     width: 40),
@@ -89,7 +89,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: const Padding(
                 padding:
                 EdgeInsets.symmetric(horizontal: 16),
-                child: commonAssetSvgImageWidget(
+                child: CommonAssetSvgImageWidget(
                   imageString: 'notification_icon.svg',
                   height: 25,
                   width: 25,

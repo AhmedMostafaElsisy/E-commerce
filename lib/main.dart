@@ -24,11 +24,9 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
   await di.init();
+  Bloc.observer = MyBlocObserver();
+  runApp(const MyApp());
 
-  BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-    blocObserver: MyBlocObserver(),
-  );
 }
 
 class MyApp extends StatefulWidget {

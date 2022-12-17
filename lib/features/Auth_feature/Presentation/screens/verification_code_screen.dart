@@ -131,7 +131,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          commonAssetSvgImageWidget(
+                          CommonAssetSvgImageWidget(
                               imageString: otpState is OtpErrorState
                                   ? "failed_otp.svg"
                                   : "sucess_otp.svg",

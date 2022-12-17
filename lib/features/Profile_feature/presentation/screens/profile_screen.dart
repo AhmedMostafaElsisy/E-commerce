@@ -146,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const commonAssetSvgImageWidget(
+                  const CommonAssetSvgImageWidget(
                     imageString: "rate_star.svg",
                     width: 24,
                     height: 24,

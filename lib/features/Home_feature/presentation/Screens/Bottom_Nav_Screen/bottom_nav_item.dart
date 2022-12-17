@@ -28,7 +28,7 @@ class BottomBarItem extends StatelessWidget {
               BorderRadius.circular(AppConstants.bottomSheetBorderRadius)),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         if (isSelected)
-          commonAssetSvgImageWidget(imageString: image, height: 24, width: 24),
+          CommonAssetSvgImageWidget(imageString: image, height: 24, width: 24),
         getSpaceWidth(AppConstants.smallPadding),
         CommonTitleText(
           textKey: title,

@@ -103,7 +103,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
-                                  commonAssetSvgImageWidget(
+                                  CommonAssetSvgImageWidget(
                                     imageString: "password_lock_iconb.svg",
                                     height: 90,
                                     width: 90,
@@ -139,7 +139,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15,
                                                         horizontal: 15),
-                                                child: commonAssetSvgImageWidget(
+                                                child: CommonAssetSvgImageWidget(
                                                     imageString: hidePassword
                                                         ? "eye_open.svg"
                                                         : "eye_close.svg",
@@ -161,7 +161,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                       suffixIcon: const Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
                                             fit: BoxFit.contain,
                                             height: 22,
@@ -218,7 +218,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15,
                                                         horizontal: 15),
-                                                child: commonAssetSvgImageWidget(
+                                                child: CommonAssetSvgImageWidget(
                                                     imageString: hideConfirmPassword
                                                         ? "eye_open.svg"
                                                         : "eye_close.svg",
@@ -240,7 +240,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                       suffixIcon: const Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
                                             fit: BoxFit.contain,
                                             height: 22,

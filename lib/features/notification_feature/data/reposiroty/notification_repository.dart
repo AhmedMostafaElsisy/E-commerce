@@ -11,9 +11,9 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
   Future<BaseModel> getNotificationList({required int page}) async {
     try {
-      String _notificationUrl = '${ApiKeys.notificationKey}?page=$page';
+      String notificationUrl = '${ApiKeys.notificationKey}?page=$page';
       isError = false;
-      Response response = await DioHelper.getDate(url: _notificationUrl);
+      Response response = await DioHelper.getDate(url: notificationUrl);
 
       if (response.statusCode == 200) {
         isError = false;
@@ -34,11 +34,11 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
   Future<BaseModel> clearAllNotification() async {
     try {
-      String _notificationUrl =ApiKeys.notificationKey+ApiKeys.clearNotificationKey ;
+      String notificationUrl =ApiKeys.notificationKey+ApiKeys.clearNotificationKey ;
       isError = false;
       FormData data = FormData();
       Response response =
-          await DioHelper.postData(url: _notificationUrl, data: data);
+          await DioHelper.postData(url: notificationUrl, data: data);
       if (response.statusCode == 200) {
         isError = false;
         baseModel = BaseModel.fromJson(response.data);
@@ -58,12 +58,12 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
   Future<BaseModel> stopOrPauseNotification({required bool state}) async {
     try {
-      String _notificationUrl = ApiKeys.notificationKey+ApiKeys.toggleNotificationKey ;
+      String notificationUrl = ApiKeys.notificationKey+ApiKeys.toggleNotificationKey ;
       isError = false;
       FormData data = FormData();
       data.fields.add(MapEntry('status', state ? "0" : "1"));
       Response response =
-          await DioHelper.postData(url: _notificationUrl, data: data);
+          await DioHelper.postData(url: notificationUrl, data: data);
 
       if (response.statusCode == 200) {
         isError = false;
@@ -85,11 +85,11 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   Future<BaseModel>  markNotificationAsRead(
       {required int notificationId}) async {
     try {
-      String _notificationUrl =ApiKeys.notificationKey+'/$notificationId'+ApiKeys.readNotificationKey ;
+      String notificationUrl ='${ApiKeys.notificationKey}/$notificationId${ApiKeys.readNotificationKey}' ;
       isError = false;
       FormData data = FormData();
       Response response =
-          await DioHelper.postData(url: _notificationUrl, data: data);
+          await DioHelper.postData(url: notificationUrl, data: data);
 
       if (response.statusCode == 200) {
         isError = false;

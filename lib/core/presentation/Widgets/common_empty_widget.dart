@@ -40,7 +40,7 @@ class EmptyScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: commonAssetSvgImageWidget(
+            child: CommonAssetSvgImageWidget(
                 imageString: imageString,
                 height: imageHeight,
                 width: imageWidth,
