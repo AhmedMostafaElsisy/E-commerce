@@ -12,4 +12,10 @@ extension GetStringWithoutSpacings on String {
   String hidePhoneNumberData() {
     return "${substring(0, 4)}xxxxxxx${substring(length - 1)}";
   }
+
+  String hideEmail() {
+    int emailIndex=indexOf("@");
+
+    return "${substring(0, 2)}xxxxxxx${substring(emailIndex)}";
+  }
 }
