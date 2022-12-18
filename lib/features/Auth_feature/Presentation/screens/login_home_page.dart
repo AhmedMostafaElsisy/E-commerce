@@ -104,7 +104,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                   Radius.circular(AppConstants.borderRadius),
                             )),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.pagePadding),
+                            horizontal: AppConstants.pagePadding) +
+                            EdgeInsets.only(
+                              bottom: MediaQuery.of(loginCtx).viewInsets.bottom,
+                            ),
                         child: ListView(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),

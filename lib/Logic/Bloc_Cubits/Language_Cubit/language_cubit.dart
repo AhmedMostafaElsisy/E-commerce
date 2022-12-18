@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
+import '../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../core/Data_source/local_source/flutter_secured_storage.dart';
 import 'language_states.dart';
 
@@ -20,7 +21,8 @@ class LangCubit extends Cubit<LangState> {
 
     ///update shared lang
     SharedText.currentLocale = currentLang;
-
+    DioHelper.dio.options.headers
+        .addAll({"Language": SharedText.currentLocale});
     ///save new lang
     DefaultSecuredStorage.setLang(newLang);
 
@@ -53,6 +55,8 @@ class LangCubit extends Cubit<LangState> {
     /// set the locale with saved lang
     appLocal = Locale(currentLang);
     SharedText.currentLocale = currentLang;
+    DioHelper.dio.options.headers
+        .addAll({"Language": SharedText.currentLocale});
     debugPrint("app local lang code is ${appLocal!.languageCode}");
 
     ///set delegate with saved lang

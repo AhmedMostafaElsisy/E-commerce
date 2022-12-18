@@ -9,7 +9,7 @@ import '../../../../core/Helpers/shared_texts.dart';
 import '../../Domain/entities/base_user_entity.dart';
 
 abstract class AuthLocalDataSourceInterface {
-  Future<void> cacheUser({required UserBaseEntity user, required String token});
+  Future<void> cacheUser({required UserBaseEntity user, required String? token});
 
   Future<void> deleteUserFromCache();
 
@@ -31,12 +31,16 @@ class AuthLocalDataSourceImp extends AuthLocalDataSourceInterface {
 
   @override
   Future<void> cacheUser(
-      {required UserBaseEntity user, required String token}) async {
+      {required UserBaseEntity user, required String? token}) async {
     String jEncode = json.encode(user.toJson());
     SharedText.currentUser = user;
-    SharedText.userToken = token;
+    if(token !=null){
+      SharedText.userToken = token;
+      await DefaultSecuredStorage.setAccessToken(token);
+
+    }
+
     await DefaultSecuredStorage.setUserMap(jEncode);
-    await DefaultSecuredStorage.setAccessToken(token);
     await DefaultSecuredStorage.setIsLogged('true');
   }
 

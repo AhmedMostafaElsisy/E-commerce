@@ -218,7 +218,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                                         vertical: 15,
                                                         horizontal: 15),
                                                 child: commonAssetSvgImageWidget(
-                                                    imageString: hidePassword
+                                                    imageString: hideConfirmPassword
                                                         ? "eye_open.svg"
                                                         : "eye_close.svg",
                                                     height: 30,
