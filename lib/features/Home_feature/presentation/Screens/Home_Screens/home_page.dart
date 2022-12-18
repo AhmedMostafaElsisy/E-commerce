@@ -1,7 +1,6 @@
-
-
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/request_cubit/request_cubit_states.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppConstants.lightWhiteColor,
-
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -115,7 +113,8 @@ class _HomePageState extends State<HomePage> {
                             ///where to go
                             InkWell(
                               onTap: () {
-                                ///Todo: add navigation for place search
+                                Navigator.pushNamed(context,
+                                    RouteNames.setDestinationPageRoute);
                               },
                               child: Container(
                                 height: getWidgetHeight(72),
