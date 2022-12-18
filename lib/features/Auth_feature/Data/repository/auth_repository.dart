@@ -27,7 +27,7 @@ class AuthRepository extends AuthRepositoryInterface {
       required String confirmPassword,
       XFile? userImage,
       required String token}) async {
-    return  await remoteDataSourceInterface.userSingUp(
+    return await remoteDataSourceInterface.userSingUp(
         confirmPassword: confirmPassword,
         phoneNumber: phoneNumber,
         userName: userName,
@@ -77,7 +77,6 @@ class AuthRepository extends AuthRepositoryInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> startApp() {
-
     return localDataSourceInterface
         .checkUserLoginCache()
         .then((value) => value.fold((failure) {
@@ -87,5 +86,18 @@ class AuthRepository extends AuthRepositoryInterface {
               SharedText.userToken = token;
               return right(BaseModel());
             }));
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> deleteAccount() async {
+    return await remoteDataSourceInterface
+        .deleteAccount()
+        .then((value) => value.fold((l) => left(l), (r) {
+
+      localDataSourceInterface.deleteUserFromCache();
+
+      ///return the right side of either (base model)
+      return right(baseModel);
+    }));
   }
 }

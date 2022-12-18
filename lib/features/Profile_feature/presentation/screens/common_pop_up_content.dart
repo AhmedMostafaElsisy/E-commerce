@@ -23,6 +23,7 @@ class CommonPopUpContent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        getSpaceHeight(AppConstants.pagePadding),
         CommonTitleText(
           textKey: title,
           textColor: AppConstants.lightBlackColor,
@@ -37,7 +38,7 @@ class CommonPopUpContent extends StatelessWidget {
           textFontSize: AppConstants.smallFontSize,
           textWeight: FontWeight.w700,
         ),
-        getSpaceHeight(16),
+        getSpaceHeight(AppConstants.pagePadding),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -77,7 +78,8 @@ class CommonPopUpContent extends StatelessWidget {
                 radius: AppConstants.containerBorderRadius,
                 withIcon: false),
           ],
-        )
+        ),
+        getSpaceHeight(AppConstants.pagePadding),
       ],
     );
   }

@@ -15,6 +15,9 @@ abstract class AuthRemoteDataSourceInterface {
   ///log out
   Future<BaseModel> logOut();
 
+  ///log out
+  Future<Either<CustomError, BaseModel>> deleteAccount();
+
   ///User Create A new Account
   Future<Either<CustomError, BaseModel>> userSingUp(
       {required String userName,
@@ -45,6 +48,27 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
     deleteAuthToken();
 
     return BaseModel.fromJson(response.data);
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> deleteAccount() async {
+    try {
+      FormData staticData = FormData();
+
+      staticData.fields.clear();
+      String loginUrl = ApiKeys.deleteProfileKey;
+
+      Response response =
+          await DioHelper.postData(url: loginUrl, data: FormData());
+
+      ///delete user token from Auth header
+      deleteAuthToken();
+
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
   }
 
   @override

@@ -1,4 +1,3 @@
-
 import 'package:captien_omda_customer/features/Auth_feature/Data/model/base_user_model.dart';
 
 import '../../../../../core/Error_Handling/custom_error.dart';
@@ -24,8 +23,7 @@ class LoginFailed extends LoginStates {}
 class UserLoginLoadingState extends LoginStates {}
 
 /// go to home after success
-class UserLogInSuccessState extends LoginStates {
-}
+class UserLogInSuccessState extends LoginStates {}
 
 class UserLogoutSuccessState extends LoginStates {
   UserLogoutSuccessState();
@@ -43,3 +41,7 @@ class UserLoginErrorState extends LoginStates {
 
   UserLoginErrorState({this.error});
 }
+
+class UserDeleteAccountLoadingState extends LoginStates {}
+
+
