@@ -35,6 +35,7 @@ class ApiKeys {
   ///Requests keys
   static const String requestListKey = "$userTypeKey/requests";
   static const String requestStoreKey = "$userTypeKey/requests/store";
+  static const String requestStatesKey = "$userTypeKey/requests/changeStatus";
 
   ///location key
   static const String locationListKey = "/general/places";

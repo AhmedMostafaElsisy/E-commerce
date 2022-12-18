@@ -29,4 +29,17 @@ class TripCubit extends Cubit<TripCubitState> {
       },
     );
   }
+
+  changeRequestSates({required int requestId, required String states}) async {
+    emit(ChangeStatesTripLoadingState());
+    var result = await _requestUesCase.callChangeRequestStates(
+        requestID: requestId, states: states);
+
+    result.fold(
+      (failure) => emit(ChangeStatesTripFailedState(failure)),
+      (request) {
+        emit(ChangeStatesTripSuccessState());
+      },
+    );
+  }
 }

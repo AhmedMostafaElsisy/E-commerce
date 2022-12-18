@@ -9,4 +9,6 @@ abstract class RequestRepositoryInterface extends BaseInterface {
 
   Future<Either<CustomError, BaseModel>> startRequest(
       {required int fromLocationId, required int toLocationId});
+  Future<Either<CustomError, BaseModel>> changeRequestStates(
+      {required int requestID, required String states});
 }

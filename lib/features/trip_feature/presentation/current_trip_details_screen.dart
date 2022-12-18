@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
+import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/common_global_button.dart';
@@ -53,9 +54,17 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
           textFontSize: AppConstants.normalFontSize,
         ),
       ),
-      body: BlocConsumer<TripCubit,TripCubitState>(
-        listener: (tripCtx,tripState){},
-        builder: (tripCtx,tripState){
+      body: BlocConsumer<TripCubit, TripCubitState>(
+        listener: (tripCtx, tripState) {
+          if(tripState is ChangeStatesTripSuccessState){
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RouteNames.mainBottomNavPageRoute,
+                  (route) => false,
+            );
+          }
+        },
+        builder: (tripCtx, tripState) {
           return Column(children: [
             ///Spacer
             getSpaceHeight(20),
@@ -102,7 +111,8 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                     children: [
                       ///select destination
                       CommonTitleText(
-                        textKey: AppLocalizations.of(context)!.lblRequestDetails,
+                        textKey:
+                            AppLocalizations.of(context)!.lblRequestDetails,
                         textColor: AppConstants.lightBlackColor,
                         textWeight: FontWeight.w700,
                         textFontSize: AppConstants.smallFontSize,
@@ -122,9 +132,10 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: getWidgetHeight(AppConstants.pagePadding),
+                              horizontal:
+                                  getWidgetHeight(AppConstants.pagePadding),
                               vertical:
-                              getWidgetWidth(AppConstants.pagePadding + 4)),
+                                  getWidgetWidth(AppConstants.pagePadding + 4)),
                           child: Column(children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -173,9 +184,17 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
 
                       ///spacer
                       getSpaceHeight(AppConstants.pagePadding),
-                       TripLocationItem(
-                        currentLocation: tripCtx.read<TripCubit>().requestModel.fromLocation!.locationName!,
-                        destinationLocation: tripCtx.read<TripCubit>().requestModel.toLocation!.locationName!,
+                      TripLocationItem(
+                        currentLocation: tripCtx
+                            .read<TripCubit>()
+                            .requestModel
+                            .fromLocation!
+                            .locationName!,
+                        destinationLocation: tripCtx
+                            .read<TripCubit>()
+                            .requestModel
+                            .toLocation!
+                            .locationName!,
                       ),
 
                       ///spacer
@@ -202,8 +221,9 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                                 imageColor: AppConstants.lightBorderColor,
                               ),
                               getSpaceWidth(AppConstants.smallPadding / 2),
-                               CommonTitleText(
-                                textKey: "${ tripCtx.read<TripCubit>().requestModel.price!} EGP",
+                              CommonTitleText(
+                                textKey:
+                                    "${tripCtx.read<TripCubit>().requestModel.price!} EGP",
                                 textColor: AppConstants.lightBorderColor,
                                 textWeight: FontWeight.w700,
                                 textFontSize: AppConstants.normalFontSize,
@@ -219,19 +239,25 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                         buttonTextColor: AppConstants.mainColor,
                         borderColor: AppConstants.mainColor,
                         showBorder: true,
+                        isLoading: tripState is ChangeStatesTripLoadingState,
                         buttonTextSize: AppConstants.normalFontSize,
                         buttonTextFontWeight: FontWeight.w700,
                         buttonText: AppLocalizations.of(context)!.lblCancel,
                         onPressedFunction: () {
-                          ///Todo:add cancel trip action
                           showAlertDialog(context, [
                             CommonPopUpContent(
-                              title: AppLocalizations.of(context)!.lblCancelTile,
+                              title:
+                                  AppLocalizations.of(context)!.lblCancelTile,
                               subTitle:
-                              AppLocalizations.of(context)!.lblCancelDesc,
+                                  AppLocalizations.of(context)!.lblCancelDesc,
                               onSubmitClick: () {
                                 Navigator.of(context).pop();
-                                // profileCtx.read<LoginCubit>().logOut();
+                                tripCtx.read<TripCubit>().changeRequestSates(
+                                    states: "Canceled",
+                                    requestId: tripCtx
+                                        .read<TripCubit>()
+                                        .requestModel
+                                        .id!);
                               },
                             ),
                           ]);
@@ -247,7 +273,6 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
             )
           ]);
         },
-
       ),
     );
   }
