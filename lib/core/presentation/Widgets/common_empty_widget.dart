@@ -50,7 +50,7 @@ class EmptyScreen extends StatelessWidget {
           Center(
             child: CommonTitleText(
               textKey: titleKey,
-              textFontSize: AppConstants.normalFontSize,
+              textFontSize: AppConstants.xLargeFontSize,
               lines: 2,
               textOverflow: TextOverflow.ellipsis,
               textAlignment: TextAlign.center,
@@ -63,12 +63,12 @@ class EmptyScreen extends StatelessWidget {
             Center(
               child: CommonTitleText(
                 textKey: description!,
-                textFontSize: AppConstants.smallFontSize,
+                textFontSize: AppConstants.normalFontSize,
                 lines: 2,
                 textOverflow: TextOverflow.ellipsis,
                 textAlignment: TextAlign.center,
                 textWeight: FontWeight.w500,
-                textColor: AppConstants.lightGrayShadowColor,
+                textColor: AppConstants.lightBlackColor,
               ),
             ),
           ],
