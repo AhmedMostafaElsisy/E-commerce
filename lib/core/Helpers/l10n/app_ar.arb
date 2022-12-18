@@ -93,5 +93,12 @@
   "lblLogOut": "تسجيل الخروج",
   "lblIsLogOut": "هل تريد تسجيل الخروج ؟",
   "lblOldPassword": "كلمة المرور القديمة",
-  "lblSave": "حفظ"
+  "lblSave": "حفظ",
+  "lblSetDestination": "تحديد الوجهة",
+  "lblCurrentLocation": "موقعي الحالي",
+  "lblDestinationLocation": "موقع الوصول",
+  "lblNoResultFound": "لايوجد نتائج",
+  "lblLocationSearchDesc": "برجاء تعديل بحثك لتجد ما تبحث عنه",
+  "lblLocationError": "لا يمكنك اختيار هذا الموقع",
+  "lblLocationValidationMassage": "يجب اختيار موقع"
 }
