@@ -21,10 +21,10 @@ class AppConstants {
   static const Color lightRedColor = Color(0xFFCE2925);
   static const Color lightBlueColor = Color(0xFF3243CD);
   static const Color lightShadowColor = Color(0xFFACACAC);
-  static const Color lightBorderColor = Color(0xFFD9D9D9);
+  static const Color lightBorderColor = Color(0xFF3244CD);
   static const Color lightContentColor = Color(0xFFD5D5D5);
 
-  static const Color lightGreyTextColor = Color(0xFFD3D3D3);
+  static const Color lightGreyTextColor = Color(0xFFF3F3F3);
   static const Color lightRateColor = Color(0xFFFFC607);
   static const Color greyColor = Color(0xffA8A8A8);
   static const Color lightSecondShadowColor = Color(0xffFBF6F7);
@@ -35,7 +35,7 @@ class AppConstants {
   static const Color lightGreyBackGround = Color(0xffF7F7F7);
   static const Color lightTextColor = Color(0xFF3B3939);
   static const Color lightButtonGrayColor = Color(0xFFF4F6F5);
-  static const Color lightGrayColor = Color(0xFF575757);
+  static const Color lightGrayColor = Color(0xFFE7E7E7);
   static const Color formFillColor = Color(0xFFEFF5F4);
   static const Color shadowColor = Color(0xFF505588);
   static const Color transparentColor = Colors.transparent;

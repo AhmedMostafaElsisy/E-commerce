@@ -13,6 +13,7 @@ import '../../../features/Profile_feature/presentation/screens/edit_profile_scre
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
+import '../../../features/trip_feature/presentation/current_trip_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -59,6 +60,9 @@ class RouteGenerator {
         case RouteNames.setDestinationPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const SetDestinationScreen());
+        case RouteNames.currentTripsPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const CurrentTripDetailsScreen());
 
       default:
         return MaterialPageRoute(

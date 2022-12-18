@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
 import 'package:captien_omda_customer/features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
@@ -125,7 +126,8 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return  AppLocalizations.of(context)!.lblLocationValidationMassage;
+                          return AppLocalizations.of(context)!
+                              .lblLocationValidationMassage;
                         }
                         return null;
                       },
@@ -165,7 +167,8 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return  AppLocalizations.of(context)!.lblLocationValidationMassage;
+                          return AppLocalizations.of(context)!
+                              .lblLocationValidationMassage;
                         }
                         return null;
                       },
@@ -282,6 +285,8 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                   onPressedFunction: () {
                     if (formKey.currentState!.validate()) {
                       FocusScope.of(context).requestFocus(FocusNode());
+                      Navigator.pushNamed(
+                          context, RouteNames.currentTripsPageRoute);
                     }
                   },
                 ),

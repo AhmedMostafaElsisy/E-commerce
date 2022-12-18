@@ -1,0 +1,232 @@
+import 'package:captien_omda_customer/features/trip_feature/presentation/trip_location_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../core/Constants/app_constants.dart';
+import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
+import '../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../core/presentation/Widgets/common_title_text.dart';
+
+class CurrentTripDetailsScreen extends StatefulWidget {
+  const CurrentTripDetailsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CurrentTripDetailsScreen> createState() =>
+      _CurrentTripDetailsScreenState();
+}
+
+class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppConstants.lightWhiteColor,
+      resizeToAvoidBottomInset: false,
+      appBar: CommonAppBar(
+        withNotification: false,
+        showBottomIcon: false,
+        withBack: true,
+        showLeadingWidget: true,
+        customActionWidget: InkWell(
+          onTap: () {
+            ///Todo: add call support func
+          },
+          child: const CommonAssetSvgImageWidget(
+              imageString: "call_support.svg",
+              isCircular: true,
+              height: 32,
+              width: 32,
+              radius: 1000,
+              fit: BoxFit.contain),
+        ),
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblCurrentRequest,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w700,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
+      body: Column(children: [
+        ///Spacer
+        getSpaceHeight(20),
+
+        ///car image
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CommonAssetSvgImageWidget(
+              imageString: "trip_car.svg",
+              height: 205,
+              width: SharedText.screenWidth,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+
+        ///Spacer
+        getSpaceHeight(25),
+        Container(
+          width: SharedText.screenWidth,
+          height: getWidgetHeight(478),
+          decoration: BoxDecoration(
+              color: AppConstants.lightWhiteColor,
+              boxShadow: [
+                BoxShadow(
+                    color: AppConstants.lightBlackColor.withOpacity(0.2),
+                    blurRadius: 10.0,
+                    offset: const Offset(0, 1))
+              ],
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(AppConstants.borderRadius),
+                topLeft: Radius.circular(AppConstants.borderRadius),
+              )),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getWidgetHeight(AppConstants.pagePadding),
+                vertical: getWidgetWidth(AppConstants.pagePadding)),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.zero,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ///select destination
+                  CommonTitleText(
+                    textKey: AppLocalizations.of(context)!.lblRequestDetails,
+                    textColor: AppConstants.lightBlackColor,
+                    textWeight: FontWeight.w700,
+                    textFontSize: AppConstants.smallFontSize,
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePadding),
+
+                  ///Searching for a car
+                  Container(
+                    // height: getWidgetHeight(72),
+                    width: SharedText.screenWidth,
+                    decoration: BoxDecoration(
+                      color: AppConstants.lightGreyTextColor,
+                      borderRadius: BorderRadius.circular(
+                          AppConstants.containerBorderRadius),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getWidgetHeight(AppConstants.pagePadding),
+                          vertical:
+                              getWidgetWidth(AppConstants.pagePadding + 4)),
+                      child: Column(children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const CommonAssetSvgImageWidget(
+                              imageString: "search_car_icon.svg",
+                              height: 25,
+                              width: 25,
+                              fit: BoxFit.contain,
+                            ),
+                            getSpaceWidth(AppConstants.smallPadding / 2),
+                            CommonTitleText(
+                              textKey: AppLocalizations.of(context)!
+                                  .lblSearchingForCar,
+                              textColor: AppConstants.lightBlackColor,
+                              textWeight: FontWeight.w700,
+                              textFontSize: AppConstants.smallFontSize,
+                            ),
+                          ],
+                        ),
+                        getSpaceHeight(AppConstants.smallPadding - 2),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CommonTitleText(
+                              textKey: AppLocalizations.of(context)!
+                                  .lblSearchingForCarTimeEstimation,
+                              textColor: AppConstants.mainTextColor,
+                              textWeight: FontWeight.w400,
+                              textFontSize: AppConstants.normalFontSize,
+                            ),
+                          ],
+                        ),
+                      ]),
+                    ),
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePadding),
+
+                  ///spacer
+                  const Divider(
+                    color: AppConstants.lightGrayColor,
+                    thickness: 1,
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePadding),
+                  const TripLocationItem(
+                    currentLocation: "asd",
+                    destinationLocation: "cvxvx",
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePaddingDouble),
+
+                  ///trip price
+                  Container(
+                    height: getWidgetHeight(48),
+                    width: SharedText.screenWidth,
+                    decoration: BoxDecoration(
+                      color: AppConstants.lightGreyTextColor,
+                      borderRadius: BorderRadius.circular(
+                          AppConstants.containerBorderRadius),
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const CommonAssetSvgImageWidget(
+                            imageString: "cash_icon.svg",
+                            height: 25,
+                            width: 25,
+                            fit: BoxFit.contain,
+                            imageColor: AppConstants.lightBorderColor,
+                          ),
+                          getSpaceWidth(AppConstants.smallPadding / 2),
+                          const CommonTitleText(
+                            textKey: "25 EGP",
+                            textColor: AppConstants.lightBorderColor,
+                            textWeight: FontWeight.w700,
+                            textFontSize: AppConstants.normalFontSize,
+                          ),
+                        ]),
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePadding),
+                  CommonGlobalButton(
+                    height: 48,
+                    buttonBackgroundColor: AppConstants.lightWhiteColor,
+                    buttonTextColor: AppConstants.mainColor,
+                    borderColor: AppConstants.mainColor,
+                    showBorder: true,
+                    buttonTextSize: AppConstants.normalFontSize,
+                    buttonTextFontWeight: FontWeight.w700,
+                    buttonText: AppLocalizations.of(context)!.lblCancel,
+                    onPressedFunction: () {
+                      ///Todo:add cancel trip action
+                    },
+                  ),
+
+                  ///spacer
+                  getSpaceHeight(AppConstants.pagePadding),
+                ],
+              ),
+            ),
+          ),
+        )
+      ]),
+    );
+  }
+}
