@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../Presentation/Widgets/common_title_text.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
 
 
 class ProfileDataItem extends StatelessWidget {
@@ -30,7 +29,7 @@ class ProfileDataItem extends StatelessWidget {
           Row(
 
             children: [
-              commonAssetSvgImageWidget(
+              CommonAssetSvgImageWidget(
                   imageString: image,
                   width: 22,
                   height: 22,

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../../Presentation/Widgets/common_title_text.dart';
+
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared.dart';
+import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../../core/presentation/Widgets/common_title_text.dart';
 
 class RequestItemWidget extends StatelessWidget {
   final String mainTitle;
@@ -23,7 +24,7 @@ class RequestItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const commonAssetSvgImageWidget(
+        const CommonAssetSvgImageWidget(
           imageString: "history.svg",
           height: 24,
           width: 24,

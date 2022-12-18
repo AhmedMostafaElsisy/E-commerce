@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../Presentation/Routes/route_names.dart';
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../Presentation/Widgets/common_cached_image_widget.dart';
-import '../../../../Presentation/Widgets/common_file_image_widget.dart';
-import '../../../../Presentation/Widgets/common_global_button.dart';
-import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../../Presentation/Widgets/custom_snack_bar.dart';
-import '../../../../Presentation/Widgets/take_photo_widget.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Profile_Cubit/profile_cubit.dart';
 import '../logic/Profile_Cubit/profile_states.dart';
@@ -154,7 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                       child: const Padding(
                                         padding: EdgeInsets.all(18.0),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "camera.svg",
                                             height: 32,
                                             width: 32,
@@ -228,7 +229,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 child: const Padding(
                                                   padding:
                                                   EdgeInsets.all(5.0),
-                                                  child: commonAssetSvgImageWidget(
+                                                  child: CommonAssetSvgImageWidget(
                                                       imageString:
                                                       "bin_icon.svg",
                                                       height: 12,
@@ -263,7 +264,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       suffixIcon: const Padding(
                         padding:
                         EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        child: commonAssetSvgImageWidget(
+                        child: CommonAssetSvgImageWidget(
                             imageString: "person_icon.svg",
                             fit: BoxFit.fill,
                             height: 16,
@@ -306,7 +307,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       suffixIcon: const Padding(
                         padding:
                         EdgeInsets.symmetric(vertical: 13, horizontal: 15),
-                        child: commonAssetSvgImageWidget(
+                        child: CommonAssetSvgImageWidget(
                             imageString: "phone_icon.svg",
                             fit: BoxFit.fill,
                             height: 16,

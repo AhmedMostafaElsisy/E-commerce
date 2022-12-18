@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
-import 'Logic/Bloc_Cubits/Language_Cubit/language_states.dart';
-import 'Presentation/Routes/route_generator.dart';
 import 'core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'core/Language_Cubit/language_cubit.dart';
+import 'core/Language_Cubit/language_states.dart';
+import 'core/presentation/Routes/route_generator.dart';
 import 'features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Connectivity_Cubit/connectivity_states.dart';
@@ -24,11 +24,9 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
   await di.init();
+  Bloc.observer = MyBlocObserver();
+  runApp(const MyApp());
 
-  BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-    blocObserver: MyBlocObserver(),
-  );
 }
 
 class MyApp extends StatefulWidget {

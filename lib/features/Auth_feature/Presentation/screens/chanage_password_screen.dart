@@ -1,18 +1,20 @@
-import '../../../../core/Constants/app_constants.dart';
-import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_text_form_field_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/Constants/app_constants.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 
-import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -105,7 +107,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
-                                  commonAssetSvgImageWidget(
+                                  CommonAssetSvgImageWidget(
                                     imageString: "password_lock_iconb.svg",
                                     height: 90,
                                     width: 90,
@@ -141,7 +143,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15,
                                                         horizontal: 15),
-                                                child: commonAssetSvgImageWidget(
+                                                child: CommonAssetSvgImageWidget(
                                                     imageString: hideOldPassword
                                                         ? "eye_open.svg"
                                                         : "eye_close.svg",
@@ -163,7 +165,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       suffixIcon: const Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
                                             fit: BoxFit.contain,
                                             height: 22,
@@ -211,7 +213,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15,
                                                         horizontal: 15),
-                                                child: commonAssetSvgImageWidget(
+                                                child: CommonAssetSvgImageWidget(
                                                     imageString: hidePassword
                                                         ? "eye_open.svg"
                                                         : "eye_close.svg",
@@ -233,7 +235,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       suffixIcon: const Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
                                             fit: BoxFit.contain,
                                             height: 22,
@@ -290,7 +292,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 15,
                                                         horizontal: 15),
-                                                child: commonAssetSvgImageWidget(
+                                                child: CommonAssetSvgImageWidget(
                                                     imageString:
                                                         hideConfirmPassword
                                                             ? "eye_open.svg"
@@ -313,7 +315,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       suffixIcon: const Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 12),
-                                        child: commonAssetSvgImageWidget(
+                                        child: CommonAssetSvgImageWidget(
                                             imageString: "lock_icon.svg",
                                             fit: BoxFit.contain,
                                             height: 22,

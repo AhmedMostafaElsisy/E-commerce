@@ -1,21 +1,22 @@
-import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../Presentation/Routes/route_names.dart';
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../Presentation/Widgets/common_file_image_widget.dart';
-import '../../../../Presentation/Widgets/common_global_button.dart';
-import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../../Presentation/Widgets/common_title_text.dart';
-import '../../../../Presentation/Widgets/custom_snack_bar.dart';
-import '../../../../Presentation/Widgets/take_photo_widget.dart';
+import '../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../logic/Sign_Up_Cubit/sign_up_states.dart';
 import '../logic/Sign_Up_Cubit/sign_up_cubit.dart';
 
@@ -159,7 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           : const Padding(
                                               padding:
                                                   EdgeInsets.all(18.0),
-                                              child: commonAssetSvgImageWidget(
+                                              child: CommonAssetSvgImageWidget(
                                                   imageString: "camera.svg",
                                                   height: 32,
                                                   width: 32,
@@ -189,7 +190,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   padding:
                                                       EdgeInsets.all(5.0),
                                                   child:
-                                                      commonAssetSvgImageWidget(
+                                                      CommonAssetSvgImageWidget(
                                                           imageString:
                                                               "bin_icon.svg",
                                                           height: 12,
@@ -225,7 +226,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "person_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,
@@ -269,7 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "email_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,
@@ -314,7 +315,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "phone_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,
@@ -358,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         child: Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 15, horizontal: 15),
-                                            child: commonAssetSvgImageWidget(
+                                            child: CommonAssetSvgImageWidget(
                                                 imageString:
                                                     _signUpCubit.hidePassword
                                                         ? "eye_open.svg"
@@ -382,7 +383,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,
@@ -434,7 +435,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         child: Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 15, horizontal: 15),
-                                            child: commonAssetSvgImageWidget(
+                                            child: CommonAssetSvgImageWidget(
                                                 imageString: _signUpCubit
                                                         .hideConfirmPassword
                                                     ? "eye_open.svg"
@@ -459,7 +460,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   suffixIcon: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",
                                         fit: BoxFit.contain,
                                         height: 22,

@@ -1,15 +1,15 @@
-import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
 import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../Presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../../Presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared_texts.dart';
+import '../../../../../core/presentation/Routes/route_names.dart';
+import '../../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../../core/presentation/Widgets/common_cached_image_widget.dart';
+import '../../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
 import '../Home_Screens/home_page.dart';

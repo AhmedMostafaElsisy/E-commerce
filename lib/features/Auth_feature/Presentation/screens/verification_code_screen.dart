@@ -1,16 +1,18 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
-import 'package:captien_omda_customer/Presentation/Widgets/common_title_text.dart';
 import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
+
+import '../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -129,7 +131,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          commonAssetSvgImageWidget(
+                          CommonAssetSvgImageWidget(
                               imageString: otpState is OtpErrorState
                                   ? "failed_otp.svg"
                                   : "sucess_otp.svg",
