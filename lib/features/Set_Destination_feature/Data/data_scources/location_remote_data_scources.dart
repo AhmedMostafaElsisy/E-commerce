@@ -16,18 +16,6 @@ class LocationRemoteDataSourceImpl extends LocationRemoteDataSourceInterface {
   @override
   Future<Either<CustomError, BaseModel>> getLocationData(
       {int? page = 1, String? searchKey}) async {
-    Map<String, dynamic> locationList = {
-      "message": "Data Retrieved Successfully",
-      "data": [
-        {"id": 1, "name": "B1"},
-        {"id": 2, "name": "B2"},
-        {"id": 3, "name": "B3"},
-        {"id": 4, "name": "B4"},
-        {"id": 5, "name": "B5"},
-        {"id": 6, "name": "B6"}
-      ],
-      "status": true
-    };
     try {
       String pathUrl = "";
       if (searchKey != null) {
@@ -38,7 +26,7 @@ class LocationRemoteDataSourceImpl extends LocationRemoteDataSourceInterface {
 
       Response response = await DioHelper.getDate(url: pathUrl);
 
-      return right(BaseModel.fromJson(locationList));
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
           type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
