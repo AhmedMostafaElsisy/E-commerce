@@ -10,6 +10,8 @@ import '../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../core/presentation/Widgets/custom_alert_dialog.dart';
+import '../../Profile_feature/presentation/screens/common_pop_up_content.dart';
 import '../logic/trip_cubit/trip_cubit.dart';
 import '../logic/trip_cubit/trip_cubit_states.dart';
 
@@ -222,6 +224,17 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                         buttonText: AppLocalizations.of(context)!.lblCancel,
                         onPressedFunction: () {
                           ///Todo:add cancel trip action
+                          showAlertDialog(context, [
+                            CommonPopUpContent(
+                              title: AppLocalizations.of(context)!.lblCancelTile,
+                              subTitle:
+                              AppLocalizations.of(context)!.lblCancelDesc,
+                              onSubmitClick: () {
+                                Navigator.of(context).pop();
+                                // profileCtx.read<LoginCubit>().logOut();
+                              },
+                            ),
+                          ]);
                         },
                       ),
 

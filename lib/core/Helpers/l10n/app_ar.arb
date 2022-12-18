@@ -104,5 +104,7 @@
   "lblCurrentRequest": "طلب حالي",
   "lblRequestDetails": "تفاصيل الرحلة",
   "lblSearchingForCar": "جاري البحث عن سياره...",
-  "lblSearchingForCarTimeEstimation": "عادة يستغرق الامر بضع داقائق"
+  "lblSearchingForCarTimeEstimation": "عادة يستغرق الامر بضع داقائق",
+  "lblCancelTile": "الغاء الرحلة",
+  "lblCancelDesc": "هل تريد حقا الغاء الرحلة"
 }
