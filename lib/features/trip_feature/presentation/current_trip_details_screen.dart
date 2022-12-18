@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:captien_omda_customer/features/trip_feature/presentation/trip_location_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +17,7 @@ import '../../../core/presentation/Widgets/custom_alert_dialog.dart';
 import '../../Profile_feature/presentation/screens/common_pop_up_content.dart';
 import '../logic/trip_cubit/trip_cubit.dart';
 import '../logic/trip_cubit/trip_cubit_states.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CurrentTripDetailsScreen extends StatefulWidget {
   const CurrentTripDetailsScreen({Key? key}) : super(key: key);
@@ -25,6 +28,15 @@ class CurrentTripDetailsScreen extends StatefulWidget {
 }
 
 class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
+  late bool canClick;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    canClick = true;
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +55,45 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                 AppLocalizations.of(context)!.lblCallSupport,
                 subTitle:
                 AppLocalizations.of(context)!.lbCallSupportDesc,
-                onSubmitClick: () {
-                  Navigator.of(context).pop();
-
+                onSubmitClick: !canClick
+                    ? () {}
+                    : () async {
+                  if (canClick) {
+                    setState(() {
+                      canClick =
+                      false;
+                    });
+                    if (Platform
+                        .isIOS) {
+                      await launch(
+                          "tel://${010929236333}");
+                      await Future
+                          .delayed(
+                        const Duration(
+                            seconds:
+                            5),
+                      );
+                    } else {
+                      final Uri
+                      launchUri =
+                      Uri(
+                        scheme:
+                        'tel',
+                        path: "010929236333",
+                      );
+                      Navigator.of(context).pop();
+                      await launchUrl(
+                          launchUri);
+                      await Future.delayed(
+                          const Duration(
+                              seconds:
+                              5));
+                    }
+                    setState(() {
+                      canClick =
+                      true;
+                    });
+                  }
                 },
               ),
             ]);
