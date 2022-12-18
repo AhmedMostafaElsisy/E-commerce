@@ -33,5 +33,7 @@ class ApiKeys {
   static const String faqKey = "/faqs";
   ///Requests keys
   static const String requestListKey = "$userTypeKey/requests";
+  ///location key
+  static const String locationListKey = "/general/places";
 
 }
