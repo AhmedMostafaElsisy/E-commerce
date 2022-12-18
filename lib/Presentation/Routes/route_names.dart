@@ -10,4 +10,5 @@ class RouteNames {
   static const String notificationPageRoute = "/NotificationPage";
   static const String mainBottomNavPageRoute = "/MainBottomNavPage";
   static const String profilePageRoute = "/ProfilePage";
+  static const String changePasswordPageRoute = "/ChangePasswordPage";
 }

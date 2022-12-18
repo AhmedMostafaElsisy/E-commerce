@@ -1,5 +1,4 @@
-import '../../../core/Constants/app_constants.dart';
-import 'package:captien_omda_customer/Presentation/Routes/route_argument_model.dart';
+import '../../../../core/Constants/app_constants.dart';
 import 'package:captien_omda_customer/Presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/Presentation/Widgets/common_global_button.dart';
@@ -9,39 +8,44 @@ import 'package:captien_omda_customer/Presentation/Widgets/custom_snack_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../core/Helpers/Validators/validators.dart';
-import '../../../core/Helpers/shared.dart';
-import '../../../core/Helpers/shared_texts.dart';
-import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_cubit.dart';
-import '../../../features/Auth_feature/Presentation/logic/Forget_Password_Cubit/forget_password_states.dart';
-import '../../Widgets/common_app_bar_widget.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
 
-class NewPasswordScreen extends StatefulWidget {
-  final RouteArgument argument;
+import '../../../../Presentation/Widgets/common_app_bar_widget.dart';
+import '../logic/Password_Cubit/password_cubit.dart';
+import '../logic/Password_Cubit/password_states.dart';
 
-  const NewPasswordScreen({Key? key, required this.argument}) : super(key: key);
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _NewPasswordScreenState();
+  State<StatefulWidget> createState() => _ChangePasswordScreenState();
 }
 
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final formKey = GlobalKey<FormState>();
+  late TextEditingController oldPasswordController;
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
 
+  bool hideOldPassword = true;
   bool hidePassword = true;
   bool hideConfirmPassword = true;
 
   @override
   void initState() {
     super.initState();
+    oldPasswordController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
   }
 
   @override
   void dispose() {
+    oldPasswordController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
@@ -53,7 +57,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstants.lightWhiteColor,
       appBar: CommonAppBar(
-        elevation: 0,
         withBack: true,
         showBottomIcon: false,
         titleWidget: CommonTitleText(
@@ -63,7 +66,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           textFontSize: AppConstants.normalFontSize,
         ),
       ),
-      body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
+      body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (passwordCtx, passwordStates) {
           if (passwordStates is ChangePasswordStateSuccess) {
             Navigator.pushNamedAndRemoveUntil(
@@ -117,7 +120,77 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                 key: formKey,
                                 child: Column(
                                   children: [
-                                    /// Password
+                                    /// old Password
+                                    CommonTextFormField(
+                                      withSuffixIcon: true,
+                                      labelText:
+                                          AppLocalizations.of(passwordCtx)!
+                                              .lblOldPassword,
+                                      prefixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            hideOldPassword = !hideOldPassword;
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          width: getWidgetWidth(30),
+                                          height: getWidgetHeight(30),
+                                          child: Center(
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 15),
+                                                child: commonAssetSvgImageWidget(
+                                                    imageString: hideOldPassword
+                                                        ? "eye_open.svg"
+                                                        : "eye_close.svg",
+                                                    height: 30,
+                                                    width: 30,
+                                                    fit: BoxFit.contain)),
+                                          ),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      isObscureText: hideOldPassword,
+                                      radius: AppConstants.smallBorderRadius,
+                                      hintKey: AppLocalizations.of(passwordCtx)!
+                                          .lblEnterPassword,
+                                      labelHintStyle:
+                                          AppConstants.mainTextColor,
+                                      suffixIcon: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 12, horizontal: 12),
+                                        child: commonAssetSvgImageWidget(
+                                            imageString: "lock_icon.svg",
+                                            fit: BoxFit.contain,
+                                            height: 22,
+                                            width: 22),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordIsEmpty;
+                                        } else if (value.length < 8) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordMustBeMoreThan;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {
+                                          oldPasswordController.text = value!;
+                                        });
+                                        return null;
+                                      },
+                                    ),
+
+                                    getSpaceHeight(AppConstants.pagePadding),
+
+                                    /// new Password
                                     CommonTextFormField(
                                       withSuffixIcon: true,
                                       labelText:
@@ -193,7 +266,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                       },
                                     ),
 
-                                    getSpaceHeight(16),
+                                    getSpaceHeight(AppConstants.pagePadding),
 
                                     /// Confirm Password
                                     CommonTextFormField(
@@ -218,9 +291,10 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                                         vertical: 15,
                                                         horizontal: 15),
                                                 child: commonAssetSvgImageWidget(
-                                                    imageString: hidePassword
-                                                        ? "eye_open.svg"
-                                                        : "eye_close.svg",
+                                                    imageString:
+                                                        hideConfirmPassword
+                                                            ? "eye_open.svg"
+                                                            : "eye_close.svg",
                                                     height: 30,
                                                     width: 30,
                                                     fit: BoxFit.contain)),
@@ -290,32 +364,32 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CommonGlobalButton(
-                              height: 48,
-                              buttonBackgroundColor: AppConstants.mainColor,
-                              isEnable: passwordController.text.isNotEmpty &&
-                                  confirmPasswordController.text.isNotEmpty,
-                              isLoading:
-                                  passwordStates is ChangePasswordStateLoading,
-                              radius: AppConstants.smallBorderRadius,
-                              buttonTextSize: 18,
-                              buttonTextFontWeight: FontWeight.w400,
-                              buttonText:
-                                  AppLocalizations.of(passwordCtx)!.lblSubmit,
-                              onPressedFunction: () {
-                                if (formKey.currentState!.validate()) {
-                                  FocusScope.of(passwordCtx)
-                                      .requestFocus(FocusNode());
-                                  passwordCtx
-                                      .read<ForgetPasswordCubit>()
-                                      .changeNewPassword(
-                                          code: widget.argument.otp!,
-                                          email: widget.argument.emailAddress!,
-                                          confirmPassword:
-                                              confirmPasswordController.text,
-                                          password: passwordController.text);
-                                }
-                              },
-                             ),
+                            height: 48,
+                            buttonBackgroundColor: AppConstants.mainColor,
+                            isEnable: passwordController.text.isNotEmpty &&
+                                confirmPasswordController.text.isNotEmpty &&
+                                oldPasswordController.text.isNotEmpty,
+                            isLoading:
+                                passwordStates is ChangePasswordStateLoading,
+                            radius: AppConstants.smallBorderRadius,
+                            buttonTextSize: 18,
+                            buttonTextFontWeight: FontWeight.w400,
+                            buttonText:
+                                AppLocalizations.of(passwordCtx)!.lblSubmit,
+                            onPressedFunction: () {
+                              if (formKey.currentState!.validate()) {
+                                FocusScope.of(passwordCtx)
+                                    .requestFocus(FocusNode());
+                                passwordCtx
+                                    .read<PasswordCubit>()
+                                    .changePassword(
+                                        oldPassword: oldPasswordController.text,
+                                        password: passwordController.text,
+                                        confirmPassword:
+                                            confirmPasswordController.text);
+                              }
+                            },
+                          ),
                         ],
                       ),
                       getSpaceHeight(50),

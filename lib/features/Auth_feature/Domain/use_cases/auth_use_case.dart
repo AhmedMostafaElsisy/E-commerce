@@ -47,6 +47,7 @@ class AuthUserCase {
   Future<Either<CustomError, BaseModel>> callUserLogout() async {
     return await repository.logout();
   }  Future<Either<CustomError, BaseModel>> callUserDeleteAccount() async {
+
     return await repository.deleteAccount();
   }
 

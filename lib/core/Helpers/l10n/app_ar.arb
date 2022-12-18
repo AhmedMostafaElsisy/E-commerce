@@ -40,7 +40,7 @@
   "lblCreateAccount": "انشاء حساب",
   "lblOutTermsAndConditions": "Our Terms and Conditions",
   "lblAccept": "I Accept",
-  "lblPasswordDontMatch": "Re-type password don`t match password",
+  "lblPasswordDontMatch": "تاكيد كلمة المرور لا تطابق كلمة المرور الجديدة",
   "lblRetypePassword": "Re-type Password",
   "lblComplexPasswordValidationUpperAndLower": "يجب أن تحتوي كلمة المرور على أحرف صغيرة وكبيرة ",
   "lblComplexPasswordValidationSc": "كلمة السر يجب ان تحتوي علي حروف خاصة",
@@ -91,5 +91,6 @@
   "lblNo": "لا",
   "lblChangePassWord": "تغير كلمة المرور",
   "lblLogOut": "تسجيل الخروج",
-  "lblIsLogOut": "هل تريد تسجيل الخروج ؟"
+  "lblIsLogOut": "هل تريد تسجيل الخروج ؟",
+  "lblOldPassword": "كلمة المرور القديمة"
 }

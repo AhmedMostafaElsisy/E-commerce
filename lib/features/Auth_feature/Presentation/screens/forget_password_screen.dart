@@ -12,8 +12,9 @@ import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../Presentation/Routes/route_argument_model.dart';
 import '../../../../Presentation/Routes/route_names.dart';
-import '../logic/Forget_Password_Cubit/forget_password_cubit.dart';
-import '../logic/Forget_Password_Cubit/forget_password_states.dart';
+
+import '../logic/Password_Cubit/password_cubit.dart';
+import '../logic/Password_Cubit/password_states.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({Key? key}) : super(key: key);
@@ -23,14 +24,14 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  late ForgetPasswordCubit _forgetPasswordCubit;
+  late PasswordCubit _forgetPasswordCubit;
   TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _forgetPasswordCubit = BlocProvider.of<ForgetPasswordCubit>(context);
+    _forgetPasswordCubit = BlocProvider.of<PasswordCubit>(context);
     _forgetPasswordCubit.resetState();
   }
 
@@ -56,7 +57,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           textFontSize: AppConstants.normalFontSize,
         ),
       ),
-      body: BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
+      body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (forgetCtx, forgetState) {
           if (forgetState is SendVerificationToEmailStateSuccess) {
             Navigator.pushNamed(forgetCtx, RouteNames.verificationCodePageRoute,
