@@ -6,4 +6,7 @@ import '../../../../core/model/base_model.dart';
 
 abstract class RequestRepositoryInterface extends BaseInterface {
   Future<Either<CustomError, BaseModel>> getRequests({int page = 1, int limit});
+
+  Future<Either<CustomError, BaseModel>> startRequest(
+      {required int fromLocationId, required int toLocationId});
 }

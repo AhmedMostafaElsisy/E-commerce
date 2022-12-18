@@ -10,6 +10,9 @@ abstract class RequestRemoteDataSourceInterface {
   ///get requests
   Future<Either<CustomError, BaseModel>> getRequestData(
       {int page = 1, int? limit});
+
+  Future<Either<CustomError, BaseModel>> startRequest(
+      {required int fromLocationId, required int toLocationId});
 }
 
 class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
@@ -24,6 +27,25 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
         pathUrl = "${ApiKeys.requestListKey}?limit=$limit";
       }
       Response response = await DioHelper.getDate(url: pathUrl);
+
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> startRequest(
+      {required int fromLocationId, required int toLocationId}) async {
+    try {
+      FormData staticData = FormData();
+
+      String pathUrl = ApiKeys.requestStoreKey;
+      staticData.fields.add(MapEntry('from_id', fromLocationId.toString()));
+      staticData.fields.add(MapEntry('to_id', toLocationId.toString()));
+      Response response =
+          await DioHelper.postData(url: pathUrl, data: staticData);
 
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {

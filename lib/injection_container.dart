@@ -32,6 +32,8 @@ import 'features/Set_Destination_feature/Data/repository/location_repository.dar
 import 'features/Set_Destination_feature/Domain/location_ues_cases/location_ues_cases.dart';
 import 'features/Set_Destination_feature/Domain/repository/location_interface.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
+import 'features/trip_feature/Domain/ues_cases/trip_ues_case.dart';
+import 'features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -44,6 +46,7 @@ Future<void> init() async {
   sl.registerFactory(() => RequestCubit(sl()));
   sl.registerFactory(() => ProfileCubit(sl()));
   sl.registerFactory(() => DestinationCubit(sl()));
+  sl.registerFactory(() => TripCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -52,6 +55,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RequestUesCases(sl()));
   sl.registerLazySingleton(() => ProfileUesCases(sl()));
   sl.registerLazySingleton(() => LocationUesCases(sl()));
+  sl.registerLazySingleton(() => TripUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<OtpRepositoryInterface>(() => OtpRepository(sl()));

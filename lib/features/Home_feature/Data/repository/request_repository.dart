@@ -17,4 +17,11 @@ class RequestRepository extends RequestRepositoryInterface {
       {int page = 1, int? limit}) {
     return remoteDataSourceInterface.getRequestData(page: page, limit: limit);
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> startRequest(
+      {required int fromLocationId, required int toLocationId}) {
+    return remoteDataSourceInterface.startRequest(
+        fromLocationId: fromLocationId, toLocationId: toLocationId);
+  }
 }
