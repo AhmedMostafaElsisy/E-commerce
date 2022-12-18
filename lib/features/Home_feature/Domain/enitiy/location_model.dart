@@ -1,3 +1,6 @@
+List<LocationModel> locationListFromJson(List str) =>
+    List<LocationModel>.from(str.map((x) => LocationModel.fromJson(x)));
+
 class LocationModel {
   int? id;
   String? locationName;
