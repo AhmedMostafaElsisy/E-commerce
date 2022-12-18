@@ -99,5 +99,9 @@
   "lblNoResultFound": "No result found",
   "lblLocationSearchDesc": "Please adjust your search to find what you want",
   "lblLocationError": "You can`t select this location",
-  "lblLocationValidationMassage": "You have to choose a location"
+  "lblLocationValidationMassage": "You have to choose a location",
+  "lblCurrentRequest": "Current Trip",
+  "lblRequestDetails": "Trip Details",
+  "lblSearchingForCar": "Searching for a car ....",
+  "lblSearchingForCarTimeEstimation": "It usually takes a few minutes"
 }
