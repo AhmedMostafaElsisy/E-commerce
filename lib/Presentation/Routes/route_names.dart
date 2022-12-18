@@ -9,5 +9,5 @@ class RouteNames {
   static const String verificationCodePageRoute = "/VerificationCodePage";
   static const String notificationPageRoute = "/NotificationPage";
   static const String mainBottomNavPageRoute = "/MainBottomNavPage";
-
+  static const String profilePageRoute = "/ProfilePage";
 }

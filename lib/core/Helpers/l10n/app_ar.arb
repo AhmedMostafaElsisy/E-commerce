@@ -83,5 +83,10 @@
   "lblHome": "الرئيسية",
   "lblTrips": "رحلاتي",
   "lblNoTripFound": "لا توجد رحلات",
-  "lblNoTripFoundHomeDesc": "استعد للقيام برحلتك الاولة"
+  "lblNoTripFoundHomeDesc": "استعد للقيام برحلتك الاولة",
+  "lblEdit": "تعديل",
+  "lblDeleteAccount": "حذف الحساب",
+  "lblDeleteThisAccount": "هل تريد حذف الحساب نهائيا",
+  "lblYes": "نعم",
+  "lblChangePassWord": "تغير كلمة المرور"
 }
