@@ -34,7 +34,7 @@ class AppConstants {
   static const Color transparent = Colors.transparent;
   static const Color lightGreyBackGround = Color(0xffF7F7F7);
   static const Color lightTextColor = Color(0xFF3B3939);
-  static const Color lightButtonGrayColor = Color(0xFFF2F9FF);
+  static const Color lightButtonGrayColor = Color(0xFFF4F6F5);
   static const Color lightGrayColor = Color(0xFF575757);
   static const Color formFillColor = Color(0xFFEFF5F4);
   static const Color shadowColor = Color(0xFF505588);

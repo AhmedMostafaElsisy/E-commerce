@@ -8,76 +8,82 @@ import '../../Helpers/shared_texts.dart';
 import 'common_title_text.dart';
 
 class CommonTextFormField extends StatelessWidget {
-final  String? labelText;
-final String? hintKey;
-final TextEditingController? controller;
-final TextInputType? keyboardType;
-final Color? textInputColor;
-final Function()? onTap;
-final bool enabled;
-final bool isSelected;
-final bool withPrefixIcon;
-final bool evaluation;
-final bool isObscureText;
-final bool isDigitOnly;
-final String? Function(String?)? validator;
-final bool withSuffixIcon;
-final double? fieldWidth;
-final double? fieldHeight;
-final int minLines;
-final int maxLines;
-final Widget? prefixIcon;
-final  Widget? suffixIcon;
-final  String? Function(String?)? onChanged;
-final  Function()? onSaved;
-final Color? borderColor;
-final Color? filledColor;
-final Color? labelHintStyle;
-final Color? labelErrorStyle;
-final List<TextInputFormatter>? inputFormatter;
-final bool? isReadOnly;
-final TextInputAction? action;
-final TextAlign? labelHintTextAlign;
-final double? radius;
-final  bool? alignMultipleLines;
-final  FocusNode? fieldFocusNode;
+  final String? labelText;
+  final String? hintKey;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final Color? textInputColor;
+  final Function()? onTap;
+  final bool enabled;
+  final bool isSelected;
+  final bool withPrefixIcon;
+  final bool evaluation;
+  final bool isObscureText;
+  final bool isDigitOnly;
+  final String? Function(String?)? validator;
+  final bool withSuffixIcon;
+  final double? fieldWidth;
+  final double? fieldHeight;
+  final int minLines;
+  final int maxLines;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final String? Function(String?)? onChanged;
+  final Function()? onSaved;
+  final Color? borderColor;
+  final Color? filledColor;
+  final Color? labelHintStyle;
+  final Color? labelErrorStyle;
+  final List<TextInputFormatter>? inputFormatter;
+  final bool? isReadOnly;
+  final TextInputAction? action;
+  final TextAlign? labelHintTextAlign;
+  final double? radius;
+  final bool? alignMultipleLines;
+  final FocusNode? fieldFocusNode;
+  final double? blurRadius;
+  final Color? shadowColor;
+  final Offset? shadowOffset;
 
- const CommonTextFormField(
-      {Key? key,
-      this.labelText,
-      this.hintKey,
-      this.controller,
-      this.keyboardType = TextInputType.name,
-      this.onTap,
-      this.enabled = true,
-      this.isSelected = false,
-      this.withPrefixIcon = true,
-      this.isObscureText = false,
-      this.evaluation = true,
-      this.withSuffixIcon = false,
-      this.fieldWidth,
-      this.fieldHeight,
-      this.isDigitOnly = false,
-      this.minLines = 1,
-      this.maxLines = 4,
-      this.validator,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.onChanged,
-      this.onSaved,
-      this.borderColor,
-      this.filledColor = AppConstants.lightWhiteColor,
-      this.textInputColor = AppConstants.lightBlackColor,
-      this.labelHintStyle = AppConstants.transparent,
-      this.labelErrorStyle = AppConstants.errorColor,
-      this.inputFormatter,
-      this.isReadOnly = false,
-      this.action = TextInputAction.next,
-      this.labelHintTextAlign = TextAlign.end,
-      this.radius = 12.0,
-      this.alignMultipleLines = false,
-      this.fieldFocusNode})
-      : super(key: key);
+  const CommonTextFormField({
+    Key? key,
+    this.labelText,
+    this.hintKey,
+    this.controller,
+    this.keyboardType = TextInputType.name,
+    this.onTap,
+    this.enabled = true,
+    this.isSelected = false,
+    this.withPrefixIcon = true,
+    this.isObscureText = false,
+    this.evaluation = true,
+    this.withSuffixIcon = false,
+    this.fieldWidth,
+    this.fieldHeight,
+    this.isDigitOnly = false,
+    this.minLines = 1,
+    this.maxLines = 4,
+    this.validator,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onChanged,
+    this.onSaved,
+    this.borderColor,
+    this.filledColor = AppConstants.lightWhiteColor,
+    this.textInputColor = AppConstants.lightBlackColor,
+    this.labelHintStyle = AppConstants.transparent,
+    this.labelErrorStyle = AppConstants.errorColor,
+    this.inputFormatter,
+    this.isReadOnly = false,
+    this.action = TextInputAction.next,
+    this.labelHintTextAlign = TextAlign.end,
+    this.radius = 12.0,
+    this.alignMultipleLines = false,
+    this.fieldFocusNode,
+    this.blurRadius = 40,
+    this.shadowColor = AppConstants.shadowColor,
+    this.shadowOffset = const Offset(0, 8),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +105,9 @@ final  FocusNode? fieldFocusNode;
           alignment: Alignment.center,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
-              offset: const Offset(0, 8),
-              blurRadius: 40,
-              color: AppConstants.shadowColor.withOpacity(0.10),
+              offset: shadowOffset!,
+              blurRadius: blurRadius!,
+              color: shadowColor!.withOpacity(0.10),
             )
           ]),
           child: Directionality(

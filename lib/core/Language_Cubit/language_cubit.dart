@@ -22,7 +22,7 @@ class LangCubit extends Cubit<LangState> {
     ///update shared lang
     SharedText.currentLocale = currentLang;
     DioHelper.dio.options.headers
-        .addAll({"Language": SharedText.currentLocale});
+        .addAll({"Accept-Language": SharedText.currentLocale});
     ///save new lang
     DefaultSecuredStorage.setLang(newLang);
 
@@ -56,7 +56,7 @@ class LangCubit extends Cubit<LangState> {
     appLocal = Locale(currentLang);
     SharedText.currentLocale = currentLang;
     DioHelper.dio.options.headers
-        .addAll({"Language": SharedText.currentLocale});
+        .addAll({"Accept-Language": SharedText.currentLocale});
     debugPrint("app local lang code is ${appLocal!.languageCode}");
 
     ///set delegate with saved lang

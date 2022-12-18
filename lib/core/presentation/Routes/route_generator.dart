@@ -11,6 +11,7 @@ import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bo
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
+import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
@@ -55,6 +56,9 @@ class RouteGenerator {
       case RouteNames.editProfilePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const EditProfileScreen());
+        case RouteNames.setDestinationPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const SetDestinationScreen());
 
       default:
         return MaterialPageRoute(

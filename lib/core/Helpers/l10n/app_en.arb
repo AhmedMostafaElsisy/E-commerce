@@ -92,6 +92,12 @@
   "lblLogOut": "Log out",
   "lblIsLogOut": "Do you want to log out ?",
   "lblOldPassword": "Old Password",
-  "lblSave": "Save"
-
+  "lblSave": "Save",
+  "lblSetDestination": "Set Destination",
+  "lblCurrentLocation": "Current location",
+  "lblDestinationLocation": "Destination location",
+  "lblNoResultFound": "No result found",
+  "lblLocationSearchDesc": "Please adjust your search to find what you want",
+  "lblLocationError": "You can`t select this location",
+  "lblLocationValidationMassage": "You have to choose a location"
 }
