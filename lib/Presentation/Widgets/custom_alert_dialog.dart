@@ -16,8 +16,9 @@ Future<void> showAlertDialog(
             borderRadius: BorderRadius.circular(AppConstants.smallRadius),
           ),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            width: getWidgetWidth(300),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            width: getWidgetWidth(500),
+
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: children,

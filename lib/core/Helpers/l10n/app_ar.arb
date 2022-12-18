@@ -88,5 +88,8 @@
   "lblDeleteAccount": "حذف الحساب",
   "lblDeleteThisAccount": "هل تريد حذف الحساب نهائيا",
   "lblYes": "نعم",
-  "lblChangePassWord": "تغير كلمة المرور"
+  "lblNo": "لا",
+  "lblChangePassWord": "تغير كلمة المرور",
+  "lblLogOut": "تسجيل الخروج",
+  "lblIsLogOut": "هل تريد تسجيل الخروج ؟"
 }
