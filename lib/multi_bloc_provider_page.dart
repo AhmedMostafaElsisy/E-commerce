@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
@@ -46,6 +47,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<NotificationCubit>(
             create: (_) => NotificationCubit(NotificationListRepository())),
         BlocProvider<RequestCubit>(create: (_) => di.sl<RequestCubit>()),
+        BlocProvider<DestinationCubit>(create: (_) => di.sl<DestinationCubit>()),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
 
       ],
