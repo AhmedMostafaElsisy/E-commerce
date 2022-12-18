@@ -105,5 +105,7 @@
   "lblSearchingForCar": "Searching for a car ....",
   "lblSearchingForCarTimeEstimation": "It usually takes a few minutes",
   "lblCancelTile": "Cancel Trip",
-  "lblCancelDesc": "Do you really want to cancel this trip"
+  "lblCancelDesc": "Do you really want to cancel this trip",
+  "lblCallSupport":"Call Support",
+  "lbCallSupportDesc": "Is there any problem , and you want to call support"
 }

@@ -37,7 +37,18 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
         showLeadingWidget: true,
         customActionWidget: InkWell(
           onTap: () {
-            ///Todo: add call support func
+            showAlertDialog(context, [
+              CommonPopUpContent(
+                title:
+                AppLocalizations.of(context)!.lblCallSupport,
+                subTitle:
+                AppLocalizations.of(context)!.lbCallSupportDesc,
+                onSubmitClick: () {
+                  Navigator.of(context).pop();
+
+                },
+              ),
+            ]);
           },
           child: const CommonAssetSvgImageWidget(
               imageString: "call_support.svg",
