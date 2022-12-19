@@ -107,5 +107,7 @@
   "lblCancelTile": "Cancel Trip",
   "lblCancelDesc": "Do you really want to cancel this trip",
   "lblCallSupport":"Call Support",
-  "lbCallSupportDesc": "Is there any problem , and you want to call support"
+  "lbCallSupportDesc": "Is there any problem , and you want to call support",
+  "lblEGP": "EGP"
+
 }

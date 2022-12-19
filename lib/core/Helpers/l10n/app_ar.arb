@@ -108,5 +108,6 @@
   "lblCancelTile": "الغاء الرحلة",
   "lblCancelDesc": "هل تريد حقا الغاء الرحلة",
   "lblCallSupport":"الاتصال بالدعم",
-  "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم"
+  "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم",
+  "lblEGP": "جنية"
 }
