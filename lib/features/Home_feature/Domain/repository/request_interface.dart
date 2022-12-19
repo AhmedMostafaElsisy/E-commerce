@@ -14,4 +14,5 @@ abstract class RequestRepositoryInterface extends BaseInterface {
       {required int requestID, required String states});
 
   Future<Either<CustomError, BaseModel>> getCurrentRequest();
+  Future<Either<CustomError, BaseModel>> getRequestDetails({required int requestId});
 }

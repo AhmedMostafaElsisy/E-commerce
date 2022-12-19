@@ -66,7 +66,7 @@ class RouteGenerator {
             page: const CurrentTripDetailsScreen());
    case RouteNames.requestHistoryDetailsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: const RequestHistoryDetails());
+            page:  RequestHistoryDetails(routeArgument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(

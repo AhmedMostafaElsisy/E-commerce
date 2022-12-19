@@ -111,7 +111,8 @@
   "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم",
   "lblEGP": "جنية",
   "lblOldRequest": "طلب سابق",
-  "lblAddRating": "اضف تقييم"
+  "lblAddRating": "اضف تقييم",
+  "lblCancelRequest": "تم الاغاء"
 
 
 }

@@ -4,6 +4,7 @@ import 'package:captien_omda_customer/features/Home_feature/presentation/Screens
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/Constants/app_constants.dart';
+import '../../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_loading_widget.dart';
@@ -98,7 +99,12 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
                             return InkWell(
                               onTap: () {
                                 Navigator.pushNamed(context,
-                                    RouteNames.requestHistoryDetailsPageRoute);
+                                    RouteNames.requestHistoryDetailsPageRoute,
+                                    arguments: RouteArgument(
+                                        requestId: requestCtx
+                                            .read<RequestCubit>()
+                                            .requestHistoryList[index]
+                                            .id));
                               },
                               child: RequestHistoryItem(
                                 model: requestCtx

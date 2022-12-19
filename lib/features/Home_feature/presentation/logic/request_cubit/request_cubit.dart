@@ -12,6 +12,8 @@ class RequestCubit extends Cubit<RequestCubitState> {
   List<RequestModel> requestList = [];
   List<RequestModel> requestHistoryList = [];
 
+  late RequestModel requestModel;
+
   ///pagination
   int page = 1;
   late ScrollController scrollController;
@@ -77,6 +79,23 @@ class RequestCubit extends Cubit<RequestCubitState> {
           requestHistoryList = requestList;
           emit(RequestHistorySuccessState());
         }
+      },
+    );
+  }
+
+  ///get request details
+  getRequestDetails({required int requestId}) async {
+    emit(RequestDetailsLoadingState());
+
+    var result = await _requestUesCase.callRequestDetails(
+      requestId: requestId,
+    );
+
+    result.fold(
+      (failure) => emit(RequestDetailsFailedState(failure)),
+      (request) {
+        requestModel = request;
+        emit(RequestDetailsSuccessState());
       },
     );
   }

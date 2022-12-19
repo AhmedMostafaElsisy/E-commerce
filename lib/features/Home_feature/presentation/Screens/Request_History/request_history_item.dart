@@ -5,6 +5,7 @@ import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../core/Constants/Enums/request_states.dart';
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared_texts.dart';
 import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -28,12 +29,13 @@ class RequestHistoryItem extends StatelessWidget {
                 offset: const Offset(0, 0))
           ],
           borderRadius:
-              BorderRadius.circular(AppConstants.containerBorderRadius)),
+          BorderRadius.circular(AppConstants.containerBorderRadius)),
       padding: const EdgeInsets.all(AppConstants.pagePadding),
       child: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
             ///driver data
             Row(
               children: [
@@ -78,21 +80,33 @@ class RequestHistoryItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CommonAssetSvgImageWidget(
-                    imageString: "cash_icon.svg",
-                    height: 25,
-                    width: 25,
-                    fit: BoxFit.contain,
-                    imageColor: AppConstants.lightBorderColor,
-                  ),
-                  getSpaceWidth(AppConstants.smallPadding / 2),
-                  CommonTitleText(
-                    textKey:
+                  if(model.state == RequestStates.cancelRequest)...[
+                    CommonTitleText(
+                      textKey:
+                      AppLocalizations.of(context)!.lblCancelRequest,
+                      textColor: AppConstants.lightBorderColor,
+                      textWeight: FontWeight.w700,
+                      textFontSize: AppConstants.normalFontSize,
+                    ),
+                  ] else
+                    ...[
+                      const CommonAssetSvgImageWidget(
+                        imageString: "cash_icon.svg",
+                        height: 25,
+                        width: 25,
+                        fit: BoxFit.contain,
+                        imageColor: AppConstants.lightBorderColor,
+                      ),
+                      getSpaceWidth(AppConstants.smallPadding / 2),
+                      CommonTitleText(
+                        textKey:
                         "${model.price!} ${AppLocalizations.of(context)!.lblEGP}",
-                    textColor: AppConstants.lightBorderColor,
-                    textWeight: FontWeight.w700,
-                    textFontSize: AppConstants.normalFontSize,
-                  ),
+                        textColor: AppConstants.lightBorderColor,
+                        textWeight: FontWeight.w700,
+                        textFontSize: AppConstants.normalFontSize,
+                      ),
+                    ]
+
                 ]),
           ],
         ),

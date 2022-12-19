@@ -18,6 +18,9 @@ abstract class RequestRemoteDataSourceInterface {
       {required int requestID, required String states});
 
   Future<Either<CustomError, BaseModel>> getCurrentRequest();
+
+  Future<Either<CustomError, BaseModel>> getRequestDetails(
+      {required int requestDetails});
 }
 
 class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
@@ -93,4 +96,21 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
           type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
     }
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getRequestDetails({required int requestDetails})async {
+    try {
+      String pathUrl = "${ApiKeys.findRequestKey}?id=$requestDetails";
+
+      Response response = await DioHelper.getDate(
+        url: pathUrl,
+      );
+
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
+  }
+
 }
