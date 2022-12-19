@@ -109,5 +109,9 @@
   "lblCancelDesc": "هل تريد حقا الغاء الرحلة",
   "lblCallSupport":"الاتصال بالدعم",
   "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم",
-  "lblEGP": "جنية"
+  "lblEGP": "جنية",
+  "lblOldRequest": "طلب سابق",
+  "lblAddRating": "اضف تقييم"
+
+
 }
