@@ -22,3 +22,14 @@ class ChangeStatesTripFailedState extends TripCubitState {
 
   ChangeStatesTripFailedState(this.error);
 }
+
+
+class CurrentTripLoadingState extends TripCubitState {}
+
+class CurrentTripSuccessState extends TripCubitState {}
+
+class CurrentTripFailedState extends TripCubitState {
+  CustomError error;
+
+  CurrentTripFailedState(this.error);
+}

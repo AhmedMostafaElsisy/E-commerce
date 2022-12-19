@@ -2,7 +2,6 @@ import 'package:captien_omda_customer/core/setting_feature/Data/model/setting_mo
 import 'package:dartz/dartz.dart';
 
 import '../../../Error_Handling/custom_error.dart';
-import '../../Data/repository/setting_repository.dart';
 import '../repository/setting_interface.dart';
 
 class SettingUserCase {

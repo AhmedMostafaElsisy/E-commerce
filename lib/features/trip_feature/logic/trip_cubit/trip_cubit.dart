@@ -42,4 +42,17 @@ class TripCubit extends Cubit<TripCubitState> {
       },
     );
   }
+
+  getCurrentRequest() async {
+    emit(CurrentTripLoadingState());
+    var result = await _requestUesCase.callCurrentRequest();
+
+    result.fold(
+      (failure) => emit(CurrentTripFailedState(failure)),
+      (request) {
+        requestModel = request;
+        emit(CurrentTripSuccessState());
+      },
+    );
+  }
 }
