@@ -185,15 +185,15 @@ class _HomePageState extends State<HomePage> {
                               ),
                               if (requestState is RequestHomeEmptyState) ...[
                                 ///Spacer
-                                getSpaceHeight(AppConstants.pagePaddingDouble),
+                                getSpaceHeight(AppConstants.pagePaddingDouble*2),
                                 EmptyScreen(
-                                    imageString: "car_icon.svg",
+                                    imageString: "empty_list.svg",
                                     titleKey: AppLocalizations.of(context)!
                                         .lblNoTripFound,
                                     description: AppLocalizations.of(context)!
                                         .lblNoTripFoundHomeDesc,
-                                    imageHeight: 50,
-                                    imageWidth: 50)
+                                    imageHeight: 56,
+                                    imageWidth: 56)
                               ] else ...[
                                 ///Spacer
                                 getSpaceHeight(AppConstants.pagePaddingDouble),
