@@ -9,6 +9,7 @@ import '../../../features/Auth_feature/Presentation/screens/sign_up_screen.dart'
 import '../../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
 import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
+import '../../../features/Home_feature/presentation/Screens/Request_History/request_history_details_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
@@ -63,6 +64,9 @@ class RouteGenerator {
         case RouteNames.currentTripsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const CurrentTripDetailsScreen());
+   case RouteNames.requestHistoryDetailsPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const RequestHistoryDetails());
 
       default:
         return MaterialPageRoute(

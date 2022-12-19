@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
@@ -33,6 +34,7 @@ class RequestHistoryItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            ///driver data
             Row(
               children: [
                 commonCachedImageWidget(context, "imageUrl",
@@ -41,8 +43,8 @@ class RequestHistoryItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CommonTitleText(
-                      textKey: "Drivier name",
+                    CommonTitleText(
+                      textKey: "Drivier name".getStringWithoutSpacings(),
                       textFontSize: AppConstants.smallFontSize,
                       textColor: AppConstants.lightBlackColor,
                       textWeight: FontWeight.w600,
@@ -70,6 +72,8 @@ class RequestHistoryItem extends StatelessWidget {
                 )
               ],
             ),
+
+            ///trip price
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +87,8 @@ class RequestHistoryItem extends StatelessWidget {
                   ),
                   getSpaceWidth(AppConstants.smallPadding / 2),
                   CommonTitleText(
-                    textKey: "${model.price!} ${AppLocalizations.of(context)!.lblEGP}",
+                    textKey:
+                        "${model.price!} ${AppLocalizations.of(context)!.lblEGP}",
                     textColor: AppConstants.lightBorderColor,
                     textWeight: FontWeight.w700,
                     textFontSize: AppConstants.normalFontSize,
@@ -103,6 +108,8 @@ class RequestHistoryItem extends StatelessWidget {
 
         ///spacer
         getSpaceHeight(AppConstants.smallPadding),
+
+        ///trip start location
         Row(
           children: [
             const CommonAssetSvgImageWidget(
@@ -113,8 +120,8 @@ class RequestHistoryItem extends StatelessWidget {
             getSpaceWidth(AppConstants.smallPadding),
             SizedBox(
               width: getWidgetWidth(250),
-              child:  CommonTitleText(
-                textKey:model.fromLocation!.locationName!,
+              child: CommonTitleText(
+                textKey: model.fromLocation!.locationName!,
                 textColor: AppConstants.lightBlackColor,
                 textWeight: FontWeight.w600,
                 textFontSize: AppConstants.normalFontSize,
@@ -127,6 +134,9 @@ class RequestHistoryItem extends StatelessWidget {
 
         ///spacer
         getSpaceHeight(AppConstants.pagePadding - 4),
+
+        ///trip end location
+
         Row(
           children: [
             const CommonAssetSvgImageWidget(
@@ -137,8 +147,8 @@ class RequestHistoryItem extends StatelessWidget {
             getSpaceWidth(AppConstants.smallPadding),
             SizedBox(
               width: getWidgetWidth(250),
-              child:  CommonTitleText(
-                textKey:model.toLocation!.locationName!,
+              child: CommonTitleText(
+                textKey: model.toLocation!.locationName!,
                 textColor: AppConstants.lightBlackColor,
                 textWeight: FontWeight.w600,
                 textFontSize: AppConstants.normalFontSize,
