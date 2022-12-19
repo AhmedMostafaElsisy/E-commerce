@@ -39,4 +39,7 @@ class ApiKeys {
 
   ///location key
   static const String locationListKey = "/general/places";
+
+  ///Setting
+  static const String settingKey = "/general/settings";
 }

@@ -43,6 +43,9 @@ class DefaultSecuredStorage {
   static void setDoctorMap(String doctorMap) async {
     await _securedStorage.write(key: DbKeys.countryCode, value: doctorMap);
   }
+  static Future setSettingMap(String settingMap) async {
+    await _securedStorage.write(key: DbKeys.settingKey, value: settingMap);
+  }
 
   /// GETTERS
   ///
@@ -76,5 +79,8 @@ class DefaultSecuredStorage {
 
   static Future<String?> getCountryCode() async {
     return await _securedStorage.read(key: DbKeys.countryCode);
+  }
+  static Future<String?> getSetting() async {
+    return await _securedStorage.read(key: DbKeys.settingKey);
   }
 }
