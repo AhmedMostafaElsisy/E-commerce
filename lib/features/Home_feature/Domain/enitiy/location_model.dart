@@ -11,4 +11,9 @@ class LocationModel {
     return LocationModel(
         id: json["id"] ?? 0, locationName: json["name"] ?? '--');
   }
+
+  @override
+  String toString() {
+    return 'LocationModel{id: $id, locationName: $locationName}';
+  }
 }

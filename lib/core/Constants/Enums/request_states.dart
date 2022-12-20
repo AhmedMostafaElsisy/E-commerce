@@ -1,6 +1,7 @@
 enum RequestStates {
   newRequest,
   cancelRequest,
-  inProgressRequest,
+  pendingRequest,
+  startedRequest,
   finishedRequest
 }
