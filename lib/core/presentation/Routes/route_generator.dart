@@ -14,6 +14,7 @@ import '../../../features/Profile_feature/presentation/screens/edit_profile_scre
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
+import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/trip_feature/presentation/current_trip_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
@@ -58,15 +59,18 @@ class RouteGenerator {
       case RouteNames.editProfilePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const EditProfileScreen());
-        case RouteNames.setDestinationPageRoute:
+      case RouteNames.setDestinationPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const SetDestinationScreen());
-        case RouteNames.currentTripsPageRoute:
+      case RouteNames.currentTripsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const CurrentTripDetailsScreen());
-   case RouteNames.requestHistoryDetailsPageRoute:
+      case RouteNames.requestHistoryDetailsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page:  RequestHistoryDetails(routeArgument: args as RouteArgument));
+            page: RequestHistoryDetails(routeArgument: args as RouteArgument));
+      case RouteNames.ratingPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: RatingScreen(routeArgument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(

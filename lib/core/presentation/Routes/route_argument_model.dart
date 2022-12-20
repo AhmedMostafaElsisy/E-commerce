@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/Home_feature/Domain/enitiy/request_model.dart';
+
 class RouteArgument {
   String? id;
   String? sourcePage;
@@ -18,15 +20,18 @@ class RouteArgument {
   /// Functions
   Function()? onTap;
   String? otp;
+
   ///request id
   int? requestId;
+
+  ///request Model
+  RequestModel? requestModel;
 
   RouteArgument(
       {this.id,
       this.sourcePage = '',
       this.appBarWidget = const PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: SizedBox()),
+          preferredSize: Size.fromHeight(0), child: SizedBox()),
       this.mainBody,
       this.titleWidget,
       this.withBack = false,
@@ -36,7 +41,9 @@ class RouteArgument {
       this.imagePath,
       this.emailAddress,
       this.onTap,
-      this.otp,this.requestId});
+      this.requestModel,
+      this.otp,
+      this.requestId});
 
   @override
   String toString() {

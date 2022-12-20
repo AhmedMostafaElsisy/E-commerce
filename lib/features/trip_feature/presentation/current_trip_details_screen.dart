@@ -10,6 +10,7 @@ import '../../../core/Constants/Enums/request_states.dart';
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
+import '../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -50,7 +51,7 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
       appBar: CommonAppBar(
         withNotification: false,
         showBottomIcon: false,
-        withBack: true,
+        withBack: false,
         showLeadingWidget: true,
         customActionWidget: InkWell(
           onTap: () {
@@ -122,7 +123,14 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
           } else if (tripState is RequestDetailsSuccessState) {
             if (tripCtx.read<TripCubit>().requestModel.state ==
                 RequestStates.finishedRequest) {
-              ///TODO: navigate to rate request
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteNames.ratingPageRoute,
+                arguments: RouteArgument(
+                  requestModel: tripCtx.read<TripCubit>().requestModel,
+                ),
+                (route) => route.isFirst,
+              );
             }
           }
         },
