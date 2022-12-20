@@ -1,11 +1,10 @@
 import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
-import 'package:captien_omda_customer/features/Home_feature/presentation/logic/request_cubit/request_cubit_states.dart';
+import 'package:captien_omda_customer/features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
-
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared.dart';
 import '../../../../../core/Helpers/shared_texts.dart';
@@ -20,6 +19,7 @@ import '../../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../../core/presentation/Widgets/custom_alert_dialog.dart';
 import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
 import '../../../../Profile_feature/presentation/screens/common_pop_up_content.dart';
+import '../../../../trip_feature/logic/trip_cubit/trip_cubit_states.dart';
 import '../../../../trip_feature/presentation/trip_location_item.dart';
 import '../../logic/request_cubit/request_cubit.dart';
 
@@ -33,13 +33,13 @@ class RequestHistoryDetails extends StatefulWidget {
 
 class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
   late bool canClick;
-  late RequestCubit requestCubit;
+  late TripCubit requestCubit;
 
   @override
   void initState() {
     super.initState();
     canClick = true;
-    requestCubit = BlocProvider.of<RequestCubit>(context);
+    requestCubit = BlocProvider.of<TripCubit>(context);
     requestCubit.getRequestDetails(requestId:widget.routeArgument.requestId! );
   }
 
@@ -147,7 +147,7 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
-              child: BlocConsumer<RequestCubit,RequestCubitState>(
+              child: BlocConsumer<TripCubit,TripCubitState>(
                 listener: (requestCtx,requestState){
                   if(requestState is RequestDetailsFailedState){
                     checkUserAuth(
@@ -162,7 +162,7 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                     return CommonError(
                       errorMassage: requestState.error.errorMassage,
                       onTap: () {
-                        requestCtx.read<RequestCubit>().getRequestDetails(requestId: widget.routeArgument.requestId!);
+                        requestCtx.read<TripCubit>().getRequestDetails(requestId: widget.routeArgument.requestId!);
                       },
                       withButton: true,
                     );

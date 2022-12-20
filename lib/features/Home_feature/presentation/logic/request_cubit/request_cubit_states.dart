@@ -40,12 +40,3 @@ class RequestMoreHistoryFailedState extends RequestCubitState {
   RequestMoreHistoryFailedState(this.error);
 }
 
-class RequestDetailsLoadingState extends RequestCubitState {}
-
-class RequestDetailsSuccessState extends RequestCubitState {}
-
-class RequestDetailsFailedState extends RequestCubitState {
-  CustomError error;
-
-  RequestDetailsFailedState(this.error);
-}

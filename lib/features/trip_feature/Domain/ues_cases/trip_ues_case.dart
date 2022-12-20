@@ -29,4 +29,10 @@ class TripUesCases {
     return repositoryInterface.getCurrentRequest().then((value) => value.fold(
         (l) => left(l), (r) => right(RequestModel.fromJson(r.data))));
   }
+  Future<Either<CustomError, RequestModel>> callRequestDetails(
+      {required int requestId}) {
+    return repositoryInterface.getRequestDetails(requestId: requestId).then(
+            (value) => value.fold(
+                (l) => Left(l), (r) => right(RequestModel.fromJson(r.data))));
+  }
 }

@@ -83,20 +83,4 @@ class RequestCubit extends Cubit<RequestCubitState> {
     );
   }
 
-  ///get request details
-  getRequestDetails({required int requestId}) async {
-    emit(RequestDetailsLoadingState());
-
-    var result = await _requestUesCase.callRequestDetails(
-      requestId: requestId,
-    );
-
-    result.fold(
-      (failure) => emit(RequestDetailsFailedState(failure)),
-      (request) {
-        requestModel = request;
-        emit(RequestDetailsSuccessState());
-      },
-    );
-  }
 }

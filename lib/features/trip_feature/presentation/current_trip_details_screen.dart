@@ -132,7 +132,7 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    tripCtx.read<TripCubit>().getCurrentRequest();
+                    tripCtx.read<TripCubit>().getRequestDetails(requestId: tripCtx.read<TripCubit>().requestModel.id!);
                   },
                   child: CommonAssetSvgImageWidget(
                     imageString: "trip_car.svg",
