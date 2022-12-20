@@ -118,5 +118,6 @@
   "lblAddRate": "اضف تقييم",
   "lblHowWas": "كيف كان",
   "lblOption": "اختياري",
-  "lblSend": "إرسال"
+  "lblSend": "إرسال",
+  "lblRatingError": "هذا الخانة مطلوبة"
 }

@@ -38,6 +38,11 @@ import 'features/Set_Destination_feature/Data/repository/location_repository.dar
 import 'features/Set_Destination_feature/Domain/location_ues_cases/location_ues_cases.dart';
 import 'features/Set_Destination_feature/Domain/repository/location_interface.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
+import 'features/rating_feature/Data/data_scoures/remote_data_scoures.dart';
+import 'features/rating_feature/Data/repository/rating_repository.dart';
+import 'features/rating_feature/Domain/repository/repository_interface.dart';
+import 'features/rating_feature/Domain/ues_cases/rating_ues_cases.dart';
+import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/trip_feature/Domain/ues_cases/trip_ues_case.dart';
 import 'features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 
@@ -54,6 +59,7 @@ Future<void> init() async {
   sl.registerFactory(() => DestinationCubit(sl()));
   sl.registerFactory(() => TripCubit(sl()));
   sl.registerFactory(() => SettingCubit(sl()));
+  sl.registerFactory(() => RatingCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -63,10 +69,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProfileUesCases(sl()));
   sl.registerLazySingleton(() => LocationUesCases(sl()));
   sl.registerLazySingleton(() => TripUesCases(sl()));
+  sl.registerLazySingleton(() => RatingUesCases(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
 
   ///repo
   sl.registerLazySingleton<OtpRepositoryInterface>(() => OtpRepository(sl()));
+  sl.registerLazySingleton<RatingRepositoryInterface>(() => RatingRepository(sl()));
   sl.registerLazySingleton<PasswordRepositoryInterface>(
       () => PasswordRepository(sl()));
   sl.registerLazySingleton<RequestRepositoryInterface>(
@@ -102,6 +110,8 @@ Future<void> init() async {
       () => LocationRemoteDataSourceImpl());
   sl.registerLazySingleton<SettingRemoteDataSourceInterface>(
       () => SettingRemoteDataSourceImpl());
+  sl.registerLazySingleton<RatingRemoteDataSourceInterface>(
+      () => RatingRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

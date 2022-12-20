@@ -117,5 +117,6 @@
   "lblAddRate": "Add rating",
   "lblHowWas": "how was",
   "lblOption": "option",
-  "lblSend": "Send"
+  "lblSend": "Send",
+  "lblRatingError": "This filed is required"
 }

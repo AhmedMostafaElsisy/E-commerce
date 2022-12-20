@@ -11,7 +11,7 @@ Widget commonRatingBarBuilder(
     initialRating: initialRatingValue!,
     minRating: 0,
     direction: Axis.horizontal,
-    allowHalfRating: true,
+    allowHalfRating: false,
     itemCount: 5,
     itemPadding: const EdgeInsets.symmetric(horizontal: 7.5),
     itemSize: itemSize!,
