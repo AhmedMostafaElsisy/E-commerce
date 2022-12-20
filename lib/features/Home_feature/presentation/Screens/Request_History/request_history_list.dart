@@ -3,6 +3,7 @@ import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart'
 import 'package:captien_omda_customer/features/Home_feature/presentation/Screens/Request_History/request_history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/Constants/Enums/request_states.dart';
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../../core/presentation/Widgets/common_empty_widget.dart';
@@ -98,13 +99,19 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
                           } else {
                             return InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context,
-                                    RouteNames.requestHistoryDetailsPageRoute,
-                                    arguments: RouteArgument(
-                                        requestId: requestCtx
-                                            .read<RequestCubit>()
-                                            .requestHistoryList[index]
-                                            .id));
+                                if (requestCtx
+                                        .read<RequestCubit>()
+                                        .requestHistoryList[index]
+                                        .state! !=
+                                    RequestStates.cancelRequest) {
+                                  Navigator.pushNamed(context,
+                                      RouteNames.requestHistoryDetailsPageRoute,
+                                      arguments: RouteArgument(
+                                          requestId: requestCtx
+                                              .read<RequestCubit>()
+                                              .requestHistoryList[index]
+                                              .id));
+                                }
                               },
                               child: RequestHistoryItem(
                                 model: requestCtx

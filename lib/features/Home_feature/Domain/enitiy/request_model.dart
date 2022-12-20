@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/location_model.dart';
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/rateing_model.dart';
@@ -48,7 +47,6 @@ class RequestModel {
       }
     }
 
-    log("this the request model ${json}");
     return RequestModel(
       id: json["id"],
       price: json["price"] ?? 0.0,

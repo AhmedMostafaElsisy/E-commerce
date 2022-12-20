@@ -37,43 +37,48 @@ class RequestHistoryItem extends StatelessWidget {
           children: [
 
             ///driver data
-            Row(
-              children: [
-                commonCachedImageWidget(context, "imageUrl",
-                    height: 38, width: 38, isCircular: true, isProfile: true),
-                getSpaceWidth(AppConstants.smallPadding),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CommonTitleText(
-                      textKey: "Drivier name".getStringWithoutSpacings(),
-                      textFontSize: AppConstants.smallFontSize,
-                      textColor: AppConstants.lightBlackColor,
-                      textWeight: FontWeight.w600,
-                    ),
-                    getSpaceHeight(AppConstants.smallPadding / 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CommonTitleText(
-                          textKey: "4.3",
-                          textFontSize: AppConstants.smallFontSize - 2,
-                          textColor: AppConstants.mainTextColor,
-                          textWeight: FontWeight.w500,
-                        ),
-                        CommonAssetSvgImageWidget(
-                          imageString: "rate_star.svg",
-                          width: 16,
-                          height: 16,
-                          fit: BoxFit.cover,
-                          imageColor: AppConstants.starRatingColor,
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
+            if( model.driverModel !=null)...[
+              Row(
+                children: [
+                  commonCachedImageWidget(context,  model.driverModel!.image!,
+                      height: 38, width: 38, isCircular: true, isProfile: true),
+                  getSpaceWidth(AppConstants.smallPadding),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonTitleText(
+                        textKey: model.driverModel!.name!.getStringWithoutSpacings(),
+                        textFontSize: AppConstants.smallFontSize,
+                        textColor: AppConstants.lightBlackColor,
+                        textWeight: FontWeight.w600,
+                      ),
+                      getSpaceHeight(AppConstants.smallPadding / 2),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          CommonTitleText(
+                            textKey:model.driverModel!.rate!,
+                            textFontSize: AppConstants.smallFontSize - 2,
+                            textColor: AppConstants.mainTextColor,
+                            textWeight: FontWeight.w500,
+                          ),
+                          const    CommonAssetSvgImageWidget(
+                            imageString: "rate_star.svg",
+                            width: 16,
+                            height: 16,
+                            fit: BoxFit.cover,
+                            imageColor: AppConstants.starRatingColor,
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+
+            ]else...[
+              const SizedBox(),
+            ],
 
             ///trip price
             Row(
