@@ -119,6 +119,11 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
               context: tripCtx,
               title: tripState.error.errorMassage!,
             );
+          } else if (tripState is RequestDetailsSuccessState) {
+            if (tripCtx.read<TripCubit>().requestModel.state ==
+                RequestStates.finishedRequest) {
+              ///TODO: navigate to rate request
+            }
           }
         },
         builder: (tripCtx, tripState) {
@@ -132,7 +137,8 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    tripCtx.read<TripCubit>().getRequestDetails(requestId: tripCtx.read<TripCubit>().requestModel.id!);
+                    tripCtx.read<TripCubit>().getRequestDetails(
+                        requestId: tripCtx.read<TripCubit>().requestModel.id!);
                   },
                   child: CommonAssetSvgImageWidget(
                     imageString: "trip_car.svg",
