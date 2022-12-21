@@ -83,7 +83,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           if (withNotification)
             InkWell(
               onTap: () {
-                ///Todo: add navigation for notification page
+
                 Navigator.pushNamed(context, RouteNames.notificationPageRoute);
               },
               child: const Padding(

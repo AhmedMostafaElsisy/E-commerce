@@ -42,29 +42,30 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
     return Scaffold(
       backgroundColor: AppConstants.lightWhiteColor,
       appBar: CommonAppBar(
-        centerTitle: false,
+        centerTitle: true,
         titleWidget: CommonTitleText(
           textKey: AppLocalizations.of(context)!.lblNotification,
-          textFontSize: AppConstants.largeFontSize,
-          textWeight: FontWeight.w500,
+          textFontSize: AppConstants.normalFontSize,
+          textWeight: FontWeight.w700,
           textColor: AppConstants.lightBlackColor,
           textAlignment: TextAlign.start,
         ),
-        withBack: true,
         withNotification: false,
         showBottomIcon: false,
-        customActionWidget: Center(
-          child: InkWell(
-              onTap: () {
-                notificationCubit.clearAllNotificationList();
-              },
-              child: CommonTitleText(
-                textKey: AppLocalizations.of(context)!.lblClearAll,
-                textWeight: FontWeight.w400,
-                textFontSize: AppConstants.normalFontSize,
-                textColor: AppConstants.mainColor,
-              )),
-        ),
+        withBack: true,
+        showLeadingWidget: true,
+        // customActionWidget: Center(
+        //   child: InkWell(
+        //       onTap: () {
+        //         notificationCubit.clearAllNotificationList();
+        //       },
+        //       child: CommonTitleText(
+        //         textKey: AppLocalizations.of(context)!.lblClearAll,
+        //         textWeight: FontWeight.w400,
+        //         textFontSize: AppConstants.normalFontSize,
+        //         textColor: AppConstants.mainColor,
+        //       )),
+        // ),
       ),
       body: BlocConsumer<NotificationCubit, NotificationStates>(
           listener: (notificationCtx, notificationState) {
