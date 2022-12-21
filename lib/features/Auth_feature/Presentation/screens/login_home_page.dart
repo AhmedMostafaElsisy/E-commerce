@@ -1,3 +1,6 @@
+
+import '../../../../core/Constants/Enums/exception_enums.dart';
+import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -17,6 +20,8 @@ import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
+import '../logic/OTP_Cubit/otp_cubit.dart';
+import '../logic/OTP_Cubit/otp_states.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({Key? key}) : super(key: key);
@@ -63,6 +68,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
             BlocProvider.of<BottomNavCubit>(context).selectItem(0);
           }
           if (loginState is UserLoginErrorState) {
+            if (loginState.error!.type ==
+                CustomStatusCodeErrorType.unVerified) {
+              BlocProvider.of<OtpCubit>(context)
+                  .resendOTP(email: emailController.text);
+            }
             showSnackBar(
               context: loginCtx,
               title: loginState.error!.errorMassage!,
@@ -105,7 +115,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                   Radius.circular(AppConstants.borderRadius),
                             )),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.pagePadding) +
+                                horizontal: AppConstants.pagePadding) +
                             EdgeInsets.only(
                               bottom: MediaQuery.of(loginCtx).viewInsets.bottom,
                             ),
@@ -194,18 +204,20 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         height: getWidgetHeight(30),
                                         child: Center(
                                           child: Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 15),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 15),
                                               child: CommonAssetSvgImageWidget(
-                                                  imageString:
-                                                  hidePassword
+                                                  imageString: hidePassword
                                                       ? "eye_open.svg"
                                                       : "eye_close.svg",
                                                   height: 30,
                                                   width: 30,
                                                   fit: BoxFit.contain)),
                                         ),
-                                      ),                                    ),
+                                      ),
+                                    ),
                                     keyboardType: TextInputType.text,
                                     minLines: 1,
                                     maxLines: 1,
@@ -273,27 +285,51 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                       AppConstants.pagePaddingDouble),
 
                                   ///login button
-                                  CommonGlobalButton(
-                                    height: 48,
-                                    buttonBackgroundColor:
-                                        AppConstants.mainColor,
-                                    isEnable: emailController.text.isNotEmpty &&
-                                        passwordController.text.isNotEmpty,
-                                    isLoading:
-                                        loginState is UserLoginLoadingState,
-                                    buttonTextSize: AppConstants.normalFontSize,
-                                    buttonTextFontWeight: FontWeight.w700,
-                                    buttonText:
-                                        AppLocalizations.of(context)!.lblLogin,
-                                    onPressedFunction: () {
-                                      if (formKey.currentState!.validate()) {
-                                        FocusScope.of(context)
-                                            .requestFocus(FocusNode());
-                                        loginCtx.read<LoginCubit>().login(
-                                            email: emailController.text,
-                                            password: passwordController.text,
-                                            token: SharedText.deviceToken);
+                                  BlocConsumer<OtpCubit, OtpStates>(
+                                    listener: (otpCtx, otpState) {
+                                      if(otpState is ResendOtpSuccessState){
+                                        Navigator.pushReplacementNamed(
+                                            context, RouteNames.verificationCodePageRoute,
+                                            arguments: RouteArgument(
+                                                emailAddress: emailController.text,
+                                                otp: otpState.otp));
+                                      }else if (otpState is OtpErrorState){
+                                        showSnackBar(
+                                          context: otpCtx,
+                                          title: otpState.error!.errorMassage!,
+                                        );
                                       }
+                                    },
+                                    builder: (otpCtx, otpState) {
+                                      return CommonGlobalButton(
+                                        height: 48,
+                                        buttonBackgroundColor:
+                                            AppConstants.mainColor,
+                                        isEnable: emailController
+                                                .text.isNotEmpty &&
+                                            passwordController.text.isNotEmpty,
+                                        isLoading: loginState
+                                                is UserLoginLoadingState ||
+                                            otpState is ResendOtpLoadingState,
+                                        buttonTextSize:
+                                            AppConstants.normalFontSize,
+                                        buttonTextFontWeight: FontWeight.w700,
+                                        buttonText:
+                                            AppLocalizations.of(context)!
+                                                .lblLogin,
+                                        onPressedFunction: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            FocusScope.of(context)
+                                                .requestFocus(FocusNode());
+                                            loginCtx.read<LoginCubit>().login(
+                                                email: emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                                token: SharedText.deviceToken);
+                                          }
+                                        },
+                                      );
                                     },
                                   ),
 
