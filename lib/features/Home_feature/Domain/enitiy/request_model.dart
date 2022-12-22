@@ -46,7 +46,6 @@ class RequestModel {
           return RequestStates.cancelRequest;
       }
     }
-
     return RequestModel(
       id: json["id"],
       price: json["price"] ?? 0.0,
