@@ -57,7 +57,7 @@ class RequestHistoryItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:  [
                           CommonTitleText(
-                            textKey:model.driverModel!.rate!,
+                            textKey:double.tryParse(model.driverModel!.rate!)!.toStringAsFixed(2),
                             textFontSize: AppConstants.smallFontSize - 2,
                             textColor: AppConstants.mainTextColor,
                             textWeight: FontWeight.w500,

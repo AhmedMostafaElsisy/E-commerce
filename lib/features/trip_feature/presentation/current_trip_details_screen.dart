@@ -120,6 +120,18 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
               context: tripCtx,
               title: tripState.error.errorMassage!,
             );
+          } else if (tripState is ChangeStatesTripFailedState) {
+            checkUserAuth(context: tripCtx, errorType: tripState.error.type);
+            showSnackBar(
+              context: tripCtx,
+              title: tripState.error.errorMassage!,
+            );
+          } else if (tripState is RequestDetailsFailedState) {
+            checkUserAuth(context: tripCtx, errorType: tripState.error.type);
+            showSnackBar(
+              context: tripCtx,
+              title: tripState.error.errorMassage!,
+            );
           } else if (tripState is RequestDetailsSuccessState) {
             if (tripCtx.read<TripCubit>().requestModel.state ==
                 RequestStates.finishedRequest) {

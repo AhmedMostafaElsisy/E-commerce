@@ -31,7 +31,9 @@ class RatingRemoteDataSourceImpl extends RatingRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('driver_id', driverId.toString()));
       staticData.fields.add(MapEntry('request_id', requestId.toString()));
       staticData.fields.add(MapEntry('rate', rate.toString()));
-      staticData.fields.add(MapEntry('comment', comment.toString()));
+      if (comment.isNotEmpty) {
+        staticData.fields.add(MapEntry('comment', comment.toString()));
+      }
       log("this the rating form ${staticData.fields}");
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);

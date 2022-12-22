@@ -61,226 +61,234 @@ class _RatingScreenState extends State<RatingScreen> {
           textFontSize: AppConstants.normalFontSize,
         ),
       ),
-      body: Column(children: [
+      body: GestureDetector(
+        onTap: (){
+          FocusScope.of(context)
+              .requestFocus(FocusNode());
+        },
+        child: Column(children: [
 
-        ///Spacer
-        getSpaceHeight(20),
+          ///Spacer
+          getSpaceHeight(20),
 
-        ///Rating image
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CommonAssetSvgImageWidget(
-              imageString: "rate_icon.svg",
-              height: 205,
-              width: SharedText.screenWidth-60,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
+          ///Rating image
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CommonAssetSvgImageWidget(
+                imageString: "rate_icon.svg",
+                height: 205,
+                width: SharedText.screenWidth-60,
+                fit: BoxFit.contain,
+              ),
+            ],
+          ),
 
-        ///Spacer
-        getSpaceHeight(25),
-        Container(
-          width: SharedText.screenWidth,
-          height: getWidgetHeight(478),
-          decoration: BoxDecoration(
-              color: AppConstants.lightWhiteColor,
-              boxShadow: [
-                BoxShadow(
-                    color: AppConstants.lightBlackColor.withOpacity(0.2),
-                    blurRadius: 10.0,
-                    offset: const Offset(0, 1))
-              ],
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(AppConstants.borderRadius),
-                topLeft: Radius.circular(AppConstants.borderRadius),
-              )),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: getWidgetHeight(AppConstants.pagePadding),
-                vertical: getWidgetWidth(AppConstants.pagePadding)) +
-                EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              child: BlocConsumer<RatingCubit, RatingCubitStates>(
-                listener: (ratingCtx, ratingState) {
-                  if(ratingState is RatingSuccessStates){
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouteNames.mainBottomNavPageRoute,
-                          (route) => false,
-                    );
-                    BlocProvider.of<BottomNavCubit>(context).selectItem(0);
-                  }else if (ratingState is RatingFailedStates){
-                    checkUserAuth(
-                        context: ratingCtx, errorType: ratingState.error.type);
-                    showSnackBar(
-                      context: ratingCtx,
-                      title: ratingState.error.errorMassage!,
-                    );
-                  }
-                },
-                builder: (ratingCtx, ratingState) {
-                  return Form(
-                    key: formKey,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+          ///Spacer
+          getSpaceHeight(25),
+          Container(
+            width: SharedText.screenWidth,
+            height: getWidgetHeight(478),
+            decoration: BoxDecoration(
+                color: AppConstants.lightWhiteColor,
+                boxShadow: [
+                  BoxShadow(
+                      color: AppConstants.lightBlackColor.withOpacity(0.2),
+                      blurRadius: 10.0,
+                      offset: const Offset(0, 1))
+                ],
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(AppConstants.borderRadius),
+                  topLeft: Radius.circular(AppConstants.borderRadius),
+                )),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getWidgetHeight(AppConstants.pagePadding),
+                  vertical: getWidgetWidth(AppConstants.pagePadding)) +
+                  EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.zero,
+                child: BlocConsumer<RatingCubit, RatingCubitStates>(
+                  listener: (ratingCtx, ratingState) {
+                    if(ratingState is RatingSuccessStates){
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.mainBottomNavPageRoute,
+                            (route) => false,
+                      );
+                      BlocProvider.of<BottomNavCubit>(context).selectItem(0);
+                    }else if (ratingState is RatingFailedStates){
+                      checkUserAuth(
+                          context: ratingCtx, errorType: ratingState.error.type);
+                      showSnackBar(
+                        context: ratingCtx,
+                        title: ratingState.error.errorMassage!,
+                      );
+                    }
+                  },
+                  builder: (ratingCtx, ratingState) {
+                    return Form(
+                      key: formKey,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
 
-                          ///total
-                          CommonTitleText(
-                            textKey: AppLocalizations.of(context)!.lblTotal,
-                            textColor: AppConstants.lightBlackColor,
-                            textWeight: FontWeight.w700,
-                            textFontSize: AppConstants.normalFontSize,
-                          ),
+                            ///total
+                            CommonTitleText(
+                              textKey: AppLocalizations.of(context)!.lblTotal,
+                              textColor: AppConstants.lightBlackColor,
+                              textWeight: FontWeight.w700,
+                              textFontSize: AppConstants.normalFontSize,
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///trip price
-                          CommonTitleText(
-                            textKey:
-                            "${widget.routeArgument.requestModel!
-                                .price!} ${AppLocalizations.of(context)!.lblEGP}",
-                            textColor: AppConstants.lightBorderColor,
-                            textWeight: FontWeight.w700,
-                            textFontSize: AppConstants.titleFontSize,
-                          ),
+                            ///trip price
+                            CommonTitleText(
+                              textKey:
+                              "${widget.routeArgument.requestModel!
+                                  .price!} ${AppLocalizations.of(context)!.lblEGP}",
+                              textColor: AppConstants.lightBorderColor,
+                              textWeight: FontWeight.w700,
+                              textFontSize: AppConstants.titleFontSize,
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///spacer
-                          const Divider(
-                            color: AppConstants.lightGrayColor,
-                            thickness: 1,
-                          ),
+                            ///spacer
+                            const Divider(
+                              color: AppConstants.lightGrayColor,
+                              thickness: 1,
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///add rating title
-                          CommonTitleText(
-                            textKey: AppLocalizations.of(context)!.lblAddRating,
-                            textColor: AppConstants.lightBlackColor,
-                            textWeight: FontWeight.w700,
-                            textFontSize: AppConstants.normalFontSize,
-                          ),
+                            ///add rating title
+                            CommonTitleText(
+                              textKey: AppLocalizations.of(context)!.lblAddRating,
+                              textColor: AppConstants.lightBlackColor,
+                              textWeight: FontWeight.w700,
+                              textFontSize: AppConstants.normalFontSize,
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///how was driver
-                          CommonTitleText(
-                            textKey:
-                            "${AppLocalizations.of(context)!.lblHowWas} ${widget
-                                .routeArgument.requestModel!.driverModel!.name!
-                                .getStringWithoutSpacings()} ؟ ",
-                            textColor: AppConstants.lightRedColor,
-                            textWeight: FontWeight.w600,
-                            textFontSize: AppConstants.normalFontSize,
-                          ),
+                            ///how was driver
+                            CommonTitleText(
+                              textKey:
+                              "${AppLocalizations.of(context)!.lblHowWas} ${widget
+                                  .routeArgument.requestModel!.driverModel!.name!
+                                  .getStringWithoutSpacings()} ؟ ",
+                              textColor: AppConstants.lightRedColor,
+                              textWeight: FontWeight.w600,
+                              textFontSize: AppConstants.normalFontSize,
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///rating
-                          commonRatingBarBuilder(
-                            onRatingUpdate: (rating) {
-                              setState(() {
-                                currentRating = rating;
-                              });
-                            },
-                          ),
+                            ///rating
+                            commonRatingBarBuilder(
+                              onRatingUpdate: (rating) {
+                                setState(() {
+                                  currentRating = rating;
+                                });
+                              },
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
-                          CommonTextFormField(
-                            controller: ratingController,
-                            radius: AppConstants.smallBorderRadius * 2,
-                            filledColor: AppConstants.backGroundColor,
-                            hintKey:currentRating >=3?AppLocalizations.of(context)!
-                                .lblAddRate :
-                            "${AppLocalizations.of(context)!
-                                .lblAddRate} (${AppLocalizations.of(context)!
-                                .lblOption})",
-                            keyboardType: TextInputType.emailAddress,
-                            labelHintStyle: AppConstants.mainTextColor,
-                            contentPaddingHorizontal: getWidgetWidth(16),
-                            contentPaddingVertical: getWidgetHeight(12),
-                            withSuffixIcon: false,
-                            maxLines: 5,
-                            minLines: 5,
-                            validator: (value) {
-                              if (value!.isEmpty &(currentRating >=3)) {
-                                return AppLocalizations.of(context)!
-                                    .lblRatingError;
-                              } else {
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
+                            CommonTextFormField(
+                              controller: ratingController,
+                              radius: AppConstants.smallBorderRadius * 2,
+                              filledColor: AppConstants.backGroundColor,
+                              hintKey:currentRating <=3?AppLocalizations.of(context)!
+                                  .lblAddRate :
+                              "${AppLocalizations.of(context)!
+                                  .lblAddRate} (${AppLocalizations.of(context)!
+                                  .lblOption})",
+                              keyboardType: TextInputType.emailAddress,
+                              labelHintStyle: AppConstants.mainTextColor,
+                              contentPaddingHorizontal: getWidgetWidth(16),
+                              contentPaddingVertical: getWidgetHeight(12),
+                              withSuffixIcon: false,
+                              maxLines: 5,
+                              minLines: 5,
+                              validator: (value) {
+                                if (value!.isEmpty &(currentRating <=3)) {
+                                  return AppLocalizations.of(context)!
+                                      .lblRatingError;
+                                } else {
+                                  return null;
+                                }
+                              },
+                              onChanged: (value) {
+                                setState(() {});
                                 return null;
-                              }
-                            },
-                            onChanged: (value) {
-                              setState(() {});
-                              return null;
-                            },
-                          ),
+                              },
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.pagePadding),
 
-                          ///send rating
-                          CommonGlobalButton(
-                            height: 48,
-                            buttonBackgroundColor: AppConstants.mainColor,
-                            isEnable: currentRating != 0.0,
-                            isLoading: ratingState is RatingLoadingStates,
-                            buttonTextSize: AppConstants.normalFontSize,
-                            buttonTextFontWeight: FontWeight.w700,
-                            buttonText: AppLocalizations.of(context)!.lblSend,
-                            onPressedFunction: () {
-                             if(formKey.currentState!.validate()){
-                               ratingCtx.read<RatingCubit>().addRating(
-                                   driverId: widget.routeArgument.requestModel!
-                                       .driverModel!.id!,
-                                   requestId: widget.routeArgument.requestModel!
-                                       .id!,
-                                   rate: currentRating.toInt(),
-                                   comment: ratingController.text);
-                             }
-                            },
-                          ),
+                            ///send rating
+                            CommonGlobalButton(
+                              height: 48,
+                              buttonBackgroundColor: AppConstants.mainColor,
+                              isEnable: currentRating != 0.0,
+                              isLoading: ratingState is RatingLoadingStates,
+                              buttonTextSize: AppConstants.normalFontSize,
+                              buttonTextFontWeight: FontWeight.w700,
+                              buttonText: AppLocalizations.of(context)!.lblSend,
+                              onPressedFunction: () {
+                               if(formKey.currentState!.validate()){
+                                 FocusScope.of(context)
+                                     .requestFocus(FocusNode());
+                                 ratingCtx.read<RatingCubit>().addRating(
+                                     driverId: widget.routeArgument.requestModel!
+                                         .driverModel!.id!,
+                                     requestId: widget.routeArgument.requestModel!
+                                         .id!,
+                                     rate: currentRating.toInt(),
+                                     comment: ratingController.text);
+                               }
+                              },
+                            ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.smallPadding),
+                            ///spacer
+                            getSpaceHeight(AppConstants.smallPadding),
 
-                          ///cancel
-                          CommonGlobalButton(
-                            height: 48,
-                            buttonBackgroundColor: AppConstants.lightWhiteColor,
-                            buttonTextColor: AppConstants.mainTextColor,
-                            showBorder: false,
-                            buttonTextSize: AppConstants.normalFontSize,
-                            buttonTextFontWeight: FontWeight.w700,
-                            buttonText: AppLocalizations.of(context)!.lblCancel,
-                            shadowBackgroundColor: AppConstants.lightWhiteColor,
-                            elevation: 0,
-                            onPressedFunction: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ]),
-                  );
-                },
+                            ///cancel
+                            CommonGlobalButton(
+                              height: 48,
+                              buttonBackgroundColor: AppConstants.lightWhiteColor,
+                              buttonTextColor: AppConstants.mainTextColor,
+                              showBorder: false,
+                              buttonTextSize: AppConstants.normalFontSize,
+                              buttonTextFontWeight: FontWeight.w700,
+                              buttonText: AppLocalizations.of(context)!.lblCancel,
+                              shadowBackgroundColor: AppConstants.lightWhiteColor,
+                              elevation: 0,
+                              onPressedFunction: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ]),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        )
-      ]),
+          )
+        ]),
+      ),
     );
   }
 }

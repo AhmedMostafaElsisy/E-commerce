@@ -158,7 +158,9 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                 },
                 builder: (requestCtx, requestState) {
                   if (requestState is RequestDetailsLoadingState) {
-                    return const CommonLoadingWidget();
+                    return SizedBox(
+                        height: SharedText.screenHeight * 0.4,
+                        child: const CommonLoadingWidget());
                   } else if (requestState is RequestDetailsFailedState) {
                     return CommonError(
                       errorMassage: requestState.error.errorMassage,
@@ -189,10 +191,16 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                           model: requestCtx.read<TripCubit>().requestModel,
                         ),
                         if (requestCtx
-                                .read<TripCubit>()
-                                .requestModel
-                                .rateModel !=
-                            null) ...[
+                                    .read<TripCubit>()
+                                    .requestModel
+                                    .rateModel !=
+                                null &&
+                            requestCtx
+                                    .read<TripCubit>()
+                                    .requestModel
+                                    .rateModel!
+                                    .comment !=
+                                null) ...[
                           ///spacer
                           getSpaceHeight(AppConstants.pagePadding),
                           Row(
@@ -284,32 +292,33 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
                         if (requestCtx
-                            .read<TripCubit>()
-                            .requestModel
-                            .rateModel ==
+                                .read<TripCubit>()
+                                .requestModel
+                                .rateModel ==
                             null)
-                        ///add rating
-                        CommonGlobalButton(
-                          height: 48,
-                          buttonBackgroundColor: AppConstants.lightWhiteColor,
-                          buttonTextColor: AppConstants.mainColor,
-                          borderColor: AppConstants.mainColor,
-                          showBorder: true,
-                          buttonTextSize: AppConstants.normalFontSize,
-                          buttonTextFontWeight: FontWeight.w700,
-                          buttonText:
-                              AppLocalizations.of(context)!.lblAddRating,
-                          onPressedFunction: () {
-                            Navigator.pushNamed(
-                              context,
-                              RouteNames.ratingPageRoute,
-                              arguments: RouteArgument(
-                                requestModel:
-                                    requestCtx.read<TripCubit>().requestModel,
-                              ),
-                            );
-                          },
-                        ),
+
+                          ///add rating
+                          CommonGlobalButton(
+                            height: 48,
+                            buttonBackgroundColor: AppConstants.lightWhiteColor,
+                            buttonTextColor: AppConstants.mainColor,
+                            borderColor: AppConstants.mainColor,
+                            showBorder: true,
+                            buttonTextSize: AppConstants.normalFontSize,
+                            buttonTextFontWeight: FontWeight.w700,
+                            buttonText:
+                                AppLocalizations.of(context)!.lblAddRating,
+                            onPressedFunction: () {
+                              Navigator.pushNamed(
+                                context,
+                                RouteNames.ratingPageRoute,
+                                arguments: RouteArgument(
+                                  requestModel:
+                                      requestCtx.read<TripCubit>().requestModel,
+                                ),
+                              );
+                            },
+                          ),
 
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
