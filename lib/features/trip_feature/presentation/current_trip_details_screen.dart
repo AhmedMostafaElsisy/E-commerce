@@ -108,13 +108,8 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
       ),
       body: BlocConsumer<TripCubit, TripCubitState>(
         listener: (tripCtx, tripState) {
-          if (tripState is ChangeStatesTripSuccessState) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              RouteNames.mainBottomNavPageRoute,
-              (route) => false,
-            );
-          } else if (tripState is CurrentTripFailedState) {
+
+         if (tripState is CurrentTripFailedState) {
             checkUserAuth(context: tripCtx, errorType: tripState.error.type);
             showSnackBar(
               context: tripCtx,

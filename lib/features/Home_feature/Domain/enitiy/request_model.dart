@@ -43,7 +43,7 @@ class RequestModel {
         case "started":
           return RequestStates.startedRequest;
         default:
-          return RequestStates.cancelRequest;
+          return RequestStates.initial;
       }
     }
     return RequestModel(
