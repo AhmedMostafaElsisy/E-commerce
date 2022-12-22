@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     requestCubit = BlocProvider.of<RequestCubit>(context);
     settingCubit = BlocProvider.of<SettingCubit>(context);
     tripCubit = BlocProvider.of<TripCubit>(context);
-    requestCubit.getHomeRequest();
     settingCubit.getSetting();
     tripCubit.getCurrentRequest();
   }
@@ -85,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                     horizontal: getWidgetHeight(AppConstants.pagePadding),
                     vertical: getWidgetWidth(AppConstants.pagePadding)),
-                child: BlocListener<TripCubit, TripCubitState>(
+                child: BlocConsumer<TripCubit, TripCubitState>(
                   listener: (tripCtx, tripStates) {
                     if (tripStates is CurrentTripSuccessState) {
                       Navigator.pushNamed(
@@ -100,147 +99,156 @@ class _HomePageState extends State<HomePage> {
                     } else if (tripStates is TripSuccessState) {
                       Navigator.pushNamed(
                           context, RouteNames.currentTripsPageRoute);
+                    } else if (tripStates is CurrentTripFailedState) {
+                      requestCubit.getHomeRequest();
                     }
                   },
-                  child: BlocConsumer<RequestCubit, RequestCubitState>(
-                    listener: (requestCtx, requestState) {
-                      if (requestState is RequestHomeFailedState) {
-                        checkUserAuth(
-                            context: requestCtx,
-                            errorType: requestState.error.type);
-                      }
-                    },
-                    builder: (requestCtx, requestState) {
-                      if (requestState is RequestHomeLoadingState) {
-                        return const CommonLoadingWidget();
-                      } else if (requestState is RequestHomeFailedState) {
-                        return CommonError(
-                          errorMassage: requestState.error.errorMassage,
-                          onTap: () {
-                            requestCubit.getHomeRequest();
-                          },
-                          withButton: true,
-                        );
-                      } else {
-                        return Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ///select destination
-                              CommonTitleText(
-                                textKey: AppLocalizations.of(context)!
-                                    .lblSelectDestination,
-                                textColor: AppConstants.lightBlackColor,
-                                textWeight: FontWeight.w700,
-                                textFontSize: AppConstants.smallFontSize,
-                              ),
+                  builder: (tripCtx, tripStates) {
+                    return BlocConsumer<RequestCubit, RequestCubitState>(
+                      listener: (requestCtx, requestState) {
+                        if (requestState is RequestHomeFailedState) {
+                          checkUserAuth(
+                              context: requestCtx,
+                              errorType: requestState.error.type);
+                        }
+                      },
+                      builder: (requestCtx, requestState) {
+                        if (requestState is RequestHomeLoadingState ||
+                            tripStates is TripLoadingState ||
+                            tripStates is CurrentTripLoadingState) {
+                          return const CommonLoadingWidget();
+                        } else if (requestState is RequestHomeFailedState) {
+                          return CommonError(
+                            errorMassage: requestState.error.errorMassage,
+                            onTap: () {
+                              requestCubit.getHomeRequest();
+                            },
+                            withButton: true,
+                          );
+                        } else {
+                          return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ///select destination
+                                CommonTitleText(
+                                  textKey: AppLocalizations.of(context)!
+                                      .lblSelectDestination,
+                                  textColor: AppConstants.lightBlackColor,
+                                  textWeight: FontWeight.w700,
+                                  textFontSize: AppConstants.smallFontSize,
+                                ),
 
-                              ///spacer
-                              getSpaceHeight(AppConstants.pagePadding),
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePadding),
 
-                              ///where to go
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context,
-                                      RouteNames.setDestinationPageRoute);
-                                },
-                                child: Container(
-                                  height: getWidgetHeight(72),
-                                  width: SharedText.screenWidth,
-                                  decoration: BoxDecoration(
-                                    color: AppConstants.backGroundColor,
-                                    borderRadius: BorderRadius.circular(
-                                        AppConstants.containerBorderRadius),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: AppConstants.lightBlackColor
-                                              .withOpacity(0.2),
-                                          blurRadius: 10.0,
-                                          offset: const Offset(0, 1))
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: getWidgetHeight(
-                                            AppConstants.pagePadding),
-                                        vertical: getWidgetWidth(
-                                            AppConstants.pagePadding + 4)),
-                                    child: Row(children: [
-                                      const CommonAssetSvgImageWidget(
-                                        imageString: "location_from_icon.svg",
-                                        height: 45,
-                                        width: 45,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      CommonTitleText(
-                                        textKey: AppLocalizations.of(context)!
-                                            .lblWhereToGo,
-                                        textColor: AppConstants.lightBlackColor,
-                                        textWeight: FontWeight.w700,
-                                        textFontSize:
-                                            AppConstants.normalFontSize,
-                                      ),
-                                    ]),
+                                ///where to go
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context,
+                                        RouteNames.setDestinationPageRoute);
+                                  },
+                                  child: Container(
+                                    height: getWidgetHeight(72),
+                                    width: SharedText.screenWidth,
+                                    decoration: BoxDecoration(
+                                      color: AppConstants.backGroundColor,
+                                      borderRadius: BorderRadius.circular(
+                                          AppConstants.containerBorderRadius),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: AppConstants.lightBlackColor
+                                                .withOpacity(0.2),
+                                            blurRadius: 10.0,
+                                            offset: const Offset(0, 1))
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: getWidgetHeight(
+                                              AppConstants.pagePadding),
+                                          vertical: getWidgetWidth(
+                                              AppConstants.pagePadding + 4)),
+                                      child: Row(children: [
+                                        const CommonAssetSvgImageWidget(
+                                          imageString: "location_from_icon.svg",
+                                          height: 45,
+                                          width: 45,
+                                          fit: BoxFit.contain,
+                                        ),
+                                        CommonTitleText(
+                                          textKey: AppLocalizations.of(context)!
+                                              .lblWhereToGo,
+                                          textColor:
+                                              AppConstants.lightBlackColor,
+                                          textWeight: FontWeight.w700,
+                                          textFontSize:
+                                              AppConstants.normalFontSize,
+                                        ),
+                                      ]),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              if (requestState is RequestHomeEmptyState) ...[
-                                ///Spacer
-                                getSpaceHeight(AppConstants.pagePaddingDouble*2),
-                                EmptyScreen(
-                                    imageString: "empty_list.svg",
-                                    titleKey: AppLocalizations.of(context)!
-                                        .lblNoTripFound,
-                                    description: AppLocalizations.of(context)!
-                                        .lblNoTripFoundHomeDesc,
-                                    imageHeight: 56,
-                                    imageWidth: 56)
-                              ] else ...[
-                                ///Spacer
-                                getSpaceHeight(AppConstants.pagePaddingDouble),
-                                Expanded(
-                                  child: ListView.separated(
-                                      shrinkWrap: true,
-                                      padding: EdgeInsets.zero,
-                                      physics: const BouncingScrollPhysics(),
-                                      itemBuilder: (context, index) {
-                                        return RequestItemWidget(
-                                          mainTitle: requestCtx
-                                              .read<RequestCubit>()
-                                              .requestList[index]
-                                              .fromLocation!
-                                              .locationName!,
-                                          subTitle: requestCtx
-                                              .read<RequestCubit>()
-                                              .requestList[index]
-                                              .toLocation!
-                                              .locationName!,
-                                          onReorderClick: () {
-                                            tripCubit.startTrip(
-                                                fromModel: requestCtx
-                                                    .read<RequestCubit>()
-                                                    .requestList[index]
-                                                    .fromLocation!,
-                                                toModel: requestCtx
-                                                    .read<RequestCubit>()
-                                                    .requestList[index]
-                                                    .toLocation!);
-                                          },
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return getSpaceHeight(
-                                            AppConstants.pagePadding);
-                                      },
-                                      itemCount: requestCtx
-                                          .read<RequestCubit>()
-                                          .requestList
-                                          .length),
-                                ),
-                              ]
-                            ]);
-                      }
-                    },
-                  ),
+                                if (requestState is RequestHomeEmptyState) ...[
+                                  ///Spacer
+                                  getSpaceHeight(
+                                      AppConstants.pagePaddingDouble * 2),
+                                  EmptyScreen(
+                                      imageString: "empty_list.svg",
+                                      titleKey: AppLocalizations.of(context)!
+                                          .lblNoTripFound,
+                                      description: AppLocalizations.of(context)!
+                                          .lblNoTripFoundHomeDesc,
+                                      imageHeight: 56,
+                                      imageWidth: 56)
+                                ] else ...[
+                                  ///Spacer
+                                  getSpaceHeight(
+                                      AppConstants.pagePaddingDouble),
+                                  Expanded(
+                                    child: ListView.separated(
+                                        shrinkWrap: true,
+                                        padding: EdgeInsets.zero,
+                                        physics: const BouncingScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return RequestItemWidget(
+                                            mainTitle: requestCtx
+                                                .read<RequestCubit>()
+                                                .requestList[index]
+                                                .fromLocation!
+                                                .locationName!,
+                                            subTitle: requestCtx
+                                                .read<RequestCubit>()
+                                                .requestList[index]
+                                                .toLocation!
+                                                .locationName!,
+                                            onReorderClick: () {
+                                              tripCubit.startTrip(
+                                                  fromModel: requestCtx
+                                                      .read<RequestCubit>()
+                                                      .requestList[index]
+                                                      .fromLocation!,
+                                                  toModel: requestCtx
+                                                      .read<RequestCubit>()
+                                                      .requestList[index]
+                                                      .toLocation!);
+                                            },
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return getSpaceHeight(
+                                              AppConstants.pagePadding);
+                                        },
+                                        itemCount: requestCtx
+                                            .read<RequestCubit>()
+                                            .requestList
+                                            .length),
+                                  ),
+                                ]
+                              ]);
+                        }
+                      },
+                    );
+                  },
                 ),
               ),
             )

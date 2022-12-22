@@ -73,7 +73,7 @@ class _RatingScreenState extends State<RatingScreen> {
             CommonAssetSvgImageWidget(
               imageString: "rate_icon.svg",
               height: 205,
-              width: SharedText.screenWidth,
+              width: SharedText.screenWidth-60,
               fit: BoxFit.contain,
             ),
           ],

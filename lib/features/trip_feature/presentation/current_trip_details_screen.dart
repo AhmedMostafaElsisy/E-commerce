@@ -274,7 +274,9 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                           buttonBackgroundColor: AppConstants.lightWhiteColor,
                           buttonTextColor: AppConstants.mainColor,
                           borderColor: AppConstants.mainColor,
-                          showBorder: true,
+                          showBorder: tripState is ChangeStatesTripLoadingState
+                              ? false
+                              : true,
                           isLoading: tripState is ChangeStatesTripLoadingState,
                           buttonTextSize: AppConstants.normalFontSize,
                           buttonTextFontWeight: FontWeight.w700,
