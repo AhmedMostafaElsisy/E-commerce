@@ -143,6 +143,13 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                 ),
                 (route) => route.isFirst,
               );
+            }else  if (tripCtx.read<TripCubit>().requestModel.state ==
+                RequestStates.cancelRequest){
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteNames.mainBottomNavPageRoute,
+                    (route) => false,
+              );
             }
           }
         },

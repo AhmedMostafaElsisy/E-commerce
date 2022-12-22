@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/location_model.dart';
 import 'package:captien_omda_customer/features/trip_feature/logic/trip_cubit/trip_cubit_states.dart';
@@ -66,8 +67,9 @@ class TripCubit extends Cubit<TripCubitState> {
     );
 
     result.fold(
-          (failure) => emit(RequestDetailsFailedState(failure)),
-          (request) {
+      (failure) => emit(RequestDetailsFailedState(failure)),
+      (request) {
+        log("this request data ${request.toString()}");
         requestModel = request;
         emit(RequestDetailsSuccessState());
       },
