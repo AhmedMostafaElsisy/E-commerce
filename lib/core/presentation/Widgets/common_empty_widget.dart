@@ -75,7 +75,6 @@ class EmptyScreen extends StatelessWidget {
           if (withButton!) ...[
             getSpaceHeight(8),
             CommonGlobalButton(
-                radius: AppConstants.smallRadius,
                 width: 140,
                 height: 40,
                 buttonBackgroundColor: AppConstants.verificationCodeColor,

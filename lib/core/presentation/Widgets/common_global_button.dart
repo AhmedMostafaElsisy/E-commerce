@@ -47,7 +47,7 @@ class CommonGlobalButton extends StatelessWidget {
       this.buttonTextFontWeight = FontWeight.normal,
       this.buttonTextSize = 14,
       this.iconData,
-      this.radius = AppConstants.containerBorderRadius,
+      this.radius = AppConstants.smallBorderRadius,
       this.iconSize = 13.0,
       this.spaceSize = 13.0,
       this.isLoading = false,

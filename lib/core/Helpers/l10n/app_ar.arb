@@ -60,11 +60,11 @@
   "lblSendYou": "سوف نقوم بارسال",
   "lblVerificationCode": "رمز التحقق إلى رقم الهاتف الخاص بك",
   "lblSubmit": "تاكيد",
-  "lblEnterEmail": "ادخل البريد الالكتروني او رقم الهاتف",
+  "lblEnterEmail": "البريد الالكتروني او رقم الهاتف",
   "lblVerify": "Verify",
   "lblEnterPassword": "ادخل كلمة المرور",
   "lblCreateNewPassword": "Create a new Password",
-  "lblEnterVerificationCode": "برجاء ادخال الرمز",
+  "lblEnterVerificationCode": "برجاء ادخال رمز التفعيل",
   "lblSendToYourEmail": "سيتم ارسال الرمز الي بريدك الالكتروني",
   "lblVerificationCodeSt": "رمز التحقق ",
   "lblSecond": "ثواني",
@@ -128,5 +128,7 @@
   "lblLastName": "الاسم الاخير",
   "lblCity": "المحافظة",
   "lblArea": "المنطقة",
-  "lblSignUpWithSocialMedia": "انشاء حساب عن طريق مواقع التواصل الاجتماعي"
+  "lblSignUpWithSocialMedia": "انشاء حساب عن طريق مواقع التواصل الاجتماعي",
+  "lblForgetPasswordTitle": "لإستعادة كلمة المرور برجاء ادخال\n رقم الهاتف او البريد الالكتروني",
+  "lblCheck": "تحقق"
 }

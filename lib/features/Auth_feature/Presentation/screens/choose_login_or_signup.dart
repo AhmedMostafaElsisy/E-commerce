@@ -66,7 +66,7 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
                         context, RouteNames.loginHomePageRoute);
                   },
                   height: 56,
-                  radius: AppConstants.smallRadius,
+
                 ),
 
                 /// Space
@@ -86,7 +86,7 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
                   height: 56,
                   buttonBackgroundColor: AppConstants.loaderBackGroundColor,
                   buttonTextColor: AppConstants.mainColor,
-                  radius: AppConstants.smallRadius,
+
                 ),
 
                 /// Space

@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
-
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
-import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,6 +31,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   late Timer _timer;
   int _start = 15;
   String otpError = "";
+  String email = "";
   late OtpCubit _otpCubit;
 
   @override
@@ -42,6 +40,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
     otpController = TextEditingController();
     _otpCubit = BlocProvider.of<OtpCubit>(context);
     _otpCubit.resetState();
+    email = widget.routeArgument.emailAddress!;
     startTimer();
   }
 
@@ -74,18 +73,6 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppConstants.lightWhiteColor,
-      appBar: CommonAppBar(
-        elevation: 0,
-        withBack: true,
-        showBottomIcon: false,
-        titleWidget: CommonTitleText(
-          textKey: AppLocalizations.of(context)!.lblVerificationCodeSt,
-          textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w700,
-          textFontSize: AppConstants.normalFontSize,
-        ),
-      ),
       body: BlocConsumer<OtpCubit, OtpStates>(
         listener: (otpCtx, otpState) {
           if (otpState is OtpSuccessState) {
@@ -113,13 +100,29 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             onTap: () {
               FocusScope.of(otpCtx).requestFocus(FocusNode());
             },
-            child: SizedBox(
+            child: Container(
               width: SharedText.screenWidth,
               height: SharedText.screenHeight,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                    image: AssetImage(
+                      "assets/images/backGround.png",
+                    ),
+                    fit: BoxFit.fill),
+                gradient: LinearGradient(
+                  colors: [
+                    AppConstants.lightWhiteColor.withOpacity(0.28),
+                    AppConstants.lightWhiteColor
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  getSpaceHeight(20),
+
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -131,15 +134,20 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          CommonAssetSvgImageWidget(
-                              imageString: otpState is OtpErrorState
-                                  ? "failed_otp.svg"
-                                  : "sucess_otp.svg",
-                              height: (350),
-                              width: 300,
-                              fit: BoxFit.contain),
-                          getSpaceHeight(AppConstants.pagePadding),
+                          ///spacer
+                          getSpaceHeight(60),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppConstants.pagePaddingDouble),
+                            child: commonAssetImageWidget(
+                                imageString: "forget_password.png",
+                                height: 137,
+                                width: 180,
+                                fit: BoxFit.contain),
+                          ),
 
+                          ///Spacer
+                          getSpaceHeight(AppConstants.pagePaddingDouble),
                           /// Title
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -147,22 +155,14 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               CommonTitleText(
                                 textKey: AppLocalizations.of(otpCtx)!
                                     .lblEnterVerificationCode,
-                                textColor: AppConstants.lightBlackColor,
+                                textColor: AppConstants.mainTextColor,
                                 textFontSize: AppConstants.normalFontSize,
                                 textWeight: FontWeight.w700,
                               ),
                               getSpaceHeight(AppConstants.smallPadding),
                               CommonTitleText(
-                                textKey: AppLocalizations.of(otpCtx)!
-                                    .lblSendToYourEmail,
-                                textColor: AppConstants.mainTextColor,
-                                textFontSize: AppConstants.smallFontSize,
-                                textWeight: FontWeight.w600,
-                              ),
-                              getSpaceHeight(AppConstants.smallPadding / 2),
-                              CommonTitleText(
                                 textKey:
-                                    "${widget.routeArgument.emailAddress!.hideEmail()}-${widget.routeArgument.otp!}",
+                                    "${email.hideEmail()}-${widget.routeArgument.otp!}",
                                 textColor: AppConstants.mainTextColor,
                                 textFontSize: AppConstants.smallFontSize,
                                 textWeight: FontWeight.w600,
@@ -182,7 +182,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                 child: PinCodeTextField(
                                   autoDisposeControllers: false,
                                   textStyle: const TextStyle(
-                                      color: AppConstants.mainTextColor,
+                                      color: AppConstants.greyColor,
                                       fontSize: 32,
                                       fontWeight: FontWeight.w400),
                                   length: 6,
@@ -194,28 +194,42 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   pinTheme: PinTheme(
                                     shape: PinCodeFieldShape.box,
                                     borderRadius: BorderRadius.circular(
-                                        AppConstants.containerBorderRadius),
+                                        AppConstants.smallPadding),
                                     fieldHeight: 48,
                                     fieldWidth: 48,
                                     borderWidth: 1,
                                     activeFillColor:
-                                        AppConstants.backGroundColor,
+                                        AppConstants.lightWhiteColor,
                                     inactiveColor:
                                         AppConstants.borderInputColor,
-                                    selectedColor: AppConstants.backGroundColor,
+                                    selectedColor: AppConstants.lightShadowColor,
                                     activeColor: AppConstants.borderInputColor,
                                     inactiveFillColor:
-                                        AppConstants.backGroundColor,
+                                        AppConstants.lightWhiteColor,
                                     selectedFillColor:
-                                        AppConstants.backGroundColor,
+                                        AppConstants.lightWhiteColor,
                                   ),
                                   animationDuration:
                                       const Duration(milliseconds: 300),
-                                  backgroundColor: Colors.transparent,
+                                  backgroundColor: AppConstants.lightWhiteColor,
                                   enableActiveFill: true,
                                   controller: otpController,
                                   enablePinAutofill: true,
-                                  onCompleted: (v) {},
+                                  onCompleted: (v) {
+                                    if (widget.routeArgument.sourcePage ==
+                                        "forget") {
+                                      log("call the check otp func");
+                                      otpCtx.read<OtpCubit>().checkOtp(
+                                          emailAddress: widget
+                                              .routeArgument.emailAddress!,
+                                          otp: otpController.text);
+                                    } else {
+                                      otpCtx.read<OtpCubit>().verifyAccount(
+                                          emailAddress: widget
+                                              .routeArgument.emailAddress!,
+                                          otp: otpController.text);
+                                    }
+                                  },
                                   onChanged: (value) {
                                     setState(() {});
                                   },
@@ -230,7 +244,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   textKey: otpState.error!.errorMassage ??
                                       AppLocalizations.of(context)!
                                           .lblWrongHappen,
-                                  textColor: AppConstants.mainColor,
+                                  textColor: AppConstants.lightRedColor,
                                   textWeight: FontWeight.w700,
                                   textFontSize: AppConstants.smallFontSize,
                                 )
@@ -245,9 +259,9 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                     CommonTitleText(
                                       textKey: AppLocalizations.of(context)!
                                           .lblDontRecieveCode,
-                                      textColor: AppConstants.lightBlackColor,
+                                      textColor: AppConstants.mainTextColor,
                                       textFontSize: AppConstants.normalFontSize,
-                                      textWeight: FontWeight.w600,
+                                      textWeight: FontWeight.w700,
                                     ),
                                     getSpaceWidth(4),
                                     _start != 0
@@ -264,7 +278,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                                       .lightBlueColor,
                                                   textFontSize: AppConstants
                                                       .smallFontSize,
-                                                  textWeight: FontWeight.w700,
+                                                  textWeight: FontWeight.w500,
                                                 ),
                                               ],
                                             ),
@@ -316,14 +330,14 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               CommonGlobalButton(
                                   height: 48,
                                   buttonBackgroundColor: AppConstants.mainColor,
-                                  radius: AppConstants.smallBorderRadius,
+
                                   buttonTextSize: 18,
                                   buttonTextFontWeight: FontWeight.w400,
                                   isEnable: otpController.text.length == 6,
                                   isLoading: otpState is OtpLoadingState ||
                                       otpState is ResendOtpLoadingState,
                                   buttonText:
-                                      AppLocalizations.of(otpCtx)!.lblConfirm,
+                                      AppLocalizations.of(otpCtx)!.lblCheck,
                                   onPressedFunction: () {
                                     if (widget.routeArgument.sourcePage ==
                                         "forget") {
