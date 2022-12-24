@@ -17,6 +17,8 @@ class UserBaseEntity {
 
   int? id;
   String? image;
+  String? otp;
+  String? rate;
 
   UserBaseEntity(
       {this.name,
@@ -26,20 +28,23 @@ class UserBaseEntity {
       this.active,
       this.verified,
       this.id,
-      this.image});
+      this.image,
+      this.otp,
+      this.rate});
 
   factory UserBaseEntity.fromJson(Map<String, dynamic> json) {
     try {
       return UserBaseEntity(
-        name: json["name"],
-        email: json["email"],
-        phone: json["phone"],
-        address: json["address"],
-        active: json["active"],
-        verified: json["verified"],
-        id: json["id"],
-        image: json["image"],
-      );
+          name: json["name"],
+          email: json["email"],
+          phone: json["phone"],
+          address: json["address"],
+          active: json["active"],
+          verified: json["verified"],
+          id: json["id"],
+          image: json["image"] ?? "",
+          otp: json["otp"],
+          rate: json["rate"] == null ? "0.0" : json["rate"].toString());
     } catch (e) {
       debugPrint("here is the error in parsing UserBaseModel ${e.toString()}");
       return UserBaseEntity();
@@ -55,5 +60,6 @@ class UserBaseEntity {
         "verified": verified,
         "id": id,
         "image": image,
+    "rate":rate
       };
 }

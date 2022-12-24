@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../Data/local_source/flutter_secured_storage.dart';
-import '../../Presentation/Routes/route_names.dart';
-import '../../features/Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../Constants/Enums/exception_enums.dart';
+import '../presentation/Routes/route_names.dart';
 import 'shared_texts.dart';
 
 
@@ -25,16 +21,7 @@ checkUserAuth(
         context, RouteNames.loginHomePageRoute, (route) => false);
   }
 }
-/// Fetch Current Locales
-fetchLocale() async {
-  SharedText.currentLocale = await DefaultSecuredStorage.getLang() ?? 'en';
-  var lang = await DefaultSecuredStorage.getLang() ?? 'en';
-  var countryCode = await DefaultSecuredStorage.getCountryCode() ?? 'us';
 
-  String userMap = await DefaultSecuredStorage.getUserMap() ?? '';
-  SharedText.currentUser = UserBaseEntity.fromJson(jsonDecode(userMap));
-  return Locale(lang, countryCode);
-}
 
 /// Calculate %
 String calculatePercentage(String price, String discount) {

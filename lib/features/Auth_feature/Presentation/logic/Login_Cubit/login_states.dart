@@ -1,6 +1,6 @@
+import 'package:captien_omda_customer/features/Auth_feature/Data/model/base_user_model.dart';
 
 import '../../../../../core/Error_Handling/custom_error.dart';
-import '../../../Domain/entities/base_user_entity.dart';
 
 abstract class LoginStates {}
 
@@ -11,7 +11,7 @@ class LoginIfFoundLoading extends LoginStates {}
 
 /// Go To HomePage with User Data
 class LoginSuccess extends LoginStates {
-  UserBaseEntity user;
+  UserBaseModel user;
 
   LoginSuccess(this.user);
 }
@@ -23,8 +23,7 @@ class LoginFailed extends LoginStates {}
 class UserLoginLoadingState extends LoginStates {}
 
 /// go to home after success
-class UserLogInSuccessState extends LoginStates {
-}
+class UserLogInSuccessState extends LoginStates {}
 
 class UserLogoutSuccessState extends LoginStates {
   UserLogoutSuccessState();
@@ -42,3 +41,7 @@ class UserLoginErrorState extends LoginStates {
 
   UserLoginErrorState({this.error});
 }
+
+class UserDeleteAccountLoadingState extends LoginStates {}
+
+

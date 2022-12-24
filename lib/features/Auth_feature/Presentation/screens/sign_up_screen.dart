@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../Presentation/Routes/route_names.dart';
-import '../../../../Presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../Presentation/Widgets/common_file_image_widget.dart';
-import '../../../../Presentation/Widgets/common_global_button.dart';
-import '../../../../Presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../../Presentation/Widgets/common_title_text.dart';
-import '../../../../Presentation/Widgets/custom_snack_bar.dart';
-import '../../../../Presentation/Widgets/take_photo_widget.dart';
+import '../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
+import '../../../../core/presentation/Widgets/common_global_button.dart';
+import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../logic/Sign_Up_Cubit/sign_up_states.dart';
 import '../logic/Sign_Up_Cubit/sign_up_cubit.dart';
-
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -28,7 +29,6 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late SignUpCubit _signUpCubit;
-  bool acceptTerms = false;
   final formKey = GlobalKey<FormState>();
 
   late TextEditingController userNameController;
@@ -40,11 +40,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   late TextEditingController confirmPasswordController;
 
-  bool hidePassword = true;
-  bool hideConfirmPassword = true;
-  List<TextEditingController> controllerList = [];
-  late bool isDataFound;
-
   @override
   void initState() {
     super.initState();
@@ -54,13 +49,14 @@ class _SignUpPageState extends State<SignUpPage> {
     phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
-    isDataFound = false;
+    _signUpCubit.isDataFound = false;
     _signUpCubit.imageXFile = null;
-    controllerList.add(userNameController);
-    controllerList.add(emailAddressController);
-    controllerList.add(phoneNumberController);
-    controllerList.add(passwordController);
-    controllerList.add(confirmPasswordController);
+    _signUpCubit.controllerList.clear();
+    _signUpCubit.controllerList.add(userNameController);
+    _signUpCubit.controllerList.add(emailAddressController);
+    _signUpCubit.controllerList.add(phoneNumberController);
+    _signUpCubit.controllerList.add(passwordController);
+    _signUpCubit.controllerList.add(confirmPasswordController);
   }
 
   @override
@@ -76,11 +72,27 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppConstants.lightWhiteColor,
+      appBar: CommonAppBar(
+        elevation: 0,
+        withBack: true,
+        showBottomIcon: false,
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblCreateAccount,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w700,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
       body: BlocConsumer<SignUpCubit, SignUpStates>(
         listener: (loginCtx, signUpState) {
           if (signUpState is UserSignUpSuccessState) {
             Navigator.pushReplacementNamed(
-                context, RouteNames.loginHomePageRoute);
+                context, RouteNames.verificationCodePageRoute,
+                arguments: RouteArgument(
+                    emailAddress: emailAddressController.text,
+                    otp: signUpState.otp));
             showSnackBar(
               context: loginCtx,
               color: AppConstants.lightOffBlueColor,
@@ -94,10 +106,10 @@ class _SignUpPageState extends State<SignUpPage> {
             );
           }
         },
-        builder: (context, state) {
+        builder: (signUpCtx, signUpstate) {
           return GestureDetector(
             onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(signUpCtx).requestFocus(FocusNode());
             },
             child: SizedBox(
               width: SharedText.screenWidth,
@@ -105,133 +117,97 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  getSpaceHeight(75),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.pagePadding),
+                              horizontal: AppConstants.pagePadding) +
+                          EdgeInsets.only(
+                            bottom: MediaQuery.of(signUpCtx).viewInsets.bottom,
+                          ),
                       child: ListView(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         children: [
-                          /// Title
-                          Row(
-                            children: [
-                              CommonTitleText(
-                                textKey:
-                                    AppLocalizations.of(context)!.lblSignup,
-                                textColor: AppConstants.lightBlackColor,
-                                textFontSize: AppConstants.normalFontSize,
-                                textWeight: FontWeight.w700,
-                              ),
-                            ],
-                          ),
-
-                          getSpaceHeight(16),
-
                           /// Upload Image
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  selectedPhoto(
-                                    context,
-                                    takePhoto: _signUpCubit.photoPicked,
-                                  );
+                                  takePhotoBottomSheet(
+                                      context: signUpCtx,
+                                      getPhoto: signUpCtx.read<SignUpCubit>().photoPicked);
                                 },
                                 child: Stack(
                                   children: [
                                     Container(
-                                      width: getWidgetWidth(46),
-                                      height: getWidgetHeight(46),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              AppConstants.smallRadius),
-                                          color: AppConstants.lightWhiteColor,
-                                          border: Border.all(
-                                              color: _signUpCubit.imageXFile !=
-                                                      null
-                                                  ? AppConstants.lightWhiteColor
-                                                  : AppConstants
-                                                      .mainTextColor)),
+                                      width: getWidgetHeight(90),
+                                      height: getWidgetHeight(90),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppConstants.backGroundColor,
+                                      ),
                                       child: _signUpCubit.imageXFile != null
                                           ? commonFileImageWidget(
                                               imageString:
                                                   _signUpCubit.imageXFile!.path,
-                                              height: 47,
-                                              width: 47,
-                                              radius: 4,
+                                              height: 90,
+                                              width: 90,
+                                              radius: 1000,
                                               fit: BoxFit.fill)
-                                          : Padding(
+                                          : const Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: commonAssetSvgImageWidget(
-                                                imageString: "person_icon.svg",
-                                                height: 22,
-                                                width: 22,
-                                                fit: BoxFit.fill,
-                                              ),
+                                                  EdgeInsets.all(18.0),
+                                              child: CommonAssetSvgImageWidget(
+                                                  imageString: "camera.svg",
+                                                  height: 32,
+                                                  width: 32,
+                                                  fit: BoxFit.contain,
+                                                  imageColor:
+                                                      AppConstants.mainColor),
                                             ),
                                     ),
-                                    _signUpCubit.imageXFile != null
+                                    _signUpCubit.imageXFile == null
                                         ? const SizedBox()
                                         : Positioned(
                                             bottom: 0,
-                                            right: 0,
-                                            child: commonAssetSvgImageWidget(
-                                                imageString: "add_icon.svg",
-                                                height: 10.3,
-                                                width: 10.3))
+                                            left: 0,
+                                            child: InkWell(
+                                              onTap: () {
+                                                _signUpCubit
+                                                    .clearSelectedImage();
+                                              },
+                                              child: Container(
+                                                height: getWidgetHeight(24),
+                                                width: getWidgetWidth(24),
+                                                decoration: const BoxDecoration(
+                                                    color:
+                                                        AppConstants.mainColor,
+                                                    shape: BoxShape.circle),
+                                                child: const Padding(
+                                                  padding:
+                                                      EdgeInsets.all(5.0),
+                                                  child:
+                                                      CommonAssetSvgImageWidget(
+                                                          imageString:
+                                                              "bin_icon.svg",
+                                                          height: 12,
+                                                          imageColor: AppConstants
+                                                              .lightWhiteColor,
+                                                          width: 12),
+                                                ),
+                                              ),
+                                            ))
                                   ],
                                 ),
                               ),
-                              getSpaceWidth(6),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  if (_signUpCubit.imageXFile != null) ...[
-                                    Material(
-                                      child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            _signUpCubit.imageXFile = null;
-                                          });
-                                        },
-                                        child: CommonTitleText(
-                                          textKey: AppLocalizations.of(context)!
-                                              .lblRemoveImage,
-                                          textColor: AppConstants.mainColor,
-                                          textFontSize:
-                                              AppConstants.normalFontSize,
-                                          textWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ] else ...[
-                                    CommonTitleText(
-                                      textKey: AppLocalizations.of(context)!
-                                          .lblAddProfilePicture,
-                                      textColor: AppConstants.mainTextColor,
-                                      textFontSize: 14,
-                                      textWeight: FontWeight.w400,
-                                    ),
-                                    CommonTitleText(
-                                      textKey:
-                                          "(${AppLocalizations.of(context)!.lblOptional})",
-                                      textColor: AppConstants.mainTextColor,
-                                      textFontSize: 14,
-                                      textWeight: FontWeight.w400,
-                                    ),
-                                  ]
-                                ],
-                              )
                             ],
                           ),
 
-                          getSpaceHeight(16),
-
+                          ///spacer
+                          getSpaceHeight(AppConstants.pagePadding),
                           Form(
                             key: formKey,
                             child: Column(
@@ -240,64 +216,70 @@ class _SignUpPageState extends State<SignUpPage> {
                                 CommonTextFormField(
                                   radius: AppConstants.smallBorderRadius,
                                   controller: userNameController,
-                                  hintKey:
-                                      AppLocalizations.of(context)!.lblName,
+                                  hintKey: AppLocalizations.of(signUpCtx)!
+                                      .lblEnterName,
+                                  labelText:
+                                      AppLocalizations.of(signUpCtx)!.lblName,
                                   keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                  withSuffixIcon: true,
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
                                         vertical: 12, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "person_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameIsEmpty;
                                     } else if (nameValidator(value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameBadFormat;
                                     } else if (value.length < 2) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblNameLength;
                                     } else {
                                       return null;
                                     }
                                   },
                                   onChanged: (value) {
-                                    isDataFount(controllerList);
+                                    _signUpCubit.isDataFount(
+                                        _signUpCubit.controllerList);
                                     return null;
                                   },
                                 ),
 
-                                getSpaceHeight(16),
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePadding),
 
                                 /// Email
                                 CommonTextFormField(
-                                  controller: emailAddressController,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey:
-                                      AppLocalizations.of(context)!.lblEmail,
-                                  keyboardType: TextInputType.emailAddress,
+                                  controller: emailAddressController,
+                                  hintKey: AppLocalizations.of(signUpCtx)!
+                                      .lblEnterEmail,
+                                  labelText:
+                                      AppLocalizations.of(signUpCtx)!.lblEmail,
+                                  keyboardType: TextInputType.text,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 17, horizontal: 12),
-                                    child: commonAssetSvgImageWidget(
+                                  withSuffixIcon: true,
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "email_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
                                   ),
                                   validator: (value) {
                                     if (value!.isNotEmpty) {
                                       if (!validateEmail(value)) {
-                                        return AppLocalizations.of(context)!
+                                        return AppLocalizations.of(signUpCtx)!
                                             .lblEmailBadFormat;
                                       } else {
                                         return null;
@@ -307,312 +289,239 @@ class _SignUpPageState extends State<SignUpPage> {
                                     }
                                   },
                                   onChanged: (value) {
-                                    isDataFount(controllerList);
+                                    _signUpCubit.isDataFount(
+                                        _signUpCubit.controllerList);
                                     return null;
                                   },
                                 ),
 
-                                getSpaceHeight(16),
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePadding),
 
                                 /// Phone
                                 CommonTextFormField(
                                   controller: phoneNumberController,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey:
-                                      AppLocalizations.of(context)!.lblPhone,
+                                  hintKey: AppLocalizations.of(signUpCtx)!
+                                      .lblEnterPhoneNumber,
+                                  labelText:
+                                      AppLocalizations.of(signUpCtx)!.lblPhone,
                                   keyboardType: TextInputType.phone,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
                                   inputFormatter: [
                                     FilteringTextInputFormatter.digitsOnly
                                   ],
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13, horizontal: 15),
-                                    child: commonAssetSvgImageWidget(
+                                  withSuffixIcon: true,
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "phone_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPhoneIsEmpty;
                                     } else if (value.length <
                                         AppConstants.phoneLength) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPhoneValidate;
                                     } else {
                                       return null;
                                     }
                                   },
                                   onChanged: (value) {
-                                    isDataFount(controllerList);
+                                    _signUpCubit.isDataFount(
+                                        _signUpCubit.controllerList);
                                     return null;
                                   },
                                 ),
 
-                                getSpaceHeight(16),
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePadding),
 
                                 /// Password
                                 CommonTextFormField(
                                   controller: passwordController,
                                   withSuffixIcon: true,
-                                  suffixIcon: GestureDetector(
+                                  withPrefixIcon: true,
+                                  prefixIcon: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        hidePassword = !hidePassword;
-                                      });
+                                      _signUpCubit.switchPasswordToggle();
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: hidePassword
-                                          ? commonAssetSvgImageWidget(
-                                              imageString: "eye_open.svg",
-                                              height: 16,
-                                              width: 16,
-                                              fit: BoxFit.fill)
-                                          : commonAssetSvgImageWidget(
-                                              imageString: "eye_close.svg",
-                                              height: 16,
-                                              width: 16,
-                                              fit: BoxFit.fill),
+                                    child: SizedBox(
+                                      width: getWidgetWidth(30),
+                                      height: getWidgetHeight(30),
+                                      child: Center(
+                                        child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 15),
+                                            child: CommonAssetSvgImageWidget(
+                                                imageString:
+                                                    _signUpCubit.hidePassword
+                                                        ? "eye_open.svg"
+                                                        : "eye_close.svg",
+                                                height: 30,
+                                                width: 30,
+                                                fit: BoxFit.contain)),
+                                      ),
                                     ),
                                   ),
                                   keyboardType: TextInputType.text,
                                   minLines: 1,
                                   maxLines: 1,
-                                  isObscureText: hidePassword,
+                                  isObscureText: _signUpCubit.hidePassword,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(context)!
+                                  hintKey: AppLocalizations.of(signUpCtx)!
                                       .lblEnterComplexPassword,
+                                  labelText:
+                                      AppLocalizations.of(signUpCtx)!.lblPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13, horizontal: 15),
-                                    child: commonAssetSvgImageWidget(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordIsEmpty;
                                     } else if (value.length < 8) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordMustBeMoreThan;
                                     } else if (complexValidationLowerAndUpperCaseValidator(
                                         value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblComplexPasswordValidationUpperAndLower;
                                     } else if (complexValidationSpecialCharactersValidator(
                                         value)) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblComplexPasswordValidationSc;
                                     } else {
                                       return null;
                                     }
                                   },
                                   onChanged: (value) {
-                                    isDataFount(controllerList);
+                                    _signUpCubit.isDataFount(
+                                        _signUpCubit.controllerList);
                                     return null;
                                   },
                                 ),
 
-                                getSpaceHeight(16),
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePadding),
 
                                 /// Confirm Password
                                 CommonTextFormField(
                                   controller: confirmPasswordController,
                                   withSuffixIcon: true,
-                                  suffixIcon: GestureDetector(
+                                  withPrefixIcon: true,
+                                  prefixIcon: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        hideConfirmPassword =
-                                            !hideConfirmPassword;
-                                      });
+                                      _signUpCubit.switchPasswordToggle(
+                                          isMainPassword: false);
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: hideConfirmPassword
-                                          ? commonAssetSvgImageWidget(
-                                              imageString: "eye_open.svg",
-                                              height: 16,
-                                              width: 16,
-                                              fit: BoxFit.fill)
-                                          : commonAssetSvgImageWidget(
-                                              imageString: "eye_close.svg",
-                                              height: 16,
-                                              width: 16,
-                                              fit: BoxFit.fill),
+                                    child: SizedBox(
+                                      width: getWidgetWidth(30),
+                                      height: getWidgetHeight(30),
+                                      child: Center(
+                                        child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 15),
+                                            child: CommonAssetSvgImageWidget(
+                                                imageString: _signUpCubit
+                                                        .hideConfirmPassword
+                                                    ? "eye_open.svg"
+                                                    : "eye_close.svg",
+                                                height: 30,
+                                                width: 30,
+                                                fit: BoxFit.contain)),
+                                      ),
                                     ),
                                   ),
                                   keyboardType: TextInputType.text,
                                   minLines: 1,
                                   maxLines: 1,
-                                  isObscureText: hideConfirmPassword,
+                                  isObscureText:
+                                      _signUpCubit.hideConfirmPassword,
                                   radius: AppConstants.smallBorderRadius,
-                                  hintKey: AppLocalizations.of(context)!
-                                      .lblRetypePassword,
+                                  labelText:
+                                      AppLocalizations.of(signUpCtx)!.lblPassword,
+                                  hintKey: AppLocalizations.of(signUpCtx)!
+                                      .lblConfirmPassword,
                                   labelHintStyle: AppConstants.mainTextColor,
-                                  borderColor: AppConstants.borderInputColor,
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13, horizontal: 15),
-                                    child: commonAssetSvgImageWidget(
+                                  suffixIcon: const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    child: CommonAssetSvgImageWidget(
                                         imageString: "lock_icon.svg",
-                                        fit: BoxFit.fill,
-                                        height: 16,
-                                        width: 16),
+                                        fit: BoxFit.contain,
+                                        height: 22,
+                                        width: 22),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordIsEmpty;
                                     } else if (value.length < 8) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordMustBeMoreThan;
                                     } else if (value !=
                                         passwordController.text) {
-                                      return AppLocalizations.of(context)!
+                                      return AppLocalizations.of(signUpCtx)!
                                           .lblPasswordDontMatch;
                                     } else {
                                       return null;
                                     }
                                   },
                                   onChanged: (value) {
-                                    isDataFount(controllerList);
+                                    _signUpCubit.isDataFount(
+                                        _signUpCubit.controllerList);
                                     return null;
                                   },
                                 ),
 
-                                getSpaceHeight(16),
-
-                                /// Terms And Conditions
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          acceptTerms = !acceptTerms;
-                                        });
-                                      },
-                                      child: Container(
-                                        width: getWidgetWidth(24),
-                                        height: getWidgetHeight(24),
-                                        decoration: BoxDecoration(
-                                            color: acceptTerms
-                                                ? AppConstants.mainColor
-                                                : AppConstants.lightWhiteColor,
-                                            borderRadius: BorderRadius.circular(
-                                                AppConstants.smallBorderRadius),
-                                            border: Border.all(
-                                                color: acceptTerms
-                                                    ? AppConstants.mainColor
-                                                    : AppConstants
-                                                        .borderInputColor,
-                                                width: 1)),
-                                        child: const Icon(
-                                          Icons.check,
-                                          color: AppConstants.lightWhiteColor,
-                                          size: 17,
-                                        ),
-                                      ),
-                                    ),
-                                    getSpaceWidth(4),
-                                    CommonTitleText(
-                                      textKey: AppLocalizations.of(context)!
-                                          .lblAccept,
-                                      textColor: AppConstants.mainTextColor,
-                                      textFontSize: 12,
-                                      textWeight: FontWeight.w700,
-                                    ),
-                                    getSpaceWidth(2),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: CommonTitleText(
-                                        textKey: AppLocalizations.of(context)!
-                                            .lblOutTermsAndConditions,
-                                        textColor: AppConstants.mainColor,
-                                        textFontSize: 12,
-                                        textWeight: FontWeight.w700,
-                                      ),
-                                    )
-                                  ],
-                                ),
-
-                                getSpaceHeight(32),
+                                ///spacer
+                                getSpaceHeight(
+                                    AppConstants.pagePaddingDouble * 2),
 
                                 /// Create Account Button
                                 CommonGlobalButton(
                                     height: 48,
                                     buttonBackgroundColor:
                                         AppConstants.mainColor,
-                                    isEnable: isDataFound && acceptTerms,
-                                    isLoading: state is UserSignUpLoadingState,
+                                    isEnable: _signUpCubit.isDataFound,
+                                    isLoading: signUpstate is UserSignUpLoadingState,
                                     radius: AppConstants.smallBorderRadius,
                                     buttonTextSize: 18,
                                     buttonTextFontWeight: FontWeight.w400,
-                                    buttonText: AppLocalizations.of(context)!
+                                    buttonText: AppLocalizations.of(signUpCtx)!
                                         .lblCreateAccount,
                                     onPressedFunction: () {
                                       if (formKey.currentState!.validate()) {
-                                        FocusScope.of(context)
+                                        FocusScope.of(signUpCtx)
                                             .requestFocus(FocusNode());
-                                        if (acceptTerms) {
-                                          _signUpCubit.singUp(
-                                              email:
-                                                  emailAddressController.text,
-                                              password: passwordController.text,
-                                              confirmPassword:
-                                                  confirmPasswordController
-                                                      .text,
-                                              phone: phoneNumberController.text,
-                                              username: userNameController.text,
-                                              token: SharedText.deviceToken);
-                                        } else {
-                                          showSnackBar(
-                                            context: context,
-                                            title: AppLocalizations.of(context)!
-                                                .lblPleaseConfirmOnTerms,
-                                          );
-                                        }
+                                        _signUpCubit.singUp(
+                                            email: emailAddressController.text,
+                                            password: passwordController.text,
+                                            confirmPassword:
+                                                confirmPasswordController.text,
+                                            phone: phoneNumberController.text,
+                                            username: userNameController.text,
+                                            token: SharedText.deviceToken);
                                       }
                                     },
                                     withIcon: false),
 
-                                getSpaceHeight(20),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CommonTitleText(
-                                      textKey: AppLocalizations.of(context)!
-                                          .lblHaveAccount,
-                                      textColor: AppConstants.lightBlackColor,
-                                      textFontSize: 13,
-                                      textWeight: FontWeight.w400,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.pushReplacementNamed(context,
-                                            RouteNames.loginHomePageRoute);
-                                      },
-                                      child: CommonTitleText(
-                                        textKey: AppLocalizations.of(context)!
-                                            .lblLogin,
-                                        textColor: AppConstants.lightBlackColor,
-                                        textFontSize: 14,
-                                        textWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                )
+                                ///spacer
+                                getSpaceHeight(AppConstants.pagePaddingDouble),
                               ],
                             ),
                           ),
@@ -627,21 +536,5 @@ class _SignUpPageState extends State<SignUpPage> {
         },
       ),
     );
-  }
-
-  void isDataFount(List<TextEditingController> list) {
-    setState(() {
-      isDataFound = true;
-    });
-
-    for (var element in list) {
-      if (element.text.isEmpty) {
-        setState(() {
-          isDataFound = false;
-        });
-
-        return;
-      }
-    }
   }
 }

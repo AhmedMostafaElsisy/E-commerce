@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'Data/Remote_Data/Repositories/ProfileRepository.dart';
-import 'Data/local_source/flutter_secured_storage.dart';
-import 'Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
-import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
-import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
-import 'features/Auth_feature/Data/repository/auth_repository.dart';
-import 'Data/Remote_Data/Repositories/notification_repository.dart';
-import 'Data/Remote_Data/Repositories/otp_repository.dart';
-import 'Data/Remote_Data/Repositories/password_repository.dart';
-import 'Logic/Bloc_Cubits/Forget_Password_Cubit/forget_password_cubit.dart';
-import 'Logic/Bloc_Cubits/Help_Cubit/help_cubit.dart';
-import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
-import 'Logic/Bloc_Cubits/Notification_Cubit/notification_cubit.dart';
-import 'Logic/Bloc_Cubits/OTP_Cubit/otp_cubit.dart';
-import 'Logic/Bloc_Cubits/Profile_Cubit/profile_cubit.dart';
-import 'Logic/Bloc_Cubits/Setting_Cubit/setting_cubit.dart';
-import 'features/Auth_feature/Domain/use_cases/login_use_case.dart';
+import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
+import 'features/notification_feature/data/reposiroty/notification_repository.dart';
+
+import 'core/Connectivity_Cubit/connectivity_cubit.dart';
+import 'core/Language_Cubit/language_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
+import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
+import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
+import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
+import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
@@ -42,29 +39,23 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             lazy: false, create: (_) => ConnectivityCubit()..initConnection()),
         BlocProvider<LoginCubit>(
             lazy: false,
-            create: (_) => LoginCubit(LoginUesCase(repository:
-            AuthRepository(
-                localDataSourceInterface: AuthLocalDataSourceImp(
-                  flutterSecureStorage: DefaultSecuredStorage(),
-                ),
-                remoteDataSourceInterface: AuthRemoteDataSourceImp())
-            ))
-              ..startApp()),
+            create: (_) =>  di.sl<LoginCubit>()),
         BlocProvider<SignUpCubit>(
-            create: (_) => SignUpCubit(AuthRepository(
-                localDataSourceInterface: AuthLocalDataSourceImp(
-                  flutterSecureStorage: DefaultSecuredStorage(),
-                ),
-                remoteDataSourceInterface: AuthRemoteDataSourceImp()))),
-        BlocProvider<OtpCubit>(create: (_) => OtpCubit(OtpRepository())),
-        BlocProvider<ForgetPasswordCubit>(
-            create: (_) => ForgetPasswordCubit(PasswordRepository())),
+            create: (_) => di.sl<SignUpCubit>()),
+        BlocProvider<OtpCubit>(create: (_) => di.sl<OtpCubit>()),
+        BlocProvider<PasswordCubit>(
+            create: (_) => di.sl<PasswordCubit>()),
         BlocProvider<ProfileCubit>(
-            create: (_) => ProfileCubit(ProfileRepository())),
-        BlocProvider<HelpCubit>(create: (_) => HelpCubit()),
+            create: (_) =>di.sl<ProfileCubit>()),
         BlocProvider<NotificationCubit>(
             create: (_) => NotificationCubit(NotificationListRepository())),
+        BlocProvider<RequestCubit>(create: (_) => di.sl<RequestCubit>()),
+        BlocProvider<DestinationCubit>(create: (_) => di.sl<DestinationCubit>()),
+        BlocProvider<TripCubit>(create: (_) => di.sl<TripCubit>()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
+        BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
+        BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
+
       ],
       child: widget.body,
     );

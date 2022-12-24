@@ -18,6 +18,7 @@ class UserBaseModel extends UserBaseEntity {
     int? verified,
     int? id,
     String? image,
+    String? otp,
   }) : super(
             id: id,
             image: image,
@@ -26,7 +27,9 @@ class UserBaseModel extends UserBaseEntity {
             address: address,
             email: email,
             phone: phone,
-            verified: verified);
+            verified: verified,
+  otp: otp
+  );
 
   factory UserBaseModel.fromJson(Map<String, dynamic> json) {
     try {
@@ -39,6 +42,8 @@ class UserBaseModel extends UserBaseEntity {
         verified: json["verified"],
         id: json["id"],
         image: json["image"],
+        otp: json["otp"],
+
       );
     } catch (e) {
       debugPrint("here is the error in parsing UserBaseModel ${e.toString()}");

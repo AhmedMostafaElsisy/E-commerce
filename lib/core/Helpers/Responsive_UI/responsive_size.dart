@@ -26,10 +26,5 @@ class Tools {
     var isTablet = diagonal > 1090.0;
     return isTablet;
   }
-
-  static String formatImage(String url, [kSize size = kSize.medium]) {
-    return url;
-  }
 }
 
-enum kSize { small, medium, large }
