@@ -71,7 +71,7 @@ class CommonGlobalButton extends StatelessWidget {
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
             width: 1,
-            color: showBorder ? borderColor! : AppConstants.lightWhiteColor,
+            color: showBorder ? borderColor! :isLoading || !isEnable  ? AppConstants.greyColor:AppConstants.lightWhiteColor,
           ),
         ),
         shadowColor: MaterialStateProperty.all(

@@ -63,12 +63,19 @@ class _SplashPageState extends State<SplashHomePage>
           return Container(
             width: SharedText.screenWidth,
             height: SharedText.screenHeight,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
+            decoration:  BoxDecoration(
+                image: const DecorationImage(
                     image: AssetImage(
                       "assets/images/backGround.png",
                     ),
-                    fit: BoxFit.fill)),
+                    fit: BoxFit.fill) ,  gradient: LinearGradient(
+            colors: [
+            AppConstants.lightWhiteColor.withOpacity(0.28),
+            AppConstants.lightWhiteColor
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),),
             child: Center(
               child: SizedBox(
                 width: SharedText.screenWidth,
