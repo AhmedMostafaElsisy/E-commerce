@@ -31,9 +31,11 @@ class ApiKeys {
   ///Setting keys
   static const String termsKey = "/terms";
   static const String faqKey = "/faqs";
+
   ///Requests keys
   static const String requestListKey = "$userTypeKey/requests";
+  static const String requestStoreKey = "$userTypeKey/requests/store";
+
   ///location key
   static const String locationListKey = "/general/places";
-
 }

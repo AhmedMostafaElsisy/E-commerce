@@ -6,17 +6,19 @@ List<RequestModel> requestListFromJson(List str) =>
 class RequestModel {
   int? id;
   num? price;
+  String? state;
   LocationModel? fromLocation;
   LocationModel? toLocation;
 
-  RequestModel({this.id, this.price, this.fromLocation, this.toLocation});
+  RequestModel(
+      {this.id, this.price, this.fromLocation, this.toLocation, this.state});
 
   factory RequestModel.fromJson(Map<String, dynamic> json) {
     return RequestModel(
-      id: json["id"],
-      price: json["price"] ?? 0.0,
-      fromLocation: LocationModel.fromJson(json["from"]),
-      toLocation: LocationModel.fromJson(json["to"]),
-    );
+        id: json["id"],
+        price: json["price"] ?? 0.0,
+        fromLocation: LocationModel.fromJson(json["from"]),
+        toLocation: LocationModel.fromJson(json["to"]),
+        state: json["state"]);
   }
 }
