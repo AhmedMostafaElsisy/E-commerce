@@ -27,7 +27,6 @@ class TripCubit extends Cubit<TripCubitState> {
       (failure) => emit(TripFailedState(failure)),
       (request) {
         requestModel = request;
-        log("this request data $requestModel");
         emit(TripSuccessState());
       },
     );
@@ -68,8 +67,9 @@ class TripCubit extends Cubit<TripCubitState> {
     );
 
     result.fold(
-          (failure) => emit(RequestDetailsFailedState(failure)),
-          (request) {
+      (failure) => emit(RequestDetailsFailedState(failure)),
+      (request) {
+        log("this request data ${request.toString()}");
         requestModel = request;
         emit(RequestDetailsSuccessState());
       },

@@ -1,4 +1,6 @@
+
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/location_model.dart';
+import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/rateing_model.dart';
 
 import '../../../../core/Constants/Enums/request_states.dart';
 import 'car_model.dart';
@@ -15,16 +17,17 @@ class RequestModel {
   LocationModel? toLocation;
   DriverModel? driverModel;
   CarModel? carModel;
+  RatingModel? rateModel;
 
-  RequestModel({
-    this.id,
-    this.price,
-    this.fromLocation,
-    this.toLocation,
-    this.state,
-    this.driverModel,
-    this.carModel,
-  });
+  RequestModel(
+      {this.id,
+      this.price,
+      this.fromLocation,
+      this.toLocation,
+      this.state,
+      this.driverModel,
+      this.carModel,
+      this.rateModel});
 
   factory RequestModel.fromJson(Map<String, dynamic> json) {
     RequestStates getRequestStates(String state) {
@@ -35,15 +38,14 @@ class RequestModel {
           return RequestStates.cancelRequest;
         case "finished":
           return RequestStates.finishedRequest;
-          case "pending":
+        case "pending":
           return RequestStates.pendingRequest;
-          case "started":
+        case "started":
           return RequestStates.startedRequest;
         default:
-          return RequestStates.cancelRequest;
+          return RequestStates.initial;
       }
     }
-
     return RequestModel(
       id: json["id"],
       price: json["price"] ?? 0.0,
@@ -55,6 +57,11 @@ class RequestModel {
       driverModel:
           json["driver"] == null ? null : DriverModel.fromJson(json["driver"]),
       carModel: json["car"] == null ? null : CarModel.fromJson(json["car"]),
+      rateModel: json["rate"] == null
+          ? null
+          : json["rate"].isEmpty
+              ? null
+              : RatingModel.fromJson(json["rate"][0]),
     );
   }
 

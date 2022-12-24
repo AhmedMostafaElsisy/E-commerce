@@ -1,6 +1,6 @@
+import 'package:captien_omda_customer/core/Constants/Enums/exception_enums.dart';
 import 'package:captien_omda_customer/core/model/base_model.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../Home_feature/Domain/enitiy/request_model.dart';
 import '../../../Home_feature/Domain/repository/request_interface.dart';
@@ -26,13 +26,23 @@ class TripUesCases {
   }
 
   Future<Either<CustomError, RequestModel>> callCurrentRequest() {
-    return repositoryInterface.getCurrentRequest().then((value) => value.fold(
-        (l) => left(l), (r) => right(RequestModel.fromJson(r.data))));
+    return repositoryInterface
+        .getCurrentRequest()
+        .then((value) => value.fold((l) => left(l), (r) {
+              if (r.data.isEmpty) {
+                return left(CustomError(
+                    type: CustomStatusCodeErrorType.unVerified,
+                    errorMassage: "Error"));
+              } else {
+                return right(RequestModel.fromJson(r.data));
+              }
+            }));
   }
+
   Future<Either<CustomError, RequestModel>> callRequestDetails(
       {required int requestId}) {
     return repositoryInterface.getRequestDetails(requestId: requestId).then(
-            (value) => value.fold(
-                (l) => Left(l), (r) => right(RequestModel.fromJson(r.data))));
+        (value) => value.fold(
+            (l) => Left(l), (r) => right(RequestModel.fromJson(r.data))));
   }
 }

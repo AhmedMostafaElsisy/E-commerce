@@ -30,9 +30,9 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
     try {
       String pathUrl = "";
       if (limit == null) {
-        pathUrl = ApiKeys.requestListKey;
+        pathUrl = "${ApiKeys.requestListKey}?page=$page";
       } else {
-        pathUrl = "${ApiKeys.requestListKey}?limit=$limit";
+        pathUrl = "${ApiKeys.requestListKey}?limit=$limit&page=$page";
       }
       Response response = await DioHelper.getDate(url: pathUrl);
 
@@ -98,7 +98,8 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
   }
 
   @override
-  Future<Either<CustomError, BaseModel>> getRequestDetails({required int requestDetails})async {
+  Future<Either<CustomError, BaseModel>> getRequestDetails(
+      {required int requestDetails}) async {
     try {
       String pathUrl = "${ApiKeys.findRequestKey}?id=$requestDetails";
 
@@ -112,5 +113,4 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
           type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
     }
   }
-
 }

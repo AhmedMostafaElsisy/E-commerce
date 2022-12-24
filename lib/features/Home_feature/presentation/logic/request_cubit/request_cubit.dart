@@ -67,7 +67,7 @@ class RequestCubit extends Cubit<RequestCubitState> {
   getRequestHistory() async {
     emit(RequestHistoryLoadingState());
     page = 1;
-    var result = await _requestUesCase.callHistoryRequest(page: page);
+    var result = await _requestUesCase.callHistoryRequest(page: page, );
 
     result.fold(
       (failure) => emit(RequestHistoryFailedState(failure)),

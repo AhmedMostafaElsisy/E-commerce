@@ -108,13 +108,20 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
       ),
       body: BlocConsumer<TripCubit, TripCubitState>(
         listener: (tripCtx, tripState) {
-          if (tripState is ChangeStatesTripSuccessState) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              RouteNames.mainBottomNavPageRoute,
-              (route) => false,
+
+         if (tripState is CurrentTripFailedState) {
+            checkUserAuth(context: tripCtx, errorType: tripState.error.type);
+            showSnackBar(
+              context: tripCtx,
+              title: tripState.error.errorMassage!,
             );
-          } else if (tripState is CurrentTripFailedState) {
+          } else if (tripState is ChangeStatesTripFailedState) {
+            checkUserAuth(context: tripCtx, errorType: tripState.error.type);
+            showSnackBar(
+              context: tripCtx,
+              title: tripState.error.errorMassage!,
+            );
+          } else if (tripState is RequestDetailsFailedState) {
             checkUserAuth(context: tripCtx, errorType: tripState.error.type);
             showSnackBar(
               context: tripCtx,
@@ -130,6 +137,13 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                   requestModel: tripCtx.read<TripCubit>().requestModel,
                 ),
                 (route) => route.isFirst,
+              );
+            }else  if (tripCtx.read<TripCubit>().requestModel.state ==
+                RequestStates.cancelRequest){
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RouteNames.mainBottomNavPageRoute,
+                    (route) => false,
               );
             }
           }
@@ -274,7 +288,9 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                           buttonBackgroundColor: AppConstants.lightWhiteColor,
                           buttonTextColor: AppConstants.mainColor,
                           borderColor: AppConstants.mainColor,
-                          showBorder: true,
+                          showBorder: tripState is ChangeStatesTripLoadingState
+                              ? false
+                              : true,
                           isLoading: tripState is ChangeStatesTripLoadingState,
                           buttonTextSize: AppConstants.normalFontSize,
                           buttonTextFontWeight: FontWeight.w700,

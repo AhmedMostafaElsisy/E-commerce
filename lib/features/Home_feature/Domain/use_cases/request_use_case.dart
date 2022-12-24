@@ -18,10 +18,9 @@ class RequestUesCases {
   }
 
   Future<Either<CustomError, List<RequestModel>>> callHistoryRequest(
-      {int page = 1}) {
-    return repositoryInterface.getRequests(page: page).then((value) =>
-        value.fold((l) => Left(l), (r) => right(requestListFromJson(r.data))));
+      {int page = 1, int limit = 10}) {
+    return repositoryInterface.getRequests(page: page, limit: limit).then(
+        (value) => value.fold(
+            (l) => Left(l), (r) => right(requestListFromJson(r.data))));
   }
-
-
 }

@@ -1,4 +1,3 @@
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,9 +8,9 @@ import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared.dart';
 import '../../../../../core/Helpers/shared_texts.dart';
 import '../../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../../core/presentation/Routes/route_names.dart';
 import '../../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../../core/presentation/Widgets/common_loading_widget.dart';
@@ -20,12 +19,14 @@ import '../../../../../core/presentation/Widgets/custom_alert_dialog.dart';
 import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
 import '../../../../Profile_feature/presentation/screens/common_pop_up_content.dart';
 import '../../../../trip_feature/logic/trip_cubit/trip_cubit_states.dart';
+import '../../../../trip_feature/presentation/driveri_data_widget.dart';
 import '../../../../trip_feature/presentation/trip_location_item.dart';
-import '../../logic/request_cubit/request_cubit.dart';
 
 class RequestHistoryDetails extends StatefulWidget {
   final RouteArgument routeArgument;
-  const RequestHistoryDetails({Key? key,required this.routeArgument}) : super(key: key);
+
+  const RequestHistoryDetails({Key? key, required this.routeArgument})
+      : super(key: key);
 
   @override
   State<RequestHistoryDetails> createState() => _RequestHistoryDetailsState();
@@ -33,14 +34,14 @@ class RequestHistoryDetails extends StatefulWidget {
 
 class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
   late bool canClick;
-  late TripCubit requestCubit;
+  late TripCubit tripCubit;
 
   @override
   void initState() {
     super.initState();
     canClick = true;
-    requestCubit = BlocProvider.of<TripCubit>(context);
-    requestCubit.getRequestDetails(requestId:widget.routeArgument.requestId! );
+    tripCubit = BlocProvider.of<TripCubit>(context);
+    tripCubit.getRequestDetails(requestId: widget.routeArgument.requestId!);
   }
 
   @override
@@ -147,22 +148,25 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
-              child: BlocConsumer<TripCubit,TripCubitState>(
-                listener: (requestCtx,requestState){
-                  if(requestState is RequestDetailsFailedState){
+              child: BlocConsumer<TripCubit, TripCubitState>(
+                listener: (requestCtx, requestState) {
+                  if (requestState is RequestDetailsFailedState) {
                     checkUserAuth(
                         context: requestCtx,
                         errorType: requestState.error.type);
                   }
                 },
-                builder:(requestCtx,requestState){
+                builder: (requestCtx, requestState) {
                   if (requestState is RequestDetailsLoadingState) {
-                    return const CommonLoadingWidget();
+                    return SizedBox(
+                        height: SharedText.screenHeight * 0.4,
+                        child: const CommonLoadingWidget());
                   } else if (requestState is RequestDetailsFailedState) {
                     return CommonError(
                       errorMassage: requestState.error.errorMassage,
                       onTap: () {
-                        requestCtx.read<TripCubit>().getRequestDetails(requestId: widget.routeArgument.requestId!);
+                        requestCtx.read<TripCubit>().getRequestDetails(
+                            requestId: widget.routeArgument.requestId!);
                       },
                       withButton: true,
                     );
@@ -172,7 +176,8 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                       children: [
                         ///select destination
                         CommonTitleText(
-                          textKey: AppLocalizations.of(context)!.lblRequestDetails,
+                          textKey:
+                              AppLocalizations.of(context)!.lblRequestDetails,
                           textColor: AppConstants.lightBlackColor,
                           textWeight: FontWeight.w700,
                           textFontSize: AppConstants.smallFontSize,
@@ -182,108 +187,49 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                         getSpaceHeight(AppConstants.pagePadding),
 
                         ///Searching for a car
-                        Container(
-                          // height: getWidgetHeight(72),
-                          width: SharedText.screenWidth,
-                          decoration: BoxDecoration(
-                            color: AppConstants.lightGreyTextColor,
-                            borderRadius: BorderRadius.circular(
-                                AppConstants.containerBorderRadius),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                getWidgetHeight(AppConstants.pagePadding),
-                                vertical:
-                                getWidgetWidth(AppConstants.pagePadding + 4)),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ///driver data
-                                  Row(
-                                    children: [
-                                      commonCachedImageWidget(context, "imageUrl",
-                                          height: 48,
-                                          width: 48,
-                                          isCircular: true,
-                                          isProfile: true),
-                                      getSpaceWidth(AppConstants.smallPadding),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          CommonTitleText(
-                                            textKey: "Drivier name"
-                                                .getStringWithoutSpacings(),
-                                            textFontSize:
-                                            AppConstants.smallFontSize,
-                                            textColor: AppConstants.lightBlackColor,
-                                            textWeight: FontWeight.w600,
-                                          ),
-                                          getSpaceHeight(
-                                              AppConstants.pagePadding - 2),
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: const [
-                                              CommonTitleText(
-                                                textKey: "لانسر شارك (احمر)",
-                                                textFontSize:
-                                                AppConstants.smallFontSize - 2,
-                                                textColor:
-                                                AppConstants.mainTextColor,
-                                                textWeight: FontWeight.w700,
-                                              ),
-
-                                            ],
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-
-                                  ///trip price
-                                  Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children:  [
-                                            const  CommonTitleText(
-                                              textKey: "4.3",
-                                              textFontSize:
-                                              AppConstants.smallFontSize - 2,
-                                              textColor:
-                                              AppConstants.mainTextColor,
-                                              textWeight: FontWeight.w500,
-                                            ),
-                                            getSpaceWidth(4),
-                                            const    CommonAssetSvgImageWidget(
-                                              imageString: "rate_star.svg",
-                                              width: 16,
-                                              height: 16,
-                                              fit: BoxFit.cover,
-                                              imageColor:
-                                              AppConstants.mainColor,
-                                            ),
-                                          ],
-                                        ),
-                                        getSpaceHeight(
-                                            AppConstants.pagePadding - 2),
-                                        const    CommonTitleText(
-                                          textKey:
-                                          "د و ج 189",
-                                          textColor: AppConstants.mainTextColor,
-                                          textWeight: FontWeight.w700,
-                                          textFontSize: AppConstants.smallFontSize-2,
-                                        ),
-                                      ]),
-                                ]),
-                          ),
+                        DriverDataWidget(
+                          model: requestCtx.read<TripCubit>().requestModel,
                         ),
+                        if (requestCtx
+                                    .read<TripCubit>()
+                                    .requestModel
+                                    .rateModel !=
+                                null &&
+                            requestCtx
+                                    .read<TripCubit>()
+                                    .requestModel
+                                    .rateModel!
+                                    .comment !=
+                                null) ...[
+                          ///spacer
+                          getSpaceHeight(AppConstants.pagePadding),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CommonAssetSvgImageWidget(
+                                imageString: "comment.svg",
+                                height: 24,
+                                width: 24,
+                                fit: BoxFit.contain,
+                              ),
+                              getSpaceWidth(8),
+                              Expanded(
+                                child: CommonTitleText(
+                                  textKey: requestCtx
+                                      .read<TripCubit>()
+                                      .requestModel
+                                      .rateModel!
+                                      .comment!,
+                                  textFontSize: AppConstants.smallFontSize,
+                                  textColor: AppConstants.mainTextColor,
+                                  textWeight: FontWeight.w400,
+                                  lines: 4,
+                                  textAlignment: TextAlign.start,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
 
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
@@ -296,9 +242,17 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
 
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
-                         TripLocationItem(
-                          currentLocation:   requestCtx.read<RequestCubit>().requestModel.fromLocation!.locationName!,
-                          destinationLocation: requestCtx.read<RequestCubit>().requestModel.toLocation!.locationName!,
+                        TripLocationItem(
+                          currentLocation: requestCtx
+                              .read<TripCubit>()
+                              .requestModel
+                              .fromLocation!
+                              .locationName!,
+                          destinationLocation: requestCtx
+                              .read<TripCubit>()
+                              .requestModel
+                              .toLocation!
+                              .locationName!,
                         ),
 
                         ///spacer
@@ -327,7 +281,7 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
                                 getSpaceWidth(AppConstants.smallPadding / 2),
                                 CommonTitleText(
                                   textKey:
-                                  "${requestCtx.read<RequestCubit>().requestModel.price} ${AppLocalizations.of(context)!.lblEGP}",
+                                      "${requestCtx.read<TripCubit>().requestModel.price} ${AppLocalizations.of(context)!.lblEGP}",
                                   textColor: AppConstants.lightBorderColor,
                                   textWeight: FontWeight.w700,
                                   textFontSize: AppConstants.normalFontSize,
@@ -337,27 +291,39 @@ class _RequestHistoryDetailsState extends State<RequestHistoryDetails> {
 
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
+                        if (requestCtx
+                                .read<TripCubit>()
+                                .requestModel
+                                .rateModel ==
+                            null)
 
-                        ///add rating
-                        CommonGlobalButton(
-                          height: 48,
-                          buttonBackgroundColor: AppConstants.lightWhiteColor,
-                          buttonTextColor: AppConstants.mainColor,
-                          borderColor: AppConstants.mainColor,
-                          showBorder: true,
-                          buttonTextSize: AppConstants.normalFontSize,
-                          buttonTextFontWeight: FontWeight.w700,
-                          buttonText: AppLocalizations.of(context)!.lblAddRating,
-                          onPressedFunction: () {
-                            ///Todo: navigate to add rating screen
-                          },
-                        ),
+                          ///add rating
+                          CommonGlobalButton(
+                            height: 48,
+                            buttonBackgroundColor: AppConstants.lightWhiteColor,
+                            buttonTextColor: AppConstants.mainColor,
+                            borderColor: AppConstants.mainColor,
+                            showBorder: true,
+                            buttonTextSize: AppConstants.normalFontSize,
+                            buttonTextFontWeight: FontWeight.w700,
+                            buttonText:
+                                AppLocalizations.of(context)!.lblAddRating,
+                            onPressedFunction: () {
+                              Navigator.pushNamed(
+                                context,
+                                RouteNames.ratingPageRoute,
+                                arguments: RouteArgument(
+                                  requestModel:
+                                      requestCtx.read<TripCubit>().requestModel,
+                                ),
+                              );
+                            },
+                          ),
 
                         ///spacer
                         getSpaceHeight(AppConstants.pagePadding),
                       ]);
                 },
-
               ),
             ),
           ),

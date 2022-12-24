@@ -96,7 +96,7 @@ class TripLocationItem extends StatelessWidget {
                   SizedBox(
                     width: getWidgetWidth(350),
                     child: CommonTitleText(
-                      textKey: AppLocalizations.of(context)!.lblCurrentLocation,
+                      textKey: AppLocalizations.of(context)!.lblDestinationLocation,
                       textColor: AppConstants.lightBlackColor,
                       textWeight: FontWeight.w600,
                       textFontSize: AppConstants.normalFontSize,
