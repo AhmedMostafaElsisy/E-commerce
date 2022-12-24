@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -31,7 +30,6 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   late Timer _timer;
   int _start = 15;
   String otpError = "";
-  String email = "";
   late OtpCubit _otpCubit;
 
   @override
@@ -40,7 +38,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
     otpController = TextEditingController();
     _otpCubit = BlocProvider.of<OtpCubit>(context);
     _otpCubit.resetState();
-    email = widget.routeArgument.emailAddress!;
+
     startTimer();
   }
 
@@ -162,7 +160,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                               getSpaceHeight(AppConstants.smallPadding),
                               CommonTitleText(
                                 textKey:
-                                    "${email.hideEmail()}-${widget.routeArgument.otp!}",
+                                    widget.routeArgument.otp!,
                                 textColor: AppConstants.mainTextColor,
                                 textFontSize: AppConstants.smallFontSize,
                                 textWeight: FontWeight.w600,
