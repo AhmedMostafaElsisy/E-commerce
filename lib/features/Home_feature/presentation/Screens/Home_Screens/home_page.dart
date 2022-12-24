@@ -12,6 +12,7 @@ import '../../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_loading_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
 import 'request_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,12 +24,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late RequestCubit requestCubit;
+  late SettingCubit settingCubit;
 
   @override
   void initState() {
     super.initState();
     requestCubit = BlocProvider.of<RequestCubit>(context);
+    settingCubit = BlocProvider.of<SettingCubit>(context);
     requestCubit.getHomeRequest();
+    settingCubit.getSetting();
   }
 
   @override

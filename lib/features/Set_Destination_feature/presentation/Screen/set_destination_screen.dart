@@ -1,8 +1,10 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
 import 'package:captien_omda_customer/features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
 import 'package:captien_omda_customer/features/Set_Destination_feature/presentation/logic/destination_states.dart';
+import 'package:captien_omda_customer/features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/Constants/app_constants.dart';
@@ -15,6 +17,7 @@ import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../trip_feature/logic/trip_cubit/trip_cubit_states.dart';
 import '../logic/destination_event.dart';
 import 'location_item_widget.dart';
 
@@ -125,7 +128,8 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return  AppLocalizations.of(context)!.lblLocationValidationMassage;
+                          return AppLocalizations.of(context)!
+                              .lblLocationValidationMassage;
                         }
                         return null;
                       },
@@ -165,7 +169,8 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return  AppLocalizations.of(context)!.lblLocationValidationMassage;
+                          return AppLocalizations.of(context)!
+                              .lblLocationValidationMassage;
                         }
                         return null;
                       },
@@ -265,24 +270,47 @@ class _SetDestinationScreenState extends State<SetDestinationScreen> {
                   ),
                 ),
                 getSpaceHeight(30),
-                CommonGlobalButton(
-                  height: 48,
-                  buttonBackgroundColor: AppConstants.mainColor,
-                  isEnable: destinationCtx
-                              .read<DestinationCubit>()
-                              .destinationFrom !=
-                          null &&
-                      destinationCtx.read<DestinationCubit>().destinationTo !=
-                          null,
-                  // isLoading:
-                  // loginState is UserLoginLoadingState,
-                  buttonTextSize: AppConstants.normalFontSize,
-                  buttonTextFontWeight: FontWeight.w700,
-                  buttonText: AppLocalizations.of(context)!.lblConfirm,
-                  onPressedFunction: () {
-                    if (formKey.currentState!.validate()) {
-                      FocusScope.of(context).requestFocus(FocusNode());
+                BlocConsumer<TripCubit,TripCubitState>(
+                  listener: (tripCtx,tripState){
+                    if(tripState is TripSuccessState){
+                      Navigator.pushNamed(
+                          context, RouteNames.currentTripsPageRoute);
+                    }else if (tripState is TripFailedState){
+                      showSnackBar(
+                        context: tripCtx,
+                        title: tripState.error.errorMassage!,
+                      );
                     }
+                  },
+                  builder:  (tripCtx,tripState){
+                    return CommonGlobalButton(
+                      height: 48,
+                      buttonBackgroundColor: AppConstants.mainColor,
+                      isEnable: destinationCtx
+                          .read<DestinationCubit>()
+                          .destinationFrom !=
+                          null &&
+                          destinationCtx.read<DestinationCubit>().destinationTo !=
+                              null,
+                      isLoading:
+                      tripState is TripLoadingState,
+                      buttonTextSize: AppConstants.normalFontSize,
+                      buttonTextFontWeight: FontWeight.w700,
+                      buttonText: AppLocalizations.of(context)!.lblConfirm,
+                      onPressedFunction: () {
+                        if (formKey.currentState!.validate()) {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          BlocProvider.of<TripCubit>(context).startTrip(
+                              fromModel: destinationCtx
+                                  .read<DestinationCubit>()
+                                  .destinationFrom!,
+                              toModel: destinationCtx
+                                  .read<DestinationCubit>()
+                                  .destinationTo!);
+
+                        }
+                      },
+                    );
                   },
                 ),
                 getSpaceHeight(50),

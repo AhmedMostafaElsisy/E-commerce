@@ -13,4 +13,5 @@ class RouteNames {
   static const String editProfilePageRoute = "/EditProfilePage";
   static const String changePasswordPageRoute = "/ChangePasswordPage";
   static const String setDestinationPageRoute = "/SetDestinationPage";
+  static const String currentTripsPageRoute = "/CurrentTripPage";
 }

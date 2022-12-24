@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/setting_feature/Logic/setting_cubit.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 
@@ -13,6 +14,7 @@ import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cub
 import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
@@ -48,6 +50,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => NotificationCubit(NotificationListRepository())),
         BlocProvider<RequestCubit>(create: (_) => di.sl<RequestCubit>()),
         BlocProvider<DestinationCubit>(create: (_) => di.sl<DestinationCubit>()),
+        BlocProvider<TripCubit>(create: (_) => di.sl<TripCubit>()),
+        BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
 
       ],
