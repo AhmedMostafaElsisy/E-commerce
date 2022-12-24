@@ -27,12 +27,15 @@ class CommonGlobalButton extends StatelessWidget {
   final bool isEnable;
   final bool showBorder;
   final Color? borderColor;
+  final String? iconPath;
+  final double? iconWidth;
+  final double? iconHeight;
 
   const CommonGlobalButton(
       {Key? key,
       required this.buttonText,
       required this.onPressedFunction,
-       this.withIcon=false,
+      this.withIcon = false,
       this.buttonBackgroundColor,
       this.onPressedColor,
       this.shadowBackgroundColor,
@@ -50,7 +53,10 @@ class CommonGlobalButton extends StatelessWidget {
       this.isLoading = false,
       this.isEnable = true,
       this.showBorder = false,
-      this.borderColor = AppConstants.mainColor})
+      this.borderColor = AppConstants.mainColor,
+      this.iconHeight = 8,
+      this.iconWidth = 14,
+      this.iconPath = "right_arrow.svg"})
       : super(key: key);
 
   @override
@@ -89,6 +95,7 @@ class CommonGlobalButton extends StatelessWidget {
       child: withIcon!
           ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 CommonTitleText(
                   textKey: isLoading
@@ -103,8 +110,12 @@ class CommonGlobalButton extends StatelessWidget {
                   textWeight: buttonTextFontWeight!,
                 ),
                 getSpaceWidth(spaceSize!),
-                const CommonAssetSvgImageWidget(
-                    imageString: "right_arrow.svg", height: 8, width: 14)
+                CommonAssetSvgImageWidget(
+                  imageString: iconPath!,
+                  height: iconHeight!,
+                  width: iconWidth!,
+                  fit: BoxFit.contain,
+                )
               ],
             )
           : CommonTitleText(

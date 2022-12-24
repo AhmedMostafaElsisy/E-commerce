@@ -6,7 +6,7 @@
   "title2": "التطبيق التلقائي 22",
   "lblNoData": "لا يوجد بيانات",
   "lblStartTravel": "",
-  "lblSignup": "تسجيل الدخول",
+  "lblSignup": "تسجيل جديد",
   "lblName": "اسم المستخدم",
   "lblEnterName": " ادخل اسم المستخدم",
   "lblEmail": "البريد الالكتروني",
@@ -22,7 +22,7 @@
   "lblPhoneIsEmpty": "رقم الهاتف فارغ",
   "lblNameBadFormat": "الاسم يحتوي ع ارقام او رموز",
   "lblEmailBadFormat": "الايميل بصيغة غير صحيحة",
-  "lblLogin": "تسجيل الدخول",
+  "lblLogin": "تسجيل دخول",
   "lblPhoneValidate": "يجب ان يكون رقم الهاتف مكون من 11 رقم",
   "lblPasswordValidate": "كلمة المرور يجب ان تكون اكبر من ٦ احرف",
   "lblIsForgetPassword": "نسيت كلمة السر ؟",
@@ -119,5 +119,8 @@
   "lblHowWas": "كيف كان",
   "lblOption": "اختياري",
   "lblSend": "إرسال",
-  "lblRatingError": "هذا الخانة مطلوبة"
+  "lblRatingError": "هذا الخانة مطلوبة",
+  "lblLoginWithSocialMedia": "تسجيل الدخول عن طريق مواقع التواصل الاجتماعي",
+  "lblGoogle": "جوجل",
+  "lblFaceBook": "فيسبوك"
 }

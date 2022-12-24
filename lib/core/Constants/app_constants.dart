@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppConstants {
   /// Colors in Light Version ...
-  static const Color mainColor = Color(0xFFC00319);
-  static const Color mainTextColor = Color(0xFF595959);
+  static const Color mainColor = Color(0xFF4232C6);
+  static const Color mainTextColor = Color(0xFF072B4F);
   static const Color verificationCodeColor = Color(0xFFFBF6F7);
   static const Color borderInputColor = Color(0xFF6E6E6E);
   static const Color lightBlackColor = Color(0xFF000000);
@@ -16,6 +16,7 @@ class AppConstants {
   static const Color darkFieldColor = Color(0XFF2F2F2F);
   static const Color darkTextColor = Color(0XFFEDEDED);
   static const Color backGroundColor = Color(0xFFFFF8F5);
+  static const Color loaderBackGroundColor = Color(0xFFFAFAFD);
 
   static const Color errorColor = Color(0xFF65020D);
   static const Color lightRedColor = Color(0xFFCE2925);
@@ -58,7 +59,7 @@ class AppConstants {
   static const double smallBorderRadius = 4.0;
   static const double borderRadius = 20.0;
   static const double containerBorderRadius = 6.0;
-  static const double containerOfListTitleBorderRadius = 10;
+  static const double containerOfListTitleBorderRadius = 8;
   static const double buttonBorderRadius = 25.0;
   static const double bottomSheetBorderRadius = 25.0;
 
