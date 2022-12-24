@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:captien_omda_customer/features/trip_feature/presentation/trip_location_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,9 +14,11 @@ import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../core/presentation/Widgets/custom_alert_dialog.dart';
+import '../../../core/setting_feature/Logic/setting_cubit.dart';
 import '../../Profile_feature/presentation/screens/common_pop_up_content.dart';
 import '../logic/trip_cubit/trip_cubit.dart';
 import '../logic/trip_cubit/trip_cubit_states.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CurrentTripDetailsScreen extends StatefulWidget {
   const CurrentTripDetailsScreen({Key? key}) : super(key: key);
@@ -25,6 +29,15 @@ class CurrentTripDetailsScreen extends StatefulWidget {
 }
 
 class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
+  late bool canClick;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    canClick = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +50,41 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
         showLeadingWidget: true,
         customActionWidget: InkWell(
           onTap: () {
-            ///Todo: add call support func
+            showAlertDialog(context, [
+              CommonPopUpContent(
+                title: AppLocalizations.of(context)!.lblCallSupport,
+                subTitle: AppLocalizations.of(context)!.lbCallSupportDesc,
+                onSubmitClick: !canClick
+                    ? () {}
+                    : () async {
+                        if (canClick) {
+                          setState(() {
+                            canClick = false;
+                          });
+                          if (Platform.isIOS) {
+                            await launch(
+                                "tel://${BlocProvider.of<SettingCubit>(context).settingModel.sitePhone!}");
+                            await Future.delayed(
+                              const Duration(seconds: 5),
+                            );
+                          } else {
+                            final Uri launchUri = Uri(
+                              scheme: 'tel',
+                              path: BlocProvider.of<SettingCubit>(context)
+                                  .settingModel
+                                  .sitePhone!,
+                            );
+                            Navigator.of(context).pop();
+                            await launchUrl(launchUri);
+                            await Future.delayed(const Duration(seconds: 5));
+                          }
+                          setState(() {
+                            canClick = true;
+                          });
+                        }
+                      },
+              ),
+            ]);
           },
           child: const CommonAssetSvgImageWidget(
               imageString: "call_support.svg",
@@ -56,11 +103,11 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
       ),
       body: BlocConsumer<TripCubit, TripCubitState>(
         listener: (tripCtx, tripState) {
-          if(tripState is ChangeStatesTripSuccessState){
+          if (tripState is ChangeStatesTripSuccessState) {
             Navigator.pushNamedAndRemoveUntil(
               context,
               RouteNames.mainBottomNavPageRoute,
-                  (route) => false,
+              (route) => false,
             );
           }
         },
