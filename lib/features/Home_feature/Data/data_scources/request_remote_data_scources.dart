@@ -16,6 +16,8 @@ abstract class RequestRemoteDataSourceInterface {
 
   Future<Either<CustomError, BaseModel>> changeRequestStates(
       {required int requestID, required String states});
+
+  Future<Either<CustomError, BaseModel>> getCurrentRequest();
 }
 
 class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
@@ -68,6 +70,22 @@ class RequestRemoteDataSourceImpl extends RequestRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('state', states.toString()));
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
+
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getCurrentRequest() async {
+    try {
+      String pathUrl = ApiKeys.currentRequestKey;
+
+      Response response = await DioHelper.getDate(
+        url: pathUrl,
+      );
 
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {

@@ -21,3 +21,21 @@ class RequestHomeFailedState extends RequestCubitState {
 
   RequestHomeFailedState(this.error);
 }
+class RequestHistoryLoadingState extends RequestCubitState {}
+
+class RequestHistorySuccessState extends RequestCubitState {}
+
+class RequestHistoryEmptyState extends RequestCubitState {}
+
+class RequestHistoryFailedState extends RequestCubitState {
+  CustomError error;
+
+  RequestHistoryFailedState(this.error);
+}
+
+class RequestMoreDataHistoryLoadingState extends RequestCubitState {}
+class RequestMoreHistoryFailedState extends RequestCubitState {
+  CustomError error;
+
+  RequestMoreHistoryFailedState(this.error);
+}

@@ -14,16 +14,19 @@ class TripUesCases {
       {required int locationFromId, required int locationToId}) {
     return repositoryInterface
         .startRequest(
-        fromLocationId: locationFromId, toLocationId: locationToId)
-        .then((value) =>
-        value.fold(
-                (l) => left(l), (r) => right(RequestModel.fromJson(r.data))));
+            fromLocationId: locationFromId, toLocationId: locationToId)
+        .then((value) => value.fold(
+            (l) => left(l), (r) => right(RequestModel.fromJson(r.data))));
   }
 
   Future<Either<CustomError, BaseModel>> callChangeRequestStates(
       {required int requestID, required String states}) {
-    return repositoryInterface
-        .changeRequestStates(
+    return repositoryInterface.changeRequestStates(
         requestID: requestID, states: states);
+  }
+
+  Future<Either<CustomError, RequestModel>> callCurrentRequest() {
+    return repositoryInterface.getCurrentRequest().then((value) => value.fold(
+        (l) => left(l), (r) => right(RequestModel.fromJson(r.data))));
   }
 }

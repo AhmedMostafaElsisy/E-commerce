@@ -33,7 +33,6 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     canClick = true;
   }
@@ -270,7 +269,7 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                               getSpaceWidth(AppConstants.smallPadding / 2),
                               CommonTitleText(
                                 textKey:
-                                    "${tripCtx.read<TripCubit>().requestModel.price!} EGP",
+                                    "${tripCtx.read<TripCubit>().requestModel.price!} ${AppLocalizations.of(context)!.lblEGP}",
                                 textColor: AppConstants.lightBorderColor,
                                 textWeight: FontWeight.w700,
                                 textFontSize: AppConstants.normalFontSize,
