@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/model/base_model.dart';
 import '../../../../core/Constants/Keys/api_keys.dart';
@@ -20,12 +19,15 @@ abstract class AuthRemoteDataSourceInterface {
 
   ///User Create A new Account
   Future<Either<CustomError, BaseModel>> userSingUp(
-      {required String userName,
+      {required String userFirstName,
+      required String userLastName,
       required String emailAddress,
       required String phoneNumber,
       required String password,
       required String confirmPassword,
-      XFile? userImage,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
       required String token});
 
   void saveAuthToken({required String token});
@@ -98,32 +100,30 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> userSingUp(
-      {required String userName,
+      {required String userFirstName,
+      required String userLastName,
       required String emailAddress,
       required String phoneNumber,
       required String password,
       required String confirmPassword,
-      XFile? userImage,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
       required String token}) async {
     try {
       FormData staticData = FormData();
       staticData.fields.clear();
       String pathUrl = ApiKeys.singUpKey;
-      staticData.fields.add(MapEntry('name', userName));
+      staticData.fields.add(MapEntry('first_name', userFirstName));
+      staticData.fields.add(MapEntry('last_name', userLastName));
       staticData.fields.add(MapEntry('email', emailAddress));
       staticData.fields.add(MapEntry('phone', phoneNumber));
       staticData.fields.add(MapEntry('password', password));
       staticData.fields.add(MapEntry('password_confirmation', confirmPassword));
+      staticData.fields.add(MapEntry('address', userAddressDetails));
+      staticData.fields.add(MapEntry('city', userCity));
+      staticData.fields.add(MapEntry('area', userArea));
       staticData.fields.add(MapEntry('device_token', token));
-      if (userImage != null && userImage.path != "") {
-        staticData.files.add(MapEntry(
-            'image',
-            await MultipartFile.fromFile(
-              userImage.path,
-              filename: userImage.path.split("/").last.toString(),
-            )));
-      }
-
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));

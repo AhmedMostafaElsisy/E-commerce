@@ -6,7 +6,7 @@ import '../../Helpers/shared.dart';
 
 void showSnackBar(
     {required BuildContext context, required String title, Color? color}) {
-  Color backgroundColor = color ?? AppConstants.mainColor;
+  Color backgroundColor = color ?? AppConstants.lightRedColor;
 
   final snackBar = SnackBar(
     content: CommonTitleText(
