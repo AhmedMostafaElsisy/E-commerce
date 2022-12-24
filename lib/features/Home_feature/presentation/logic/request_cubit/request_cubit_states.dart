@@ -39,3 +39,4 @@ class RequestMoreHistoryFailedState extends RequestCubitState {
 
   RequestMoreHistoryFailedState(this.error);
 }
+

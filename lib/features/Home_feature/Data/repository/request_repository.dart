@@ -36,4 +36,9 @@ class RequestRepository extends RequestRepositoryInterface {
   Future<Either<CustomError, BaseModel>> getCurrentRequest() {
     return remoteDataSourceInterface.getCurrentRequest();
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getRequestDetails({required int requestId}) {
+    return remoteDataSourceInterface.getRequestDetails(requestDetails: requestId);
+  }
 }

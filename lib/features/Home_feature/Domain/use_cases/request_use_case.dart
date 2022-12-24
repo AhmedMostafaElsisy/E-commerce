@@ -22,4 +22,6 @@ class RequestUesCases {
     return repositoryInterface.getRequests(page: page).then((value) =>
         value.fold((l) => Left(l), (r) => right(requestListFromJson(r.data))));
   }
+
+
 }

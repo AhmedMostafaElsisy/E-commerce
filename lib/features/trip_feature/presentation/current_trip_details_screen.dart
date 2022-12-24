@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:captien_omda_customer/features/trip_feature/presentation/trip_location_item.dart';
+import 'package:captien_omda_customer/features/trip_feature/presentation/trip_states_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../core/Constants/Enums/request_states.dart';
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
@@ -14,11 +16,14 @@ import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../core/presentation/Widgets/custom_alert_dialog.dart';
+import '../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../core/setting_feature/Logic/setting_cubit.dart';
 import '../../Profile_feature/presentation/screens/common_pop_up_content.dart';
 import '../logic/trip_cubit/trip_cubit.dart';
 import '../logic/trip_cubit/trip_cubit_states.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'driveri_data_widget.dart';
 
 class CurrentTripDetailsScreen extends StatefulWidget {
   const CurrentTripDetailsScreen({Key? key}) : super(key: key);
@@ -108,6 +113,17 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
               RouteNames.mainBottomNavPageRoute,
               (route) => false,
             );
+          } else if (tripState is CurrentTripFailedState) {
+            checkUserAuth(context: tripCtx, errorType: tripState.error.type);
+            showSnackBar(
+              context: tripCtx,
+              title: tripState.error.errorMassage!,
+            );
+          } else if (tripState is RequestDetailsSuccessState) {
+            if (tripCtx.read<TripCubit>().requestModel.state ==
+                RequestStates.finishedRequest) {
+              ///TODO: navigate to rate request
+            }
           }
         },
         builder: (tripCtx, tripState) {
@@ -119,11 +135,17 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CommonAssetSvgImageWidget(
-                  imageString: "trip_car.svg",
-                  height: 205,
-                  width: SharedText.screenWidth,
-                  fit: BoxFit.contain,
+                InkWell(
+                  onTap: () {
+                    tripCtx.read<TripCubit>().getRequestDetails(
+                        requestId: tripCtx.read<TripCubit>().requestModel.id!);
+                  },
+                  child: CommonAssetSvgImageWidget(
+                    imageString: "trip_car.svg",
+                    height: 205,
+                    width: SharedText.screenWidth,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ],
             ),
@@ -168,56 +190,14 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
                       getSpaceHeight(AppConstants.pagePadding),
 
                       ///Searching for a car
-                      Container(
-                        // height: getWidgetHeight(72),
-                        width: SharedText.screenWidth,
-                        decoration: BoxDecoration(
-                          color: AppConstants.lightGreyTextColor,
-                          borderRadius: BorderRadius.circular(
-                              AppConstants.containerBorderRadius),
+                      if (tripCtx.read<TripCubit>().requestModel.state ==
+                          RequestStates.newRequest) ...[
+                        const TripStatesWidget(),
+                      ] else ...[
+                        DriverDataWidget(
+                          model: tripCtx.read<TripCubit>().requestModel,
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  getWidgetHeight(AppConstants.pagePadding),
-                              vertical:
-                                  getWidgetWidth(AppConstants.pagePadding + 4)),
-                          child: Column(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const CommonAssetSvgImageWidget(
-                                  imageString: "search_car_icon.svg",
-                                  height: 25,
-                                  width: 25,
-                                  fit: BoxFit.contain,
-                                ),
-                                getSpaceWidth(AppConstants.smallPadding / 2),
-                                CommonTitleText(
-                                  textKey: AppLocalizations.of(context)!
-                                      .lblSearchingForCar,
-                                  textColor: AppConstants.lightBlackColor,
-                                  textWeight: FontWeight.w700,
-                                  textFontSize: AppConstants.smallFontSize,
-                                ),
-                              ],
-                            ),
-                            getSpaceHeight(AppConstants.smallPadding - 2),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CommonTitleText(
-                                  textKey: AppLocalizations.of(context)!
-                                      .lblSearchingForCarTimeEstimation,
-                                  textColor: AppConstants.mainTextColor,
-                                  textWeight: FontWeight.w400,
-                                  textFontSize: AppConstants.normalFontSize,
-                                ),
-                              ],
-                            ),
-                          ]),
-                        ),
-                      ),
+                      ],
 
                       ///spacer
                       getSpaceHeight(AppConstants.pagePadding),
@@ -279,36 +259,38 @@ class _CurrentTripDetailsScreenState extends State<CurrentTripDetailsScreen> {
 
                       ///spacer
                       getSpaceHeight(AppConstants.pagePadding),
-                      CommonGlobalButton(
-                        height: 48,
-                        buttonBackgroundColor: AppConstants.lightWhiteColor,
-                        buttonTextColor: AppConstants.mainColor,
-                        borderColor: AppConstants.mainColor,
-                        showBorder: true,
-                        isLoading: tripState is ChangeStatesTripLoadingState,
-                        buttonTextSize: AppConstants.normalFontSize,
-                        buttonTextFontWeight: FontWeight.w700,
-                        buttonText: AppLocalizations.of(context)!.lblCancel,
-                        onPressedFunction: () {
-                          showAlertDialog(context, [
-                            CommonPopUpContent(
-                              title:
-                                  AppLocalizations.of(context)!.lblCancelTile,
-                              subTitle:
-                                  AppLocalizations.of(context)!.lblCancelDesc,
-                              onSubmitClick: () {
-                                Navigator.of(context).pop();
-                                tripCtx.read<TripCubit>().changeRequestSates(
-                                    states: "Canceled",
-                                    requestId: tripCtx
-                                        .read<TripCubit>()
-                                        .requestModel
-                                        .id!);
-                              },
-                            ),
-                          ]);
-                        },
-                      ),
+                      if (tripCtx.read<TripCubit>().requestModel.state !=
+                          RequestStates.startedRequest)
+                        CommonGlobalButton(
+                          height: 48,
+                          buttonBackgroundColor: AppConstants.lightWhiteColor,
+                          buttonTextColor: AppConstants.mainColor,
+                          borderColor: AppConstants.mainColor,
+                          showBorder: true,
+                          isLoading: tripState is ChangeStatesTripLoadingState,
+                          buttonTextSize: AppConstants.normalFontSize,
+                          buttonTextFontWeight: FontWeight.w700,
+                          buttonText: AppLocalizations.of(context)!.lblCancel,
+                          onPressedFunction: () {
+                            showAlertDialog(context, [
+                              CommonPopUpContent(
+                                title:
+                                    AppLocalizations.of(context)!.lblCancelTile,
+                                subTitle:
+                                    AppLocalizations.of(context)!.lblCancelDesc,
+                                onSubmitClick: () {
+                                  Navigator.of(context).pop();
+                                  tripCtx.read<TripCubit>().changeRequestSates(
+                                      states: "Canceled",
+                                      requestId: tripCtx
+                                          .read<TripCubit>()
+                                          .requestModel
+                                          .id!);
+                                },
+                              ),
+                            ]);
+                          },
+                        ),
 
                       ///spacer
                       getSpaceHeight(AppConstants.pagePadding),

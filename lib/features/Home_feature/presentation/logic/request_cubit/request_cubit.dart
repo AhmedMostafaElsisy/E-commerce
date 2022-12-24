@@ -12,6 +12,8 @@ class RequestCubit extends Cubit<RequestCubitState> {
   List<RequestModel> requestList = [];
   List<RequestModel> requestHistoryList = [];
 
+  late RequestModel requestModel;
+
   ///pagination
   int page = 1;
   late ScrollController scrollController;
@@ -80,4 +82,5 @@ class RequestCubit extends Cubit<RequestCubitState> {
       },
     );
   }
+
 }

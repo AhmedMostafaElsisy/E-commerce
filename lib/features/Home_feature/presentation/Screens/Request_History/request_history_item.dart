@@ -1,9 +1,11 @@
+import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/request_model.dart';
 import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../core/Constants/Enums/request_states.dart';
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared_texts.dart';
 import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -27,12 +29,14 @@ class RequestHistoryItem extends StatelessWidget {
                 offset: const Offset(0, 0))
           ],
           borderRadius:
-              BorderRadius.circular(AppConstants.containerBorderRadius)),
+          BorderRadius.circular(AppConstants.containerBorderRadius)),
       padding: const EdgeInsets.all(AppConstants.pagePadding),
       child: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
+            ///driver data
             Row(
               children: [
                 commonCachedImageWidget(context, "imageUrl",
@@ -41,8 +45,8 @@ class RequestHistoryItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CommonTitleText(
-                      textKey: "Drivier name",
+                    CommonTitleText(
+                      textKey: "Drivier name".getStringWithoutSpacings(),
                       textFontSize: AppConstants.smallFontSize,
                       textColor: AppConstants.lightBlackColor,
                       textWeight: FontWeight.w600,
@@ -70,24 +74,39 @@ class RequestHistoryItem extends StatelessWidget {
                 )
               ],
             ),
+
+            ///trip price
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CommonAssetSvgImageWidget(
-                    imageString: "cash_icon.svg",
-                    height: 25,
-                    width: 25,
-                    fit: BoxFit.contain,
-                    imageColor: AppConstants.lightBorderColor,
-                  ),
-                  getSpaceWidth(AppConstants.smallPadding / 2),
-                  CommonTitleText(
-                    textKey: "${model.price!} ${AppLocalizations.of(context)!.lblEGP}",
-                    textColor: AppConstants.lightBorderColor,
-                    textWeight: FontWeight.w700,
-                    textFontSize: AppConstants.normalFontSize,
-                  ),
+                  if(model.state == RequestStates.cancelRequest)...[
+                    CommonTitleText(
+                      textKey:
+                      AppLocalizations.of(context)!.lblCancelRequest,
+                      textColor: AppConstants.lightBorderColor,
+                      textWeight: FontWeight.w700,
+                      textFontSize: AppConstants.normalFontSize,
+                    ),
+                  ] else
+                    ...[
+                      const CommonAssetSvgImageWidget(
+                        imageString: "cash_icon.svg",
+                        height: 25,
+                        width: 25,
+                        fit: BoxFit.contain,
+                        imageColor: AppConstants.lightBorderColor,
+                      ),
+                      getSpaceWidth(AppConstants.smallPadding / 2),
+                      CommonTitleText(
+                        textKey:
+                        "${model.price!} ${AppLocalizations.of(context)!.lblEGP}",
+                        textColor: AppConstants.lightBorderColor,
+                        textWeight: FontWeight.w700,
+                        textFontSize: AppConstants.normalFontSize,
+                      ),
+                    ]
+
                 ]),
           ],
         ),
@@ -103,6 +122,8 @@ class RequestHistoryItem extends StatelessWidget {
 
         ///spacer
         getSpaceHeight(AppConstants.smallPadding),
+
+        ///trip start location
         Row(
           children: [
             const CommonAssetSvgImageWidget(
@@ -113,8 +134,8 @@ class RequestHistoryItem extends StatelessWidget {
             getSpaceWidth(AppConstants.smallPadding),
             SizedBox(
               width: getWidgetWidth(250),
-              child:  CommonTitleText(
-                textKey:model.fromLocation!.locationName!,
+              child: CommonTitleText(
+                textKey: model.fromLocation!.locationName!,
                 textColor: AppConstants.lightBlackColor,
                 textWeight: FontWeight.w600,
                 textFontSize: AppConstants.normalFontSize,
@@ -127,6 +148,9 @@ class RequestHistoryItem extends StatelessWidget {
 
         ///spacer
         getSpaceHeight(AppConstants.pagePadding - 4),
+
+        ///trip end location
+
         Row(
           children: [
             const CommonAssetSvgImageWidget(
@@ -137,8 +161,8 @@ class RequestHistoryItem extends StatelessWidget {
             getSpaceWidth(AppConstants.smallPadding),
             SizedBox(
               width: getWidgetWidth(250),
-              child:  CommonTitleText(
-                textKey:model.toLocation!.locationName!,
+              child: CommonTitleText(
+                textKey: model.toLocation!.locationName!,
                 textColor: AppConstants.lightBlackColor,
                 textWeight: FontWeight.w600,
                 textFontSize: AppConstants.normalFontSize,

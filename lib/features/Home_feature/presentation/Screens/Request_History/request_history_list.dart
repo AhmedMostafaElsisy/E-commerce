@@ -1,8 +1,10 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/Screens/Request_History/request_history_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/Constants/app_constants.dart';
+import '../../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_loading_widget.dart';
@@ -27,8 +29,8 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
     requestCubit.getRequestHistory();
     requestCubit.scrollController = ScrollController();
     requestCubit.scrollController.addListener(
-          () {
-            requestCubit.setupScrollController();
+      () {
+        requestCubit.setupScrollController();
       },
     );
   }
@@ -71,7 +73,7 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
                 Expanded(
                   child: RefreshIndicator(
                     color: AppConstants.mainColor,
-                   onRefresh: ()=> requestCubit.getRequestHistory() ,
+                    onRefresh: () => requestCubit.getRequestHistory(),
                     child: ListView.separated(
                         shrinkWrap: true,
                         controller: requestCubit.scrollController,
@@ -81,13 +83,11 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
                             bottom: getWidgetHeight(10)),
                         itemBuilder: (context, index) {
                           if (index >=
-                              requestCtx
-                                  .read<RequestCubit>()
-                                  .requestHistoryList
-                                  .length &&
-                              requestCtx
-                                  .read<RequestCubit>()
-                                  .hasMoreData) {
+                                  requestCtx
+                                      .read<RequestCubit>()
+                                      .requestHistoryList
+                                      .length &&
+                              requestCtx.read<RequestCubit>().hasMoreData) {
                             return const CommonLoadingWidget();
                           } else if (index >=
                               requestCtx
@@ -95,22 +95,33 @@ class _RequestHistoryListState extends State<RequestHistoryList> {
                                   .requestHistoryList
                                   .length) {
                             return const SizedBox();
-                          }else{
-                            return  RequestHistoryItem(
-                              model:  requestCtx
-                                  .read<RequestCubit>()
-                                  .requestHistoryList[index],
+                          } else {
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context,
+                                    RouteNames.requestHistoryDetailsPageRoute,
+                                    arguments: RouteArgument(
+                                        requestId: requestCtx
+                                            .read<RequestCubit>()
+                                            .requestHistoryList[index]
+                                            .id));
+                              },
+                              child: RequestHistoryItem(
+                                model: requestCtx
+                                    .read<RequestCubit>()
+                                    .requestHistoryList[index],
+                              ),
                             );
                           }
-
                         },
                         separatorBuilder: (context, index) {
                           return getSpaceHeight(AppConstants.pagePadding);
                         },
                         itemCount: requestCtx
-                            .read<RequestCubit>()
-                            .requestHistoryList
-                            .length+1),
+                                .read<RequestCubit>()
+                                .requestHistoryList
+                                .length +
+                            1),
                   ),
                 ),
               ]);

@@ -33,3 +33,12 @@ class CurrentTripFailedState extends TripCubitState {
 
   CurrentTripFailedState(this.error);
 }
+class RequestDetailsLoadingState extends TripCubitState {}
+
+class RequestDetailsSuccessState extends TripCubitState {}
+
+class RequestDetailsFailedState extends TripCubitState {
+  CustomError error;
+
+  RequestDetailsFailedState(this.error);
+}
