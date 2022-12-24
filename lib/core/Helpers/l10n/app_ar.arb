@@ -107,12 +107,17 @@
   "lblSearchingForCarTimeEstimation": "عادة يستغرق الامر بضع داقائق",
   "lblCancelTile": "الغاء الرحلة",
   "lblCancelDesc": "هل تريد حقا الغاء الرحلة",
-  "lblCallSupport":"الاتصال بالدعم",
+  "lblCallSupport": "الاتصال بالدعم",
   "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم",
   "lblEGP": "جنية",
   "lblOldRequest": "طلب سابق",
   "lblAddRating": "اضف تقييم",
-  "lblCancelRequest": "تم الاغاء"
-
-
+  "lblCancelRequest": "تم الاغاء",
+  "lblRating": "التقيم",
+  "lblTotal": "الاجمالي",
+  "lblAddRate": "اضف تقييم",
+  "lblHowWas": "كيف كان",
+  "lblOption": "اختياري",
+  "lblSend": "إرسال",
+  "lblRatingError": "هذا الخانة مطلوبة"
 }

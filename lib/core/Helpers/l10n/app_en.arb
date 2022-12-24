@@ -111,5 +111,12 @@
   "lblEGP": "EGP",
   "lblOldRequest": "Previous request",
   "lblAddRating": "Add Rating",
-  "lblCancelRequest": "Canceled"
+  "lblCancelRequest": "Canceled",
+  "lblRating": "Rating",
+  "lblTotal": "Total",
+  "lblAddRate": "Add rating",
+  "lblHowWas": "how was",
+  "lblOption": "option",
+  "lblSend": "Send",
+  "lblRatingError": "This filed is required"
 }

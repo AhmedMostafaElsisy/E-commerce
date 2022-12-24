@@ -44,6 +44,8 @@ class CommonTextFormField extends StatelessWidget {
   final double? blurRadius;
   final Color? shadowColor;
   final Offset? shadowOffset;
+  final double? contentPaddingHorizontal;
+  final double? contentPaddingVertical;
 
   const CommonTextFormField({
     Key? key,
@@ -83,6 +85,8 @@ class CommonTextFormField extends StatelessWidget {
     this.blurRadius = 40,
     this.shadowColor = AppConstants.shadowColor,
     this.shadowOffset = const Offset(0, 8),
+    this.contentPaddingHorizontal=0,
+    this.contentPaddingVertical=10.0,
   }) : super(key: key);
 
   @override
@@ -181,8 +185,8 @@ class CommonTextFormField extends StatelessWidget {
                       .apply(
                     color: labelErrorStyle,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 0.0),
+                  contentPadding:  EdgeInsets.symmetric(
+                      vertical: contentPaddingVertical!, horizontal: contentPaddingHorizontal!),
                   fillColor: filledColor!,
                   isDense: true,
                   filled: true,
