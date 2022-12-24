@@ -24,4 +24,11 @@ class RequestRepository extends RequestRepositoryInterface {
     return remoteDataSourceInterface.startRequest(
         fromLocationId: fromLocationId, toLocationId: toLocationId);
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> changeRequestStates(
+      {required int requestID, required String states}) {
+    return remoteDataSourceInterface.changeRequestStates(
+        requestID: requestID, states: states);
+  }
 }

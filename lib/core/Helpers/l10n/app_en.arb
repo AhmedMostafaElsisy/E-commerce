@@ -103,5 +103,7 @@
   "lblCurrentRequest": "Current Trip",
   "lblRequestDetails": "Trip Details",
   "lblSearchingForCar": "Searching for a car ....",
-  "lblSearchingForCarTimeEstimation": "It usually takes a few minutes"
+  "lblSearchingForCarTimeEstimation": "It usually takes a few minutes",
+  "lblCancelTile": "Cancel Trip",
+  "lblCancelDesc": "Do you really want to cancel this trip"
 }
