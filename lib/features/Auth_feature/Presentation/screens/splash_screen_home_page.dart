@@ -3,6 +3,7 @@ import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/L
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -18,12 +19,26 @@ class SplashHomePage extends StatefulWidget {
 class _SplashPageState extends State<SplashHomePage>
     with SingleTickerProviderStateMixin {
   late LoginCubit loginCubit;
+  late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
     loginCubit = BlocProvider.of<LoginCubit>(context);
     loginCubit.startApp();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    )..addListener(() {
+      setState(() {});
+    });
+    controller.forward();
+
+  }
+  @override
+  dispose() {
+    controller.dispose(); // you need this
+    super.dispose();
   }
 
   @override
@@ -36,29 +51,58 @@ class _SplashPageState extends State<SplashHomePage>
             Timer(
                 const Duration(milliseconds: 2500),
                 () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.mainBottomNavPageRoute, (route) => false));
+                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
           } else if (loginState is LoginFailed) {
             Timer(
                 const Duration(milliseconds: 2500),
                 () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.loginHomePageRoute, (route) => false));
+                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
           }
         },
         builder: (loginCtx, loginState) {
-          return Center(
-            child: SizedBox(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  commonAssetImageWidget(
-                    imageString: "splash_logo.png",
-                    height: 250,
-                    width: 250,
-                  ),
-                ],
+          return Container(
+            width: SharedText.screenWidth,
+            height: SharedText.screenHeight,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/backGround.png",
+                    ),
+                    fit: BoxFit.fill)),
+            child: Center(
+              child: SizedBox(
+                width: SharedText.screenWidth,
+                height: SharedText.screenHeight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    commonAssetImageWidget(
+                      imageString: "splash_logo.png",
+                      height: 160,
+                      width: 125,
+                    ),
+                    getSpaceHeight(40),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Container(
+                        color:AppConstants.loaderBackGroundColor,
+                        width: getWidgetWidth(238),
+                        height: getWidgetHeight(8),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(AppConstants.borderRadius)),
+                          child: LinearProgressIndicator(
+                            value: controller.value,
+                            semanticsLabel: 'Linear progress indicator',
+                            backgroundColor: AppConstants.lightWhiteColor,
+                            color: AppConstants.mainColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

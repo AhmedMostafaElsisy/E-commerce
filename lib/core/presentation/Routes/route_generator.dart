@@ -2,6 +2,7 @@ import 'package:captien_omda_customer/core/presentation/Routes/route_argument_mo
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'package:flutter/material.dart';
 import '../../../features/Auth_feature/Presentation/screens/chanage_password_screen.dart';
+import '../../../features/Auth_feature/Presentation/screens/choose_login_or_signup.dart';
 import '../../../features/Auth_feature/Presentation/screens/forget_password_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/login_home_page.dart';
 import '../../../features/Auth_feature/Presentation/screens/new_password_screen.dart';
@@ -26,6 +27,9 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteNames.splashPageRoute:
         return MaterialPageRoute(builder: (_) => const SplashHomePage());
+      case RouteNames.chooseLoginSignupScreenRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const ChooseLoginSignupScreen());
       case RouteNames.homePageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const HomePage());

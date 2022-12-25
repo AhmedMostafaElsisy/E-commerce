@@ -118,5 +118,8 @@
   "lblHowWas": "how was",
   "lblOption": "option",
   "lblSend": "Send",
-  "lblRatingError": "This filed is required"
+  "lblRatingError": "This filed is required",
+  "lblLoginWithSocialMedia": "Login with social media accounts",
+  "lblGoogle": "Google",
+  "lblFaceBook": "FaceBook"
 }
