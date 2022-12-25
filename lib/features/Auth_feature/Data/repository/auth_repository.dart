@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../core/model/base_model.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
@@ -20,20 +19,26 @@ class AuthRepository extends AuthRepositoryInterface {
   /// singUp user to app
   @override
   Future<Either<CustomError, BaseModel>> userSingUp(
-      {required String userName,
+      {required String userFirstName,
+      required String userLastName,
       required String emailAddress,
       required String phoneNumber,
       required String password,
       required String confirmPassword,
-      XFile? userImage,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
       required String token}) async {
     return await remoteDataSourceInterface.userSingUp(
-        confirmPassword: confirmPassword,
-        phoneNumber: phoneNumber,
-        userName: userName,
-        userImage: userImage,
+        userFirstName: userFirstName,
+        userLastName: userLastName,
         emailAddress: emailAddress,
+        phoneNumber: phoneNumber,
         password: password,
+        confirmPassword: confirmPassword,
+        userAddressDetails: userAddressDetails,
+        userCity: userCity,
+        userArea: userArea,
         token: token);
   }
 
@@ -93,11 +98,10 @@ class AuthRepository extends AuthRepositoryInterface {
     return await remoteDataSourceInterface
         .deleteAccount()
         .then((value) => value.fold((l) => left(l), (r) {
+              localDataSourceInterface.deleteUserFromCache();
 
-      localDataSourceInterface.deleteUserFromCache();
-
-      ///return the right side of either (base model)
-      return right(baseModel);
-    }));
+              ///return the right side of either (base model)
+              return right(baseModel);
+            }));
   }
 }

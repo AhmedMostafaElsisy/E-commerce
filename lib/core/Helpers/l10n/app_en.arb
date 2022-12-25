@@ -12,7 +12,7 @@
   "lblPassword": "Password",
   "lblPhone": "Phone number",
   "lblConfirm": "Confirm",
-  "lblHaveAccount": "Have account?",
+  "lblHaveAccount": "Have account? ",
   "lblSignIn": "Sign in",
   "lblJoinWith": "Or you join with",
   "lblNameIsEmpty": "Name is empty",
@@ -121,5 +121,11 @@
   "lblRatingError": "This filed is required",
   "lblLoginWithSocialMedia": "Login with social media accounts",
   "lblGoogle": "Google",
-  "lblFaceBook": "FaceBook"
+  "lblFaceBook": "FaceBook",
+  "lblAddressDetails": "Address details",
+  "lblFirstName": "First name",
+  "lblLastName": "Last name",
+  "lblCity": "City",
+  "lblArea": "Area",
+  "lblSignUpWithSocialMedia": "Create Account with social media accounts"
 }

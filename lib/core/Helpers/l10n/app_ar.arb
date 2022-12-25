@@ -12,7 +12,7 @@
   "lblEmail": "البريد الالكتروني",
   "lblPassword": "كلمة المرور",
   "lblConfirm": "تاكيد",
-  "lblHaveAccount": "لديك حساب ؟",
+  "lblHaveAccount": "لديك حساب بالفعل ؟ ",
   "lblSignIn": "تسجيل الدخول",
   "lblJoinWith": "او قم بالستجيل بواسطة",
   "lblPhone": "رقم الهاتف",
@@ -122,5 +122,11 @@
   "lblRatingError": "هذا الخانة مطلوبة",
   "lblLoginWithSocialMedia": "تسجيل الدخول عن طريق مواقع التواصل الاجتماعي",
   "lblGoogle": "جوجل",
-  "lblFaceBook": "فيسبوك"
+  "lblFaceBook": "فيسبوك",
+  "lblAddressDetails": "العنوان تفصيلي",
+  "lblFirstName": "الاسم الاول",
+  "lblLastName": "الاسم الاخير",
+  "lblCity": "المحافظة",
+  "lblArea": "المنطقة",
+  "lblSignUpWithSocialMedia": "انشاء حساب عن طريق مواقع التواصل الاجتماعي"
 }
