@@ -1,19 +1,17 @@
-
+import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
-import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -46,22 +44,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppConstants.lightWhiteColor,
-      appBar: CommonAppBar(
-        elevation: 0,
-        withBack: true,
-        showBottomIcon: false,
-        titleWidget: CommonTitleText(
-          textKey: AppLocalizations.of(context)!.lblForgetPassword,
-          textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w700,
-          textFontSize: AppConstants.normalFontSize,
-        ),
-      ),
       body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (forgetCtx, forgetState) {
           if (forgetState is SendVerificationToEmailStateSuccess) {
-            Navigator.pushNamed(forgetCtx, RouteNames.verificationCodePageRoute,
+            Navigator.pushReplacementNamed(
+                forgetCtx, RouteNames.verificationCodePageRoute,
                 arguments: RouteArgument(
                     sourcePage: "forget",
                     emailAddress: emailController.text,
@@ -76,25 +63,56 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             child: Stack(
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
-                  child: SizedBox(
+                  child: Container(
                     width: SharedText.screenWidth,
                     height: SharedText.screenHeight,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: AssetImage(
+                            "assets/images/backGround.png",
+                          ),
+                          fit: BoxFit.fill),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppConstants.lightWhiteColor.withOpacity(0.28),
+                          AppConstants.lightWhiteColor
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        getSpaceHeight(AppConstants.pagePadding),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
+                        ///spacer
+                        getSpaceHeight(110),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePaddingDouble),
-                          child: CommonAssetSvgImageWidget(
-                              imageString: "forget_password.svg",
-                              height: 350,
-                              width: 300,
+                          child: commonAssetImageWidget(
+                              imageString: "forget_password.png",
+                              height: 137,
+                              width: 180,
                               fit: BoxFit.contain),
                         ),
+
+                        ///Spacer
+                        getSpaceHeight(AppConstants.pagePaddingDouble),
+                        CommonTitleText(
+                          textKey: AppLocalizations.of(context)!
+                              .lblForgetPasswordTitle,
+                          textFontSize: AppConstants.smallFontSize,
+                          textColor: AppConstants.mainTextColor,
+                          textWeight: FontWeight.w700,
+                          lines: 3,
+                        ),
+
+                        ///Spacer
+                        getSpaceHeight(AppConstants.pagePaddingDouble),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePadding),
@@ -104,24 +122,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               children: [
                                 /// Email
                                 CommonTextFormField(
-                                  labelText:
-                                      AppLocalizations.of(context)!.lblEmail,
                                   controller: emailController,
-                                  radius: AppConstants.smallBorderRadius,
-                                  hintKey:
-                                      AppLocalizations.of(context)!.lblEnterEmail,
+                                  hintKey: AppLocalizations.of(context)!
+                                      .lblEnterEmail,
                                   keyboardType: TextInputType.emailAddress,
-                                  labelHintStyle: AppConstants.mainTextColor,
-                                  withSuffixIcon: true,
-                                  suffixIcon: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 12),
-                                    child: CommonAssetSvgImageWidget(
-                                        imageString: "email_icon.svg",
-                                        fit: BoxFit.contain,
-                                        height: 22,
-                                        width: 22),
-                                  ),
                                   validator: (value) {
                                     if (value!.isNotEmpty) {
                                       if (!validateEmail(value)) {
@@ -141,16 +145,67 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 ),
                                 if (state
                                     is SendVerificationToEmailStateError) ...[
-                                  getSpaceHeight(8),
+                                  getSpaceHeight(AppConstants.smallPadding),
                                   CommonTitleText(
                                     textKey: state.error!.errorMassage ??
                                         AppLocalizations.of(context)!
                                             .lblWrongHappen,
-                                    textColor: AppConstants.mainColor,
+                                    textColor: AppConstants.lightRedColor,
                                     textWeight: FontWeight.w700,
                                     textFontSize: AppConstants.smallFontSize,
                                   )
                                 ],
+
+                                ///Spacer
+                                getSpaceHeight(
+                                    AppConstants.pagePaddingDouble * 3),
+                                GestureDetector(
+                                  onTap: () {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CommonGlobalButton(
+                                              height: 48,
+                                              buttonBackgroundColor:
+                                                  AppConstants.mainColor,
+                                              buttonTextSize: 18,
+                                              isEnable: emailController
+                                                  .text.isNotEmpty,
+                                              isLoading: state
+                                                  is SendVerificationToEmailStateLoading,
+                                              buttonTextFontWeight:
+                                                  FontWeight.w400,
+                                              buttonText:
+                                                  AppLocalizations.of(context)!
+                                                      .lblSend,
+                                              onPressedFunction: () {
+                                                if (formKey.currentState!
+                                                    .validate()) {
+                                                  FocusScope.of(context)
+                                                      .requestFocus(
+                                                          FocusNode());
+                                                  _forgetPasswordCubit
+                                                      .sendVerificationCodeToEmail(
+                                                          email: emailController
+                                                              .text);
+                                                }
+                                              },
+                                              withIcon: false),
+                                        ],
+                                      ),
+                                      getSpaceHeight(50),
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -159,43 +214,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: (){
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CommonGlobalButton(
-                              height: 48,
-                              buttonBackgroundColor: AppConstants.mainColor,
-                              radius: AppConstants.smallBorderRadius,
-                              buttonTextSize: 18,
-                              isEnable: emailController.text.isNotEmpty,
-                              isLoading:
-                                  state is SendVerificationToEmailStateLoading,
-                              buttonTextFontWeight: FontWeight.w400,
-                              buttonText: AppLocalizations.of(context)!.lblSubmit,
-                              onPressedFunction: () {
-                                if (formKey.currentState!.validate()) {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                  _forgetPasswordCubit
-                                      .sendVerificationCodeToEmail(
-                                          email: emailController.text);
-                                }
-                              },
-                              withIcon: false),
-                        ],
-                      ),
-                      getSpaceHeight(50),
-                    ],
-                  ),
-                )
               ],
             ),
           );

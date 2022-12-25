@@ -59,7 +59,7 @@
   "lblSendYou": "We will send you",
   "lblVerificationCode": "a verification code to your email address",
   "lblSubmit": "Submit",
-  "lblEnterEmail": "Enter Email or phone number",
+  "lblEnterEmail": "Email or phone number",
   "lblVerify": "Verify",
   "lblEnterPassword": "Enter Password",
   "lblCreateNewPassword": "Create a new Password",
@@ -127,5 +127,8 @@
   "lblLastName": "Last name",
   "lblCity": "City",
   "lblArea": "Area",
-  "lblSignUpWithSocialMedia": "Create Account with social media accounts"
+  "lblSignUpWithSocialMedia": "Create Account with social media accounts",
+  "lblForgetPasswordTitle": "To recover your password pleas enter\n you phone number or email",
+  "lblCheck": "Check"
+
 }

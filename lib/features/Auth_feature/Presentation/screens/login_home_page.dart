@@ -265,11 +265,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                                     otp: otpState.otp));
                                           } else if (otpState
                                               is OtpErrorState) {
-                                            showSnackBar(
-                                              context: otpCtx,
-                                              title:
-                                                  otpState.error!.errorMassage!,
-                                            );
+                                            // showSnackBar(
+                                            //   context: otpCtx,
+                                            //   title:
+                                            //       otpState.error!.errorMassage!,
+                                            // );
                                           }
                                         },
                                         builder: (otpCtx, otpState) {

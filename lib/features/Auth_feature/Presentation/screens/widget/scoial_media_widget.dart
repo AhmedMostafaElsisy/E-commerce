@@ -75,7 +75,6 @@ class SocialMediaWidget extends StatelessWidget {
                   onFacebookClicked();
                 },
                 height: 48,
-                radius: AppConstants.containerBorderRadius,
                 withIcon: true,
                 iconPath: "facebook_logo.svg",
                 iconWidth: getWidgetWidth(24),
@@ -102,7 +101,6 @@ class SocialMediaWidget extends StatelessWidget {
                   onGoogleClicked();
                 },
                 height: 48,
-                radius: AppConstants.containerBorderRadius,
                 withIcon: true,
                 iconPath: "google_logo.svg",
                 iconWidth: getWidgetWidth(24),

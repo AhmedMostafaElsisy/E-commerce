@@ -62,7 +62,6 @@ class CommonError extends StatelessWidget {
         if (withButton!) ...[
           getSpaceHeight(20),
           CommonGlobalButton(
-              radius: AppConstants.smallRadius,
               width: 140,
               height: 40,
               buttonBackgroundColor: AppConstants.verificationCodeColor,

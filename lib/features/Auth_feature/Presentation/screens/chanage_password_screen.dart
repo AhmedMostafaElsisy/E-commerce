@@ -157,7 +157,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       minLines: 1,
                                       maxLines: 1,
                                       isObscureText: hideOldPassword,
-                                      radius: AppConstants.smallBorderRadius,
                                       hintKey: AppLocalizations.of(passwordCtx)!
                                           .lblEnterPassword,
                                       labelHintStyle:
@@ -227,7 +226,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       minLines: 1,
                                       maxLines: 1,
                                       isObscureText: hidePassword,
-                                      radius: AppConstants.smallBorderRadius,
+
                                       hintKey: AppLocalizations.of(passwordCtx)!
                                           .lblEnterPassword,
                                       labelHintStyle:
@@ -307,7 +306,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       minLines: 1,
                                       maxLines: 1,
                                       isObscureText: hideConfirmPassword,
-                                      radius: AppConstants.smallBorderRadius,
+
                                       hintKey: AppLocalizations.of(passwordCtx)!
                                           .lblEnterPassword,
                                       labelHintStyle:
@@ -373,7 +372,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 oldPasswordController.text.isNotEmpty,
                             isLoading:
                                 passwordStates is ChangePasswordStateLoading,
-                            radius: AppConstants.smallBorderRadius,
+
                             buttonTextSize: 18,
                             buttonTextFontWeight: FontWeight.w400,
                             buttonText:
