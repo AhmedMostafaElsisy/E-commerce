@@ -98,12 +98,15 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
                               AppConstants.smallRadius + 2)),
                     ),
                     getSpaceWidth(2),
-                    CommonTitleText(
-                      textKey:
-                          AppLocalizations.of(context)!.lblLoginWithSocialMedia,
-                      textWeight: FontWeight.w600,
-                      textColor: AppConstants.mainTextColor,
-                      textFontSize: AppConstants.smallFontSize,
+                    Expanded(
+                      child: CommonTitleText(
+                        textKey: AppLocalizations.of(context)!
+                            .lblLoginWithSocialMedia,
+                        textWeight: FontWeight.w600,
+                        textColor: AppConstants.mainTextColor,
+                        textFontSize: AppConstants.smallFontSize,
+                        minTextFontSize: AppConstants.xSmallFontSize,
+                      ),
                     ),
                     getSpaceWidth(2),
                     Container(
