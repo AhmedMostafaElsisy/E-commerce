@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/Constants/app_constants.dart';
 import '../../../../../core/Helpers/shared.dart';
 import '../../../../../core/presentation/Widgets/common_global_button.dart';
@@ -34,11 +35,13 @@ class SocialMediaWidget extends StatelessWidget {
                       BorderRadius.circular(AppConstants.smallRadius + 2)),
             ),
             getSpaceWidth(2),
-            CommonTitleText(
-              textKey: title,
-              textWeight: FontWeight.w600,
-              textColor: AppConstants.mainTextColor,
-              textFontSize: AppConstants.smallFontSize,
+            Expanded(
+              child: CommonTitleText(
+                textKey: title,
+                textWeight: FontWeight.w600,
+                textColor: AppConstants.mainTextColor,
+                textFontSize: AppConstants.smallFontSize,
+              ),
             ),
             getSpaceWidth(2),
             Container(
