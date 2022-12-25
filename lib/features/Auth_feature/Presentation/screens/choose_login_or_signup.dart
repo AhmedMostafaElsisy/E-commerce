@@ -1,4 +1,4 @@
-coial_media_widget.dart';
+import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/widget/scoial_media_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,19 +27,21 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
         child: Container(
           width: SharedText.screenWidth,
           height: SharedText.screenHeight,
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             image: const DecorationImage(
                 image: AssetImage(
                   "assets/images/backGround.png",
                 ),
-                fit: BoxFit.fill) ,  gradient: LinearGradient(
-            colors: [
-              AppConstants.lightWhiteColor.withOpacity(0.28),
-              AppConstants.lightWhiteColor
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),),
+                fit: BoxFit.fill),
+            gradient: LinearGradient(
+              colors: [
+                AppConstants.lightWhiteColor.withOpacity(0.28),
+                AppConstants.lightWhiteColor
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getWidgetWidth(AppConstants.pagePadding)),
@@ -93,14 +95,13 @@ class _ChooseLoginSignupScreenState extends State<ChooseLoginSignupScreen> {
                 getSpaceHeight(AppConstants.pagePaddingDouble * 2),
                 SocialMediaWidget(
                   title: AppLocalizations.of(context)!.lblLoginWithSocialMedia,
-                  onFacebookClicked: (){
+                  onFacebookClicked: () {
                     ///Todo:add facebook integration
                   },
-                  onGoogleClicked: (){
+                  onGoogleClicked: () {
                     ///Todo:add google integration
                   },
                 ),
-
               ],
             ),
           ),
