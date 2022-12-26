@@ -80,7 +80,10 @@
   "lblWhereToGo": "Where to go ?...",
   "lblReorder": "Re order",
   "lblHome": "Home",
-  "lblTrips": "Trips",
+  "lblStores": "Stores",
+  "lblCategories": "Categories",
+  "lblOrders": "My Orders",
+  "lblSetting": "Setting",
   "lblNoTripFound": "No trips found",
   "lblNoTripFoundHomeDesc": "Be ready for your first trip",
   "lblEdit": "Edit",
@@ -130,5 +133,4 @@
   "lblSignUpWithSocialMedia": "Create Account with social media accounts",
   "lblForgetPasswordTitle": "To recover your password pleas enter\n you phone number or email",
   "lblCheck": "Check"
-
 }

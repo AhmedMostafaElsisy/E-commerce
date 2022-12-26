@@ -114,13 +114,52 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(1);
                       },
                       child: BottomBarItem(
-                        image: "trips.svg",
+                        image: "stores.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 1,
-                        title: AppLocalizations.of(context)!.lblTrips,
+                        title: AppLocalizations.of(context)!.lblStores,
                       ),
-                    )
+                    ),
+                    getSpaceWidth(AppConstants.pagePadding),
+                    InkWell(
+                      onTap: () {
+                        bottomNavCtx.read<BottomNavCubit>().selectItem(2);
+                      },
+                      child: BottomBarItem(
+                        image: "categories.svg",
+                        isSelected:
+                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
+                                2,
+                        title: AppLocalizations.of(context)!.lblCategories,
+                      ),
+                    ),
+                    getSpaceWidth(AppConstants.pagePadding),
+                    InkWell(
+                      onTap: () {
+                        bottomNavCtx.read<BottomNavCubit>().selectItem(3);
+                      },
+                      child: BottomBarItem(
+                        image: "orders.svg",
+                        isSelected:
+                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
+                                3,
+                        title: AppLocalizations.of(context)!.lblOrders,
+                      ),
+                    ),
+                    getSpaceWidth(AppConstants.pagePadding),
+                    InkWell(
+                      onTap: () {
+                        bottomNavCtx.read<BottomNavCubit>().selectItem(4);
+                      },
+                      child: BottomBarItem(
+                        image: "setting.svg",
+                        isSelected:
+                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
+                                4,
+                        title: AppLocalizations.of(context)!.lblSetting,
+                      ),
+                    ),
                   ],
                 ),
               )),
