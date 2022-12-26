@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -30,11 +32,11 @@ class _SplashPageState extends State<SplashHomePage>
       vsync: this,
       duration: const Duration(milliseconds: 2000),
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     controller.forward();
-
   }
+
   @override
   dispose() {
     controller.dispose(); // you need this
@@ -50,32 +52,34 @@ class _SplashPageState extends State<SplashHomePage>
           if (loginState is LoginSuccess) {
             Timer(
                 const Duration(milliseconds: 2500),
-                () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
+                () => Navigator.pushNamedAndRemoveUntil(context,
+                    RouteNames.mainBottomNavPageRoute, (route) => false));
           } else if (loginState is LoginFailed) {
             Timer(
                 const Duration(milliseconds: 2500),
-                () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
+                () => Navigator.pushNamedAndRemoveUntil(context,
+                    RouteNames.mainBottomNavPageRoute, (route) => false));
           }
         },
         builder: (loginCtx, loginState) {
           return Container(
             width: SharedText.screenWidth,
             height: SharedText.screenHeight,
-            decoration:  BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill) ,  gradient: LinearGradient(
-            colors: [
-            AppConstants.lightWhiteColor.withOpacity(0.28),
-            AppConstants.lightWhiteColor
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),),
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                  image: AssetImage(
+                    "assets/images/backGround.png",
+                  ),
+                  fit: BoxFit.fill),
+              gradient: LinearGradient(
+                colors: [
+                  AppConstants.lightWhiteColor.withOpacity(0.28),
+                  AppConstants.lightWhiteColor
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
             child: Center(
               child: SizedBox(
                 width: SharedText.screenWidth,
@@ -93,7 +97,7 @@ class _SplashPageState extends State<SplashHomePage>
                     Directionality(
                       textDirection: TextDirection.ltr,
                       child: Container(
-                        color:AppConstants.loaderBackGroundColor,
+                        color: AppConstants.loaderBackGroundColor,
                         width: getWidgetWidth(238),
                         height: getWidgetHeight(8),
                         child: ClipRRect(
