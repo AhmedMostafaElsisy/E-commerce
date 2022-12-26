@@ -37,7 +37,7 @@
   "lblJoinNow": "Join Now",
   "lblPleaseConfirmOnTerms": "Agree to the terms and conditions",
   "lblCreateAccount": "Create Account",
-  "lblOutTermsAndConditions": "Our Terms and Conditions",
+  "lblOutTermsAndConditions": "Terms and Conditions",
   "lblAccept": "I Accept",
   "lblPasswordDontMatch": "Re-type password don`t match password",
   "lblRetypePassword": "Re-type Password",
@@ -129,6 +129,17 @@
   "lblArea": "Area",
   "lblSignUpWithSocialMedia": "Create Account with social media accounts",
   "lblForgetPasswordTitle": "To recover your password pleas enter\n you phone number or email",
-  "lblCheck": "Check"
-
+  "lblCheck": "Check",
+  "lblShops": "Shops",
+  "lblCategory": "Category",
+  "lblOrders": "Orders",
+  "lblSetting": "Setting",
+  "lblProfileSetting": "Profile Setting",
+  "lblAccount": "My Account",
+  "lbFavorite": "Favorite",
+  "lblMyShop": "My Shops",
+  "lblCustomerRequests": "Customer Requests",
+  "lblRatings": "Ratings",
+  "lblMassage": "Massages",
+  "lblAppSetting": "App Setting"
 }
