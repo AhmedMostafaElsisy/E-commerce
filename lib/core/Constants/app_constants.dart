@@ -11,7 +11,7 @@ class AppConstants {
   static const Color lightOffBlueColor = Color(0xff22B07D);
   static const Color lightPurplerColor = Color(0xff525298);
   static const Color lightGrayBackgroundColor = Color(0xffF7FDFF);
-  static const Color lightGreyColor = Color(0xffEBEFF1);
+  static const Color lightGreyColor = Color(0xffDADADA);
   static const Color starRatingColor = Color(0xffFFD000);
   static const Color darkFieldColor = Color(0XFF2F2F2F);
   static const Color darkTextColor = Color(0XFFEDEDED);
