@@ -75,7 +75,12 @@ class _SettingScreenState extends State<SettingScreen> {
                       getSpaceHeight(20),
 
                       ///User profile card
-                      const UserProfileCard(),
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteNames.editProfilePageRoute);
+                          },
+                          child: const UserProfileCard()),
 
                       ///Spacer
                       getSpaceHeight(4),
@@ -146,13 +151,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           child: Column(children: [
                             ///Change password
                             InkWell(
-                              onTap: (){
-                                Navigator.of(context)
-                                    .pushNamed(RouteNames.changePasswordPageRoute);
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    RouteNames.changePasswordPageRoute);
                               },
                               child: SectionContentItem(
-                                title:
-                                    AppLocalizations.of(context)!.lblChangePassWord,
+                                title: AppLocalizations.of(context)!
+                                    .lblChangePassWord,
                               ),
                             ),
 
@@ -164,7 +169,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
                             ///Call support
                             SectionContentItem(
-                              title: AppLocalizations.of(context)!.lblCallSupport,
+                              title:
+                                  AppLocalizations.of(context)!.lblCallSupport,
                             ),
 
                             ///terms and conditions
@@ -182,57 +188,57 @@ class _SettingScreenState extends State<SettingScreen> {
 
                       ///Log out
                       BlocConsumer<LoginCubit, LoginStates>(
-                        listener: (profileCtx, profileState) {
-                          if (profileState is UserLoginErrorState) {
-                            showSnackBar(
-                              context: profileCtx,
-                              title: profileState.error!.errorMassage!,
-                            );
-                          } else if (profileState is UserLogoutSuccessState) {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, RouteNames.loginHomePageRoute, (route) => false);
-                            // BlocProvider.of<BottomNavCubit>(context).selectItem(0);
-                          }
-                        },
-                        builder: (profileCtx, profileState){
-                          return InkWell(
-                            onTap: (){
-                              showAlertDialog(context, [
-                                CommonPopUpContent(
-                                  title: AppLocalizations.of(context)!.lblLogOut,
-                                  subTitle:
-                                  AppLocalizations.of(context)!.lblIsLogOut,
-                                  onSubmitClick: () {
-                                    Navigator.of(context).pop();
-                                    profileCtx.read<LoginCubit>().logOut();
-                                  },
-                                ),
-                              ]);
-                            },
-                            child: Container(
-                              color: AppConstants.lightRedColor,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 12.0,horizontal: 8),
-                                child: Row(children:  [
-                                  const   CommonAssetSvgImageWidget(
-                                    imageString: "logout_icon.svg",
-                                    height: 16,
-                                    width: 16,
-                                    imageColor: AppConstants.lightWhiteColor,
-                                  ),
-                                  getSpaceWidth(4),
-                                  CommonTitleText(
-                                    textKey: AppLocalizations.of(context)!.lblLogOut,
-                                    textWeight: FontWeight.w600,
-                                    textFontSize: AppConstants.smallFontSize,
-                                    textColor: AppConstants.lightWhiteColor,
-                                  ),
-                                ]),
-                              ),
-                            ),
+                          listener: (profileCtx, profileState) {
+                        if (profileState is UserLoginErrorState) {
+                          showSnackBar(
+                            context: profileCtx,
+                            title: profileState.error!.errorMassage!,
                           );
+                        } else if (profileState is UserLogoutSuccessState) {
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              RouteNames.loginHomePageRoute, (route) => false);
+                          // BlocProvider.of<BottomNavCubit>(context).selectItem(0);
                         }
-                      )
+                      }, builder: (profileCtx, profileState) {
+                        return InkWell(
+                          onTap: () {
+                            showAlertDialog(context, [
+                              CommonPopUpContent(
+                                title: AppLocalizations.of(context)!.lblLogOut,
+                                subTitle:
+                                    AppLocalizations.of(context)!.lblIsLogOut,
+                                onSubmitClick: () {
+                                  Navigator.of(context).pop();
+                                  profileCtx.read<LoginCubit>().logOut();
+                                },
+                              ),
+                            ]);
+                          },
+                          child: Container(
+                            color: AppConstants.lightRedColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 8),
+                              child: Row(children: [
+                                const CommonAssetSvgImageWidget(
+                                  imageString: "logout_icon.svg",
+                                  height: 16,
+                                  width: 16,
+                                  imageColor: AppConstants.lightWhiteColor,
+                                ),
+                                getSpaceWidth(4),
+                                CommonTitleText(
+                                  textKey:
+                                      AppLocalizations.of(context)!.lblLogOut,
+                                  textWeight: FontWeight.w600,
+                                  textFontSize: AppConstants.smallFontSize,
+                                  textColor: AppConstants.lightWhiteColor,
+                                ),
+                              ]),
+                            ),
+                          ),
+                        );
+                      })
                     ]),
               ),
             ),
