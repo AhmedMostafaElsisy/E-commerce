@@ -13,8 +13,13 @@ abstract class ProfileRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getProfileData();
 
   Future<Either<CustomError, BaseModel>> updateProfileData({
-    required String name,
-    required String? phone,
+    required String userFirstName,
+    required String userLastName,
+    required String emailAddress,
+    required String phoneNumber,
+    required String userAddressDetails,
+    required String userCity,
+    required String userArea,
     XFile? userImage,
   });
 }
@@ -36,17 +41,26 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSourceInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> updateProfileData({
-    required String name,
-    required String? phone,
+    required String userFirstName,
+    required String userLastName,
+    required String emailAddress,
+    required String phoneNumber,
+    required String userAddressDetails,
+    required String userCity,
+    required String userArea,
     XFile? userImage,
   }) async {
     try {
       FormData staticData = FormData();
       staticData.fields.clear();
       String pathUrl = ApiKeys.updateProfileKey;
-      staticData.fields.add(MapEntry('name', name));
-      if (phone != null) staticData.fields.add(MapEntry('phone', phone));
-
+      staticData.fields.add(MapEntry('first_name', userFirstName));
+      staticData.fields.add(MapEntry('last_name', userLastName));
+      staticData.fields.add(MapEntry('email', emailAddress));
+      staticData.fields.add(MapEntry('phone', phoneNumber));
+      staticData.fields.add(MapEntry('address', userAddressDetails));
+      staticData.fields.add(MapEntry('city', userCity));
+      staticData.fields.add(MapEntry('area', userArea));
       if (userImage != null && userImage.path != "") {
         staticData.files.add(MapEntry(
             'image',

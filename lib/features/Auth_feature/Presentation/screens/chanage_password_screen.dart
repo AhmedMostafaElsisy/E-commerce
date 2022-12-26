@@ -63,7 +63,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         titleWidget: CommonTitleText(
           textKey: AppLocalizations.of(context)!.lblChangePassWord,
           textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w700,
+          textWeight: FontWeight.w400,
           textFontSize: AppConstants.normalFontSize,
         ),
       ),

@@ -142,5 +142,6 @@
   "lblCustomerRequests": "طلبات العملاء",
   "lblRatings": "التقيمات",
   "lblMassage": "الرسائل",
-  "lblAppSetting": "اعدادات التطبيق"
+  "lblAppSetting": "اعدادات التطبيق",
+  "lblEditProfile": "تعديل الملف الشخصي"
 }
