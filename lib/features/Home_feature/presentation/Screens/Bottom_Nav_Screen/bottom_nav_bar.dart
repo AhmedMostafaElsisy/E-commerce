@@ -27,8 +27,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     /// Pages
+    /// todo: you must edit list of screen after finish development home screen
     const List<Widget> widgetOptions = <Widget>[
       HomePage(),
+      RequestHistoryList(),
+      HomePage(),
+      RequestHistoryList(),
       RequestHistoryList(),
     ];
 
