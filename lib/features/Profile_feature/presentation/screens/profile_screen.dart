@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         imagePath: "back_arrow_icon.svg",
                         imageHeight: 20,
                         imageWidth: 20,
-                        imageColor: AppConstants.lightBlackColor,
+
                         onClick: () {
                           Navigator.pop(context);
                         },
@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         imagePath: "logout_icon.svg",
                         imageHeight: 24,
                         imageWidth: 24,
-                        imageColor: AppConstants.mainColor,
+
                         onClick: () {
                           showAlertDialog(context, [
                             CommonPopUpContent(

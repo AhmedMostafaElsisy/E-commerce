@@ -6,6 +6,7 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 
 class SectionContentItem extends StatelessWidget {
   final String title;
+  final String?screenName ;
   final Widget? actionWidget;
   final bool? isLastItem;
 
@@ -13,41 +14,51 @@ class SectionContentItem extends StatelessWidget {
       {Key? key,
       required this.title,
       this.isLastItem = false,
-      this.actionWidget})
+      this.actionWidget,
+      this.screenName,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        getSpaceHeight(2),
+    return InkWell(
+      onTap: (){
+        if(screenName!=null) {
+          Navigator.of(context).pushNamed(
+            screenName!);
+        }
+      },
+      child: Column(
+        children: [
+          getSpaceHeight(2),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ///my account
-            CommonTitleText(
-              textKey: title,
-              textWeight: FontWeight.w500,
-              textFontSize: AppConstants.normalFontSize,
-              textColor: AppConstants.mainColor,
-            ),
-            actionWidget ??
-                const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: AppConstants.mainColor,
-                  size: 22,
-                ),
-          ],
-        ),
-        if (!isLastItem!)...[
-          getSpaceHeight(4),
-          const Divider(
-            color: AppConstants.greyColor,
-            thickness: 0.2,
-          )
-        ]
-      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ///my account
+              CommonTitleText(
+                textKey: title,
+                textWeight: FontWeight.w500,
+                textFontSize: AppConstants.normalFontSize,
+                textColor: AppConstants.mainColor,
+              ),
+              actionWidget ??
+                  const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: AppConstants.mainColor,
+                    size: 22,
+                  ),
+            ],
+          ),
+          if (!isLastItem!)...[
+            getSpaceHeight(4),
+            const Divider(
+              color: AppConstants.greyColor,
+              thickness: 0.2,
+            )
+          ]
+        ],
+      ),
     );
   }
 }

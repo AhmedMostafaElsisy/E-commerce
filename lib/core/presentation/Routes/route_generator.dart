@@ -14,6 +14,7 @@ import '../../../features/Home_feature/presentation/Screens/Request_History/requ
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
+import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/trip_feature/presentation/current_trip_details_screen.dart';
@@ -75,6 +76,9 @@ class RouteGenerator {
       case RouteNames.ratingPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: RatingScreen(routeArgument: args as RouteArgument));
+        case RouteNames.favoritePageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const FavoriteListScreen());
 
       default:
         return MaterialPageRoute(

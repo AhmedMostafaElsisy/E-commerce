@@ -109,7 +109,7 @@
   "lblCancelDesc": "هل تريد حقا الغاء الرحلة",
   "lblCallSupport": "تحدث مع فريق الدعم",
   "lbCallSupportDesc": "هل هناك مشكلة وتريد الاصال بالدعم",
-  "lblEGP": "جنية",
+  "lblEGP": "ج.م",
   "lblOldRequest": "طلب سابق",
   "lblAddRating": "اضف تقييم",
   "lblCancelRequest": "تم الاغاء",
@@ -143,5 +143,6 @@
   "lblRatings": "التقيمات",
   "lblMassage": "الرسائل",
   "lblAppSetting": "اعدادات التطبيق",
-  "lblEditProfile": "تعديل الملف الشخصي"
+  "lblEditProfile": "تعديل الملف الشخصي",
+  "lblFavorite": "المفضلة"
 }

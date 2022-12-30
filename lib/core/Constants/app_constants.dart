@@ -12,7 +12,7 @@ class AppConstants {
   static const Color lightPurplerColor = Color(0xff525298);
   static const Color lightGrayBackgroundColor = Color(0xffF7FDFF);
   static const Color lightGreyColor = Color(0xffEBEFF1);
-  static const Color starRatingColor = Color(0xffFFD000);
+  static const Color starRatingColor = Color(0xffF79E1B);
   static const Color darkFieldColor = Color(0XFF2F2F2F);
   static const Color darkTextColor = Color(0XFFEDEDED);
   static const Color backGroundColor = Color(0xFFFFF8F5);
@@ -22,7 +22,7 @@ class AppConstants {
   static const Color lightBlueColor = Color(0xFF3243CD);
   static const Color lightShadowColor = Color(0xFFACACAC);
   static const Color lightBorderColor = Color(0xFFAEAEAE);
-  static const Color lightContentColor = Color(0xFFD5D5D5);
+  static const Color lightContentColor = Color(0xFF8A8895);
 
   static const Color lightGreyTextColor = Color(0xFFF3F3F3);
   static const Color lightRateColor = Color(0xFFFFC607);

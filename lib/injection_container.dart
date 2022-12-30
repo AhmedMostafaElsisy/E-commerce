@@ -38,6 +38,11 @@ import 'features/Set_Destination_feature/Data/repository/location_repository.dar
 import 'features/Set_Destination_feature/Domain/location_ues_cases/location_ues_cases.dart';
 import 'features/Set_Destination_feature/Domain/repository/location_interface.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
+import 'features/favorite_feature/data/data_scoures/remote_data_scoures.dart';
+import 'features/favorite_feature/data/repository/favorite_repository.dart';
+import 'features/favorite_feature/domain/repository/favorite_repository_interface.dart';
+import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
+import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/rating_feature/Data/data_scoures/remote_data_scoures.dart';
 import 'features/rating_feature/Data/repository/rating_repository.dart';
 import 'features/rating_feature/Domain/repository/repository_interface.dart';
@@ -60,6 +65,7 @@ Future<void> init() async {
   sl.registerFactory(() => TripCubit(sl()));
   sl.registerFactory(() => SettingCubit(sl()));
   sl.registerFactory(() => RatingCubit(sl()));
+  sl.registerFactory(() => FavoriteCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -70,11 +76,15 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LocationUesCases(sl()));
   sl.registerLazySingleton(() => TripUesCases(sl()));
   sl.registerLazySingleton(() => RatingUesCases(sl()));
+  sl.registerLazySingleton(() => FavoriteUesCase(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
 
   ///repo
+  sl.registerLazySingleton<FavoriteRepositoryInterface>(
+      () => FavoriteRepository(sl()));
   sl.registerLazySingleton<OtpRepositoryInterface>(() => OtpRepository(sl()));
-  sl.registerLazySingleton<RatingRepositoryInterface>(() => RatingRepository(sl()));
+  sl.registerLazySingleton<RatingRepositoryInterface>(
+      () => RatingRepository(sl()));
   sl.registerLazySingleton<PasswordRepositoryInterface>(
       () => PasswordRepository(sl()));
   sl.registerLazySingleton<RequestRepositoryInterface>(
@@ -83,9 +93,8 @@ Future<void> init() async {
       () => ProfileRepository(sl(), sl()));
   sl.registerLazySingleton<AuthRepositoryInterface>(() => AuthRepository(
       localDataSourceInterface: sl(), remoteDataSourceInterface: sl()));
-  sl.registerLazySingleton<SettingRepositoryInterface>(() => SettingRepository(
-    sl(),sl()
-  ));
+  sl.registerLazySingleton<SettingRepositoryInterface>(
+      () => SettingRepository(sl(), sl()));
   sl.registerLazySingleton<LocationRepositoryInterface>(
       () => LocationRepository(sl()));
 
@@ -96,6 +105,8 @@ Future<void> init() async {
       () => SettingLocalDataSourceImp(flutterSecureStorage: sl()));
 
   ///auth remote data source interface
+  sl.registerLazySingleton<FavoriteRemoteDataSourceInterface>(
+      () => FavoriteRemoteDataSourceImpl());
   sl.registerLazySingleton<AuthRemoteDataSourceInterface>(
       () => AuthRemoteDataSourceImp());
   sl.registerLazySingleton<OtpRemoteDataSourceInterface>(
