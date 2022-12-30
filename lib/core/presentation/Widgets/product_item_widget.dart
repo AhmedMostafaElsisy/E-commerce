@@ -15,10 +15,9 @@ import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dar
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
-  final Function() onFavClick;
 
   const ProductItemWidget(
-      {Key? key, required this.model, required this.onFavClick})
+      {Key? key, required this.model})
       : super(key: key);
 
   @override

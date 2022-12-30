@@ -12,7 +12,7 @@ import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/presentation/Widgets/shop_item_widget.dart';
+import '../../../../core/presentation/Widgets/product_item_widget.dart';
 
 class FavoriteListScreen extends StatefulWidget {
   const FavoriteListScreen({Key? key}) : super(key: key);
@@ -149,9 +149,7 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
                                     model: favCtx
                                         .read<FavoriteCubit>()
                                         .productList[index],
-                                    onFavClick: (){
 
-                                    },
                                   );
                                 }
                               },
