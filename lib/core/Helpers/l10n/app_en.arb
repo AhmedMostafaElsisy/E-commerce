@@ -143,5 +143,8 @@
   "lblMassage": "Massages",
   "lblAppSetting": "App Setting",
   "lblEditProfile": "Edit profile",
-  "lblFavorite": "Favorite"
+  "lblFavorite": "Favorite",
+  "lblMyStores": "My Stores",
+  "lblAddStore": "Add Store",
+  "lblShow": "Show"
 }

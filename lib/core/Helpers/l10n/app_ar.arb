@@ -144,5 +144,8 @@
   "lblMassage": "الرسائل",
   "lblAppSetting": "اعدادات التطبيق",
   "lblEditProfile": "تعديل الملف الشخصي",
-  "lblFavorite": "المفضلة"
+  "lblFavorite": "المفضلة",
+  "lblMyStores": "متاجري",
+  "lblAddStore": "اضافة متجر",
+  "lblShow": "عرض"
 }

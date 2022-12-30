@@ -23,7 +23,7 @@ class ProductItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(3),
+      margin: const EdgeInsets.all(1),
       width: getWidgetWidth(168),
       // height: getWidgetHeight(300),
       decoration: BoxDecoration(
