@@ -84,7 +84,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         title: AppLocalizations.of(context)!.lblStores,
                       ),
                     ),
-                    getSpaceWidth(AppConstants.pagePadding),
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(2);
@@ -97,7 +96,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         title: AppLocalizations.of(context)!.lblCategories,
                       ),
                     ),
-                    getSpaceWidth(AppConstants.pagePadding),
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(3);
@@ -110,7 +108,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         title: AppLocalizations.of(context)!.lblOrders,
                       ),
                     ),
-                    getSpaceWidth(AppConstants.pagePadding),
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(4);
