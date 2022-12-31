@@ -24,9 +24,24 @@ class ProfileRepository extends ProfileRepositoryInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> updateUserProfile(
-      {required String name, required String? phone, XFile? userImage}) {
+      {required String userFirstName,
+      required String userLastName,
+      required String emailAddress,
+      required String phoneNumber,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
+      XFile? userImage}) {
     return remoteDataSourceInterface
-        .updateProfileData(name: name, phone: phone, userImage: userImage)
+        .updateProfileData(
+            userFirstName: userFirstName,
+            userLastName: userLastName,
+            emailAddress: emailAddress,
+            phoneNumber: phoneNumber,
+            userAddressDetails: userAddressDetails,
+            userCity: userCity,
+            userArea: userArea,
+            userImage: userImage)
         .then((value) => value.fold((l) => left(l), (r) {
               localDataSourceInterface.cacheUser(
                   user: UserBaseEntity.fromJson(r.data), token: null);

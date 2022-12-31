@@ -9,8 +9,13 @@ import '../../../../core/model/base_model.dart';
 abstract class ProfileRepositoryInterface extends BaseInterface {
   Future<Either<CustomError, BaseModel>> getUserProfile();
   Future<Either<CustomError, BaseModel>> updateUserProfile({
-    required String name,
-    required String? phone,
+    required String userFirstName,
+    required String userLastName,
+    required String emailAddress,
+    required String phoneNumber,
+    required String userAddressDetails,
+    required String userCity,
+    required String userArea,
     XFile? userImage,
 });
 }

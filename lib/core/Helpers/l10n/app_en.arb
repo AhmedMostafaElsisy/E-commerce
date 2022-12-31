@@ -141,5 +141,6 @@
   "lblCustomerRequests": "Customer Requests",
   "lblRatings": "Ratings",
   "lblMassage": "Massages",
-  "lblAppSetting": "App Setting"
+  "lblAppSetting": "App Setting",
+  "lblEditProfile": "Edit profile"
 }

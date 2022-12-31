@@ -14,8 +14,22 @@ class ProfileUesCases {
   }
 
   Future<Either<CustomError, BaseModel>> updateUserProfile(
-      {required String name, required String? phone, XFile? userImage}) {
+      {required String userFirstName,
+      required String userLastName,
+      required String emailAddress,
+      required String phoneNumber,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
+      XFile? userImage}) {
     return repositoryInterface.updateUserProfile(
-        name: name, phone: phone, userImage: userImage);
+        userFirstName: userFirstName,
+        userLastName: userLastName,
+        emailAddress: emailAddress,
+        phoneNumber: phoneNumber,
+        userAddressDetails: userAddressDetails,
+        userCity: userCity,
+        userArea: userArea,
+        userImage: userImage);
   }
 }
