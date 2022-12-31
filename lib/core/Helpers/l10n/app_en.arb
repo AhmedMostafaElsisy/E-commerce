@@ -148,5 +148,14 @@
   "lblAddStore": "Add Store",
   "lblShow": "Show",
   "lblNoStoreFound": "No stores found for you",
-  "lblNoStoreFoundDesc": "Be ready for your first store"
+  "lblNoStoreFoundDesc": "Be ready for your first store",
+  "lblShopLogo": "Shop Logo",
+  "lblShopName": "Shop Name",
+  "lblShopOwnerName": "Shop Owner Name",
+  "lblShopEmail": "Shop Email",
+  "lblShopPhone": "Shop Phone",
+  "lblShopAddressDetails": "Shop Address Details",
+  "lblMainCategory": "Main Category",
+  "lblSubCategory": "Tags",
+  "lblStoreCreatedSuccess": "Store created successfully"
 }
