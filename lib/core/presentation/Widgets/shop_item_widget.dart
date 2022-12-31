@@ -1,17 +1,10 @@
-import 'package:captien_omda_customer/core/model/product_model.dart';
-import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
 import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
-import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import '../../model/shop_model.dart';
 import 'common_global_button.dart';
 
@@ -25,7 +18,6 @@ class ShopItemWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(1),
       width: getWidgetWidth(168),
-      // height: getWidgetHeight(300),
       decoration: BoxDecoration(
           color: AppConstants.lightWhiteColor,
           borderRadius: BorderRadius.circular(AppConstants.smallRadius),
@@ -110,7 +102,6 @@ class ShopItemWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               /// Show
               Expanded(
                 child: CommonGlobalButton(
@@ -120,7 +111,9 @@ class ShopItemWidget extends StatelessWidget {
                     elevation: 0,
                     buttonBackgroundColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblShow,
-                    onPressedFunction: () {},
+                    onPressedFunction: () {
+                      ///Todo:add navigation for show shop screen
+                    },
                     height: 32,
                     radius: AppConstants.containerBorderRadius,
                     withIcon: false),
@@ -138,7 +131,9 @@ class ShopItemWidget extends StatelessWidget {
                     buttonBackgroundColor: AppConstants.lightWhiteColor,
                     buttonTextColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblEdit,
-                    onPressedFunction: () {},
+                    onPressedFunction: () {
+                      ///Todo:add navigation for edit screen
+                    },
                     height: 32,
                     radius: AppConstants.containerBorderRadius,
                     withIcon: false),
