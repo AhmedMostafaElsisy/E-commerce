@@ -48,4 +48,8 @@ class ApiKeys {
 
   ///Setting
   static const String settingKey = "/general/settings";
+
+  ///Todo:check the endpoint when integrate with the api
+  ///Favorite
+  static const String favoriteKey = "/Favorite";
 }

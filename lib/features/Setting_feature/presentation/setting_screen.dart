@@ -111,6 +111,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             ///favorite
                             SectionContentItem(
                               title: AppLocalizations.of(context)!.lbFavorite,
+                              screenName: RouteNames.favoritePageRoute,
                             ),
                             SectionContentItem(
                               title: AppLocalizations.of(context)!.lblMyShop,
@@ -151,15 +152,10 @@ class _SettingScreenState extends State<SettingScreen> {
                               horizontal: 8.0, vertical: 11),
                           child: Column(children: [
                             ///Change password
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                    RouteNames.changePasswordPageRoute);
-                              },
-                              child: SectionContentItem(
-                                title: AppLocalizations.of(context)!
-                                    .lblChangePassWord,
-                              ),
+                            SectionContentItem(
+                              title: AppLocalizations.of(context)!
+                                  .lblChangePassWord,
+                              screenName: RouteNames.changePasswordPageRoute,
                             ),
 
                             ///notification

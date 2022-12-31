@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
+import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
@@ -54,6 +55,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<TripCubit>(create: (_) => di.sl<TripCubit>()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
+        BlocProvider<FavoriteCubit>(create: (_) => di.sl<FavoriteCubit>()),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
 
       ],

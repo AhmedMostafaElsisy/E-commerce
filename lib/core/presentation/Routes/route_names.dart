@@ -17,5 +17,6 @@ class RouteNames {
   static const String requestHistoryDetailsPageRoute =
       "/RequestHistoryDetailsPage";
   static const String ratingPageRoute = "/ratingPage";
+  static const String favoritePageRoute = "/favoritePage";
 
 }
