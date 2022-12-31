@@ -21,13 +21,13 @@ class AppConstants {
   static const Color lightRedColor = Color(0xFFBF0000);
   static const Color lightBlueColor = Color(0xFF3243CD);
   static const Color lightShadowColor = Color(0xFFACACAC);
-  static const Color lightBorderColor = Color(0xFF3244CD);
+  static const Color lightBorderColor = Color(0xFFAEAEAE);
   static const Color lightContentColor = Color(0xFFD5D5D5);
 
   static const Color lightGreyTextColor = Color(0xFFF3F3F3);
   static const Color lightRateColor = Color(0xFFFFC607);
   static const Color greyColor = Color(0xffA8A8A8);
-  static const Color lightSecondShadowColor = Color(0xffFBF6F7);
+  static const Color lightSecondShadowColor = Color(0xffDADADA);
   static const Color redShadowColor = Color(0xff999999);
   static const Color lightGrayShadowColor = Color(0xffAAAAAA);
   static const Color arrowIconColor = Color(0xff262626);

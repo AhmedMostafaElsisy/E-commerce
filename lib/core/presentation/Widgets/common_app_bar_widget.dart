@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../Helpers/shared.dart';
@@ -17,6 +18,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? sourcePage;
   final double elevation;
   final double? leadingWidth;
+  final Color? appBarBackGroundColor;
 
   const CommonAppBar(
       {Key? key,
@@ -30,13 +32,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.leadingWidget,
       this.elevation = 0,
       this.leadingWidth,
+      this.appBarBackGroundColor = AppConstants.lightWhiteColor,
       this.customActionWidget})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: appBarBackGroundColor!,
         elevation: elevation,
         centerTitle: centerTitle,
         automaticallyImplyLeading: withBack,
@@ -52,16 +55,25 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                         InkWell(
                           onTap: () => Navigator.pop(context),
                           child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 22),
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 22),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: AppConstants.loaderBackGroundColor,
+                                  borderRadius: BorderRadius.circular(AppConstants
+                                      .containerOfListTitleBorderRadius)),
                               child: RotatedBox(
                                 quarterTurns:
                                     SharedText.currentLocale == "ar" ? 2 : 0,
                                 child: const CommonAssetSvgImageWidget(
-                                    imageString: "back_arrow_icon.svg",
-                                    height: 40,
-                                    width: 40),
-                              )),
+                                  imageString: "back_arrow_icon.svg",
+                                  height: 40,
+                                  width: 40,
+                                  imageColor: AppConstants.mainColor,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -83,18 +95,15 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           if (withNotification)
             InkWell(
               onTap: () {
-
                 Navigator.pushNamed(context, RouteNames.notificationPageRoute);
               },
               child: const Padding(
-                padding:
-                EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: CommonAssetSvgImageWidget(
-                  imageString: 'notification_icon.svg',
-                  height: 25,
-                  width: 25,
-                  fit: BoxFit.cover
-                ),
+                    imageString: 'notification_icon.svg',
+                    height: 25,
+                    width: 25,
+                    fit: BoxFit.cover),
               ),
             ),
           customActionWidget ?? const SizedBox(),

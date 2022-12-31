@@ -51,7 +51,7 @@ class _SplashPageState extends State<SplashHomePage>
             Timer(
                 const Duration(milliseconds: 2500),
                 () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
+                    context, RouteNames.mainBottomNavPageRoute, (route) => false));
           } else if (loginState is LoginFailed) {
             Timer(
                 const Duration(milliseconds: 2500),
