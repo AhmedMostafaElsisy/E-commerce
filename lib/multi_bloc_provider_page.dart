@@ -16,6 +16,7 @@ import 'features/Home_feature/presentation/logic/request_cubit/request_cubit.dar
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'features/store_feature/presentation/logic/store_cubit.dart';
 import 'features/trip_feature/logic/trip_cubit/trip_cubit.dart';
 import 'injection_container.dart' as di;
 
@@ -50,13 +51,14 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) =>di.sl<ProfileCubit>()),
         BlocProvider<NotificationCubit>(
             create: (_) => NotificationCubit(NotificationListRepository())),
+        BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
         BlocProvider<RequestCubit>(create: (_) => di.sl<RequestCubit>()),
         BlocProvider<DestinationCubit>(create: (_) => di.sl<DestinationCubit>()),
         BlocProvider<TripCubit>(create: (_) => di.sl<TripCubit>()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
         BlocProvider<FavoriteCubit>(create: (_) => di.sl<FavoriteCubit>()),
-        BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
+        BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
 
       ],
       child: widget.body,
