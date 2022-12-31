@@ -1,8 +1,7 @@
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_empty_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
-import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_cubit.dart';
-import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/Constants/app_constants.dart';
@@ -12,6 +11,8 @@ import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/shop_item_widget.dart';
+import '../logic/store_cubit.dart';
+import '../logic/store_states.dart';
 
 class MyStoresListScreen extends StatefulWidget {
   const MyStoresListScreen({Key? key}) : super(key: key);
@@ -21,17 +22,17 @@ class MyStoresListScreen extends StatefulWidget {
 }
 
 class _MyStoresListScreenState extends State<MyStoresListScreen> {
-  late FavoriteCubit favoriteCubit;
+  late StoreCubit myStoreCubit;
 
   @override
   void initState() {
     super.initState();
-    favoriteCubit = BlocProvider.of<FavoriteCubit>(context);
-    favoriteCubit.getFavoriteListData();
-    favoriteCubit.scrollController = ScrollController();
-    favoriteCubit.scrollController.addListener(
+    myStoreCubit = BlocProvider.of<StoreCubit>(context);
+    myStoreCubit.getMyStoreListData();
+    myStoreCubit.scrollController = ScrollController();
+    myStoreCubit.scrollController.addListener(
       () {
-        favoriteCubit.setupScrollController();
+        myStoreCubit.setupScrollController();
       },
     );
   }
@@ -97,22 +98,30 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
           child: Column(
             children: [
               getSpaceHeight(80),
-              BlocConsumer<FavoriteCubit, FavoriteStates>(
-                listener: (favCtx, favState) {
-                  if (favState is FavoriteFailedStates) {
+              BlocConsumer<StoreCubit, StoreStates>(
+                listener: (storeCtx, storeState) {
+                  if (storeState is StoreFailedStates) {
                     checkUserAuth(
-                        context: favCtx, errorType: favState.error.type);
+                        context: storeCtx, errorType: storeState.error.type);
                   }
                 },
-                builder: (favCtx, favState) {
-                  if (favState is FavoriteLoadingStates) {
+                builder: (storeCtx, storeState) {
+                  if (storeState is StoreLoadingStates) {
                     return const CommonLoadingWidget();
-                  } else if (favState is FavoriteFailedStates) {
+                  } else if (storeState is StoreFailedStates) {
                     return CommonError(
-                      errorMassage: favState.error.errorMassage,
+                      errorMassage: storeState.error.errorMassage,
                       withButton: true,
-                      onTap: () => favoriteCubit.getFavoriteListData(),
+                      onTap: () => myStoreCubit.getMyStoreListData(),
                     );
+                  } else if (storeCtx.read<StoreCubit>().myStoreList.isEmpty) {
+                    return EmptyScreen(
+                        imageString: "category.svg",
+                        titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
+                        description:
+                            AppLocalizations.of(context)!.lblNoStoreFoundDesc,
+                        imageHeight: 80,
+                        imageWidth: 08);
                   } else {
                     return SizedBox(
                       height: SharedText.screenHeight - 110,
@@ -120,7 +129,7 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                         children: [
                           Expanded(
                             child: GridView.builder(
-                              controller: favoriteCubit.scrollController,
+                              controller: myStoreCubit.scrollController,
                               shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
                               padding: EdgeInsets.zero,
@@ -134,30 +143,30 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                                         .width /
                                     (MediaQuery.of(context).size.height / 1.28),
                               ),
-                              itemCount: favCtx
-                                      .read<FavoriteCubit>()
-                                      .productList
+                              itemCount: storeCtx
+                                      .read<StoreCubit>()
+                                      .myStoreList
                                       .length +
                                   1,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index >=
-                                        favCtx
-                                            .read<FavoriteCubit>()
-                                            .productList
+                                        storeCtx
+                                            .read<StoreCubit>()
+                                            .myStoreList
                                             .length &&
-                                    favCtx.read<FavoriteCubit>().hasMoreData) {
+                                    storeCtx.read<StoreCubit>().hasMoreData) {
                                   return const CommonLoadingWidget();
                                 } else if (index >=
-                                    favCtx
-                                        .read<FavoriteCubit>()
-                                        .productList
+                                    storeCtx
+                                        .read<StoreCubit>()
+                                        .myStoreList
                                         .length) {
                                   return const SizedBox();
                                 } else {
                                   return ShopItemWidget(
-                                    model: favCtx
-                                        .read<FavoriteCubit>()
-                                        .productList[index].shopModel!,
+                                    model: storeCtx
+                                        .read<StoreCubit>()
+                                        .myStoreList[index],
                                   );
                                 }
                               },
