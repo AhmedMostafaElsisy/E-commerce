@@ -16,6 +16,8 @@ class StoreFailedStates extends StoreStates {
   StoreFailedStates(this.error);
 }
 
+class UploadingUserImageLoadingState extends StoreStates {}
+class CheckInputValidationState extends StoreStates {}
 class StoreLoadingMoreDataStates extends StoreStates {}
 
 class StoreFailedMoreDataStates extends StoreStates {
@@ -24,3 +26,14 @@ class StoreFailedMoreDataStates extends StoreStates {
   StoreFailedMoreDataStates(this.error);
 }
 
+
+class CreateStoreLoadingStates extends StoreStates {}
+
+
+class CreateStoreSuccessStates extends StoreStates {}
+
+class CreateStoreFailedStates extends StoreStates {
+  CustomError error;
+
+  CreateStoreFailedStates(this.error);
+}
