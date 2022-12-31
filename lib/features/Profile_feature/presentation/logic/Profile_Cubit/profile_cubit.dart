@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../../../Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../../Domain/user_cases/profile_ues_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,8 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   bool imgChange = false;
   bool deleteImage = false;
   UserBaseEntity baseUser = UserBaseEntity();
+  List<TextEditingController> controllerList = [];
+  late bool isDataFound;
 
   /// user Profile_Cubit data
   getUserProfileData() async {
@@ -30,13 +34,26 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
 
   ///update user profile
   updateUserProfile({
-    required String name,
-    required String? phone,
+    required String userFirstName,
+    required String userLastName,
+    required String emailAddress,
+    required String phoneNumber,
+    required String userAddressDetails,
+    required String userCity,
+    required String userArea,
     XFile? image,
   }) async {
     emit(ProfileUpdateLoadingState());
     var result = await _uesCase.updateUserProfile(
-        name: name, phone: phone, userImage: image);
+        userFirstName: userFirstName,
+        userLastName: userLastName,
+        emailAddress: emailAddress,
+        phoneNumber: phoneNumber,
+
+        userAddressDetails: userAddressDetails,
+        userCity: userCity,
+        userArea: userArea,
+        userImage: image);
     result.fold((failure) => emit(ProfileUpdateFailedState(failure)),
         (success) => emit(ProfileUpdateSuccessState()));
   }
@@ -50,5 +67,18 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   deleteImageFunc(bool value) {
     deleteImage = value;
     emit(UploadingUserImageLoadingState());
+  }
+
+  void isDataFount(List<TextEditingController> list) {
+    isDataFound = true;
+    emit(CheckInputValidationState());
+
+    for (var element in list) {
+      if (element.text.isEmpty) {
+        isDataFound = false;
+        return;
+      }
+    }
+    emit(CheckInputValidationState());
   }
 }

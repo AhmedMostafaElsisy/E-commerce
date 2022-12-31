@@ -1,4 +1,3 @@
-import 'package:captien_omda_customer/features/Profile_feature/presentation/screens/profile_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,17 +8,18 @@ import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Profile_Cubit/profile_cubit.dart';
 import '../logic/Profile_Cubit/profile_states.dart';
-import 'common_profile_header_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -29,36 +29,81 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  late TextEditingController userNameController;
-  late TextEditingController phoneController;
+  late TextEditingController userFirstNameController;
+  late TextEditingController userLastNameController;
+  late TextEditingController userAddressController;
+  late TextEditingController userCityController;
+  late TextEditingController userAreaController;
+  late TextEditingController emailAddressController;
+
+  late TextEditingController phoneNumberController;
   late ProfileCubit _profileCubit;
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    userNameController = TextEditingController();
-    phoneController = TextEditingController();
+    userFirstNameController = TextEditingController();
+    userLastNameController = TextEditingController();
+    emailAddressController = TextEditingController();
+    phoneNumberController = TextEditingController();
+    userAddressController = TextEditingController();
+    userCityController = TextEditingController();
+    userAreaController = TextEditingController();
     _profileCubit = BlocProvider.of<ProfileCubit>(context);
     _profileCubit.deleteImage = false;
     _profileCubit.imageXFile = null;
-    userNameController.text = SharedText.currentUser!.name!;
-    phoneController.text = SharedText.currentUser!.phone!;
+
+    ///Todo:change data set
+    userFirstNameController.text = SharedText.currentUser!.name!;
+    userLastNameController.text = SharedText.currentUser!.name!;
+    phoneNumberController.text = SharedText.currentUser!.phone!;
+    emailAddressController.text = SharedText.currentUser!.email!;
+    userAddressController.text = "10th or ramada ";
+    userCityController.text = "Cairo";
+    userAreaController.text = "Cairo";
+    _profileCubit.isDataFound = false;
+    _profileCubit.controllerList.clear();
+    _profileCubit.controllerList.add(userFirstNameController);
+    _profileCubit.controllerList.add(userLastNameController);
+    _profileCubit.controllerList.add(emailAddressController);
+    _profileCubit.controllerList.add(phoneNumberController);
+    _profileCubit.controllerList.add(userAddressController);
+    _profileCubit.controllerList.add(userCityController);
+    _profileCubit.controllerList.add(userAreaController);
+    _profileCubit.isDataFount(_profileCubit.controllerList);
   }
 
   @override
   void dispose() {
-    userNameController.dispose();
-    phoneController.dispose();
-    // _profileCubit.deleteImagePicked();
+    userFirstNameController.dispose();
+    userLastNameController.dispose();
+    emailAddressController.dispose();
+    phoneNumberController.dispose();
+    userAddressController.dispose();
+    userCityController.dispose();
+    userAreaController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConstants.lightWhiteColor,
       resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
+      backgroundColor: AppConstants.lightWhiteColor,
+      appBar: CommonAppBar(
+        withBack: true,
+        appBarBackGroundColor: AppConstants.transparent,
+        showBottomIcon: false,
+        centerTitle: false,
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblEditProfile,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w400,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
       body: BlocConsumer<ProfileCubit, ProfileCubitStates>(
         listener: (profileCtx, profileState) {
           if (profileState is ProfileUpdateFailedState) {
@@ -74,7 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               RouteNames.mainBottomNavPageRoute,
-                  (route) => false,
+              (route) => false,
             );
             BlocProvider.of<BottomNavCubit>(context).selectItem(0);
           }
@@ -88,272 +133,515 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-
-                  ///profile background
-                  Container(
-                    width: getWidgetWidth(550),
-                    height: getWidgetHeight(190),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(
-                              AppConstants.bottomSheetBorderRadius),
-                          bottomLeft: Radius.circular(
-                              AppConstants.bottomSheetBorderRadius)),
+            child: Container(
+              width: SharedText.screenWidth,
+              height: SharedText.screenHeight,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                    image: AssetImage(
+                      "assets/images/backGround.png",
                     ),
-                    child: Stack(children: [
-
-                      ///profile background
-                      const ProfileHeaderWidget(),
-
-                      ///back arrow
-                      Positioned(
-                          top: getWidgetHeight(50),
-                          left: getWidgetWidth(16),
-                          child: CommonProfileHeaderWidget(
-                            imagePath: "back_arrow_icon.svg",
-                            imageHeight: 20,
-                            imageWidth: 20,
-                            imageColor: AppConstants.lightBlackColor,
-                            onClick: () {
-                              Navigator.pop(context);
-                            },
-                          )),
-                      getSpaceHeight(20),
-
-                      ///Image
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Stack(children: [
-                                profileCtx
-                                    .read<ProfileCubit>()
-                                    .deleteImage
-                                    ? InkWell(
-                                  onTap: () {
-                                    takePhotoBottomSheet(
-                                        context: profileCtx,
-                                        getPhoto: profileCtx
-                                            .read<ProfileCubit>()
-                                            .photoPicked);
-                                  },
-                                  child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                      width: getWidgetHeight(90),
-                                      height: getWidgetHeight(90),
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color:
-                                        AppConstants.backGroundColor,
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(18.0),
-                                        child: CommonAssetSvgImageWidget(
-                                            imageString: "camera.svg",
-                                            height: 32,
-                                            width: 32,
-                                            fit: BoxFit.contain,
-                                            imageColor:
-                                            AppConstants.mainColor),
-                                      ),
+                    fit: BoxFit.fill),
+                gradient: LinearGradient(
+                  colors: [
+                    AppConstants.lightWhiteColor.withOpacity(0.28),
+                    AppConstants.lightWhiteColor
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      getSpaceHeight(40),
+                      Expanded(
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          children: [
+                            Form(
+                              key: formKey,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                        horizontal: AppConstants.pagePadding) +
+                                    EdgeInsets.only(
+                                      bottom: MediaQuery.of(profileCtx)
+                                          .viewInsets
+                                          .bottom,
                                     ),
-                                  ),
-                                )
-                                    : Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    width: getWidgetHeight(98),
-                                    height: getWidgetHeight(98),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: AppConstants
-                                              .lightWhiteColor,
-                                          width: 5),
-                                    ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    getSpaceHeight(
+                                        AppConstants.pagePaddingDouble * 2),
 
-                                    ///user profile image
-                                    child: Stack(
-                                      fit: StackFit.expand,
+                                    ///Image
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 20.0),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Stack(children: [
+                                              profileCtx
+                                                      .read<ProfileCubit>()
+                                                      .deleteImage
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        takePhotoBottomSheet(
+                                                            context: profileCtx,
+                                                            getPhoto: profileCtx
+                                                                .read<
+                                                                    ProfileCubit>()
+                                                                .photoPicked);
+                                                      },
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        child: Container(
+                                                          width:
+                                                              getWidgetHeight(
+                                                                  90),
+                                                          height:
+                                                              getWidgetHeight(
+                                                                  90),
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color: AppConstants
+                                                                  .backGroundColor,
+                                                              border: Border.all(
+                                                                  color: AppConstants
+                                                                      .lightWhiteColor,
+                                                                  width: 2)),
+                                                          child: const Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    18.0),
+                                                            child: CommonAssetSvgImageWidget(
+                                                                imageString:
+                                                                    "camera.svg",
+                                                                height: 32,
+                                                                width: 32,
+                                                                fit: BoxFit
+                                                                    .contain,
+                                                                imageColor:
+                                                                    AppConstants
+                                                                        .mainColor),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Container(
+                                                        width:
+                                                            getWidgetHeight(98),
+                                                        height:
+                                                            getWidgetHeight(98),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                              color: AppConstants
+                                                                  .lightWhiteColor,
+                                                              width: 5),
+                                                        ),
+
+                                                        ///user profile image
+                                                        child: Stack(
+                                                          fit: StackFit.expand,
+                                                          children: [
+                                                            profileCtx
+                                                                        .read<
+                                                                            ProfileCubit>()
+                                                                        .imageXFile !=
+                                                                    null
+                                                                ? commonFileImageWidget(
+                                                                    imageString: profileCtx
+                                                                        .read<
+                                                                            ProfileCubit>()
+                                                                        .imageXFile!
+                                                                        .path,
+                                                                    height:
+                                                                        (98),
+                                                                    width: (98),
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    radius:
+                                                                        1000,
+                                                                  )
+                                                                : commonCachedImageWidget(
+                                                                    context,
+                                                                    SharedText
+                                                                        .currentUser!
+                                                                        .image!,
+                                                                    height:
+                                                                        (98),
+                                                                    width: (98),
+                                                                    radius:
+                                                                        1000,
+                                                                    isCircular:
+                                                                        true,
+                                                                    isProfile:
+                                                                        true),
+                                                            Align(
+                                                                alignment: Alignment
+                                                                    .bottomRight,
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    profileCtx
+                                                                        .read<
+                                                                            ProfileCubit>()
+                                                                        .deleteImageFunc(
+                                                                            true);
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        getWidgetHeight(
+                                                                            24),
+                                                                    width:
+                                                                        getWidgetWidth(
+                                                                            24),
+                                                                    decoration: const BoxDecoration(
+                                                                        color: AppConstants
+                                                                            .mainColor,
+                                                                        shape: BoxShape
+                                                                            .circle),
+                                                                    child:
+                                                                        const Padding(
+                                                                      padding:
+                                                                          EdgeInsets.all(
+                                                                              5.0),
+                                                                      child: CommonAssetSvgImageWidget(
+                                                                          imageString:
+                                                                              "bin_icon.svg",
+                                                                          height:
+                                                                              12,
+                                                                          imageColor: AppConstants
+                                                                              .lightWhiteColor,
+                                                                          width:
+                                                                              12),
+                                                                    ),
+                                                                  ),
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                            ]),
+                                          ]),
+                                    ),
+                                    getSpaceHeight(28),
+
+                                    /// User Name
+                                    Row(
                                       children: [
-                                        profileCtx
-                                            .read<ProfileCubit>()
-                                            .imageXFile !=
-                                            null
-                                            ? commonFileImageWidget(
-                                          imageString: profileCtx
-                                              .read<ProfileCubit>()
-                                              .imageXFile!
-                                              .path,
-                                          height: (98),
-                                          width: (98),
-                                          fit: BoxFit.fill,
-                                          radius: 1000,
-                                        )
-                                            : commonCachedImageWidget(
-                                            context,
-                                            SharedText
-                                                .currentUser!.image!,
-                                            height: (98),
-                                            width: (98),
-                                            radius: 1000,
-                                            isCircular: true,
-                                            isProfile: true),
-                                        Align(
-                                            alignment:
-                                            Alignment.bottomRight,
-                                            child: InkWell(
-                                              onTap: () {
-                                                profileCtx
-                                                    .read<ProfileCubit>()
-                                                    .deleteImageFunc(
-                                                    true);
-                                              },
-                                              child: Container(
-                                                height:
-                                                getWidgetHeight(24),
-                                                width: getWidgetWidth(24),
-                                                decoration:
-                                                const BoxDecoration(
-                                                    color: AppConstants
-                                                        .mainColor,
-                                                    shape: BoxShape
-                                                        .circle),
-                                                child: const Padding(
-                                                  padding:
-                                                  EdgeInsets.all(5.0),
-                                                  child: CommonAssetSvgImageWidget(
-                                                      imageString:
-                                                      "bin_icon.svg",
-                                                      height: 12,
-                                                      imageColor: AppConstants
-                                                          .lightWhiteColor,
-                                                      width: 12),
-                                                ),
-                                              ),
-                                            )),
+                                        ///First name
+                                        Expanded(
+                                          child: CommonTextFormField(
+                                            controller: userFirstNameController,
+                                            hintKey:
+                                                AppLocalizations.of(profileCtx)!
+                                                    .lblFirstName,
+                                            keyboardType: TextInputType.text,
+                                            labelHintStyle:
+                                                AppConstants.mainColor,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameIsEmpty;
+                                              } else if (nameValidator(value)) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameBadFormat;
+                                              } else if (value.length < 2) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameLength;
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            onChanged: (value) {
+                                              _profileCubit.isDataFount(
+                                                  _profileCubit.controllerList);
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+
+                                        ///Spacer
+                                        getSpaceWidth(
+                                            AppConstants.smallPadding),
+
+                                        ///last name
+                                        Expanded(
+                                          child: CommonTextFormField(
+                                            controller: userLastNameController,
+                                            hintKey:
+                                                AppLocalizations.of(profileCtx)!
+                                                    .lblLastName,
+                                            keyboardType: TextInputType.text,
+                                            labelHintStyle:
+                                                AppConstants.mainColor,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameIsEmpty;
+                                              } else if (nameValidator(value)) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameBadFormat;
+                                              } else if (value.length < 2) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameLength;
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            onChanged: (value) {
+                                              _profileCubit.isDataFount(
+                                                  _profileCubit.controllerList);
+                                              return null;
+                                            },
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
+
+                                    ///Spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
+
+                                    /// Email
+                                    CommonTextFormField(
+                                      controller: emailAddressController,
+                                      hintKey: AppLocalizations.of(profileCtx)!
+                                          .lblEmail,
+                                      keyboardType: TextInputType.text,
+                                      labelHintStyle: AppConstants.mainColor,
+                                      validator: (value) {
+                                        if (value!.isNotEmpty) {
+                                          if (!validateEmail(value)) {
+                                            return AppLocalizations.of(
+                                                    profileCtx)!
+                                                .lblEmailBadFormat;
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        _profileCubit.isDataFount(
+                                            _profileCubit.controllerList);
+                                        return null;
+                                      },
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
+
+                                    /// Phone
+                                    CommonTextFormField(
+                                      controller: phoneNumberController,
+                                      hintKey: AppLocalizations.of(profileCtx)!
+                                          .lblPhone,
+                                      keyboardType: TextInputType.phone,
+                                      labelHintStyle: AppConstants.mainColor,
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(
+                                                  profileCtx)!
+                                              .lblPhoneIsEmpty;
+                                        } else if (value.length <
+                                            AppConstants.phoneLength) {
+                                          return AppLocalizations.of(
+                                                  profileCtx)!
+                                              .lblPhoneValidate;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        _profileCubit.isDataFount(
+                                            _profileCubit.controllerList);
+                                        return null;
+                                      },
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
+
+                                    ///address
+                                    CommonTextFormField(
+                                      fieldHeight: 64,
+                                      minLines: 4,
+                                      maxLines: 20,
+                                      controller: userAddressController,
+                                      hintKey: AppLocalizations.of(profileCtx)!
+                                          .lblAddressDetails,
+                                      labelText:
+                                          AppLocalizations.of(profileCtx)!
+                                              .lblName,
+                                      keyboardType: TextInputType.text,
+                                      labelHintStyle: AppConstants.mainColor,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(
+                                                  profileCtx)!
+                                              .lblNameIsEmpty;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        _profileCubit.isDataFount(
+                                            _profileCubit.controllerList);
+                                        return null;
+                                      },
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
+
+                                    ///area and city
+                                    Row(
+                                      children: [
+                                        ///City
+                                        Expanded(
+                                          child: CommonTextFormField(
+                                            controller: userCityController,
+                                            hintKey:
+                                                AppLocalizations.of(profileCtx)!
+                                                    .lblCity,
+                                            keyboardType: TextInputType.text,
+                                            labelHintStyle:
+                                                AppConstants.mainColor,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameIsEmpty;
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            onChanged: (value) {
+                                              _profileCubit.isDataFount(
+                                                  _profileCubit.controllerList);
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+
+                                        ///Spacer
+                                        getSpaceWidth(
+                                            AppConstants.smallPadding),
+
+                                        ///Area
+                                        Expanded(
+                                          child: CommonTextFormField(
+                                            controller: userAreaController,
+                                            hintKey:
+                                                AppLocalizations.of(profileCtx)!
+                                                    .lblArea,
+                                            keyboardType: TextInputType.text,
+                                            labelHintStyle:
+                                                AppConstants.mainColor,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return AppLocalizations.of(
+                                                        profileCtx)!
+                                                    .lblNameIsEmpty;
+                                              } else {
+                                                return null;
+                                              }
+                                            },
+                                            onChanged: (value) {
+                                              _profileCubit.isDataFount(
+                                                  _profileCubit.controllerList);
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ]),
-                            ]),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ]),
+                    ],
                   ),
-                  getSpaceHeight(46),
-
-                  /// name
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: CommonTextFormField(
-                      labelText: AppLocalizations.of(context)!.lblName,
-                      controller: userNameController,
-                      radius: AppConstants.smallBorderRadius,
-                      hintKey: AppLocalizations.of(context)!.lblEnterName,
-                      keyboardType: TextInputType.name,
-                      labelHintStyle: AppConstants.mainTextColor,
-                      withSuffixIcon: true,
-                      suffixIcon: const Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        child: CommonAssetSvgImageWidget(
-                            imageString: "person_icon.svg",
-                            fit: BoxFit.fill,
-                            height: 16,
-                            width: 16),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Center(
+                        child: CommonGlobalButton(
+                          buttonText: AppLocalizations.of(context)!.lblSave,
+                          onPressedFunction: () {
+                            if (formKey.currentState!.validate()) {
+                              profileCtx.read<ProfileCubit>().updateUserProfile(
+                                  emailAddress: emailAddressController.text,
+                                  phoneNumber: phoneNumberController.text,
+                                  userFirstName: userFirstNameController.text,
+                                  userLastName: userLastNameController.text,
+                                  userCity: userCityController.text,
+                                  userArea: userAreaController.text,
+                                  userAddressDetails:
+                                      userAddressController.text,
+                                  image: profileCtx
+                                      .read<ProfileCubit>()
+                                      .imageXFile);
+                            }
+                          },
+                          height: 48,
+                          elevation: 0,
+                          showBorder: false,
+                          isEnable: _profileCubit.isDataFound,
+                          isLoading: profileState is ProfileUpdateLoadingState,
+                          buttonBackgroundColor: AppConstants.mainColor,
+                          buttonTextSize: AppConstants.largeFontSize,
+                          buttonTextFontWeight: FontWeight.w400,
+                          buttonTextColor: AppConstants.lightWhiteColor,
+                        ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return AppLocalizations.of(context)!.lblNameIsEmpty;
-                        } else if (nameValidator(value)) {
-                          return AppLocalizations.of(context)!.lblNameBadFormat;
-                        } else if (value.length < 2) {
-                          return AppLocalizations.of(context)!.lblNameLength;
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (value) {
-                        setState(() {});
-                        return null;
-                      },
-                    ),
-                  ),
-
-                  ///Spacer
-                  getSpaceHeight(AppConstants.pagePadding),
-
-                  /// phone
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: CommonTextFormField(
-                      controller: phoneController,
-                      radius: AppConstants.smallBorderRadius,
-                      labelText: AppLocalizations.of(context)!.lblPhone,
-                      hintKey:
-                      AppLocalizations.of(context)!.lblEnterPhoneNumber,
-                      keyboardType: TextInputType.phone,
-                      labelHintStyle: AppConstants.mainTextColor,
-                      inputFormatter: [FilteringTextInputFormatter.digitsOnly],
-                      withSuffixIcon: true,
-                      suffixIcon: const Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 13, horizontal: 15),
-                        child: CommonAssetSvgImageWidget(
-                            imageString: "phone_icon.svg",
-                            fit: BoxFit.fill,
-                            height: 16,
-                            width: 16),
+                      getSpaceHeight(AppConstants.pagePadding),
+                      CommonGlobalButton(
+                        showBorder: true,
+                        borderColor: AppConstants.lightRedColor,
+                        buttonTextSize: 18,
+                        buttonTextFontWeight: FontWeight.w600,
+                        elevation: 0,
+                        buttonBackgroundColor: AppConstants.lightWhiteColor,
+                        buttonTextColor: AppConstants.lightRedColor,
+                        buttonText: AppLocalizations.of(context)!.lblCancel,
+                        onPressedFunction: () {
+                          Navigator.of(context).pop();
+                        },
+                        height: 48,
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return AppLocalizations.of(context)!.lblPhoneIsEmpty;
-                        } else if (value.length != AppConstants.phoneLength) {
-                          return AppLocalizations.of(context)!.lblPhoneValidate;
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (value) {
-                        setState(() {});
-                        return null;
-                      },
-                    ),
-                  ),
 
-                  getSpaceHeight(120),
-                  CommonGlobalButton(
-                    buttonText: AppLocalizations.of(context)!.lblSave,
-                    onPressedFunction: () {
-                      if (formKey.currentState!.validate()) {
-                        profileCtx.read<ProfileCubit>().updateUserProfile(
-                            name: userNameController.text,
-                            phone: phoneController.text ==
-                                SharedText.currentUser!.phone! ? null :phoneController.text,
-                            image: profileCtx
-                                .read<ProfileCubit>()
-                                .imageXFile);
-                      }
-                    },
-                    height: 48,
-                    elevation: 0,
-                    showBorder: false,
-                    isEnable: userNameController.text.isNotEmpty &&
-                        phoneController.text.isNotEmpty,
-                    isLoading: profileState is ProfileUpdateLoadingState,
-                    buttonBackgroundColor: AppConstants.mainColor,
-                    buttonTextSize: AppConstants.largeFontSize,
-                    buttonTextFontWeight: FontWeight.w400,
-                    buttonTextColor: AppConstants.lightWhiteColor,
-                  ),
+                      ///Spacer
+                      getSpaceHeight(50),
+                    ],
+                  )
                 ],
               ),
             ),

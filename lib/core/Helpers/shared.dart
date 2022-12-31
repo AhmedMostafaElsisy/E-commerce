@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import '../../features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../Constants/Enums/exception_enums.dart';
 import '../presentation/Routes/route_names.dart';
 import 'shared_texts.dart';
-
 
 /// Hide Keyboard
 void hideKeyboard(BuildContext context) =>
@@ -12,7 +12,7 @@ void hideKeyboard(BuildContext context) =>
 
 checkUserAuth(
     {required BuildContext context,
-      required CustomStatusCodeErrorType errorType}) {
+    required CustomStatusCodeErrorType errorType}) {
   if (errorType == CustomStatusCodeErrorType.unVerified) {
     LoginCubit loginCubit = BlocProvider.of<LoginCubit>(context);
     loginCubit.logOut();
@@ -21,7 +21,6 @@ checkUserAuth(
         context, RouteNames.loginHomePageRoute, (route) => false);
   }
 }
-
 
 /// Calculate %
 String calculatePercentage(String price, String discount) {
@@ -63,3 +62,5 @@ SizedBox getSpaceWidth(double width) {
   double currentWidth = SharedText.screenWidth * (width / 375);
   return SizedBox(width: currentWidth);
 }
+
+NumberFormat currencyFormat = NumberFormat("#,##0.00", "en_US");

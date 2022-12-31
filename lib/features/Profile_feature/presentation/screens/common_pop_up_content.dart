@@ -43,37 +43,39 @@ class CommonPopUpContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /// Cancel
-            CommonGlobalButton(
-                showBorder: false,
-                width: 120,
 
-                buttonTextFontWeight: FontWeight.w700,
+
+            /// OK
+            CommonGlobalButton(
+                showBorder: true,
+                borderColor: AppConstants.lightRedColor,
+                width: 120,
+                buttonTextFontWeight: FontWeight.w600,
                 buttonTextSize: AppConstants.normalFontSize,
                 elevation: 0,
-                buttonBackgroundColor: AppConstants.mainColor,
-                buttonText: AppLocalizations.of(context)!.lblNo,
+                buttonBackgroundColor: AppConstants.lightWhiteColor,
+                buttonTextColor: AppConstants.lightRedColor,
+                buttonText: AppLocalizations.of(context)!.lblYes,
                 onPressedFunction: () {
-                  Navigator.of(context, rootNavigator: true).pop();
+                  onSubmitClick();
                 },
                 height: 48,
                 radius: AppConstants.containerBorderRadius,
                 withIcon: false),
             getSpaceWidth(16),
 
-            /// OK
+            /// Cancel
             CommonGlobalButton(
-                showBorder: true,
-                borderColor: AppConstants.mainColor,
+                showBorder: false,
                 width: 120,
-                buttonTextFontWeight: FontWeight.w700,
+
+                buttonTextFontWeight: FontWeight.w600,
                 buttonTextSize: AppConstants.normalFontSize,
                 elevation: 0,
-                buttonBackgroundColor: AppConstants.lightWhiteColor,
-                buttonTextColor: AppConstants.mainColor,
-                buttonText: AppLocalizations.of(context)!.lblYes,
+                buttonBackgroundColor: AppConstants.mainColor,
+                buttonText: AppLocalizations.of(context)!.lblNo,
                 onPressedFunction: () {
-                  onSubmitClick();
+                  Navigator.of(context, rootNavigator: true).pop();
                 },
                 height: 48,
                 radius: AppConstants.containerBorderRadius,

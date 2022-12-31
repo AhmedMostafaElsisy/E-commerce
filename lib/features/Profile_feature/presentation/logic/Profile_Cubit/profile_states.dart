@@ -19,6 +19,7 @@ class ProfileErrorState extends ProfileCubitStates {
 }
 
 class UploadingUserImageLoadingState extends ProfileCubitStates {}
+class CheckInputValidationState extends ProfileCubitStates {}
 
 /// show loader for user Profile_Cubit
 class ProfileUpdateLoadingState extends ProfileCubitStates {}

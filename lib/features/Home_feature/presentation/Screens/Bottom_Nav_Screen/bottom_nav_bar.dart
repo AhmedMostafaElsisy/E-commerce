@@ -1,15 +1,10 @@
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/Constants/app_constants.dart';
-import '../../../../../core/Helpers/shared_texts.dart';
-import '../../../../../core/presentation/Routes/route_names.dart';
-import '../../../../../core/presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../../core/presentation/Widgets/common_cached_image_widget.dart';
-import '../../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../Setting_feature/presentation/setting_screen.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
 import '../Home_Screens/home_page.dart';
@@ -27,13 +22,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     /// Pages
-    /// todo: you must edit list of screen after finish development home screen
     const List<Widget> widgetOptions = <Widget>[
       HomePage(),
       RequestHistoryList(),
-      HomePage(),
       RequestHistoryList(),
       RequestHistoryList(),
+      SettingScreen(),
     ];
 
     return BlocConsumer<BottomNavCubit, BottomNavCubitState>(
@@ -41,43 +35,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       builder: (bottomNavCtx, bottomNavState) {
         return Scaffold(
           backgroundColor: AppConstants.lightWhiteColor,
-          appBar: CommonAppBar(
-            withNotification: true,
-            showBottomIcon: false,
-            withBack: false,
-            showLeadingWidget: true,
-            leadingWidget: InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed(RouteNames.profilePageRoute);
-              },
-              child: commonCachedImageWidget(
-                  context, SharedText.currentUser!.image!,
-                  isProfile: true,
-                  isCircular: true,
-                  height: 30,
-                  width: 30,
-                  radius: 1000,
-                  fit: BoxFit.contain),
-            ),
-            titleWidget: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CommonTitleText(
-                  textKey: AppLocalizations.of(context)!.lblHello,
-                  textColor: AppConstants.mainTextColor,
-                  textWeight: FontWeight.w500,
-                  textFontSize: AppConstants.smallFontSize,
-                ),
-                CommonTitleText(
-                  textKey:
-                      SharedText.currentUser!.name!.getStringWithoutSpacings(),
-                  textColor: AppConstants.mainColor,
-                  textWeight: FontWeight.w700,
-                  textFontSize: AppConstants.smallFontSize,
-                ),
-              ],
-            ),
-          ),
           bottomNavigationBar: Container(
               decoration: BoxDecoration(
                   color: AppConstants.lightWhiteColor,
@@ -89,17 +46,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: AppConstants.redShadowColor.withOpacity(0.25),
-                        blurRadius: 8,
+                        color: AppConstants.redShadowColor.withOpacity(0.16),
+                        blurRadius: 4,
                         offset: const Offset(0, 0))
                   ]),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: getWidgetHeight(AppConstants.pagePadding)),
+                    vertical: getWidgetHeight(AppConstants.smallPadding)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    ///home icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(0);
@@ -112,7 +70,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         title: AppLocalizations.of(context)!.lblHome,
                       ),
                     ),
-                    getSpaceWidth(AppConstants.pagePadding),
+
+                    ///Shop icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(1);

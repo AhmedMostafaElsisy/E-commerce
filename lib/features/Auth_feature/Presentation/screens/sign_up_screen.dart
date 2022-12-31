@@ -71,10 +71,14 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     userFirstNameController.dispose();
+    userLastNameController.dispose();
     emailAddressController.dispose();
     phoneNumberController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    userAddressController.dispose();
+    userCityController.dispose();
+    userAreaController.dispose();
     super.dispose();
   }
 
