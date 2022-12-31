@@ -146,5 +146,7 @@
   "lblFavorite": "Favorite",
   "lblMyStores": "My Stores",
   "lblAddStore": "Add Store",
-  "lblShow": "Show"
+  "lblShow": "Show",
+  "lblNoStoreFound": "No stores found for you",
+  "lblNoStoreFoundDesc": "Be ready for your first store"
 }

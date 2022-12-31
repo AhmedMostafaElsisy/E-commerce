@@ -147,5 +147,7 @@
   "lblFavorite": "المفضلة",
   "lblMyStores": "متاجري",
   "lblAddStore": "اضافة متجر",
-  "lblShow": "عرض"
+  "lblShow": "عرض",
+  "lblNoStoreFound": "لا يوجد متاجر لديك حاليا",
+  "lblNoStoreFoundDesc": "اسرع بانشاء متجرك الان"
 }
