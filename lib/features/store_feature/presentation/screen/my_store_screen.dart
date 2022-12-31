@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_empty_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
@@ -56,7 +57,7 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
           ),
           customActionWidget: InkWell(
             onTap: () {
-              ///Todo: add navigator to create shop
+              Navigator.pushNamed(context, RouteNames.addStoresPageRoute);
             },
             child: Row(
               children: [

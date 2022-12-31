@@ -19,5 +19,6 @@ class RouteNames {
   static const String ratingPageRoute = "/ratingPage";
   static const String favoritePageRoute = "/favoritePage";
   static const String myStoresPageRoute = "/myStoresPage";
+  static const String addStoresPageRoute = "/addStoresPage";
 
 }
