@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
 import 'core/setting_feature/Data/data_scources/local_data_scources.dart';
 import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
@@ -11,18 +12,18 @@ import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/otp_remote_data_scources.dart';
 import 'features/Auth_feature/Data/data_scources/password_remote_data_scources.dart';
 import 'features/Auth_feature/Data/repository/auth_repository.dart';
+import 'features/Auth_feature/Data/repository/otp_repository.dart';
 import 'features/Auth_feature/Data/repository/password_repository.dart';
 import 'features/Auth_feature/Domain/repository/auth_interface.dart';
+import 'features/Auth_feature/Domain/repository/otp_interface.dart';
 import 'features/Auth_feature/Domain/repository/password_interface.dart';
 import 'features/Auth_feature/Domain/use_cases/auth_use_case.dart';
 import 'features/Auth_feature/Domain/use_cases/forget_password_user_case.dart';
+import 'features/Auth_feature/Domain/use_cases/otp_ues_cases.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
-import 'features/Auth_feature/Data/repository/otp_repository.dart';
-import 'features/Auth_feature/Domain/repository/otp_interface.dart';
-import 'features/Auth_feature/Domain/use_cases/otp_ues_cases.dart';
 import 'features/Home_feature/Data/data_scources/request_remote_data_scources.dart';
 import 'features/Home_feature/Data/repository/request_repository.dart';
 import 'features/Home_feature/Domain/repository/request_interface.dart';
@@ -38,7 +39,7 @@ import 'features/Set_Destination_feature/Data/repository/location_repository.dar
 import 'features/Set_Destination_feature/Domain/location_ues_cases/location_ues_cases.dart';
 import 'features/Set_Destination_feature/Domain/repository/location_interface.dart';
 import 'features/Set_Destination_feature/presentation/logic/destination_cubit.dart';
-import 'features/favorite_feature/data/data_scoures/remote_data_scoures.dart';
+import 'features/favorite_feature/data/data_scoures/favorite_remote_data_scoures.dart';
 import 'features/favorite_feature/data/repository/favorite_repository.dart';
 import 'features/favorite_feature/domain/repository/favorite_repository_interface.dart';
 import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
