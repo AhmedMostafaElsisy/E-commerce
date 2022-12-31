@@ -43,7 +43,7 @@ class StoreUesCase {
         storeSubCategory: storeSubCategory);
   }
 
-  Future<Either<CustomError, BaseModel>> removeProductFromFavorite({
+  Future<Either<CustomError, BaseModel>> editStore({
     required int storeId,
     XFile? storeImage,
     required String storeName,

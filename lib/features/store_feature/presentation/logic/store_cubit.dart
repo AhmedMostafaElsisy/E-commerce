@@ -112,4 +112,35 @@ class StoreCubit extends Cubit<StoreStates> {
     result.fold((error) => emit(CreateStoreFailedStates(error)),
         (success) => emit(CreateStoreSuccessStates()));
   }
+
+  ///edit store
+  editStore({
+    required int storeId,
+    XFile? storeImage,
+    required String storeName,
+    required String ownerName,
+    required String storeNumber,
+    required String storeEmail,
+    required String storeAddress,
+    required String storeCity,
+    required String storeArea,
+    required String storeMainCategory,
+    required String storeSubCategory,
+  }) async {
+    emit(EditStoreLoadingStates());
+    var result = await uesCase.editStore(
+        storeId: storeId,
+        storeImage: storeImage,
+        storeName: storeName,
+        ownerName: ownerName,
+        storeNumber: storeNumber,
+        storeEmail: storeEmail,
+        storeAddress: storeAddress,
+        storeCity: storeCity,
+        storeArea: storeArea,
+        storeMainCategory: storeMainCategory,
+        storeSubCategory: storeSubCategory);
+    result.fold((error) => emit(EditStoreFailedStates(error)),
+        (success) => emit(EditStoreSuccessStates()));
+  }
 }

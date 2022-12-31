@@ -1,3 +1,5 @@
+import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
@@ -133,6 +135,9 @@ class ShopItemWidget extends StatelessWidget {
                     buttonText: AppLocalizations.of(context)!.lblEdit,
                     onPressedFunction: () {
                       ///Todo:add navigation for edit screen
+                      Navigator.of(context).pushNamed(
+                          RouteNames.editStoresPageRoute,
+                          arguments: RouteArgument(shopModel: model));
                     },
                     height: 32,
                     radius: AppConstants.containerBorderRadius,

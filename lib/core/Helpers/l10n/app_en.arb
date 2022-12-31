@@ -157,5 +157,7 @@
   "lblShopAddressDetails": "Shop Address Details",
   "lblMainCategory": "Main Category",
   "lblSubCategory": "Tags",
-  "lblStoreCreatedSuccess": "Store created successfully"
+  "lblStoreCreatedSuccess": "Store created successfully",
+  "lblEditStore": "Edit Store",
+  "lblStoreEditSuccess": "Store edited successfully"
 }

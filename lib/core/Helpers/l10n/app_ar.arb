@@ -158,5 +158,7 @@
   "lblShopAddressDetails": "العنوان التفصيلي للمتجر",
   "lblMainCategory": "التصنيف الرئيسي للمتجر",
   "lblSubCategory": "الكلمات الدلالية",
-  "lblStoreCreatedSuccess": "تم انشاء المتجر بنجاح"
+  "lblStoreCreatedSuccess": "تم انشاء المتجر بنجاح",
+  "lblEditStore": "تعديل متجر",
+  "lblStoreEditSuccess": "تم تعديل المتجر بنجاح"
 }
