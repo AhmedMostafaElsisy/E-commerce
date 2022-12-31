@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
@@ -70,8 +71,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _profileCubit.controllerList.add(userAddressController);
     _profileCubit.controllerList.add(userCityController);
     _profileCubit.controllerList.add(userAreaController);
-    _profileCubit.isDataFount(
-        _profileCubit.controllerList);
+    _profileCubit.isDataFount(_profileCubit.controllerList);
   }
 
   @override
@@ -155,6 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: [
                   Column(
                     children: [
+                      getSpaceHeight(40),
                       Expanded(
                         child: ListView(
                           padding: EdgeInsets.zero,
@@ -591,27 +592,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-
                       Center(
                         child: CommonGlobalButton(
                           buttonText: AppLocalizations.of(context)!.lblSave,
                           onPressedFunction: () {
                             if (formKey.currentState!.validate()) {
                               profileCtx.read<ProfileCubit>().updateUserProfile(
-                                  emailAddress:
-                                  emailAddressController.text,
-
+                                  emailAddress: emailAddressController.text,
                                   phoneNumber: phoneNumberController.text,
-                                  userFirstName:
-                                  userFirstNameController.text,
-                                  userLastName:
-                                  userLastNameController.text,
+                                  userFirstName: userFirstNameController.text,
+                                  userLastName: userLastNameController.text,
                                   userCity: userCityController.text,
                                   userArea: userAreaController.text,
                                   userAddressDetails:
-                                  userAddressController.text,
-                                  image:
-                                      profileCtx.read<ProfileCubit>().imageXFile);
+                                      userAddressController.text,
+                                  image: profileCtx
+                                      .read<ProfileCubit>()
+                                      .imageXFile);
                             }
                           },
                           height: 48,
@@ -632,16 +629,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         buttonTextSize: 18,
                         buttonTextFontWeight: FontWeight.w600,
                         elevation: 0,
-                        buttonBackgroundColor:
-                        AppConstants.lightWhiteColor,
+                        buttonBackgroundColor: AppConstants.lightWhiteColor,
                         buttonTextColor: AppConstants.lightRedColor,
-                        buttonText:
-                        AppLocalizations.of(context)!.lblCancel,
+                        buttonText: AppLocalizations.of(context)!.lblCancel,
                         onPressedFunction: () {
                           Navigator.of(context).pop();
                         },
                         height: 48,
                       ),
+
                       ///Spacer
                       getSpaceHeight(50),
                     ],

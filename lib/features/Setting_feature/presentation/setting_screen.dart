@@ -5,6 +5,7 @@ import 'package:captien_omda_customer/features/Setting_feature/presentation/sett
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/Helpers/shared_texts.dart';
@@ -61,7 +62,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ///Spacer
-                      getSpaceHeight(20),
+                      getSpaceHeight(12),
 
                       ///Setting title
                       CommonTitleText(

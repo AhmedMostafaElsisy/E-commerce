@@ -2,6 +2,7 @@ import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_ima
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
@@ -11,7 +12,6 @@ import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -47,7 +47,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (forgetCtx, forgetState) {
           if (forgetState is SendVerificationToEmailStateSuccess) {
-            Navigator.pushReplacementNamed(forgetCtx, RouteNames.verificationCodePageRoute,
+            Navigator.pushReplacementNamed(
+                forgetCtx, RouteNames.verificationCodePageRoute,
                 arguments: RouteArgument(
                     sourcePage: "forget",
                     emailAddress: emailController.text,
@@ -88,7 +89,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ///spacer
-                        getSpaceHeight(60),
+                        getSpaceHeight(110),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: AppConstants.pagePaddingDouble),
@@ -154,37 +155,48 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                     textFontSize: AppConstants.smallFontSize,
                                   )
                                 ],
+
                                 ///Spacer
-                                getSpaceHeight(AppConstants.pagePaddingDouble*3),
+                                getSpaceHeight(
+                                    AppConstants.pagePaddingDouble * 3),
                                 GestureDetector(
                                   onTap: () {
-                                    FocusScope.of(context).requestFocus(FocusNode());
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                   },
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           CommonGlobalButton(
                                               height: 48,
-                                              buttonBackgroundColor: AppConstants.mainColor,
-
+                                              buttonBackgroundColor:
+                                                  AppConstants.mainColor,
                                               buttonTextSize: 18,
-                                              isEnable: emailController.text.isNotEmpty,
-                                              isLoading:
-                                              state is SendVerificationToEmailStateLoading,
-                                              buttonTextFontWeight: FontWeight.w400,
+                                              isEnable: emailController
+                                                  .text.isNotEmpty,
+                                              isLoading: state
+                                                  is SendVerificationToEmailStateLoading,
+                                              buttonTextFontWeight:
+                                                  FontWeight.w400,
                                               buttonText:
-                                              AppLocalizations.of(context)!.lblSend,
+                                                  AppLocalizations.of(context)!
+                                                      .lblSend,
                                               onPressedFunction: () {
-                                                if (formKey.currentState!.validate()) {
+                                                if (formKey.currentState!
+                                                    .validate()) {
                                                   FocusScope.of(context)
-                                                      .requestFocus(FocusNode());
+                                                      .requestFocus(
+                                                          FocusNode());
                                                   _forgetPasswordCubit
                                                       .sendVerificationCodeToEmail(
-                                                      email: emailController.text);
+                                                          email: emailController
+                                                              .text);
                                                 }
                                               },
                                               withIcon: false),
@@ -202,7 +214,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   ),
                 ),
-
               ],
             ),
           );
