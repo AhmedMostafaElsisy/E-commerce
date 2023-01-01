@@ -181,20 +181,23 @@ class _SettingScreenState extends State<SettingScreen> {
                     }, builder: (profileCtx, profileState) {
                       return InkWell(
                         onTap: () {
-                          showAlertDialog(context, [
+                          if(profileState is! UserLoginLoadingState) {
+                            showAlertDialog(context, [
                             CommonPopUpContent(
                               title: AppLocalizations.of(context)!.lblLogOut,
                               subTitle:
                                   AppLocalizations.of(context)!.lblIsLogOut,
                               onSubmitClick: () {
+
                                 Navigator.of(context).pop();
                                 profileCtx.read<LoginCubit>().logOut();
                               },
                             ),
                           ]);
+                          }
                         },
                         child: Container(
-                          color: AppConstants.lightRedColor,
+                          color:profileState is UserLoginLoadingState?AppConstants.greyColor  :AppConstants.lightRedColor,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 8),
