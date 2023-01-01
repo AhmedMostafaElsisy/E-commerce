@@ -12,6 +12,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/OTP_Cubit/otp_cubit.dart';
 import '../logic/OTP_Cubit/otp_states.dart';
 
@@ -98,25 +99,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             onTap: () {
               FocusScope.of(otpCtx).requestFocus(FocusNode());
             },
-            child: Container(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConstants.lightWhiteColor.withOpacity(0.28),
-                    AppConstants.lightWhiteColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
+            child: MainAppPage(
+              screenContent: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -181,7 +165,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   autoDisposeControllers: false,
                                   textStyle: const TextStyle(
                                       color: AppConstants.greyColor,
-                                      fontSize: 32,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.w400),
                                   length: 6,
                                   keyboardType: TextInputType.number,

@@ -5,13 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -65,25 +65,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
-                  child: Container(
-                    width: SharedText.screenWidth,
-                    height: SharedText.screenHeight,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage(
-                            "assets/images/backGround.png",
-                          ),
-                          fit: BoxFit.fill),
-                      gradient: LinearGradient(
-                        colors: [
-                          AppConstants.lightWhiteColor.withOpacity(0.28),
-                          AppConstants.lightWhiteColor
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: Column(
+                  child: MainAppPage(
+                    screenContent: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

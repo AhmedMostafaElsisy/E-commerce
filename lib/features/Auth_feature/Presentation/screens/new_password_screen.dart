@@ -12,8 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -69,27 +69,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             onTap: () {
               FocusScope.of(passwordCtx).requestFocus(FocusNode());
             },
-            child: Container(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConstants.lightWhiteColor.withOpacity(0.28),
-                    AppConstants.lightWhiteColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
+            child: MainAppPage(
+              screenContent: Column(
                 children: [
-
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -108,7 +90,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                                 getSpaceHeight(60),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: AppConstants.pagePaddingDouble),
+                                      horizontal:
+                                          AppConstants.pagePaddingDouble),
                                   child: commonAssetImageWidget(
                                       imageString: "forget_password.png",
                                       height: 137,
