@@ -18,6 +18,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/store_cubit.dart';
 
 class AddStoreScreen extends StatefulWidget {
@@ -88,76 +89,53 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
       backgroundColor: AppConstants.lightWhiteColor,
-      appBar: CommonAppBar(
-        withBack: true,
-        appBarBackGroundColor: AppConstants.transparent,
-        showBottomIcon: false,
-        centerTitle: false,
-        titleWidget: CommonTitleText(
-          textKey: AppLocalizations.of(context)!.lblAddStore,
-          textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w400,
-          textFontSize: AppConstants.normalFontSize,
-        ),
-      ),
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Container(
-          width: SharedText.screenWidth,
-          height: SharedText.screenHeight,
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: AssetImage(
-                  "assets/images/backGround.png",
+        child: MainAppPage(
+          screenContent: Column(
+            children: [
+              CommonAppBar(
+                withBack: true,
+                appBarBackGroundColor: AppConstants.transparent,
+                showBottomIcon: false,
+                centerTitle: false,
+                titleWidget: CommonTitleText(
+                  textKey: AppLocalizations.of(context)!.lblAddStore,
+                  textColor: AppConstants.lightBlackColor,
+                  textWeight: FontWeight.w400,
+                  textFontSize: AppConstants.normalFontSize,
                 ),
-                fit: BoxFit.fill),
-            gradient: LinearGradient(
-              colors: [
-                AppConstants.lightWhiteColor.withOpacity(0.28),
-                AppConstants.lightWhiteColor
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: BlocConsumer<StoreCubit, StoreStates>(
-            listener: (storeCtx, storeState) {
-              if (storeState is CreateStoreFailedStates) {
-                checkUserAuth(
-                    context: storeCtx, errorType: storeState.error.type);
-                showSnackBar(
-                  context: storeCtx,
-                  title: storeState.error.errorMassage!,
-                );
-              } else if (storeState is CreateStoreSuccessStates) {
-                showSnackBar(
-                    context: storeCtx,
-                    title:AppLocalizations.of(context)!
-                        .lblStoreCreatedSuccess,
-                    color: AppConstants.successColor);
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  RouteNames.mainBottomNavPageRoute,
+              ),
+              BlocConsumer<StoreCubit, StoreStates>(
+                listener: (storeCtx, storeState) {
+                  if (storeState is CreateStoreFailedStates) {
+                    checkUserAuth(
+                        context: storeCtx, errorType: storeState.error.type);
+                    showSnackBar(
+                      context: storeCtx,
+                      title: storeState.error.errorMassage!,
+                    );
+                  } else if (storeState is CreateStoreSuccessStates) {
+                    showSnackBar(
+                        context: storeCtx,
+                        title: AppLocalizations.of(context)!
+                            .lblStoreCreatedSuccess,
+                        color: AppConstants.successColor);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RouteNames.mainBottomNavPageRoute,
                       (route) => false,
-                );
-              }
-            },
-            builder: (storeCtx, storeState) {
-              return Column(
-                children: [
-                  getSpaceHeight(80),
-                  Expanded(
+                    );
+                  }
+                },
+                builder: (storeCtx, storeState) {
+                  return Expanded(
                       child: Container(
                           padding: const EdgeInsets.symmetric(
-                                  horizontal: AppConstants.pagePadding) +
-                              EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom,
-                              ),
+                              horizontal: AppConstants.pagePadding),
                           child: ListView(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
@@ -580,10 +558,10 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                     ],
                                   ))
                             ],
-                          )))
-                ],
-              );
-            },
+                          )));
+                },
+              ),
+            ],
           ),
         ),
       ),
