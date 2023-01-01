@@ -71,13 +71,15 @@ class ProductItemWidget extends StatelessWidget {
                       imageHeight: 14,
                       imageWidth: 14,
                       onClick: () {
-                        model.isFav!
+                       if( favState is! FavoriteFavLoadingStates) {
+                         model.isFav!
                             ? favCtx
                                 .read<FavoriteCubit>()
                                 .removeItemFromFav(productId: model.id!)
                             : favCtx
                                 .read<FavoriteCubit>()
                                 .addItemToFav(productId: model.id!);
+                       }
                       },
                     );
                   },
