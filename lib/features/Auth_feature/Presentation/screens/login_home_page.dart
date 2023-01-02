@@ -18,6 +18,7 @@ import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
@@ -84,25 +85,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
-            child: Container(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConstants.lightWhiteColor.withOpacity(0.28),
-                    AppConstants.lightWhiteColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: SafeArea(
+            child: MainAppPage(
+              screenContent: SafeArea(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: getWidgetWidth(AppConstants.pagePadding)),

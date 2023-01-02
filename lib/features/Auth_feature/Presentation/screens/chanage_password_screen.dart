@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/Constants/app_constants.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
-
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -15,6 +11,7 @@ import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/Password_Cubit/password_cubit.dart';
 import '../logic/Password_Cubit/password_states.dart';
 
@@ -53,20 +50,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
       backgroundColor: AppConstants.lightWhiteColor,
-      appBar: CommonAppBar(
-        withBack: true,
-        appBarBackGroundColor: AppConstants.transparent,
-        showBottomIcon: false,
-        centerTitle: false,
-        titleWidget: CommonTitleText(
-          textKey: AppLocalizations.of(context)!.lblChangePassWord,
-          textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w400,
-          textFontSize: AppConstants.normalFontSize,
-        ),
-      ),
       body: BlocConsumer<PasswordCubit, PasswordStates>(
         listener: (passwordCtx, passwordStates) {
           if (passwordStates is ChangePasswordStateSuccess) {
@@ -85,32 +69,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             onTap: () {
               FocusScope.of(passwordCtx).requestFocus(FocusNode());
             },
-            child: Container(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConstants.lightWhiteColor.withOpacity(0.28),
-                    AppConstants.lightWhiteColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
+            child: MainAppPage(
+              screenContent: Column(
                 children: [
+                  CommonAppBar(
+                    withBack: true,
+                    appBarBackGroundColor: AppConstants.transparent,
+                    showBottomIcon: false,
+                    centerTitle: false,
+                    titleWidget: CommonTitleText(
+                      textKey: AppLocalizations.of(context)!.lblChangePassWord,
+                      textColor: AppConstants.lightBlackColor,
+                      textWeight: FontWeight.w400,
+                      textFontSize: AppConstants.normalFontSize,
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: AppConstants.pagePadding),
                       child: ListView(
                         shrinkWrap: true,
+                        padding: EdgeInsets.zero,
                         physics: const BouncingScrollPhysics(),
                         children: [
                           Padding(

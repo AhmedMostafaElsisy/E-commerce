@@ -15,6 +15,7 @@ import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/Sign_Up_Cubit/sign_up_states.dart';
 import '../logic/Sign_Up_Cubit/sign_up_cubit.dart';
 
@@ -112,25 +113,8 @@ class _SignUpPageState extends State<SignUpPage> {
             onTap: () {
               FocusScope.of(signUpCtx).requestFocus(FocusNode());
             },
-            child: Container(
-              width: SharedText.screenWidth,
-              height: SharedText.screenHeight,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/backGround.png",
-                    ),
-                    fit: BoxFit.fill),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConstants.lightWhiteColor.withOpacity(0.28),
-                    AppConstants.lightWhiteColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Stack(
+            child: MainAppPage(
+              screenContent: Stack(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
