@@ -1,9 +1,11 @@
 import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/location_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// ignore: depend_on_referenced_packages
+import 'package:rxdart/rxdart.dart';
+
 import '../../Domain/location_ues_cases/location_ues_cases.dart';
 import 'destination_event.dart';
 import 'destination_states.dart';
-import 'package:rxdart/rxdart.dart';
 
 class DestinationCubit extends Bloc<SearchEvents, DestinationStates> {
   final LocationUesCases _locationUesCase;

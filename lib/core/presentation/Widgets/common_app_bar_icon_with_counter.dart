@@ -27,7 +27,7 @@ class _CommonAppBarImageWithCounterState
     extends State<CommonAppBarImageWithCounter> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: getWidgetWidth(36),
       height: getWidgetHeight(36),
       child: Center(
@@ -46,7 +46,7 @@ class _CommonAppBarImageWithCounterState
                 child: Container(
                   height: getWidgetHeight(16),
                   width: getWidgetWidth(16),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppConstants.lightRedColor,
                   ),

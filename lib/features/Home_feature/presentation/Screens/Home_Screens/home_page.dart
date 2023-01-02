@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       screen: Scaffold(
           backgroundColor: AppConstants.transparent,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
+            preferredSize: const Size.fromHeight(kToolbarHeight),
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: getWidgetHeight(32),
