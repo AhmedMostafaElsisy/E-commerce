@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../features/Home_feature/Domain/enitiy/request_model.dart';
+import '../../model/shop_model.dart';
 
 class RouteArgument {
   String? id;
@@ -27,6 +28,8 @@ class RouteArgument {
   ///request Model
   RequestModel? requestModel;
 
+  ShopModel? shopModel;
+
   RouteArgument(
       {this.id,
       this.sourcePage = '',
@@ -43,7 +46,8 @@ class RouteArgument {
       this.onTap,
       this.requestModel,
       this.otp,
-      this.requestId});
+      this.requestId,
+      this.shopModel});
 
   @override
   String toString() {

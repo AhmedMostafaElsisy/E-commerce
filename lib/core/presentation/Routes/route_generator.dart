@@ -17,6 +17,9 @@ import '../../../features/Set_Destination_feature/presentation/Screen/set_destin
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
+import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
+import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
+import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
 import '../../../features/trip_feature/presentation/current_trip_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
@@ -76,9 +79,18 @@ class RouteGenerator {
       case RouteNames.ratingPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: RatingScreen(routeArgument: args as RouteArgument));
-        case RouteNames.favoritePageRoute:
+      case RouteNames.favoritePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const FavoriteListScreen());
+      case RouteNames.myStoresPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const MyStoresListScreen());
+      case RouteNames.addStoresPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const AddStoreScreen());
+      case RouteNames.editStoresPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: EditStoreScreen(argument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(
