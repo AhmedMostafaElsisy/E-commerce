@@ -9,6 +9,7 @@ import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
+import '../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -105,6 +106,14 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
                       withButton: true,
                       onTap: () => favoriteCubit.getFavoriteListData(),
                     );
+                  }else if (favCtx.read<FavoriteCubit>().productList.isEmpty) {
+                    return EmptyScreen(
+                        imageString: "category.svg",
+                        titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
+                        description:
+                        AppLocalizations.of(context)!.lblNoStoreFoundDesc,
+                        imageHeight: 80,
+                        imageWidth: 08);
                   } else {
                     return SizedBox(
                       height: SharedText.screenHeight - 110,

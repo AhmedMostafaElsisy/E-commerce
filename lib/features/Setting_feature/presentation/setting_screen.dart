@@ -113,8 +113,10 @@ class _SettingScreenState extends State<SettingScreen> {
                               title: AppLocalizations.of(context)!.lbFavorite,
                               screenName: RouteNames.favoritePageRoute,
                             ),
+                            ///my stores
                             SectionContentItem(
                               title: AppLocalizations.of(context)!.lblMyShop,
+                              screenName: RouteNames.myStoresPageRoute,
                             ),
                             SectionContentItem(
                               title: AppLocalizations.of(context)!

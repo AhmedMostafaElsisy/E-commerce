@@ -52,4 +52,7 @@ class ApiKeys {
   ///Todo:check the endpoint when integrate with the api
   ///Favorite
   static const String favoriteKey = "/Favorite";
+
+  ///Store
+  static const String storeKey = "/Store";
 }

@@ -17,6 +17,7 @@ class AppConstants {
   static const Color darkTextColor = Color(0XFFEDEDED);
   static const Color backGroundColor = Color(0xFFFFF8F5);
   static const Color loaderBackGroundColor = Color(0xFFFAFAFD);
+  static const Color successColor = Color(0XFF16A085);
 
   static const Color lightRedColor = Color(0xFFBF0000);
   static const Color lightBlueColor = Color(0xFF3243CD);
@@ -25,7 +26,7 @@ class AppConstants {
   static const Color lightContentColor = Color(0xFF8A8895);
 
   static const Color lightGreyTextColor = Color(0xFFF3F3F3);
-  static const Color lightRateColor = Color(0xFFFFC607);
+  static const Color lightOrangeColor = Color(0xFFff8204);
   static const Color greyColor = Color(0xffA8A8A8);
   static const Color lightSecondShadowColor = Color(0xffDADADA);
   static const Color redShadowColor = Color(0xff999999);
