@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/Constants/Keys/api_keys.dart';
-import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/model/base_model.dart';
@@ -86,7 +87,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -142,7 +145,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -193,7 +198,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -209,7 +216,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 1,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -218,7 +225,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -227,7 +234,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 2,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -236,7 +243,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -245,7 +252,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 3,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -254,7 +261,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -266,7 +273,8 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       if (limit == null) {
         pathUrl = "${ApiKeys.productKey}?storeId=$shopId&page=$page";
       } else {
-        pathUrl = "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
+        pathUrl =
+            "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
       }
       await Future.delayed(const Duration(seconds: 3));
 
@@ -274,7 +282,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 }

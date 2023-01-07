@@ -23,7 +23,7 @@ ThemeData lightTheme = ThemeData(
   /// Text Themes
   textTheme: const TextTheme(
     headline1: TextStyle(
-        fontSize: AppConstants.xSmallFontSize,
+        fontSize: AppConstants.xxSmallFontSize,
         fontWeight: FontWeight.w500,
         color: AppConstants.lightTextColor,
         height: 1.3),
@@ -88,7 +88,7 @@ ThemeData darkTheme = ThemeData(
   /// Text Themes
   textTheme: const TextTheme(
     headline1: TextStyle(
-        fontSize: AppConstants.xSmallFontSize,
+        fontSize: AppConstants.xxSmallFontSize,
         fontWeight: FontWeight.w500,
         color: AppConstants.darkOffWhiteColor,
         height: 1.3),

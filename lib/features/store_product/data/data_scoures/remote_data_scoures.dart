@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/Constants/Keys/api_keys.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
@@ -75,7 +77,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -127,7 +131,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 }

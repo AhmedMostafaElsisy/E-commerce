@@ -1,12 +1,13 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
-import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../model/shop_model.dart';
 import 'common_global_button.dart';
 
@@ -31,7 +32,7 @@ class ShopItemWidget extends StatelessWidget {
           ]),
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         ///shop image
-        commonCachedImageWidget(context, model.image!,
+        commonCachedImageWidget(model.image!,
             height: 168, width: 168, fit: BoxFit.fill),
 
         ///spacer
@@ -66,7 +67,7 @@ class ShopItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.category ?? "asd",
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
@@ -87,7 +88,7 @@ class ShopItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.location ?? "asda",
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
@@ -136,7 +137,6 @@ class ShopItemWidget extends StatelessWidget {
                     buttonTextColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblEdit,
                     onPressedFunction: () {
-
                       Navigator.of(context).pushNamed(
                           RouteNames.editStoresPageRoute,
                           arguments: RouteArgument(shopModel: model));

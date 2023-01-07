@@ -13,7 +13,7 @@ class AppConstants {
   static const Color lightGreenColor = Color(0xffF4F8F2);
   static const Color lightPurplerColor = Color(0xff525298);
   static const Color lightGrayBackgroundColor = Color(0xffF7FDFF);
-  static const Color lightGreyColor = Color(0xffEBEFF1);
+  static const Color lightGreyColor = Color(0xffDADADA);
   static const Color starRatingColor = Color(0xffF79E1B);
   static const Color darkFieldColor = Color(0XFF2F2F2F);
   static const Color darkTextColor = Color(0XFFEDEDED);
@@ -49,7 +49,8 @@ class AppConstants {
   static const Color darkBackgroundWidgetsColor = Color(0xFF212121);
 
   /// Font Sizes
-  static const double xSmallFontSize = 10.0;
+  static const double xxSmallFontSize = 10.0;
+  static const double xSmallFontSize = 12.0;
   static const double smallFontSize = 14.0;
   static const double normalFontSize = 16.0;
   static const double mediumFontSize = 17.0;
@@ -63,7 +64,7 @@ class AppConstants {
   static const double borderRadius = 20.0;
   static const double containerBorderRadius = 6.0;
   static const double containerOfListTitleBorderRadius = 8;
-  static const double buttonBorderRadius = 25.0;
+  static const double textFormBorderRadius = 24.0;
   static const double bottomSheetBorderRadius = 25.0;
 
   /// Page Padding

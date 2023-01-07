@@ -1,16 +1,12 @@
-
-
-import '../Constants/Enums/exception_enums.dart';
+import 'custom_error.dart';
 
 class CustomException implements Exception {
-  CustomStatusCodeErrorType type;
-  String errorMassage;
-  String imgPath;
+  CustomError error;
 
-  CustomException(this.type, this.imgPath, {this.errorMassage = ""});
+  CustomException({required this.error});
 
   @override
   String toString() {
-    return 'SomeThing Wrong Happen: \n$type';
+    return 'SomeThing Wrong Happen: \n${error.type}';
   }
 }

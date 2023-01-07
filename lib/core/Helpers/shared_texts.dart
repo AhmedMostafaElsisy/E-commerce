@@ -1,4 +1,3 @@
-
 import '../../features/Auth_feature/Domain/entities/base_user_entity.dart';
 import 'Responsive_UI/device_info.dart';
 
@@ -15,4 +14,8 @@ class SharedText {
 
   /// On_Will_Pop app close time
   static DateTime? currentBackPressTime;
+
+  static bool isAppLocalAr() {
+    return currentLocale == "ar";
+  }
 }

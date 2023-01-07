@@ -2,6 +2,11 @@ import 'package:captien_omda_customer/features/Profile_feature/presentation/scre
 import 'package:captien_omda_customer/features/Profile_feature/presentation/screens/profile_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
@@ -9,11 +14,6 @@ import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_alert_dialog.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
-import '../../../../core/Constants/app_constants.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
 import '../../../Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../../../Auth_feature/Presentation/logic/Login_Cubit/login_states.dart';
 import 'common_pop_up_content.dart';
@@ -71,7 +71,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         imagePath: "back_arrow_icon.svg",
                         imageHeight: 20,
                         imageWidth: 20,
-
                         onClick: () {
                           Navigator.pop(context);
                         },
@@ -85,7 +84,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         imagePath: "logout_icon.svg",
                         imageHeight: 24,
                         imageWidth: 24,
-
                         onClick: () {
                           showAlertDialog(context, [
                             CommonPopUpContent(
@@ -125,12 +123,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                 ///user profile image
                                 child: commonCachedImageWidget(
-                                    context, SharedText.currentUser!.image!,
-                                    height: (98),
-                                    width: (98),
-                                    radius: 1000,
-                                    isCircular: true,
-                                    isProfile: true),
+                                  SharedText.currentUser!.image!,
+                                  height: (98),
+                                  width: (98),
+                                  radius: 1000,
+                                  isCircular: true,
+                                  isProfile: true,
+                                ),
                               ),
                             ),
                           ]),
@@ -187,9 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CommonGlobalButton(
                 buttonText: AppLocalizations.of(context)!.lblEdit,
                 onPressedFunction: () {
-
-                  Navigator.pushNamed(
-                      context, RouteNames.editProfilePageRoute);
+                  Navigator.pushNamed(context, RouteNames.editProfilePageRoute);
                 },
                 height: 48,
                 elevation: 0,
@@ -208,7 +205,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CommonGlobalButton(
                   buttonText: AppLocalizations.of(context)!.lblChangePassWord,
                   onPressedFunction: () {
-
                     Navigator.of(context)
                         .pushNamed(RouteNames.changePasswordPageRoute);
                   },

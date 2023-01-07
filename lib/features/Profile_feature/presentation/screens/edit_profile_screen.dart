@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
@@ -150,24 +151,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 key: formKey,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                          horizontal:
-                                              AppConstants.pagePadding) ,
+                                      horizontal: AppConstants.pagePadding),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       ///Image
                                       Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 20.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 20.0),
                                         child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
                                               Stack(children: [
                                                 profileCtx
-                                                        .read<
-                                                            ProfileCubit>()
+                                                        .read<ProfileCubit>()
                                                         .deleteImage
                                                     ? InkWell(
                                                         onTap: () {
@@ -197,8 +195,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                 border: Border.all(
                                                                     color: AppConstants
                                                                         .lightWhiteColor,
-                                                                    width:
-                                                                        2)),
+                                                                    width: 2)),
                                                             child:
                                                                 const Padding(
                                                               padding:
@@ -208,8 +205,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                               child: CommonAssetSvgImageWidget(
                                                                   imageString:
                                                                       "camera.svg",
-                                                                  height:
-                                                                      32,
+                                                                  height: 32,
                                                                   width: 32,
                                                                   fit: BoxFit
                                                                       .contain,
@@ -232,8 +228,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                   98),
                                                           decoration:
                                                               BoxDecoration(
-                                                            shape: BoxShape
-                                                                .circle,
+                                                            shape:
+                                                                BoxShape.circle,
                                                             border: Border.all(
                                                                 color: AppConstants
                                                                     .lightWhiteColor,
@@ -242,14 +238,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                                                           ///user profile image
                                                           child: Stack(
-                                                            fit: StackFit
-                                                                .expand,
+                                                            fit:
+                                                                StackFit.expand,
                                                             children: [
-                                                              profileCtx.read<ProfileCubit>().imageXFile !=
+                                                              profileCtx
+                                                                          .read<
+                                                                              ProfileCubit>()
+                                                                          .imageXFile !=
                                                                       null
                                                                   ? commonFileImageWidget(
                                                                       imageString: profileCtx
-                                                                          .read<ProfileCubit>()
+                                                                          .read<
+                                                                              ProfileCubit>()
                                                                           .imageXFile!
                                                                           .path,
                                                                       height:
@@ -262,7 +262,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                           1000,
                                                                     )
                                                                   : commonCachedImageWidget(
-                                                                      context,
                                                                       SharedText
                                                                           .currentUser!
                                                                           .image!,
@@ -282,29 +281,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                           .bottomRight,
                                                                   child:
                                                                       InkWell(
-                                                                    onTap:
-                                                                        () {
+                                                                    onTap: () {
                                                                       profileCtx
-                                                                          .read<ProfileCubit>()
-                                                                          .deleteImageFunc(true);
+                                                                          .read<
+                                                                              ProfileCubit>()
+                                                                          .deleteImageFunc(
+                                                                              true);
                                                                     },
                                                                     child:
                                                                         Container(
                                                                       height:
-                                                                          getWidgetHeight(24),
+                                                                          getWidgetHeight(
+                                                                              24),
                                                                       width:
-                                                                          getWidgetWidth(24),
+                                                                          getWidgetWidth(
+                                                                              24),
                                                                       decoration: const BoxDecoration(
-                                                                          color: AppConstants.mainColor,
-                                                                          shape: BoxShape.circle),
+                                                                          color: AppConstants
+                                                                              .mainColor,
+                                                                          shape:
+                                                                              BoxShape.circle),
                                                                       child:
                                                                           const Padding(
                                                                         padding:
                                                                             EdgeInsets.all(5.0),
                                                                         child: CommonAssetSvgImageWidget(
-                                                                            imageString: "bin_icon.svg",
-                                                                            height: 12,
-                                                                            imageColor: AppConstants.lightWhiteColor,
+                                                                            imageString:
+                                                                                "bin_icon.svg",
+                                                                            height:
+                                                                                12,
+                                                                            imageColor:
+                                                                                AppConstants.lightWhiteColor,
                                                                             width: 12),
                                                                       ),
                                                                     ),
@@ -329,24 +336,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               hintKey: AppLocalizations.of(
                                                       profileCtx)!
                                                   .lblFirstName,
-                                              keyboardType:
-                                                  TextInputType.text,
-                                              labelHintStyle:
+                                              keyboardType: TextInputType.text,
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else if (nameValidator(
                                                     value)) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameBadFormat;
-                                                } else if (value.length <
-                                                    2) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                } else if (value.length < 2) {
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameLength;
                                                 } else {
                                                   return null;
@@ -373,24 +378,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               hintKey: AppLocalizations.of(
                                                       profileCtx)!
                                                   .lblLastName,
-                                              keyboardType:
-                                                  TextInputType.text,
-                                              labelHintStyle:
+                                              keyboardType: TextInputType.text,
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else if (nameValidator(
                                                     value)) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameBadFormat;
-                                                } else if (value.length <
-                                                    2) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                } else if (value.length < 2) {
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameLength;
                                                 } else {
                                                   return null;
@@ -408,8 +411,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
 
                                       ///Spacer
-                                      getSpaceHeight(
-                                          AppConstants.smallPadding),
+                                      getSpaceHeight(AppConstants.smallPadding),
 
                                       /// Email
                                       CommonTextFormField(
@@ -418,8 +420,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             AppLocalizations.of(profileCtx)!
                                                 .lblEmail,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle:
-                                            AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
                                             if (!validateEmail(value)) {
@@ -441,8 +442,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
 
                                       ///spacer
-                                      getSpaceHeight(
-                                          AppConstants.smallPadding),
+                                      getSpaceHeight(AppConstants.smallPadding),
 
                                       /// Phone
                                       CommonTextFormField(
@@ -451,11 +451,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             AppLocalizations.of(profileCtx)!
                                                 .lblPhone,
                                         keyboardType: TextInputType.phone,
-                                        labelHintStyle:
-                                            AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         inputFormatter: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly
+                                          FilteringTextInputFormatter.digitsOnly
                                         ],
                                         validator: (value) {
                                           if (value!.isEmpty) {
@@ -479,8 +477,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
 
                                       ///spacer
-                                      getSpaceHeight(
-                                          AppConstants.smallPadding),
+                                      getSpaceHeight(AppConstants.smallPadding),
 
                                       ///address
                                       CommonTextFormField(
@@ -495,8 +492,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             AppLocalizations.of(profileCtx)!
                                                 .lblName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle:
-                                            AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(
@@ -514,8 +510,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
 
                                       ///spacer
-                                      getSpaceHeight(
-                                          AppConstants.smallPadding),
+                                      getSpaceHeight(AppConstants.smallPadding),
 
                                       ///area and city
                                       Row(
@@ -523,19 +518,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ///City
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller:
-                                                  userCityController,
+                                              controller: userCityController,
                                               hintKey: AppLocalizations.of(
                                                       profileCtx)!
                                                   .lblCity,
-                                              keyboardType:
-                                                  TextInputType.text,
-                                              labelHintStyle:
+                                              keyboardType: TextInputType.text,
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -557,19 +550,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ///Area
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller:
-                                                  userAreaController,
+                                              controller: userAreaController,
                                               hintKey: AppLocalizations.of(
                                                       profileCtx)!
                                                   .lblArea,
-                                              keyboardType:
-                                                  TextInputType.text,
-                                              labelHintStyle:
+                                              keyboardType: TextInputType.text,
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return AppLocalizations
-                                                          .of(profileCtx)!
+                                                  return AppLocalizations.of(
+                                                          profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -589,31 +580,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ),
                                 ),
                               ),
-                              getSpaceHeight(AppConstants.pagePadding*9),
+                              getSpaceHeight(AppConstants.pagePadding * 9),
                               Center(
                                 child: CommonGlobalButton(
                                   buttonText:
-                                  AppLocalizations.of(context)!.lblSave,
+                                      AppLocalizations.of(context)!.lblSave,
                                   onPressedFunction: () {
                                     if (formKey.currentState!.validate()) {
                                       profileCtx
                                           .read<ProfileCubit>()
                                           .updateUserProfile(
-                                          emailAddress:
-                                          emailAddressController.text,
-                                          phoneNumber:
-                                          phoneNumberController.text,
-                                          userFirstName:
-                                          userFirstNameController.text,
-                                          userLastName:
-                                          userLastNameController.text,
-                                          userCity: userCityController.text,
-                                          userArea: userAreaController.text,
-                                          userAddressDetails:
-                                          userAddressController.text,
-                                          image: profileCtx
-                                              .read<ProfileCubit>()
-                                              .imageXFile);
+                                              emailAddress: emailAddressController
+                                                  .text,
+                                              phoneNumber:
+                                                  phoneNumberController.text,
+                                              userFirstName:
+                                                  userFirstNameController.text,
+                                              userLastName:
+                                                  userLastNameController.text,
+                                              userCity: userCityController.text,
+                                              userArea: userAreaController.text,
+                                              userAddressDetails:
+                                                  userAddressController.text,
+                                              image: profileCtx
+                                                  .read<ProfileCubit>()
+                                                  .imageXFile);
                                     }
                                   },
                                   height: 48,
@@ -621,7 +612,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   showBorder: false,
                                   isEnable: _profileCubit.isDataFound,
                                   isLoading:
-                                  profileState is ProfileUpdateLoadingState,
+                                      profileState is ProfileUpdateLoadingState,
                                   buttonBackgroundColor: AppConstants.mainColor,
                                   buttonTextSize: AppConstants.largeFontSize,
                                   buttonTextFontWeight: FontWeight.w400,
@@ -637,10 +628,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   buttonTextFontWeight: FontWeight.w600,
                                   elevation: 0,
                                   buttonBackgroundColor:
-                                  AppConstants.lightWhiteColor,
+                                      AppConstants.lightWhiteColor,
                                   buttonTextColor: AppConstants.lightRedColor,
                                   buttonText:
-                                  AppLocalizations.of(context)!.lblCancel,
+                                      AppLocalizations.of(context)!.lblCancel,
                                   onPressedFunction: () {
                                     Navigator.of(context).pop();
                                   },

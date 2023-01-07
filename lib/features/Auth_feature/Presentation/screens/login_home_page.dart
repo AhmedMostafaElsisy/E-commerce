@@ -1,6 +1,13 @@
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/widget/scoial_media_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/Enums/exception_enums.dart';
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -8,20 +15,11 @@ import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-
-import '../../../../core/Constants/app_constants.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/Helpers/Validators/validators.dart';
-import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
-import '../logic/Login_Cubit/login_states.dart';
 import '../logic/Login_Cubit/login_cubit.dart';
+import '../logic/Login_Cubit/login_states.dart';
 import '../logic/OTP_Cubit/otp_cubit.dart';
 import '../logic/OTP_Cubit/otp_states.dart';
 
@@ -41,7 +39,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
@@ -124,7 +121,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                             .lblEnterEmail,
                                         keyboardType:
                                             TextInputType.emailAddress,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         withSuffixIcon: false,
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
@@ -185,7 +182,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                         isObscureText: hidePassword,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblPassword,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         withSuffixIcon: false,
                                         validator: (value) {
                                           if (value!.isEmpty) {
@@ -323,7 +320,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushReplacementNamed(
                                   context, RouteNames.singUpPageRoute);
                             },
@@ -333,14 +330,15 @@ class _LoginHomePageState extends State<LoginHomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   CommonTitleText(
-                                    textKey:
-                                    AppLocalizations.of(context)!.lblDoNotHaveAccount,
+                                    textKey: AppLocalizations.of(context)!
+                                        .lblDoNotHaveAccount,
                                     textColor: AppConstants.lightBlackColor,
                                     textFontSize: 14,
                                     textWeight: FontWeight.w600,
                                   ),
                                   CommonTitleText(
-                                    textKey: AppLocalizations.of(context)!.lblCreateAccount,
+                                    textKey: AppLocalizations.of(context)!
+                                        .lblCreateAccount,
                                     textColor: AppConstants.lightBlackColor,
                                     textFontSize: 14,
                                     textWeight: FontWeight.w700,
@@ -349,7 +347,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
                               ),
                             ),
                           ),
-
                           getSpaceHeight(30),
                         ],
                       )

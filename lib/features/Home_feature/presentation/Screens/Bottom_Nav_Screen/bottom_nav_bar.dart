@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/features/Categories_feature/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,8 +8,7 @@ import '../../../../../core/Constants/app_constants.dart';
 import '../../../../Setting_feature/presentation/setting_screen.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
-import '../Home_Screens/home_page.dart';
-import '../Request_History/request_history_list.dart';
+import '../Home_Screens/home_screen.dart';
 import 'bottom_nav_item.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -23,10 +23,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     /// Pages
     const List<Widget> widgetOptions = <Widget>[
-      HomePage(),
-      RequestHistoryList(),
-      RequestHistoryList(),
-      RequestHistoryList(),
+      HomeScreen(),
+      HomeScreen(),
+      CategoriesScreen(),
+      HomeScreen(),
       SettingScreen(),
     ];
 
@@ -46,7 +46,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: AppConstants.lightShadowSecColor.withOpacity(0.16),
+                        color:
+                            AppConstants.lightShadowSecColor.withOpacity(0.16),
                         blurRadius: 4,
                         offset: const Offset(0, 0))
                   ]),
@@ -63,7 +64,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(0);
                       },
                       child: BottomBarItem(
-                        image: "home.png",
+                        image: "home.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 0,
@@ -77,55 +78,49 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(1);
                       },
                       child: BottomBarItem(
-                        image: "shop.png",
+                        image: "stores.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 1,
-                        title: AppLocalizations.of(context)!.lblShops,
+                        title: AppLocalizations.of(context)!.lblStores,
                       ),
                     ),
-
-                    ///Category icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(2);
                       },
                       child: BottomBarItem(
-                        image: "category.png",
+                        image: "categories.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 2,
-                        title: AppLocalizations.of(context)!.lblCategory,
+                        title: AppLocalizations.of(context)!.lblCategories,
                       ),
                     ),
-
-                    ///orders icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(3);
                       },
                       child: BottomBarItem(
-                        image: "orders.png",
+                        image: "orders.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 3,
                         title: AppLocalizations.of(context)!.lblOrders,
                       ),
                     ),
-
-                    ///Setting icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(4);
                       },
                       child: BottomBarItem(
-                        image: "setting.png",
+                        image: "setting.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 4,
                         title: AppLocalizations.of(context)!.lblSetting,
                       ),
-                    )
+                    ),
                   ],
                 ),
               )),

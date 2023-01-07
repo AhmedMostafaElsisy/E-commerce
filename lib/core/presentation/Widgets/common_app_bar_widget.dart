@@ -55,13 +55,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                         InkWell(
                           onTap: () => Navigator.pop(context),
                           child: Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 22),
+                            padding: const EdgeInsets.symmetric(horizontal: 22),
                             child: Container(
                               decoration: BoxDecoration(
                                   color: AppConstants.loaderBackGroundColor,
-                                  borderRadius: BorderRadius.circular(AppConstants
-                                      .containerOfListTitleBorderRadius)),
+                                  borderRadius: BorderRadius.circular(
+                                      AppConstants
+                                          .containerOfListTitleBorderRadius)),
                               child: RotatedBox(
                                 quarterTurns:
                                     SharedText.currentLocale == "ar" ? 2 : 0,

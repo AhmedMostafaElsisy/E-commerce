@@ -1,6 +1,7 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'package:flutter/material.dart';
+
 import '../../../features/Auth_feature/Presentation/screens/chanage_password_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/choose_login_or_signup.dart';
 import '../../../features/Auth_feature/Presentation/screens/forget_password_screen.dart';
@@ -9,11 +10,9 @@ import '../../../features/Auth_feature/Presentation/screens/new_password_screen.
 import '../../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
 import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
-import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_page.dart';
-import '../../../features/Home_feature/presentation/Screens/Request_History/request_history_details_screen.dart';
+import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
-import '../../../features/Set_Destination_feature/presentation/Screen/set_destination_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
@@ -23,7 +22,6 @@ import '../../../features/store_feature/presentation/screen/my_store_screen.dart
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
 import '../../../features/store_product/presentation/edit_my_product_screen.dart';
-import '../../../features/trip_feature/presentation/current_trip_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -39,7 +37,7 @@ class RouteGenerator {
             page: const ChooseLoginSignupScreen());
       case RouteNames.homePageRoute:
         return RouteAnimation()
-            .animationFromCenterRightToCenterLeft(page: const HomePage());
+            .animationFromCenterRightToCenterLeft(page: const HomeScreen());
       case RouteNames.loginHomePageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const LoginHomePage());
@@ -70,15 +68,6 @@ class RouteGenerator {
       case RouteNames.editProfilePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const EditProfileScreen());
-      case RouteNames.setDestinationPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: const SetDestinationScreen());
-      case RouteNames.currentTripsPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: const CurrentTripDetailsScreen());
-      case RouteNames.requestHistoryDetailsPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: RequestHistoryDetails(routeArgument: args as RouteArgument));
       case RouteNames.ratingPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: RatingScreen(routeArgument: args as RouteArgument));

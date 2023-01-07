@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,7 +29,8 @@ class CommonTextFormField extends StatelessWidget {
   final Function()? onSaved;
   final Color? borderColor;
   final Color? filledColor;
-  final Color? labelHintStyle;
+  final Color? labelHintColor;
+  final double? labelHintFontSize;
   final Color? labelErrorStyle;
   final List<TextInputFormatter>? inputFormatter;
   final bool? isReadOnly;
@@ -71,8 +71,9 @@ class CommonTextFormField extends StatelessWidget {
     this.borderColor = AppConstants.lightGrayColor,
     this.filledColor = AppConstants.lightWhiteColor,
     this.textInputColor = AppConstants.mainTextColor,
-    this.labelHintStyle = AppConstants.mainColor,
+    this.labelHintColor = AppConstants.mainColor,
     this.labelErrorStyle = AppConstants.lightRedColor,
+    this.labelHintFontSize = AppConstants.smallFontSize,
     this.inputFormatter,
     this.isReadOnly = false,
     this.action = TextInputAction.next,
@@ -120,10 +121,9 @@ class CommonTextFormField extends StatelessWidget {
                 .textTheme
                 .subtitle1!
                 .copyWith(
-                    fontSize: AppConstants.smallFontSize,
-                    fontWeight: FontWeight.w500)
+                    fontSize: labelHintFontSize, fontWeight: FontWeight.w400)
                 .apply(
-                  color: labelHintStyle,
+                  color: labelHintColor,
                 ),
             alignLabelWithHint: alignMultipleLines,
             floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -152,7 +152,7 @@ class CommonTextFormField extends StatelessWidget {
                 borderSide: const BorderSide(
                     color: AppConstants.lightRedColor, width: 1)),
             errorStyle: const TextStyle(
-                    fontSize: AppConstants.xSmallFontSize,
+                    fontSize: AppConstants.xxSmallFontSize,
                     fontWeight: FontWeight.w500)
                 .apply(
               color: labelErrorStyle,

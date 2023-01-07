@@ -2,6 +2,7 @@ import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
@@ -13,8 +14,6 @@ import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
@@ -214,7 +213,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -245,7 +244,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopOwnerName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -276,7 +275,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopPhone,
                                         keyboardType: TextInputType.phone,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         inputFormatter: [
                                           FilteringTextInputFormatter.digitsOnly
                                         ],
@@ -308,7 +307,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopEmail,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isNotEmpty) {
                                             if (!validateEmail(value)) {
@@ -340,7 +339,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopAddressDetails,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -370,7 +369,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                                   AppLocalizations.of(context)!
                                                       .lblCity,
                                               keyboardType: TextInputType.text,
-                                              labelHintStyle:
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
@@ -401,7 +400,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                                   AppLocalizations.of(context)!
                                                       .lblArea,
                                               keyboardType: TextInputType.text,
-                                              labelHintStyle:
+                                              labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
@@ -431,7 +430,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblMainCategory,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -459,7 +458,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblSubCategory,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!

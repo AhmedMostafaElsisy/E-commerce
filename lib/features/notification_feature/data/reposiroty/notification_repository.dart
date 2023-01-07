@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/Constants/Keys/api_keys.dart';
-import '../../domain/reposiroty/notification_interface.dart';
-import '../../../../core/model/base_model.dart';
+import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
-import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
+import '../../../../core/model/base_model.dart';
+import '../../domain/reposiroty/notification_interface.dart';
 
 class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
@@ -25,8 +25,8 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
       }
     } on CustomException catch (ex) {
       isError = true;
-      errorMsg = CustomError(
-          type: ex.type, imgPath: ex.imgPath, errorMassage: ex.errorMassage);
+      errorMsg =
+          CustomError(type: ex.error.type, errorMassage: ex.error.errorMassage);
       return baseModel;
     }
   }
@@ -34,7 +34,8 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
   Future<BaseModel> clearAllNotification() async {
     try {
-      String notificationUrl =ApiKeys.notificationKey+ApiKeys.clearNotificationKey ;
+      String notificationUrl =
+          ApiKeys.notificationKey + ApiKeys.clearNotificationKey;
       isError = false;
       FormData data = FormData();
       Response response =
@@ -49,8 +50,8 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
       }
     } on CustomException catch (ex) {
       isError = true;
-      errorMsg = CustomError(
-          type: ex.type, imgPath: ex.imgPath, errorMassage: ex.errorMassage);
+      errorMsg =
+          CustomError(type: ex.error.type, errorMassage: ex.error.errorMassage);
       return baseModel;
     }
   }
@@ -58,7 +59,8 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
   @override
   Future<BaseModel> stopOrPauseNotification({required bool state}) async {
     try {
-      String notificationUrl = ApiKeys.notificationKey+ApiKeys.toggleNotificationKey ;
+      String notificationUrl =
+          ApiKeys.notificationKey + ApiKeys.toggleNotificationKey;
       isError = false;
       FormData data = FormData();
       data.fields.add(MapEntry('status', state ? "0" : "1"));
@@ -75,17 +77,18 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
       }
     } on CustomException catch (ex) {
       isError = true;
-      errorMsg = CustomError(
-          type: ex.type, imgPath: ex.imgPath, errorMassage: ex.errorMassage);
+      errorMsg =
+          CustomError(type: ex.error.type, errorMassage: ex.error.errorMassage);
       return baseModel;
     }
   }
 
   @override
-  Future<BaseModel>  markNotificationAsRead(
+  Future<BaseModel> markNotificationAsRead(
       {required int notificationId}) async {
     try {
-      String notificationUrl ='${ApiKeys.notificationKey}/$notificationId${ApiKeys.readNotificationKey}' ;
+      String notificationUrl =
+          '${ApiKeys.notificationKey}/$notificationId${ApiKeys.readNotificationKey}';
       isError = false;
       FormData data = FormData();
       Response response =
@@ -101,8 +104,8 @@ class NotificationListRepository extends NotificationListRepositoryInterface {
       }
     } on CustomException catch (ex) {
       isError = true;
-      errorMsg = CustomError(
-          type: ex.type, imgPath: ex.imgPath, errorMassage: ex.errorMassage);
+      errorMsg =
+          CustomError(type: ex.error.type, errorMassage: ex.error.errorMassage);
       return baseModel;
     }
   }
