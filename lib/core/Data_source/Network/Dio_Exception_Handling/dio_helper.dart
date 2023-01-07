@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/Error_Handling/custom_error.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +22,20 @@ class DioHelper {
       );
     } on DioError catch (exception) {
       /// Get custom massage for the exception
-      final errorMessage = DioExceptions.fromDioError(exception).errorType;
+      final errorType = DioExceptions.fromDioError(exception).errorType;
 
       /// throw custom exception
-      throw CustomException(errorMessage, 'error.png');
-    } catch (e) {
-      throw CustomException(CustomStatusCodeErrorType.unExcepted, 'error.png');
+      throw CustomException(
+        error: CustomError(
+          type: errorType,
+        ),
+      );
+    } catch (error) {
+      throw CustomException(
+        error: CustomError(
+            type: CustomStatusCodeErrorType.unExcepted,
+            errorMassage: error.toString()),
+      );
     }
   }
 
@@ -42,9 +51,15 @@ class DioHelper {
       final errorMessage = DioExceptions.fromDioError(exception).errorMassage;
 
       /// throw custom exception
-      throw CustomException(errorType, 'error.png', errorMassage: errorMessage);
-    } catch (e) {
-      throw CustomException(CustomStatusCodeErrorType.unExcepted, 'error.png');
+      throw CustomException(
+        error: CustomError(type: errorType, errorMassage: errorMessage),
+      );
+    } catch (error) {
+      throw CustomException(
+        error: CustomError(
+            type: CustomStatusCodeErrorType.unExcepted,
+            errorMassage: error.toString()),
+      );
     }
   }
 
@@ -68,13 +83,20 @@ class DioHelper {
       final errorMessage = DioExceptions.fromDioError(exception).errorMassage;
 
       /// throw custom exception
-      throw CustomException(errorType, 'error.png', errorMassage: errorMessage);
+      /// throw custom exception
+      throw CustomException(
+        error: CustomError(type: errorType, errorMassage: errorMessage),
+      );
     } catch (error) {
       debugPrint("this is error from CustomException exception$error");
       debugPrint(
           "this is error from CustomException exception${error.runtimeType}");
 
-      throw CustomException(CustomStatusCodeErrorType.unExcepted, 'error.png');
+      throw CustomException(
+        error: CustomError(
+            type: CustomStatusCodeErrorType.unExcepted,
+            errorMassage: error.toString()),
+      );
     }
   }
 
@@ -97,15 +119,22 @@ class DioHelper {
       final errorMessage = DioExceptions.fromDioError(exception).errorMassage;
 
       /// throw custom exception
-      throw CustomException(errorType, 'error.png', errorMassage: errorMessage);
+      throw CustomException(
+        error: CustomError(type: errorType, errorMassage: errorMessage),
+      );
     } catch (error) {
       debugPrint("this is error from CustomException exception$error");
       debugPrint(
           "this is error from CustomException exception${error.runtimeType}");
 
-      throw CustomException(CustomStatusCodeErrorType.unExcepted, 'error.png');
+      throw CustomException(
+        error: CustomError(
+            type: CustomStatusCodeErrorType.unExcepted,
+            errorMassage: error.toString()),
+      );
     }
   }
+
   ///use this method to delete data in api
   static Future<Response> deleteData({required String url}) async {
     try {
@@ -116,31 +145,32 @@ class DioHelper {
       return response;
     } on DioError catch (exception) {
       debugPrint(
-          "here is the error from dio put data ${exception.response!
-              .data["message"]} ");
+          "here is the error from dio put data ${exception.response!.data["message"]} ");
 
       /// G1et custom massage for the exception
-      final errorType = DioExceptions
-          .fromDioError(exception)
-          .errorType;
+      final errorType = DioExceptions.fromDioError(exception).errorType;
 
-      final errorMessage = DioExceptions
-          .fromDioError(exception)
-          .errorMassage;
-      if (DioExceptions
-          .fromDioError(exception)
-          .errorType !=
+      final errorMessage = DioExceptions.fromDioError(exception).errorMassage;
+      if (DioExceptions.fromDioError(exception).errorType !=
           CustomStatusCodeErrorType.unVerified) {}
 
       /// throw custom exception
-      throw CustomException(errorType, 'error.png', errorMassage: errorMessage);
+      throw CustomException(
+        error: CustomError(
+          type: errorType,
+          errorMassage: errorMessage,
+        ),
+      );
     } catch (error) {
       debugPrint("this is error from CustomException exception$error");
       debugPrint(
           "this is error from CustomException exception${error.runtimeType}");
 
-      throw CustomException(CustomStatusCodeErrorType.unExcepted, 'error.png');
+      throw CustomException(
+        error: CustomError(
+            type: CustomStatusCodeErrorType.unExcepted,
+            errorMassage: error.toString()),
+      );
     }
   }
-
 }

@@ -8,6 +8,7 @@ import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/model/base_model.dart';
 
+//todo:need to handel it with cc talks about exceptions
 abstract class FavoriteRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getFavoriteData(
       {int page = 1, int? limit});
@@ -37,7 +38,9 @@ class FavoriteRemoteDataSourceImpl extends FavoriteRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -117,7 +120,9 @@ class FavoriteRemoteDataSourceImpl extends FavoriteRemoteDataSourceInterface {
       return right(BaseModel.fromJson(data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -137,7 +142,9 @@ class FavoriteRemoteDataSourceImpl extends FavoriteRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 }

@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/Constants/app_constants.dart';
+import '../../../../core/Helpers/Validators/validators.dart';
+import '../../../../core/Helpers/shared.dart';
+import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
-import '../../../../core/Constants/app_constants.dart';
-import '../../../../core/Helpers/Validators/validators.dart';
-import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/Sign_Up_Cubit/sign_up_states.dart';
 import '../logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import '../logic/Sign_Up_Cubit/sign_up_states.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -160,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblFirstName,
                                             keyboardType: TextInputType.text,
-                                            labelHintStyle:
+                                            labelHintColor:
                                                 AppConstants.mainColor,
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -199,7 +200,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblLastName,
                                             keyboardType: TextInputType.text,
-                                            labelHintStyle:
+                                            labelHintColor:
                                                 AppConstants.mainColor,
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -237,7 +238,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       hintKey: AppLocalizations.of(signUpCtx)!
                                           .lblEmail,
                                       keyboardType: TextInputType.text,
-                                      labelHintStyle: AppConstants.mainColor,
+                                      labelHintColor: AppConstants.mainColor,
                                       validator: (value) {
                                         if (value!.isNotEmpty) {
                                           if (!validateEmail(value)) {
@@ -267,7 +268,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       hintKey: AppLocalizations.of(signUpCtx)!
                                           .lblPhone,
                                       keyboardType: TextInputType.phone,
-                                      labelHintStyle: AppConstants.mainColor,
+                                      labelHintColor: AppConstants.mainColor,
                                       inputFormatter: [
                                         FilteringTextInputFormatter.digitsOnly
                                       ],
@@ -327,7 +328,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       isObscureText: _signUpCubit.hidePassword,
                                       hintKey: AppLocalizations.of(signUpCtx)!
                                           .lblPassword,
-                                      labelHintStyle: AppConstants.mainColor,
+                                      labelHintColor: AppConstants.mainColor,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return AppLocalizations.of(signUpCtx)!
@@ -368,7 +369,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .lblPassword,
                                       hintKey: AppLocalizations.of(signUpCtx)!
                                           .lblConfirmPassword,
-                                      labelHintStyle: AppConstants.mainColor,
+                                      labelHintColor: AppConstants.mainColor,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return AppLocalizations.of(signUpCtx)!
@@ -405,7 +406,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       labelText: AppLocalizations.of(signUpCtx)!
                                           .lblName,
                                       keyboardType: TextInputType.text,
-                                      labelHintStyle: AppConstants.mainColor,
+                                      labelHintColor: AppConstants.mainColor,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return AppLocalizations.of(signUpCtx)!
@@ -435,7 +436,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblCity,
                                             keyboardType: TextInputType.text,
-                                            labelHintStyle:
+                                            labelHintColor:
                                                 AppConstants.mainColor,
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -466,7 +467,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblArea,
                                             keyboardType: TextInputType.text,
-                                            labelHintStyle:
+                                            labelHintColor:
                                                 AppConstants.mainColor,
                                             validator: (value) {
                                               if (value!.isEmpty) {

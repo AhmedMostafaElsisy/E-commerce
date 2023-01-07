@@ -1,10 +1,11 @@
 import 'package:captien_omda_customer/core/Constants/Keys/api_keys.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../../core/model/base_model.dart';
+
 import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
+import '../../../../core/model/base_model.dart';
 
 abstract class OtpRemoteDataSourceInterface {
   ///verify account
@@ -16,8 +17,7 @@ abstract class OtpRemoteDataSourceInterface {
       {required String email, required String code});
 
   ///send otp to email
-  Future<Either<CustomError, BaseModel>> sendOtp(
-      {required String email});
+  Future<Either<CustomError, BaseModel>> sendOtp({required String email});
 
   ///resend otp
   Future<Either<CustomError, BaseModel>> resendOTP({
@@ -40,7 +40,9 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -59,7 +61,9 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -78,13 +82,15 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
   @override
   Future<Either<CustomError, BaseModel>> sendOtp(
-      {required String email})  async {
+      {required String email}) async {
     try {
       FormData staticData = FormData();
 
@@ -92,11 +98,13 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('email', email));
 
       Response response =
-      await DioHelper.postData(url: pathUrl, data: staticData);
+          await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 }

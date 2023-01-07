@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/Constants/Keys/api_keys.dart';
-import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/model/base_model.dart';
@@ -83,7 +84,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -108,7 +111,8 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "city": "cairo",
             "area": "cairo",
             "sub_category": "electronic , hardware"
-          }, {
+          },
+          {
             "id": 1,
             "shop_name": "متجر الكتروني",
             "shop_image":
@@ -136,7 +140,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
@@ -187,7 +193,9 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       return right(BaseModel.fromJson(dataMap));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 }

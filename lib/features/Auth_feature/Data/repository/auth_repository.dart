@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import '../../../../core/model/base_model.dart';
-import '../../../../core/Error_Handling/custom_exception.dart';
+
 import '../../../../core/Error_Handling/custom_error.dart';
+import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/model/base_model.dart';
 import '../../Domain/entities/base_user_entity.dart';
 import '../../Domain/repository/auth_interface.dart';
 import '../data_scources/auth_local_data_source.dart';
@@ -75,7 +76,9 @@ class AuthRepository extends AuthRepositoryInterface {
       return right(baseModel);
     } on CustomException catch (ex) {
       errorMsg = CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath);
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      );
       return Left(errorMsg!);
     }
   }
