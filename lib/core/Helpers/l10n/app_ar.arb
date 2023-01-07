@@ -160,5 +160,9 @@
   "lblSubCategory": "الكلمات الدلالية",
   "lblStoreCreatedSuccess": "تم انشاء المتجر بنجاح",
   "lblEditStore": "تعديل متجر",
-  "lblStoreEditSuccess": "تم تعديل المتجر بنجاح"
+  "lblStoreEditSuccess": "تم تعديل المتجر بنجاح",
+  "lblAddProduct": "اضافة منتج",
+  "lblStoreOrder": "طلبات المتجر",
+  "lblStoreMassage": "رسائل المتجر",
+  "lblStoreNotification": "تنبيهات المتجر"
 }
