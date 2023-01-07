@@ -12,12 +12,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
 import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import 'common_global_button.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
+  final bool? showActionButton;
 
   const ProductItemWidget(
-      {Key? key, required this.model})
+      {Key? key, required this.model, this.showActionButton = false})
       : super(key: key);
 
   @override
@@ -47,17 +49,18 @@ class ProductItemWidget extends StatelessWidget {
                 child: BlocConsumer<FavoriteCubit, FavoriteStates>(
                   listener: (favCtx, favState) {
                     if (favState is FavoriteRemoveFavSuccessStates) {
-                      if(favState.productId==model.id) {
+                      if (favState.productId == model.id) {
                         model.isFav = false;
                       }
                     } else if (favState is FavoriteAddFavSuccessStates) {
-                      if(favState.productId==model.id) {
+                      if (favState.productId == model.id) {
                         model.isFav = true;
                       }
                     }
                   },
                   builder: (favCtx, favState) {
-                    if (favState is FavoriteFavLoadingStates && favState.productId==model.id) {
+                    if (favState is FavoriteFavLoadingStates &&
+                        favState.productId == model.id) {
                       return SizedBox(
                           height: getWidgetHeight(14),
                           width: getWidgetWidth(14),
@@ -71,15 +74,15 @@ class ProductItemWidget extends StatelessWidget {
                       imageHeight: 14,
                       imageWidth: 14,
                       onClick: () {
-                       if( favState is! FavoriteFavLoadingStates) {
-                         model.isFav!
-                            ? favCtx
-                                .read<FavoriteCubit>()
-                                .removeItemFromFav(productId: model.id!)
-                            : favCtx
-                                .read<FavoriteCubit>()
-                                .addItemToFav(productId: model.id!);
-                       }
+                        if (favState is! FavoriteFavLoadingStates) {
+                          model.isFav!
+                              ? favCtx
+                                  .read<FavoriteCubit>()
+                                  .removeItemFromFav(productId: model.id!)
+                              : favCtx
+                                  .read<FavoriteCubit>()
+                                  .addItemToFav(productId: model.id!);
+                        }
                       },
                     );
                   },
@@ -202,9 +205,58 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
+
+              ///Action button
             ],
           ),
-        )
+        ),
+        if (showActionButton!) ...[
+          getSpaceHeight(AppConstants.smallPadding),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                /// Show
+                Expanded(
+                  child: CommonGlobalButton(
+                      showBorder: false,
+                      buttonTextFontWeight: FontWeight.w600,
+                      buttonTextSize: AppConstants.normalFontSize,
+                      elevation: 0,
+                      buttonBackgroundColor: AppConstants.mainColor,
+                      buttonText: AppLocalizations.of(context)!.lblShow,
+                      onPressedFunction: () {
+                        ///Todo: add show product action
+                      },
+                      height: 32,
+                      radius: AppConstants.containerBorderRadius,
+                      withIcon: false),
+                ),
+                getSpaceWidth(8),
+
+                /// edit
+                Expanded(
+                  child: CommonGlobalButton(
+                      showBorder: true,
+                      borderColor: AppConstants.mainColor,
+                      buttonTextFontWeight: FontWeight.w600,
+                      buttonTextSize: AppConstants.normalFontSize,
+                      elevation: 0,
+                      buttonBackgroundColor: AppConstants.lightWhiteColor,
+                      buttonTextColor: AppConstants.mainColor,
+                      buttonText: AppLocalizations.of(context)!.lblEdit,
+                      onPressedFunction: () {
+                        ///Todo: add edit product action
+                      },
+                      height: 32,
+                      radius: AppConstants.containerBorderRadius,
+                      withIcon: false),
+                ),
+              ],
+            ),
+          ),
+        ]
       ]),
     );
   }
