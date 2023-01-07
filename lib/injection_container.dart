@@ -74,6 +74,7 @@ Future<void> init() async {
   sl.registerFactory(() => RatingCubit(sl()));
   sl.registerFactory(() => FavoriteCubit(sl()));
   sl.registerFactory(() => StoreCubit(sl()));
+  sl.registerFactory(() => MyStoreCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));

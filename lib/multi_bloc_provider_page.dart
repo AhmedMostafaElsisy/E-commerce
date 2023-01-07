@@ -60,6 +60,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
         BlocProvider<FavoriteCubit>(create: (_) => di.sl<FavoriteCubit>()),
         BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
+        BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
 
       ],
       child: widget.body,
