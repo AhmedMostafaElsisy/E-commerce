@@ -114,7 +114,9 @@ class ShopItemWidget extends StatelessWidget {
                     buttonBackgroundColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblShow,
                     onPressedFunction: () {
-                      ///Todo:add navigation for show shop screen
+                      Navigator.of(context).pushNamed(
+                          RouteNames.viewMyStoresPageRoute,
+                          arguments: RouteArgument(shopModel: model));
                     },
                     height: 32,
                     radius: AppConstants.containerBorderRadius,
@@ -134,7 +136,7 @@ class ShopItemWidget extends StatelessWidget {
                     buttonTextColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblEdit,
                     onPressedFunction: () {
-                      ///Todo:add navigation for edit screen
+
                       Navigator.of(context).pushNamed(
                           RouteNames.editStoresPageRoute,
                           arguments: RouteArgument(shopModel: model));

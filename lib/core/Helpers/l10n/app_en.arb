@@ -159,5 +159,10 @@
   "lblSubCategory": "Tags",
   "lblStoreCreatedSuccess": "Store created successfully",
   "lblEditStore": "Edit Store",
-  "lblStoreEditSuccess": "Store edited successfully"
+  "lblStoreEditSuccess": "Store edited successfully",
+  "lblAddProduct": "Add product",
+  "lblStoreOrder": "Store order",
+  "lblStoreMassage": "Store massage",
+  "lblStoreNotification": "Store notification"
+
 }

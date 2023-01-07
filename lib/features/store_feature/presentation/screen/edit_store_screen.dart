@@ -1,6 +1,6 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/features/store_feature/presentation/logic/store_states.dart';
+import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_store_cubit/store_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +21,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/store_cubit.dart';
+import '../logic/general_store_cubit/store_cubit.dart';
 
 class EditStoreScreen extends StatefulWidget {
   final RouteArgument argument;

@@ -13,8 +13,8 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/shop_item_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/store_cubit.dart';
-import '../logic/store_states.dart';
+import '../logic/general_store_cubit/store_cubit.dart';
+import '../logic/general_store_cubit/store_states.dart';
 
 class MyStoresListScreen extends StatefulWidget {
   const MyStoresListScreen({Key? key}) : super(key: key);

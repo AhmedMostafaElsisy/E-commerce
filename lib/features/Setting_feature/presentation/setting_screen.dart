@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
+import '../../../core/Helpers/shared_texts.dart';
 import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/custom_alert_dialog.dart';
@@ -54,17 +55,18 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///Spacer
                     getSpaceHeight(20),
+                    if (SharedText.currentUser != null) ...[
+                      ///User profile card
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteNames.editProfilePageRoute);
+                          },
+                          child: const UserProfileCard()),
 
-                    ///User profile card
-                    InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, RouteNames.editProfilePageRoute);
-                        },
-                        child: const UserProfileCard()),
-
-                    ///Spacer
-                    getSpaceHeight(4),
+                      ///Spacer
+                      getSpaceHeight(4),
+                    ],
 
                     ///my account
                     CommonTitleText(
@@ -181,23 +183,24 @@ class _SettingScreenState extends State<SettingScreen> {
                     }, builder: (profileCtx, profileState) {
                       return InkWell(
                         onTap: () {
-                          if(profileState is! UserLoginLoadingState) {
+                          if (profileState is! UserLoginLoadingState) {
                             showAlertDialog(context, [
-                            CommonPopUpContent(
-                              title: AppLocalizations.of(context)!.lblLogOut,
-                              subTitle:
-                                  AppLocalizations.of(context)!.lblIsLogOut,
-                              onSubmitClick: () {
-
-                                Navigator.of(context).pop();
-                                profileCtx.read<LoginCubit>().logOut();
-                              },
-                            ),
-                          ]);
+                              CommonPopUpContent(
+                                title: AppLocalizations.of(context)!.lblLogOut,
+                                subTitle:
+                                    AppLocalizations.of(context)!.lblIsLogOut,
+                                onSubmitClick: () {
+                                  Navigator.of(context).pop();
+                                  profileCtx.read<LoginCubit>().logOut();
+                                },
+                              ),
+                            ]);
                           }
                         },
                         child: Container(
-                          color:profileState is UserLoginLoadingState?AppConstants.greyColor  :AppConstants.lightRedColor,
+                          color: profileState is UserLoginLoadingState
+                              ? AppConstants.greyColor
+                              : AppConstants.lightRedColor,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 8),

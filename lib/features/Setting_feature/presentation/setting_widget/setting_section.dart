@@ -19,7 +19,7 @@ class SettingSection extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-                color: AppConstants.redShadowColor
+                color: AppConstants.lightShadowSecColor
                     .withOpacity(0.16),
                 blurRadius: 4,
                 offset: const Offset(0, 0))
