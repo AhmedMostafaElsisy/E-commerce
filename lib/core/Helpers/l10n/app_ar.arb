@@ -176,5 +176,6 @@
   "lblBrand": "الماركة",
   "lblAdsDetails": "تفاصيل الاعلان",
   "lblProductCreatedSuccess":"تم اضافة المنتج بنجاح",
-  "lblProductEditSuccess":  "تم تعديل المنتج بنجاح"
+  "lblProductEditSuccess":  "تم تعديل المنتج بنجاح",
+
 }
