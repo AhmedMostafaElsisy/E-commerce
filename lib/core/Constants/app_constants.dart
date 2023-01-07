@@ -60,7 +60,7 @@ class AppConstants {
   static const double borderRadius = 20.0;
   static const double containerBorderRadius = 6.0;
   static const double containerOfListTitleBorderRadius = 8;
-  static const double buttonBorderRadius = 25.0;
+  static const double textFormBorderRadius = 24.0;
   static const double bottomSheetBorderRadius = 25.0;
 
   /// Page Padding

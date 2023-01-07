@@ -8,7 +8,6 @@ import '../../../../Setting_feature/presentation/setting_screen.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
 import '../Home_Screens/home_page.dart';
-import '../Request_History/request_history_list.dart';
 import 'bottom_nav_item.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -24,9 +23,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
     /// Pages
     const List<Widget> widgetOptions = <Widget>[
       HomePage(),
-      RequestHistoryList(),
-      RequestHistoryList(),
-      RequestHistoryList(),
+      HomePage(),
+      HomePage(),
+      HomePage(),
       SettingScreen(),
     ];
 

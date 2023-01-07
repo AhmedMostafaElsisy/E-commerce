@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/Home_feature/Domain/enitiy/request_model.dart';
 import '../../model/shop_model.dart';
 
 class RouteArgument {
@@ -25,9 +24,6 @@ class RouteArgument {
   ///request id
   int? requestId;
 
-  ///request Model
-  RequestModel? requestModel;
-
   ShopModel? shopModel;
 
   RouteArgument(
@@ -44,7 +40,6 @@ class RouteArgument {
       this.imagePath,
       this.emailAddress,
       this.onTap,
-      this.requestModel,
       this.otp,
       this.requestId,
       this.shopModel});

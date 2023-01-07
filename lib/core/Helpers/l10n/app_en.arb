@@ -160,5 +160,8 @@
   "lblSubCategory": "Tags",
   "lblStoreCreatedSuccess": "Store created successfully",
   "lblEditStore": "Edit Store",
-  "lblStoreEditSuccess": "Store edited successfully"
+  "lblStoreEditSuccess": "Store edited successfully",
+  "lblSearchOn": "search for",
+  "lblDetectLocation": "Region / Governorate"
+
 }

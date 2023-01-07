@@ -1,4 +1,3 @@
-import 'package:captien_omda_customer/core/Helpers/Extensions/prevent_string_spacing.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'package:captien_omda_customer/features/rating_feature/presentation/screen/rating_start_builder.dart';
@@ -36,14 +35,15 @@ class _RatingScreenState extends State<RatingScreen> {
   @override
   void initState() {
     super.initState();
-    ratingController= TextEditingController();
+    ratingController = TextEditingController();
   }
+
   @override
   void dispose() {
     ratingController.dispose();
     super.dispose();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,12 +62,10 @@ class _RatingScreenState extends State<RatingScreen> {
         ),
       ),
       body: GestureDetector(
-        onTap: (){
-          FocusScope.of(context)
-              .requestFocus(FocusNode());
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Column(children: [
-
           ///Spacer
           getSpaceHeight(20),
 
@@ -78,7 +76,7 @@ class _RatingScreenState extends State<RatingScreen> {
               CommonAssetSvgImageWidget(
                 imageString: "rate_icon.svg",
                 height: 205,
-                width: SharedText.screenWidth-60,
+                width: SharedText.screenWidth - 60,
                 fit: BoxFit.contain,
               ),
             ],
@@ -103,8 +101,8 @@ class _RatingScreenState extends State<RatingScreen> {
                 )),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: getWidgetHeight(AppConstants.pagePadding),
-                  vertical: getWidgetWidth(AppConstants.pagePadding)) +
+                      horizontal: getWidgetHeight(AppConstants.pagePadding),
+                      vertical: getWidgetWidth(AppConstants.pagePadding)) +
                   EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
@@ -113,16 +111,17 @@ class _RatingScreenState extends State<RatingScreen> {
                 padding: EdgeInsets.zero,
                 child: BlocConsumer<RatingCubit, RatingCubitStates>(
                   listener: (ratingCtx, ratingState) {
-                    if(ratingState is RatingSuccessStates){
+                    if (ratingState is RatingSuccessStates) {
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         RouteNames.mainBottomNavPageRoute,
-                            (route) => false,
+                        (route) => false,
                       );
                       BlocProvider.of<BottomNavCubit>(context).selectItem(0);
-                    }else if (ratingState is RatingFailedStates){
+                    } else if (ratingState is RatingFailedStates) {
                       checkUserAuth(
-                          context: ratingCtx, errorType: ratingState.error.type);
+                          context: ratingCtx,
+                          errorType: ratingState.error.type);
                       showSnackBar(
                         context: ratingCtx,
                         title: ratingState.error.errorMassage!,
@@ -135,7 +134,6 @@ class _RatingScreenState extends State<RatingScreen> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-
                             ///total
                             CommonTitleText(
                               textKey: AppLocalizations.of(context)!.lblTotal,
@@ -150,8 +148,7 @@ class _RatingScreenState extends State<RatingScreen> {
                             ///trip price
                             CommonTitleText(
                               textKey:
-                              "${widget.routeArgument.requestModel!
-                                  .price!} ${AppLocalizations.of(context)!.lblEGP}",
+                                  "${5} ${AppLocalizations.of(context)!.lblEGP}",
                               textColor: AppConstants.lightBorderColor,
                               textWeight: FontWeight.w700,
                               textFontSize: AppConstants.titleFontSize,
@@ -171,7 +168,8 @@ class _RatingScreenState extends State<RatingScreen> {
 
                             ///add rating title
                             CommonTitleText(
-                              textKey: AppLocalizations.of(context)!.lblAddRating,
+                              textKey:
+                                  AppLocalizations.of(context)!.lblAddRating,
                               textColor: AppConstants.lightBlackColor,
                               textWeight: FontWeight.w700,
                               textFontSize: AppConstants.normalFontSize,
@@ -183,9 +181,7 @@ class _RatingScreenState extends State<RatingScreen> {
                             ///how was driver
                             CommonTitleText(
                               textKey:
-                              "${AppLocalizations.of(context)!.lblHowWas} ${widget
-                                  .routeArgument.requestModel!.driverModel!.name!
-                                  .getStringWithoutSpacings()} ؟ ",
+                                  "${AppLocalizations.of(context)!.lblHowWas} ${5} ؟ ",
                               textColor: AppConstants.lightRedColor,
                               textWeight: FontWeight.w600,
                               textFontSize: AppConstants.normalFontSize,
@@ -209,20 +205,18 @@ class _RatingScreenState extends State<RatingScreen> {
                               controller: ratingController,
                               radius: AppConstants.smallBorderRadius * 2,
                               filledColor: AppConstants.backGroundColor,
-                              hintKey:currentRating <=3?AppLocalizations.of(context)!
-                                  .lblAddRate :
-                              "${AppLocalizations.of(context)!
-                                  .lblAddRate} (${AppLocalizations.of(context)!
-                                  .lblOption})",
+                              hintKey: currentRating <= 3
+                                  ? AppLocalizations.of(context)!.lblAddRate
+                                  : "${AppLocalizations.of(context)!.lblAddRate} (${AppLocalizations.of(context)!.lblOption})",
                               keyboardType: TextInputType.emailAddress,
-                              labelHintStyle: AppConstants.mainTextColor,
+                              labelHintColor: AppConstants.mainTextColor,
                               contentPaddingHorizontal: getWidgetWidth(16),
                               contentPaddingVertical: getWidgetHeight(12),
                               withSuffixIcon: false,
                               maxLines: 5,
                               minLines: 5,
                               validator: (value) {
-                                if (value!.isEmpty &(currentRating <=3)) {
+                                if (value!.isEmpty & (currentRating <= 3)) {
                                   return AppLocalizations.of(context)!
                                       .lblRatingError;
                                 } else {
@@ -248,17 +242,15 @@ class _RatingScreenState extends State<RatingScreen> {
                               buttonTextFontWeight: FontWeight.w700,
                               buttonText: AppLocalizations.of(context)!.lblSend,
                               onPressedFunction: () {
-                               if(formKey.currentState!.validate()){
-                                 FocusScope.of(context)
-                                     .requestFocus(FocusNode());
-                                 ratingCtx.read<RatingCubit>().addRating(
-                                     driverId: widget.routeArgument.requestModel!
-                                         .driverModel!.id!,
-                                     requestId: widget.routeArgument.requestModel!
-                                         .id!,
-                                     rate: currentRating.toInt(),
-                                     comment: ratingController.text);
-                               }
+                                if (formKey.currentState!.validate()) {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  ratingCtx.read<RatingCubit>().addRating(
+                                      driverId: 5,
+                                      requestId: 5,
+                                      rate: currentRating.toInt(),
+                                      comment: ratingController.text);
+                                }
                               },
                             ),
 
@@ -268,13 +260,16 @@ class _RatingScreenState extends State<RatingScreen> {
                             ///cancel
                             CommonGlobalButton(
                               height: 48,
-                              buttonBackgroundColor: AppConstants.lightWhiteColor,
+                              buttonBackgroundColor:
+                                  AppConstants.lightWhiteColor,
                               buttonTextColor: AppConstants.mainTextColor,
                               showBorder: false,
                               buttonTextSize: AppConstants.normalFontSize,
                               buttonTextFontWeight: FontWeight.w700,
-                              buttonText: AppLocalizations.of(context)!.lblCancel,
-                              shadowBackgroundColor: AppConstants.lightWhiteColor,
+                              buttonText:
+                                  AppLocalizations.of(context)!.lblCancel,
+                              shadowBackgroundColor:
+                                  AppConstants.lightWhiteColor,
                               elevation: 0,
                               onPressedFunction: () {
                                 Navigator.of(context).pop();

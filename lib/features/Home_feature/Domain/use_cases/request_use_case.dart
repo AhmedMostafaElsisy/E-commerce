@@ -1,26 +1,17 @@
+import 'package:captien_omda_customer/core/Error_Handling/custom_exception.dart';
+import 'package:captien_omda_customer/features/Home_feature/Domain/enitiy/home_model.dart';
 import 'package:dartz/dartz.dart';
-import '../../../../core/Error_Handling/custom_error.dart';
-import '../enitiy/request_model.dart';
-import '../repository/request_interface.dart';
 
-class RequestUesCases {
-  final RequestRepositoryInterface repositoryInterface;
+import '../repository/home_interface.dart';
 
-  RequestUesCases(this.repositoryInterface);
+class HomeUesCases {
+  final HomeRepositoryInterface repositoryInterface;
 
-  Future<Either<CustomError, List<RequestModel>>> callHomeRequest() {
+  HomeUesCases(this.repositoryInterface);
+
+  Future<Either<CustomException, HomeModel>> callHomeContent() {
     return repositoryInterface
-        .getRequests(
-          limit: 4,
-        )
-        .then((value) => value.fold(
-            (l) => Left(l), (r) => right(requestListFromJson(r.data))));
-  }
-
-  Future<Either<CustomError, List<RequestModel>>> callHistoryRequest(
-      {int page = 1, int limit = 10}) {
-    return repositoryInterface.getRequests(page: page, limit: limit).then(
-        (value) => value.fold(
-            (l) => Left(l), (r) => right(requestListFromJson(r.data))));
+        .getHomeContent()
+        .then((value) => value.fold((l) => Left(l), (r) => right(r)));
   }
 }

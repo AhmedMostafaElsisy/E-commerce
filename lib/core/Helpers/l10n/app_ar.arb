@@ -134,10 +134,6 @@
   "lblSignUpWithSocialMedia": "انشاء حساب عن طريق مواقع التواصل الاجتماعي",
   "lblForgetPasswordTitle": "لإستعادة كلمة المرور برجاء ادخال\n رقم الهاتف او البريد الالكتروني",
   "lblCheck": "تحقق",
-  "lblShops": "المتاجر",
-  "lblCategory": "الاقسام",
-  "lblOrders": "طلباتي",
-  "lblSetting": "الاعدادات",
   "lblProfileSetting": "اعدادت الملف الشخصي",
   "lblAccount": "حسابي",
   "lbFavorite": "المفضلة",
@@ -163,5 +159,7 @@
   "lblSubCategory": "الكلمات الدلالية",
   "lblStoreCreatedSuccess": "تم انشاء المتجر بنجاح",
   "lblEditStore": "تعديل متجر",
-  "lblStoreEditSuccess": "تم تعديل المتجر بنجاح"
+  "lblStoreEditSuccess": "تم تعديل المتجر بنجاح",
+  "lblSearchOn": "آبحث عن",
+  "lblDetectLocation": "المنطقة / المحافظة"
 }

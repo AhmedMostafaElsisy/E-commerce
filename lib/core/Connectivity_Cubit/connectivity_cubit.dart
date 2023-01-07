@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
     } on CustomException catch (e) {
       emit(InternetDisconnected());
       debugPrint('catch DioError google ${e.toString()}');
-    } on DioError catch (e){
+    } on DioError catch (e) {
       emit(InternetDisconnected());
       debugPrint('catch DioError google ${e.toString()}');
     }
