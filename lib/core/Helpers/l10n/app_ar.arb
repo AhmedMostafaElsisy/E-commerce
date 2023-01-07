@@ -177,5 +177,10 @@
   "lblBrand": "الماركة",
   "lblAdsDetails": "تفاصيل الاعلان",
   "lblProductCreatedSuccess": "تم اضافة المنتج بنجاح",
-  "lblProductEditSuccess": "تم تعديل المنتج بنجاح"
+  "lblProductEditSuccess": "تم تعديل المنتج بنجاح",
+  "lblCategoriesLabel": "التصنيفات",
+  "lblShowAll": "عرض الكل",
+  "lblFeaturedStores": "ابرز المتاجر",
+  "lblFeaturedProducts": "ابرز الاعلانات"
+
 }
