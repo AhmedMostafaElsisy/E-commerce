@@ -69,4 +69,10 @@ class StoreRepository extends StoreRepositoryInterface {
       {int page = 1, int? limit}) {
     return remoteDataSourceInterface.getStoreData(page: page, limit: limit);
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getMyStoreProductData({required int shopID, int page = 1, int? limit}) {
+    return remoteDataSourceInterface.getStoreProductData(shopId: shopID,page: page, limit: limit);
+
+  }
 }

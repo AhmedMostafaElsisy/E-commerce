@@ -12,6 +12,9 @@ abstract class StoreRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getStoreData(
       {int page = 1, int? limit});
 
+  Future<Either<CustomError, BaseModel>> getStoreProductData(
+      {required int shopId, int page = 1, int? limit});
+
   Future<Either<CustomError, BaseModel>> createStore({
     required XFile storeImage,
     required String storeName,
@@ -107,8 +110,10 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "owner_name": "ahmed",
             "city": "cairo",
             "area": "cairo",
-            "sub_category": "electronic , hardware"
-          }, {
+            "sub_category": "electronic , hardware",
+            "rate": "2"
+          },
+          {
             "id": 1,
             "shop_name": "متجر الكتروني",
             "shop_image":
@@ -120,7 +125,8 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "owner_name": "ahmed",
             "city": "cairo",
             "area": "cairo",
-            "sub_category": "electronic , hardware"
+            "sub_category": "electronic , hardware",
+            "rate": "2"
           },
         ]
       };
@@ -185,6 +191,87 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       };
       await Future.delayed(const Duration(seconds: 3));
       return right(BaseModel.fromJson(dataMap));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getStoreProductData(
+      {required int shopId, int page = 1, int? limit}) async {
+    try {
+      Map<String, dynamic> data = {
+        "code": 200,
+        "massage": "success",
+        "data": [
+          {
+            "id": 1,
+            "product_name": "product one",
+            "product_image":
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+            "price": "1500",
+            "description": "electronic , photos",
+            "time": "15h",
+            "is_fav": true,
+            "shop": {
+              "id": 1,
+              "shop_name": "متجر الكتروني",
+              "shop_image":
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "category": "electronic",
+              "location": "cairo"
+            }
+          },
+          {
+            "id": 2,
+            "product_name": "product one",
+            "product_image":
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+            "price": "1500",
+            "description": "electronic , photos",
+            "time": "15h",
+            "is_fav": true,
+            "shop": {
+              "id": 1,
+              "shop_name": "متجر الكتروني",
+              "shop_image":
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "category": "electronic",
+              "location": "cairo"
+            }
+          },
+          {
+            "id": 3,
+            "product_name": "product one",
+            "product_image":
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+            "price": "1500",
+            "description": "electronic , photos",
+            "time": "15h",
+            "is_fav": false,
+            "shop": {
+              "id": 1,
+              "shop_name": "متجر الكتروني",
+              "shop_image":
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "category": "electronic",
+              "location": "cairo"
+            }
+          },
+        ]
+      };
+
+      String pathUrl = "";
+      if (limit == null) {
+        pathUrl = "${ApiKeys.productKey}?storeId=$shopId&page=$page";
+      } else {
+        pathUrl = "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
+      }
+      await Future.delayed(const Duration(seconds: 3));
+
+      // Response response = await DioHelper.getDate(url: pathUrl);
+      return right(BaseModel.fromJson(data));
     } on CustomException catch (ex) {
       return Left(CustomError(
           type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
