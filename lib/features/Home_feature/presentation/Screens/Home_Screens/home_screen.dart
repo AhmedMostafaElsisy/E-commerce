@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/category_grid_item_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_app_bar_icon_with_counter.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_image_widget.dart';
@@ -98,12 +99,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           CommonAppBarImageWithCounter(
                             imagePath: "fav_disable.svg",
                             withCounter: false,
+                            navigationPath: RouteNames.favoritePageRoute,
                           ),
+                          //todo: handel click on chat icon by navigation to chat screen
                           CommonAppBarImageWithCounter(
                             imagePath: "chat.svg",
                             withCounter: true,
                             itemCounter: 19,
                           ),
+                          //todo: handel click on cart icon by navigation to cart screen
                           CommonAppBarImageWithCounter(
                             imagePath: "cart.svg",
                             withCounter: true,
@@ -209,14 +213,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     BlocBuilder<CategoriesCubit, CategoryState>(
                         builder: (categoryCtx, categoryState) {
                       if (categoryState is CategoryLoadingState) {
-                        return Column(
-                          children: const [
-                            Center(
-                              child: CircularProgressIndicator(
-                                color: AppConstants.mainColor,
-                              ),
-                            )
-                          ],
+                        return SizedBox(
+                          width: getWidgetWidth(375),
+                          height: getWidgetHeight(130),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Center(
+                                child: CircularProgressIndicator(
+                                  color: AppConstants.mainColor,
+                                ),
+                              )
+                            ],
+                          ),
                         );
                       } else if (categoryState is GetCategoryFailedState) {
                         return CommonError(

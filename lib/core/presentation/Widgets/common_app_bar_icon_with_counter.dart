@@ -10,13 +10,15 @@ class CommonAppBarImageWithCounter extends StatefulWidget {
   final String imagePath;
   final int itemCounter;
   final bool withCounter;
+  final String? navigationPath;
 
-  const CommonAppBarImageWithCounter(
-      {Key? key,
-      required this.imagePath,
-      this.itemCounter = 0,
-      this.withCounter = false})
-      : super(key: key);
+  const CommonAppBarImageWithCounter({
+    Key? key,
+    required this.imagePath,
+    this.itemCounter = 0,
+    this.withCounter = false,
+    this.navigationPath,
+  }) : super(key: key);
 
   @override
   State<CommonAppBarImageWithCounter> createState() =>
@@ -30,38 +32,45 @@ class _CommonAppBarImageWithCounterState
     return SizedBox(
       width: getWidgetWidth(36),
       height: getWidgetHeight(36),
-      child: Center(
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: CommonAssetSvgImageWidget(
-                  imageString: widget.imagePath, height: 22, width: 22),
-            ),
-            if (widget.withCounter)
+      child: InkWell(
+        onTap: () {
+          if (widget.navigationPath != null) {
+            Navigator.pushNamed(context, widget.navigationPath!);
+          }
+        },
+        child: Center(
+          child: Stack(
+            children: [
               Positioned(
-                top: getWidgetHeight(6),
-                right: SharedText.isAppLocalAr() ? null : 3,
-                left: SharedText.isAppLocalAr() ? 3 : null,
-                child: Container(
-                  height: getWidgetHeight(16),
-                  width: getWidgetWidth(16),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppConstants.lightRedColor,
-                  ),
-                  child: Center(
-                    child: CommonTitleText(
-                      textKey: widget.itemCounter.toString(),
-                      textColor: AppConstants.lightWhiteColor,
-                      textFontSize: AppConstants.xxSmallFontSize,
-                      minTextFontSize: AppConstants.xxSmallFontSize,
-                      textWeight: FontWeight.w400,
+                bottom: 0,
+                child: CommonAssetSvgImageWidget(
+                    imageString: widget.imagePath, height: 22, width: 22),
+              ),
+              if (widget.withCounter)
+                Positioned(
+                  top: getWidgetHeight(6),
+                  right: SharedText.isAppLocalAr() ? null : 3,
+                  left: SharedText.isAppLocalAr() ? 3 : null,
+                  child: Container(
+                    height: getWidgetHeight(16),
+                    width: getWidgetWidth(16),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppConstants.lightRedColor,
+                    ),
+                    child: Center(
+                      child: CommonTitleText(
+                        textKey: widget.itemCounter.toString(),
+                        textColor: AppConstants.lightWhiteColor,
+                        textFontSize: AppConstants.xxSmallFontSize,
+                        minTextFontSize: AppConstants.xxSmallFontSize,
+                        textWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
