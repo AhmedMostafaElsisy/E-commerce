@@ -67,7 +67,7 @@ class ShopItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.category ?? "asd",
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
@@ -88,7 +88,7 @@ class ShopItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.location ?? "asda",
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
@@ -137,7 +137,6 @@ class ShopItemWidget extends StatelessWidget {
                     buttonTextColor: AppConstants.mainColor,
                     buttonText: AppLocalizations.of(context)!.lblEdit,
                     onPressedFunction: () {
-
                       Navigator.of(context).pushNamed(
                           RouteNames.editStoresPageRoute,
                           arguments: RouteArgument(shopModel: model));

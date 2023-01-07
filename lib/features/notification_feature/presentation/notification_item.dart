@@ -87,7 +87,7 @@ class NotificationItem extends StatelessWidget {
                   CommonTitleText(
                     textKey: model.createdAt ?? "8 hrs ago",
                     textWeight: FontWeight.w400,
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightGrayShadowColor,
                   ),
                 ],

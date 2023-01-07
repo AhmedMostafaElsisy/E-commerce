@@ -152,7 +152,7 @@ class CommonTextFormField extends StatelessWidget {
                 borderSide: const BorderSide(
                     color: AppConstants.lightRedColor, width: 1)),
             errorStyle: const TextStyle(
-                    fontSize: AppConstants.xSmallFontSize,
+                    fontSize: AppConstants.xxSmallFontSize,
                     fontWeight: FontWeight.w500)
                 .apply(
               color: labelErrorStyle,

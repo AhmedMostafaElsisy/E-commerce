@@ -54,8 +54,8 @@ class _CommonAppBarImageWithCounterState
                     child: CommonTitleText(
                       textKey: widget.itemCounter.toString(),
                       textColor: AppConstants.lightWhiteColor,
-                      textFontSize: AppConstants.xSmallFontSize,
-                      minTextFontSize: AppConstants.xSmallFontSize,
+                      textFontSize: AppConstants.xxSmallFontSize,
+                      minTextFontSize: AppConstants.xxSmallFontSize,
                       textWeight: FontWeight.w400,
                     ),
                   ),

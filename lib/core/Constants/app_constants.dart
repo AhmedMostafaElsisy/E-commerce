@@ -49,7 +49,8 @@ class AppConstants {
   static const Color darkBackgroundWidgetsColor = Color(0xFF212121);
 
   /// Font Sizes
-  static const double xSmallFontSize = 10.0;
+  static const double xxSmallFontSize = 10.0;
+  static const double xSmallFontSize = 12.0;
   static const double smallFontSize = 14.0;
   static const double normalFontSize = 16.0;
   static const double mediumFontSize = 17.0;

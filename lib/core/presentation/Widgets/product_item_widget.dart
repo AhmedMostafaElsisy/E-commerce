@@ -149,7 +149,7 @@ class ProductItemWidget extends StatelessWidget {
         ///Product words
         CommonTitleText(
           textKey: model.description!,
-          textFontSize: AppConstants.xSmallFontSize,
+          textFontSize: AppConstants.xxSmallFontSize,
           textColor: AppConstants.lightContentColor,
           textWeight: FontWeight.w400,
         ),
@@ -180,7 +180,7 @@ class ProductItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.time!,
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
@@ -200,7 +200,7 @@ class ProductItemWidget extends StatelessWidget {
                   getSpaceWidth(4),
                   CommonTitleText(
                     textKey: model.shopModel!.location!,
-                    textFontSize: AppConstants.xSmallFontSize,
+                    textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
                   ),
