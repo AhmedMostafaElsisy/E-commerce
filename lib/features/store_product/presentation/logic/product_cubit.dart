@@ -62,4 +62,35 @@ class ProductCubit extends Cubit<ProductState> {
     result.fold((failed) => emit(AddNewProductErrorState(failed)),
         (r) => emit(AddNewProductSuccessState()));
   }
+  ///add new product
+  editProduct(
+      {required String productName,
+      required String productMainPrice,
+      required String productDiscountPrice,
+      required String productType,
+       List<XFile>? productImage,
+      required String productStates,
+      required String productBrand,
+      required String productDescription,
+      required String storeId,
+      required String productId,
+
+      }) async {
+    emit(AddNewProductLoadingState());
+    var result = await uesCase.callEditProduct(
+        productName: productName,
+        productMainPrice: productMainPrice,
+        productDiscountPrice: productDiscountPrice,
+        productType: productType,
+        productImage: productImage,
+        productStates: productStates,
+        productBrand: productBrand,
+        productDescription: productDescription,
+        storeId: storeId,
+    productId: productId
+
+    );
+    result.fold((failed) => emit(AddNewProductErrorState(failed)),
+        (r) => emit(AddNewProductSuccessState()));
+  }
 }
