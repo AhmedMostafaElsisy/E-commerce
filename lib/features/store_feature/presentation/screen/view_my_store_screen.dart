@@ -6,16 +6,16 @@ import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_w
 import 'package:captien_omda_customer/features/store_feature/presentation/screen/store_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/product_item_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-
 import '../logic/single_store_cubit/my_store_cubit.dart';
 import '../logic/single_store_cubit/my_store_states.dart';
 
@@ -51,7 +51,8 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstants.lightWhiteColor,
       body: MainAppPage(
-        screenContent: Column(
+        screenContent: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             CommonAppBar(
                 withBack: true,
@@ -67,12 +68,10 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                 ),
                 customActionWidget: InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(RouteNames.addNewProductPageRoute,
-                    arguments: RouteArgument(
-                      shopModel: widget.argument.shopModel!
-                    )
-                    );
+                    Navigator.of(context).pushNamed(
+                        RouteNames.addNewProductPageRoute,
+                        arguments: RouteArgument(
+                            shopModel: widget.argument.shopModel!));
                   },
                   child: Row(
                     children: [
@@ -90,110 +89,113 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                     ],
                   ),
                 )),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getWidgetWidth(AppConstants.pagePadding)),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ///store info card
-                    StoreInfoCard(
-                      shopModel: widget.argument.shopModel!,
-                    ),
-                    getSpaceHeight(AppConstants.smallPadding),
-                    BlocConsumer<MyStoreCubit, MyStoreStates>(
-                      listener: (myStoreCtx, myStoreState) {
-                        if (myStoreState is MyStoreFailedStates) {
-                          checkUserAuth(
-                              context: myStoreCtx,
-                              errorType: myStoreState.error.type);
-                        }
-                      },
-                      builder: (myStoreCtx, myStoreState) {
-                        if (myStoreState is MyStoreLoadingStates) {
-                          return const CommonLoadingWidget();
-                        } else if (myStoreState is MyStoreFailedStates) {
-                          return CommonError(
-                            errorMassage: myStoreState.error.errorMassage,
-                            withButton: true,
-                            onTap: () => myStoreCubit
-                              ..getStoreProductList(
-                                  shopID: widget.argument.shopModel!.id!),
-                          );
-                        } else if (myStoreCtx
-                            .read<MyStoreCubit>()
-                            .productList
-                            .isEmpty) {
-                          return EmptyScreen(
-                              imageString: "category.svg",
-                              titleKey:
-                                  AppLocalizations.of(context)!.lblNoStoreFound,
-                              description: AppLocalizations.of(context)!
-                                  .lblNoStoreFoundDesc,
-                              imageHeight: 80,
-                              imageWidth: 08);
-                        } else {
-                          return SizedBox(
-                            height: SharedText.screenHeight - 225,
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GridView.builder(
-                                    controller: myStoreCubit.scrollController,
-                                    shrinkWrap: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: getWidgetWidth(8),
-                                      mainAxisSpacing: getWidgetHeight(16),
-                                      childAspectRatio: MediaQuery.of(context)
-                                              .size
-                                              .width /
-                                          (MediaQuery.of(context).size.height /
-                                              1.0),
-                                    ),
-                                    itemCount: myStoreCtx
-                                            .read<MyStoreCubit>()
-                                            .productList
-                                            .length +
-                                        1,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      if (index >=
-                                              myStoreCtx
-                                                  .read<MyStoreCubit>()
-                                                  .productList
-                                                  .length &&
-                                          myStoreCtx
-                                              .read<MyStoreCubit>()
-                                              .hasMoreData) {
-                                        return const CommonLoadingWidget();
-                                      } else if (index >=
-                                          myStoreCtx
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getWidgetWidth(AppConstants.pagePadding)),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ///store info card
+                      StoreInfoCard(
+                        shopModel: widget.argument.shopModel!,
+                      ),
+                      getSpaceHeight(AppConstants.smallPadding),
+                      BlocConsumer<MyStoreCubit, MyStoreStates>(
+                        listener: (myStoreCtx, myStoreState) {
+                          if (myStoreState is MyStoreFailedStates) {
+                            checkUserAuth(
+                                context: myStoreCtx,
+                                errorType: myStoreState.error.type);
+                          }
+                        },
+                        builder: (myStoreCtx, myStoreState) {
+                          if (myStoreState is MyStoreLoadingStates) {
+                            return const CommonLoadingWidget();
+                          } else if (myStoreState is MyStoreFailedStates) {
+                            return CommonError(
+                              errorMassage: myStoreState.error.errorMassage,
+                              withButton: true,
+                              onTap: () => myStoreCubit
+                                ..getStoreProductList(
+                                    shopID: widget.argument.shopModel!.id!),
+                            );
+                          } else if (myStoreCtx
+                              .read<MyStoreCubit>()
+                              .productList
+                              .isEmpty) {
+                            return EmptyScreen(
+                                imageString: "category.svg",
+                                titleKey: AppLocalizations.of(context)!
+                                    .lblNoStoreFound,
+                                description: AppLocalizations.of(context)!
+                                    .lblNoStoreFoundDesc,
+                                imageHeight: 80,
+                                imageWidth: 08);
+                          } else {
+                            return SizedBox(
+                              height: SharedText.screenHeight - 225,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GridView.builder(
+                                      controller: myStoreCubit.scrollController,
+                                      shrinkWrap: true,
+                                      physics: const BouncingScrollPhysics(),
+                                      padding: EdgeInsets.zero,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: getWidgetWidth(8),
+                                        mainAxisSpacing: getWidgetHeight(16),
+                                        childAspectRatio:
+                                            MediaQuery.of(context).size.width /
+                                                (MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    1.0),
+                                      ),
+                                      itemCount: myStoreCtx
                                               .read<MyStoreCubit>()
                                               .productList
-                                              .length) {
-                                        return const SizedBox();
-                                      } else {
-                                        return ProductItemWidget(
-                                          model: myStoreCtx
-                                              .read<MyStoreCubit>()
-                                              .productList[index],
-                                          showActionButton: true,
-                                        );
-                                      }
-                                    },
+                                              .length +
+                                          1,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        if (index >=
+                                                myStoreCtx
+                                                    .read<MyStoreCubit>()
+                                                    .productList
+                                                    .length &&
+                                            myStoreCtx
+                                                .read<MyStoreCubit>()
+                                                .hasMoreData) {
+                                          return const CommonLoadingWidget();
+                                        } else if (index >=
+                                            myStoreCtx
+                                                .read<MyStoreCubit>()
+                                                .productList
+                                                .length) {
+                                          return const SizedBox();
+                                        } else {
+                                          return ProductItemWidget(
+                                            model: myStoreCtx
+                                                .read<MyStoreCubit>()
+                                                .productList[index],
+                                            showActionButton: true,
+                                          );
+                                        }
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
