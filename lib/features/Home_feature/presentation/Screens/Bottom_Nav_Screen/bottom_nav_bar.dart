@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/features/Categories_feature/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,7 +8,7 @@ import '../../../../../core/Constants/app_constants.dart';
 import '../../../../Setting_feature/presentation/setting_screen.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
-import '../Home_Screens/home_page.dart';
+import '../Home_Screens/home_screen.dart';
 import 'bottom_nav_item.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -22,10 +23,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     /// Pages
     const List<Widget> widgetOptions = <Widget>[
-      HomePage(),
-      HomePage(),
-      HomePage(),
-      HomePage(),
+      HomeScreen(),
+      HomeScreen(),
+      CategoriesScreen(),
+      HomeScreen(),
       SettingScreen(),
     ];
 
@@ -45,7 +46,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: AppConstants.lightShadowSecColor.withOpacity(0.16),
+                        color:
+                            AppConstants.lightShadowSecColor.withOpacity(0.16),
                         blurRadius: 4,
                         offset: const Offset(0, 0))
                   ]),
