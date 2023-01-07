@@ -1,12 +1,13 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
-import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../model/shop_model.dart';
 import 'common_global_button.dart';
 
@@ -31,7 +32,7 @@ class ShopItemWidget extends StatelessWidget {
           ]),
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         ///shop image
-        commonCachedImageWidget(context, model.image!,
+        commonCachedImageWidget(model.image!,
             height: 168, width: 168, fit: BoxFit.fill),
 
         ///spacer

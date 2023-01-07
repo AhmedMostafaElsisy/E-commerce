@@ -196,14 +196,14 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                                           width: 40,
                                                           fit: BoxFit.fill)
                                                       : commonCachedImageWidget(
-                                                          context,
                                                           widget
                                                               .argument
                                                               .shopModel!
                                                               .image!,
                                                           height: 40,
                                                           width: 40,
-                                                          fit: BoxFit.fill),
+                                                          fit: BoxFit.fill,
+                                                        ),
                                                   const CommonAssetSvgImageWidget(
                                                       imageString: "upload.svg",
                                                       height: 24,

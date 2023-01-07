@@ -12,7 +12,7 @@ class HomeModel {
 
   factory HomeModel.fromJson(Map<String, dynamic> jsonObject) {
     try {
-      return HomeModel(banners: bannerListFromJson(jsonObject["Banners"]));
+      return HomeModel(banners: bannerListFromJson(jsonObject["banners"]));
     } catch (e) {
       throw CustomException(
         error: CustomError(

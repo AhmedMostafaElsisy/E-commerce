@@ -262,7 +262,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                                           1000,
                                                                     )
                                                                   : commonCachedImageWidget(
-                                                                      context,
                                                                       SharedText
                                                                           .currentUser!
                                                                           .image!,

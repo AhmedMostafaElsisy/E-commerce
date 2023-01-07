@@ -3,6 +3,7 @@ import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_im
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -28,12 +29,14 @@ class _UserProfileCardState extends State<UserProfileCard> {
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           ///User image
-          commonCachedImageWidget(context, SharedText.currentUser!.image!,
-              height: 48,
-              width: 48,
-              isProfile: true,
-              isCircular: true,
-              radius: 1000),
+          commonCachedImageWidget(
+            SharedText.currentUser!.image!,
+            height: 48,
+            width: 48,
+            isProfile: true,
+            isCircular: true,
+            radius: 1000,
+          ),
           getSpaceWidth(AppConstants.smallPadding),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/Constants/app_constants.dart';
+import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
 import '../domain/model/notification_model.dart';
-import '../../../core/Helpers/shared.dart';
 
 class NotificationItem extends StatelessWidget {
   final NotificationModel model;
@@ -39,7 +40,6 @@ class NotificationItem extends StatelessWidget {
                     border: Border.all(color: AppConstants.mainColor, width: 1),
                     color: AppConstants.verificationCodeColor),
                 child: commonCachedImageWidget(
-                  context,
                   model.icon ??
                       "https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png",
                   width: 48,

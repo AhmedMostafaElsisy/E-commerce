@@ -1,5 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
-import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../Domain/enitiy/banner_model.dart';
@@ -23,10 +23,10 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
           width: getWidgetWidth(343),
           height: getWidgetHeight(132),
           child: Stack(
-            children: const [
+            children: [
               Center(
-                child: CommonAssetSvgImageWidget(
-                  imageString: 'banner.svg',
+                child: commonCachedImageWidget(
+                  widget.banners[itemPos].image ?? "",
                   height: 132,
                   width: 343,
                   fit: BoxFit.cover,
@@ -36,7 +36,7 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
           ),
         );
       },
-      itemCount: 4,
+      itemCount: widget.banners.length,
     );
   }
 }

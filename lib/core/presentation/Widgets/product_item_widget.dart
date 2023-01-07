@@ -1,24 +1,21 @@
 import 'package:captien_omda_customer/core/model/product_model.dart';
-import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
-import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
 import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
 
-  const ProductItemWidget(
-      {Key? key, required this.model})
-      : super(key: key);
+  const ProductItemWidget({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,7 @@ class ProductItemWidget extends StatelessWidget {
         ///product image
         Stack(
           children: [
-            commonCachedImageWidget(context, model.image!,
+            commonCachedImageWidget(model.image!,
                 height: 168, width: 168, fit: BoxFit.fill),
             Positioned(
                 top: getWidgetHeight(8),
@@ -47,17 +44,18 @@ class ProductItemWidget extends StatelessWidget {
                 child: BlocConsumer<FavoriteCubit, FavoriteStates>(
                   listener: (favCtx, favState) {
                     if (favState is FavoriteRemoveFavSuccessStates) {
-                      if(favState.productId==model.id) {
+                      if (favState.productId == model.id) {
                         model.isFav = false;
                       }
                     } else if (favState is FavoriteAddFavSuccessStates) {
-                      if(favState.productId==model.id) {
+                      if (favState.productId == model.id) {
                         model.isFav = true;
                       }
                     }
                   },
                   builder: (favCtx, favState) {
-                    if (favState is FavoriteFavLoadingStates && favState.productId==model.id) {
+                    if (favState is FavoriteFavLoadingStates &&
+                        favState.productId == model.id) {
                       return SizedBox(
                           height: getWidgetHeight(14),
                           width: getWidgetWidth(14),
@@ -71,15 +69,15 @@ class ProductItemWidget extends StatelessWidget {
                       imageHeight: 14,
                       imageWidth: 14,
                       onClick: () {
-                       if( favState is! FavoriteFavLoadingStates) {
-                         model.isFav!
-                            ? favCtx
-                                .read<FavoriteCubit>()
-                                .removeItemFromFav(productId: model.id!)
-                            : favCtx
-                                .read<FavoriteCubit>()
-                                .addItemToFav(productId: model.id!);
-                       }
+                        if (favState is! FavoriteFavLoadingStates) {
+                          model.isFav!
+                              ? favCtx
+                                  .read<FavoriteCubit>()
+                                  .removeItemFromFav(productId: model.id!)
+                              : favCtx
+                                  .read<FavoriteCubit>()
+                                  .addItemToFav(productId: model.id!);
+                        }
                       },
                     );
                   },
@@ -118,7 +116,7 @@ class ProductItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ///Shop image
-            commonCachedImageWidget(context, model.shopModel!.image!,
+            commonCachedImageWidget(model.shopModel!.image!,
                 height: 24,
                 width: 24,
                 fit: BoxFit.fill,

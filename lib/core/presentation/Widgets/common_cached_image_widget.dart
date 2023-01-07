@@ -7,18 +7,17 @@ import 'common_asset_image_widget.dart';
 import 'common_asset_svg_image_widget.dart';
 
 Widget commonCachedImageWidget(
-    BuildContext context,
-    String imageUrl, {
-      double radius = 0.0,
-      BoxFit fit = BoxFit.fill,
-      required double height,
-      required double width,
-      bool isCircular = false,
-      bool isProfile = false,
-    }) {
+  String imageUrl, {
+  double radius = 0.0,
+  BoxFit fit = BoxFit.fill,
+  required double height,
+  required double width,
+  bool isCircular = false,
+  bool isProfile = false,
+}) {
   double imageHeight = getWidgetHeight(height);
   double imageWidth =
-  isCircular ? getWidgetHeight(height) : getWidgetWidth(width);
+      isCircular ? getWidgetHeight(height) : getWidgetWidth(width);
 
   return CachedNetworkImage(
     imageUrl: imageUrl,
@@ -48,23 +47,24 @@ Widget commonCachedImageWidget(
       ),
       child: const Center(
           child: CircularProgressIndicator(
-            color: AppConstants.mainColor,
-          )),
+        color: AppConstants.mainColor,
+      )),
     ),
-    errorWidget: (context, url, error) => isProfile ?
-    commonAssetImageWidget(
-      imageString: 'avatar.png',
-      height: imageHeight,
-      width: imageWidth,
-      radius: radius,
-      fit: fit,
-    ):CommonAssetSvgImageWidget(
-      imageString: 'logo.svg',
-      height: imageHeight,
-      width: imageWidth,
-      fit: fit,
-      radius: radius,
-      isCircular: isCircular,
-    ),
+    errorWidget: (context, url, error) => isProfile
+        ? commonAssetImageWidget(
+            imageString: 'avatar.png',
+            height: imageHeight,
+            width: imageWidth,
+            radius: radius,
+            fit: fit,
+          )
+        : CommonAssetSvgImageWidget(
+            imageString: 'logo.svg',
+            height: imageHeight,
+            width: imageWidth,
+            fit: fit,
+            radius: radius,
+            isCircular: isCircular,
+          ),
   );
 }

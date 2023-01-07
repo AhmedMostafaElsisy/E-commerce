@@ -7,12 +7,14 @@ class BannerModel {
   int? id;
   String? title;
   String? description;
+  String? image;
   BannerNavigationType? navigationType;
 
   BannerModel({
     this.id,
     this.title,
     this.description,
+    this.image,
     this.navigationType,
   });
 
@@ -35,7 +37,8 @@ class BannerModel {
       id: json["id"],
       title: json["title"],
       description: json["description"],
-      navigationType: getRequestStates(json["title"]),
+      image: json["banner_image"],
+      navigationType: getRequestStates(json["navigation"]),
     );
   }
 
