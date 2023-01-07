@@ -37,6 +37,148 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSourceInterface {
               "navigation": "store",
             },
           ],
+          "stores": [
+            {
+              "id": 1,
+              "shop_name": "متجر الكتروني",
+              "shop_image":
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "category": "electronic",
+              "location": "cairo",
+              "phone": "0100000",
+              "email": "abc@gmail.com",
+              "owner_name": "ahmed",
+              "city": "cairo",
+              "area": "cairo",
+              "sub_category": "electronic , hardware",
+              "rate": "2"
+            },
+            {
+              "id": 1,
+              "shop_name": "متجر الكتروني",
+              "shop_image":
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "category": "electronic",
+              "location": "cairo",
+              "phone": "0100000",
+              "email": "abc@gmail.com",
+              "owner_name": "ahmed",
+              "city": "cairo",
+              "area": "cairo",
+              "sub_category": "electronic , hardware",
+              "rate": "2"
+            },
+          ],
+          "products": [
+            {
+              "id": 1,
+              "product_name": "product 1",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": true,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+            {
+              "id": 2,
+              "product_name": "product 2",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": true,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+            {
+              "id": 3,
+              "product_name": "product 3",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": false,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+            {
+              "id": 4,
+              "product_name": "product 4",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": true,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+            {
+              "id": 5,
+              "product_name": "product 5",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": true,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+            {
+              "id": 6,
+              "product_name": "product 6",
+              "product_image":
+                  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+              "price": "1500",
+              "description": "electronic , photos",
+              "time": "15h",
+              "is_fav": false,
+              "shop": {
+                "id": 1,
+                "shop_name": "متجر الكتروني",
+                "shop_image":
+                    "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                "category": "electronic",
+                "location": "cairo"
+              }
+            },
+          ],
         }
       };
       return right(BaseModel.fromJson(json));

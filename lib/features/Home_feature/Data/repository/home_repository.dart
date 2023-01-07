@@ -20,10 +20,13 @@ class HomeRepository extends HomeRepositoryInterface {
               try {
                 HomeModel homeParsedModel = HomeModel.fromJson(r.data);
                 return Right(homeParsedModel);
+              } on CustomException catch (error) {
+                return left(error);
               } catch (ex) {
                 return left(CustomException(
                     error: CustomError(
                   type: CustomStatusCodeErrorType.unExcepted,
+                  errorMassage: ex.toString(),
                 )));
               }
             }));
