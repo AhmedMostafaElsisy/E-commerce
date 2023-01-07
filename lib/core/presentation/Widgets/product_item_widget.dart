@@ -12,6 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
 import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import '../Routes/route_argument_model.dart';
+import '../Routes/route_names.dart';
 import 'common_global_button.dart';
 
 class ProductItemWidget extends StatelessWidget {
@@ -247,7 +249,12 @@ class ProductItemWidget extends StatelessWidget {
                       buttonTextColor: AppConstants.mainColor,
                       buttonText: AppLocalizations.of(context)!.lblEdit,
                       onPressedFunction: () {
-                        ///Todo: add edit product action
+                        Navigator.of(context)
+                            .pushNamed(RouteNames.editProductPageRoute,
+                            arguments: RouteArgument(
+                                productModel: model
+                            )
+                        );
                       },
                       height: 32,
                       radius: AppConstants.containerBorderRadius,

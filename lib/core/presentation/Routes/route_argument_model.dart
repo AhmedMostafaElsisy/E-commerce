@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/Home_feature/Domain/enitiy/request_model.dart';
@@ -29,6 +30,7 @@ class RouteArgument {
   RequestModel? requestModel;
 
   ShopModel? shopModel;
+  ProductModel? productModel;
 
   RouteArgument(
       {this.id,
@@ -47,7 +49,7 @@ class RouteArgument {
       this.requestModel,
       this.otp,
       this.requestId,
-      this.shopModel});
+      this.shopModel,this.productModel});
 
   @override
   String toString() {
