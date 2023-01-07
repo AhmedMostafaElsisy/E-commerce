@@ -19,6 +19,9 @@ import '../../../features/rating_feature/presentation/screen/rating_screen.dart'
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
+import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
+import '../../../features/store_product/presentation/add_new_product_screen.dart';
+import '../../../features/store_product/presentation/edit_my_product_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -80,6 +83,15 @@ class RouteGenerator {
       case RouteNames.editStoresPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: EditStoreScreen(argument: args as RouteArgument));
+      case RouteNames.viewMyStoresPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: ViewMyStoreScreen(argument: args as RouteArgument));
+      case RouteNames.addNewProductPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: AddProductScreen(argument: args as RouteArgument));
+      case RouteNames.editProductPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: EditProductScreen(argument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(

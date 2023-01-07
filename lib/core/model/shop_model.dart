@@ -13,6 +13,8 @@ class ShopModel {
   String? ownerName;
   String? city;
   String? area;
+  String? rate;
+
 
   ShopModel(
       {this.id,
@@ -25,7 +27,7 @@ class ShopModel {
       this.email,
       this.ownerName,
       this.city,
-      this.area});
+      this.area,this.rate});
 
   factory ShopModel.fromJson(Map<String, dynamic> json) {
     return ShopModel(
@@ -40,11 +42,12 @@ class ShopModel {
       ownerName: json["owner_name"] ?? "--",
       city: json["city"] ?? "--",
       area: json["area"] ?? "--",
+      rate: json["rate"]??"0.0"
     );
   }
 
   @override
   String toString() {
-    return 'ShopModel{id: $id, name: $name, image: $image, location: $location, category: $category, subCategory: $subCategory, phone: $phone, email: $email, ownerName: $ownerName, city: $city, area: $area}';
+    return 'ShopModel{id: $id, name: $name, image: $image, location: $location, category: $category, subCategory: $subCategory, phone: $phone, email: $email, ownerName: $ownerName, city: $city, area: $area, rate: $rate}';
   }
 }

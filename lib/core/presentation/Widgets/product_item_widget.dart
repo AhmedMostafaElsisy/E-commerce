@@ -1,21 +1,28 @@
 import 'package:captien_omda_customer/core/model/product_model.dart';
-import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
-import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
 import 'package:flutter/material.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
 import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import '../Routes/route_argument_model.dart';
+import '../Routes/route_names.dart';
+import 'common_global_button.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
+  final bool? showActionButton;
 
-  const ProductItemWidget({Key? key, required this.model}) : super(key: key);
+  const ProductItemWidget(
+      {Key? key, required this.model, this.showActionButton = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -200,9 +207,63 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
+
+              ///Action button
             ],
           ),
-        )
+        ),
+        if (showActionButton!) ...[
+          getSpaceHeight(AppConstants.smallPadding),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                /// Show
+                Expanded(
+                  child: CommonGlobalButton(
+                      showBorder: false,
+                      buttonTextFontWeight: FontWeight.w600,
+                      buttonTextSize: AppConstants.normalFontSize,
+                      elevation: 0,
+                      buttonBackgroundColor: AppConstants.mainColor,
+                      buttonText: AppLocalizations.of(context)!.lblShow,
+                      onPressedFunction: () {
+                        ///Todo: add show product action
+                      },
+                      height: 32,
+                      radius: AppConstants.containerBorderRadius,
+                      withIcon: false),
+                ),
+                getSpaceWidth(8),
+
+                /// edit
+                Expanded(
+                  child: CommonGlobalButton(
+                      showBorder: true,
+                      borderColor: AppConstants.mainColor,
+                      buttonTextFontWeight: FontWeight.w600,
+                      buttonTextSize: AppConstants.normalFontSize,
+                      elevation: 0,
+                      buttonBackgroundColor: AppConstants.lightWhiteColor,
+                      buttonTextColor: AppConstants.mainColor,
+                      buttonText: AppLocalizations.of(context)!.lblEdit,
+                      onPressedFunction: () {
+                        Navigator.of(context)
+                            .pushNamed(RouteNames.editProductPageRoute,
+                            arguments: RouteArgument(
+                                productModel: model
+                            )
+                        );
+                      },
+                      height: 32,
+                      radius: AppConstants.containerBorderRadius,
+                      withIcon: false),
+                ),
+              ],
+            ),
+          ),
+        ]
       ]),
     );
   }

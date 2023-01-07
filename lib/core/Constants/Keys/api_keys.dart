@@ -55,4 +55,7 @@ class ApiKeys {
 
   ///Store
   static const String storeKey = "/Store";
+  ///product
+  static const String productKey = "/product";
+
 }

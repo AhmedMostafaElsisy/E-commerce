@@ -7,6 +7,8 @@ import '../../../../core/Error_Handling/custom_error.dart';
 abstract class StoreRepositoryInterface  {
   Future<Either<CustomError, BaseModel>> getMyStoreData(
       {int page = 1, int? limit});
+  Future<Either<CustomError, BaseModel>> getMyStoreProductData(
+      {required int shopID,int page = 1, int? limit});
 
   Future<Either<CustomError, BaseModel>> addNewStore({
     required XFile storeImage,

@@ -9,6 +9,8 @@ class AppConstants {
   static const Color lightBlackColor = Color(0xFF000000);
   static const Color lightWhiteColor = Color(0xFFFFFFFF);
   static const Color lightOffBlueColor = Color(0xff22B07D);
+  static const Color greenColor = Color(0xff3F8527);
+  static const Color lightGreenColor = Color(0xffF4F8F2);
   static const Color lightPurplerColor = Color(0xff525298);
   static const Color lightGrayBackgroundColor = Color(0xffF7FDFF);
   static const Color lightGreyColor = Color(0xffDADADA);
@@ -18,6 +20,7 @@ class AppConstants {
   static const Color backGroundColor = Color(0xFFFFF8F5);
   static const Color loaderBackGroundColor = Color(0xFFFAFAFD);
   static const Color successColor = Color(0XFF16A085);
+  static const Color lightOrangColor = Color(0XFFFFF5EB);
 
   static const Color lightRedColor = Color(0xFFBF0000);
   static const Color lightBlueColor = Color(0xFF3243CD);
@@ -29,7 +32,7 @@ class AppConstants {
   static const Color lightOrangeColor = Color(0xFFff8204);
   static const Color greyColor = Color(0xffA8A8A8);
   static const Color lightSecondShadowColor = Color(0xffDADADA);
-  static const Color redShadowColor = Color(0xff999999);
+  static const Color lightShadowSecColor = Color(0xffF5F6F7);
   static const Color lightGrayShadowColor = Color(0xffAAAAAA);
   static const Color arrowIconColor = Color(0xff262626);
   static const Color transparent = Colors.transparent;

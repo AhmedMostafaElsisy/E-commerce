@@ -53,10 +53,11 @@ class _SplashPageState extends State<SplashHomePage>
                 () => Navigator.pushNamedAndRemoveUntil(
                     context, RouteNames.mainBottomNavPageRoute, (route) => false));
           } else if (loginState is LoginFailed) {
+            ///Todo:change this route
             Timer(
                 const Duration(milliseconds: 2500),
                 () => Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.chooseLoginSignupScreenRoute, (route) => false));
+                    context, RouteNames.mainBottomNavPageRoute, (route) => false));
           }
         },
         builder: (loginCtx, loginState) {
