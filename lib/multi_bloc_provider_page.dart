@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/features/Categories_feature/presentation/logic/category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +10,7 @@ import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
-import 'features/Home_feature/presentation/logic/request_cubit/home_cubit.dart';
+import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
@@ -47,6 +48,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => NotificationCubit(NotificationListRepository())),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
         BlocProvider<HomeCubit>(create: (_) => di.sl<HomeCubit>()),
+        BlocProvider<CategoriesCubit>(create: (_) => di.sl<CategoriesCubit>()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
         BlocProvider<FavoriteCubit>(create: (_) => di.sl<FavoriteCubit>()),
