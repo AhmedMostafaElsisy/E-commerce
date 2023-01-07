@@ -164,5 +164,17 @@
   "lblAddProduct": "اضافة منتج",
   "lblStoreOrder": "طلبات المتجر",
   "lblStoreMassage": "رسائل المتجر",
-  "lblStoreNotification": "تنبيهات المتجر"
+  "lblStoreNotification": "تنبيهات المتجر",
+  "lblAddAds": "اضافة اعلان",
+  "lblEditAds": "تعديل اعلان",
+  "lblAdsName": "اسم الاعلان",
+  "lblAdsPrice": "سعر الاعلان",
+  "lblAdsPriceAfterDiscount": "السعر بعد الخصم",
+  "lblAdsType": "نوع الاعلان",
+  "lblAdsImages": "صور الاعلان",
+  "lblStates": "الحالة",
+  "lblBrand": "الماركة",
+  "lblAdsDetails": "تفاصيل الاعلان",
+  "lblProductCreatedSuccess":"تم اضافة المنتج بنجاح",
+  "lblProductEditSuccess":  "تم تعديل المنتج بنجاح"
 }

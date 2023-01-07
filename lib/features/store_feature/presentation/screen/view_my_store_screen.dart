@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_empty_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
@@ -34,11 +35,12 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
   void initState() {
     super.initState();
     myStoreCubit = BlocProvider.of<MyStoreCubit>(context);
-    myStoreCubit.getStoreProductList(shopID:widget.argument.shopModel!.id! );
+    myStoreCubit.getStoreProductList(shopID: widget.argument.shopModel!.id!);
     myStoreCubit.scrollController = ScrollController();
     myStoreCubit.scrollController.addListener(
-          () {
-        myStoreCubit.setupScrollController( shopID: widget.argument.shopModel!.id! );
+      () {
+        myStoreCubit.setupScrollController(
+            shopID: widget.argument.shopModel!.id!);
       },
     );
   }
@@ -65,7 +67,12 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                 ),
                 customActionWidget: InkWell(
                   onTap: () {
-                    ///Todo: add navigation to add to product for this store
+                    Navigator.of(context)
+                        .pushNamed(RouteNames.addNewProductPageRoute,
+                    arguments: RouteArgument(
+                      shopModel: widget.argument.shopModel!
+                    )
+                    );
                   },
                   child: Row(
                     children: [
@@ -98,7 +105,8 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                       listener: (myStoreCtx, myStoreState) {
                         if (myStoreState is MyStoreFailedStates) {
                           checkUserAuth(
-                              context: myStoreCtx, errorType: myStoreState.error.type);
+                              context: myStoreCtx,
+                              errorType: myStoreState.error.type);
                         }
                       },
                       builder: (myStoreCtx, myStoreState) {
@@ -108,14 +116,20 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                           return CommonError(
                             errorMassage: myStoreState.error.errorMassage,
                             withButton: true,
-                            onTap: () => myStoreCubit..getStoreProductList(shopID:widget.argument.shopModel!.id! ),
+                            onTap: () => myStoreCubit
+                              ..getStoreProductList(
+                                  shopID: widget.argument.shopModel!.id!),
                           );
-                        }else if (myStoreCtx.read<MyStoreCubit>().productList.isEmpty) {
+                        } else if (myStoreCtx
+                            .read<MyStoreCubit>()
+                            .productList
+                            .isEmpty) {
                           return EmptyScreen(
                               imageString: "category.svg",
-                              titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
-                              description:
-                              AppLocalizations.of(context)!.lblNoStoreFoundDesc,
+                              titleKey:
+                                  AppLocalizations.of(context)!.lblNoStoreFound,
+                              description: AppLocalizations.of(context)!
+                                  .lblNoStoreFoundDesc,
                               imageHeight: 80,
                               imageWidth: 08);
                         } else {
@@ -130,27 +144,31 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                     physics: const BouncingScrollPhysics(),
                                     padding: EdgeInsets.zero,
                                     gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: getWidgetWidth(8),
                                       mainAxisSpacing: getWidgetHeight(16),
                                       childAspectRatio: MediaQuery.of(context)
-                                          .size
-                                          .width /
-                                          (MediaQuery.of(context).size.height / 1.0),
+                                              .size
+                                              .width /
+                                          (MediaQuery.of(context).size.height /
+                                              1.0),
                                     ),
                                     itemCount: myStoreCtx
-                                        .read<MyStoreCubit>()
-                                        .productList
-                                        .length+1,
-                                    itemBuilder: (BuildContext context, int index) {
-
+                                            .read<MyStoreCubit>()
+                                            .productList
+                                            .length +
+                                        1,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
                                       if (index >=
+                                              myStoreCtx
+                                                  .read<MyStoreCubit>()
+                                                  .productList
+                                                  .length &&
                                           myStoreCtx
                                               .read<MyStoreCubit>()
-                                              .productList
-                                              .length &&
-                                          myStoreCtx.read<MyStoreCubit>().hasMoreData) {
+                                              .hasMoreData) {
                                         return const CommonLoadingWidget();
                                       } else if (index >=
                                           myStoreCtx
@@ -164,7 +182,6 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                               .read<MyStoreCubit>()
                                               .productList[index],
                                           showActionButton: true,
-
                                         );
                                       }
                                     },

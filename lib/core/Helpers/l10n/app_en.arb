@@ -163,6 +163,17 @@
   "lblAddProduct": "Add product",
   "lblStoreOrder": "Store order",
   "lblStoreMassage": "Store massage",
-  "lblStoreNotification": "Store notification"
-
+  "lblStoreNotification": "Store notification",
+  "lblAddAds": "Add Ads",
+  "lblEditAds": "Edit Ads",
+  "lblAdsName": "Ads name",
+  "lblAdsPrice": "Ads price",
+  "lblAdsPriceAfterDiscount": "Ads after discount",
+  "lblAdsType": "Ads type",
+  "lblAdsImages": "Ads images",
+  "lblStates": "States",
+  "lblBrand": "Brand",
+  "lblAdsDetails": "Ads Details",
+  "lblProductCreatedSuccess": "Product Added successfully",
+  "lblProductEditSuccess": "Product edited successfully"
 }
