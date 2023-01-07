@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         builder: (homeCtx, homeState) {
           if (homeState is HomeContentLoadingState) {
             return Column(
-              children: [
+              children: const [
                 Center(
                   child: CircularProgressIndicator(
                     color: AppConstants.mainColor,

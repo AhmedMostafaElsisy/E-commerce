@@ -15,7 +15,7 @@ import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
-import 'features/store_feature/presentation/logic/store_cubit.dart';
+import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {

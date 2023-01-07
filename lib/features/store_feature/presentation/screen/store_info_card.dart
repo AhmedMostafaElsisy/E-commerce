@@ -1,6 +1,7 @@
 import 'package:captien_omda_customer/core/model/shop_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -28,12 +29,14 @@ class StoreInfoCard extends StatelessWidget {
             Row(
               children: [
                 ///store image
-                commonCachedImageWidget(context, shopModel.image!,
-                    height: 56,
-                    width: 56,
-                    isProfile: true,
-                    isCircular: true,
-                    radius: 1000),
+                commonCachedImageWidget(
+                  shopModel.image!,
+                  height: 56,
+                  width: 56,
+                  isProfile: true,
+                  isCircular: true,
+                  radius: 1000,
+                ),
 
                 ///Spacer
                 getSpaceWidth(AppConstants.smallPadding),
@@ -141,9 +144,9 @@ class StoreInfoCard extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: getWidgetHeight(4)),
-
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                    borderRadius:
+                        BorderRadius.circular(AppConstants.smallRadius),
                     color: AppConstants.lightGreenColor),
                 child: Column(
                   children: [
@@ -160,15 +163,17 @@ class StoreInfoCard extends StatelessWidget {
                 ),
               ),
             ),
+
             ///Spacer
             getSpaceWidth(AppConstants.smallPadding),
+
             ///store chat
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: getWidgetHeight(4)),
-
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                    borderRadius:
+                        BorderRadius.circular(AppConstants.smallRadius),
                     color: AppConstants.lightShadowSecColor),
                 child: Column(
                   children: [
@@ -190,15 +195,19 @@ class StoreInfoCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: getWidgetHeight(4)),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                    borderRadius:
+                        BorderRadius.circular(AppConstants.smallRadius),
                     color: AppConstants.lightOrangColor),
                 child: Column(
                   children: [
                     const CommonAssetSvgImageWidget(
-                        imageString: "store_notification.svg", height: 16, width: 16),
+                        imageString: "store_notification.svg",
+                        height: 16,
+                        width: 16),
                     getSpaceHeight(AppConstants.smallPadding),
                     CommonTitleText(
-                      textKey: AppLocalizations.of(context)!.lblStoreNotification,
+                      textKey:
+                          AppLocalizations.of(context)!.lblStoreNotification,
                       textWeight: FontWeight.w600,
                       textFontSize: AppConstants.smallFontSize - 2,
                       textColor: AppConstants.lightOrangeColor,

@@ -1,15 +1,14 @@
 import 'package:captien_omda_customer/core/model/product_model.dart';
-import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
-import 'package:flutter/material.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:captien_omda_customer/features/favorite_feature/presentation/logic/favorite_states.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/Constants/app_constants.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../features/Profile_feature/presentation/screens/common_profile_header_widget.dart';
 import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import '../Routes/route_argument_model.dart';
@@ -249,12 +248,9 @@ class ProductItemWidget extends StatelessWidget {
                       buttonTextColor: AppConstants.mainColor,
                       buttonText: AppLocalizations.of(context)!.lblEdit,
                       onPressedFunction: () {
-                        Navigator.of(context)
-                            .pushNamed(RouteNames.editProductPageRoute,
-                            arguments: RouteArgument(
-                                productModel: model
-                            )
-                        );
+                        Navigator.of(context).pushNamed(
+                            RouteNames.editProductPageRoute,
+                            arguments: RouteArgument(productModel: model));
                       },
                       height: 32,
                       radius: AppConstants.containerBorderRadius,

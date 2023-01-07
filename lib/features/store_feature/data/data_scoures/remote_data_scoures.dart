@@ -216,7 +216,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 1,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -225,7 +225,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -234,7 +234,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 2,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -243,7 +243,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -252,7 +252,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "id": 3,
             "product_name": "product one",
             "product_image":
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
             "price": "1500",
             "description": "electronic , photos",
             "time": "15h",
@@ -261,7 +261,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
               "location": "cairo"
             }
@@ -273,7 +273,8 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
       if (limit == null) {
         pathUrl = "${ApiKeys.productKey}?storeId=$shopId&page=$page";
       } else {
-        pathUrl = "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
+        pathUrl =
+            "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
       }
       await Future.delayed(const Duration(seconds: 3));
 
@@ -284,5 +285,6 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
         type: ex.error.type,
         errorMassage: ex.error.errorMassage,
       ));
+    }
   }
 }

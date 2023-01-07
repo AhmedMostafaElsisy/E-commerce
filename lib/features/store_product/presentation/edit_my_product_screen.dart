@@ -3,6 +3,7 @@ import 'package:captien_omda_customer/features/store_product/presentation/logic/
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
@@ -14,8 +15,6 @@ import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
@@ -52,34 +51,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.initState();
     _productCubit = BlocProvider.of<ProductCubit>(context);
     storeNameController = TextEditingController(
-      text:  widget.argument.productModel!.shopModel!.name
-    );
+        text: widget.argument.productModel!.shopModel!.name);
     ownerNameController = TextEditingController(
-      text:  widget.argument.productModel!.shopModel!.ownerName!
-    );
-    adsNameController = TextEditingController(
-        text:  widget.argument.productModel!.name
-    );
-    adsDetailsController = TextEditingController(
-        text:  widget.argument.productModel!.description!
-    );
+        text: widget.argument.productModel!.shopModel!.ownerName!);
+    adsNameController =
+        TextEditingController(text: widget.argument.productModel!.name);
+    adsDetailsController =
+        TextEditingController(text: widget.argument.productModel!.description!);
     adsMainPriceController = TextEditingController(
-        text:  widget.argument.productModel!.price.toString()
-    );
+        text: widget.argument.productModel!.price.toString());
     adsDiscountPriceController = TextEditingController(
-        text:  widget.argument.productModel!.price.toString()
-
-    );
-    adsTypeController = TextEditingController(
-        text:  widget.argument.productModel!.type!
-
-    );
-    adsStatesController = TextEditingController(
-        text:  widget.argument.productModel!.state!
-    );
-    adsBrandController = TextEditingController(
-        text:  widget.argument.productModel!.brand!
-    );
+        text: widget.argument.productModel!.price.toString());
+    adsTypeController =
+        TextEditingController(text: widget.argument.productModel!.type!);
+    adsStatesController =
+        TextEditingController(text: widget.argument.productModel!.state!);
+    adsBrandController =
+        TextEditingController(text: widget.argument.productModel!.brand!);
     _productCubit.isDataFound = false;
     _productCubit.controllerList.clear();
     _productCubit.controllerList.add(storeNameController);
@@ -92,7 +80,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _productCubit.controllerList.add(adsStatesController);
     _productCubit.controllerList.add(adsBrandController);
     _productCubit.isDataFount(_productCubit.controllerList);
-
   }
 
   @override
@@ -147,13 +134,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   } else if (productState is AddNewProductSuccessState) {
                     showSnackBar(
                         context: productCtx,
-                        title: AppLocalizations.of(context)!
-                            .lblProductEditSuccess,
+                        title:
+                            AppLocalizations.of(context)!.lblProductEditSuccess,
                         color: AppConstants.successColor);
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RouteNames.mainBottomNavPageRoute,
-                          (route) => false,
+                      (route) => false,
                     );
                   }
                 },
@@ -161,10 +148,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return Expanded(
                       child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: AppConstants.pagePadding) +
+                                  horizontal: AppConstants.pagePadding) +
                               EdgeInsets.only(
                                 bottom:
-                                MediaQuery.of(context).viewInsets.bottom,
+                                    MediaQuery.of(context).viewInsets.bottom,
                               ),
                           child: ListView(
                             padding: EdgeInsets.zero,
@@ -180,7 +167,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblAdsName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -206,13 +193,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           Expanded(
                                             child: CommonTextFormField(
                                               controller:
-                                              adsMainPriceController,
+                                                  adsMainPriceController,
                                               hintKey:
-                                              AppLocalizations.of(context)!
-                                                  .lblAdsPrice,
+                                                  AppLocalizations.of(context)!
+                                                      .lblAdsPrice,
                                               keyboardType: TextInputType.phone,
-                                              labelHintStyle:
-                                              AppConstants.mainColor,
+                                              labelHintColor:
+                                                  AppConstants.mainColor,
                                               inputFormatter: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
@@ -220,7 +207,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                      context)!
+                                                          context)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -243,13 +230,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           Expanded(
                                             child: CommonTextFormField(
                                               controller:
-                                              adsDiscountPriceController,
+                                                  adsDiscountPriceController,
                                               hintKey:
-                                              AppLocalizations.of(context)!
-                                                  .lblAdsPriceAfterDiscount,
+                                                  AppLocalizations.of(context)!
+                                                      .lblAdsPriceAfterDiscount,
                                               keyboardType: TextInputType.phone,
-                                              labelHintStyle:
-                                              AppConstants.mainColor,
+                                              labelHintColor:
+                                                  AppConstants.mainColor,
                                               inputFormatter: [
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
@@ -257,7 +244,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                      context)!
+                                                          context)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -319,10 +306,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           decoration: BoxDecoration(
                                             color: AppConstants.lightWhiteColor,
                                             borderRadius:
-                                            BorderRadius.circular(8),
+                                                BorderRadius.circular(8),
                                             border: Border.all(
                                                 color:
-                                                AppConstants.lightGrayColor,
+                                                    AppConstants.lightGrayColor,
                                                 width: 1),
                                           ),
                                           child: Padding(
@@ -330,27 +317,28 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                 vertical: 4.0, horizontal: 8),
                                             child: Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  _productCubit.imageXFile != null
+                                                  _productCubit.imageXFile !=
+                                                          null
                                                       ? commonFileImageWidget(
-                                                      imageString:
-                                                      _productCubit
-                                                          .imageXFile!
-                                                          .path,
-                                                      height: 40,
-                                                      width: 40,
-                                                      fit: BoxFit.fill)
+                                                          imageString:
+                                                              _productCubit
+                                                                  .imageXFile!
+                                                                  .path,
+                                                          height: 40,
+                                                          width: 40,
+                                                          fit: BoxFit.fill)
                                                       : commonCachedImageWidget(
-                                                      context,
-                                                      widget
-                                                          .argument
-                                                          .productModel!
-                                                          .image!,
-                                                      height: 40,
-                                                      width: 40,
-                                                      fit: BoxFit.fill),
+                                                          widget
+                                                              .argument
+                                                              .productModel!
+                                                              .image!,
+                                                          height: 40,
+                                                          width: 40,
+                                                          fit: BoxFit.fill,
+                                                        ),
                                                   const CommonAssetSvgImageWidget(
                                                       imageString: "upload.svg",
                                                       height: 24,
@@ -369,7 +357,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblStates,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -397,7 +385,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblBrand,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -425,12 +413,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
                                                 .lblNameIsEmpty;
-                                          }  else {
+                                          } else {
                                             return null;
                                           }
                                         },
@@ -450,7 +438,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopOwnerName,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -483,7 +471,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblAdsDetails,
                                         keyboardType: TextInputType.text,
-                                        labelHintStyle: AppConstants.mainColor,
+                                        labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
@@ -503,24 +491,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                       getSpaceHeight(AppConstants.smallPadding),
                                       Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
                                           CommonGlobalButton(
                                             height: 48,
                                             buttonBackgroundColor:
-                                            AppConstants.mainColor,
+                                                AppConstants.mainColor,
                                             isEnable:
-                                            _productCubit.isDataFound &&
-                                                _productCubit.imageXFile !=
-                                                    null,
+                                                _productCubit.isDataFound &&
+                                                    _productCubit.imageXFile !=
+                                                        null,
                                             isLoading: productState
-                                            is AddNewProductLoadingState,
+                                                is AddNewProductLoadingState,
                                             buttonTextSize: 18,
                                             buttonTextFontWeight:
-                                            FontWeight.w600,
+                                                FontWeight.w600,
                                             buttonText:
-                                            AppLocalizations.of(context)!
-                                                .lblSave,
+                                                AppLocalizations.of(context)!
+                                                    .lblSave,
                                             onPressedFunction: () {
                                               if (formKey.currentState!
                                                   .validate()) {
@@ -528,32 +516,39 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                     .requestFocus(FocusNode());
                                                 productCtx.read<ProductCubit>().editProduct(
                                                     productName:
-                                                    adsNameController.text,
+                                                        adsNameController.text,
                                                     productMainPrice:
-                                                    adsMainPriceController
-                                                        .text,
+                                                        adsMainPriceController
+                                                            .text,
                                                     productDiscountPrice:
-                                                    adsDiscountPriceController
-                                                        .text,
+                                                        adsDiscountPriceController
+                                                            .text,
                                                     productType:
-                                                    adsTypeController
-                                                        .text,
-                                                    productImage:  _productCubit.imageXFile==null ? null:[
-                                                      _productCubit.imageXFile!
-                                                    ],
+                                                        adsTypeController.text,
+                                                    productImage:
+                                                        _productCubit.imageXFile == null
+                                                            ? null
+                                                            : [
+                                                                _productCubit
+                                                                    .imageXFile!
+                                                              ],
                                                     productStates:
-                                                    adsStatesController
-                                                        .text,
+                                                        adsStatesController
+                                                            .text,
                                                     productBrand:
-                                                    adsBrandController.text,
+                                                        adsBrandController.text,
                                                     productDescription:
-                                                    adsDetailsController
-                                                        .text,
-                                                    storeId: widget.argument.productModel!.shopModel!.id
+                                                        adsDetailsController
+                                                            .text,
+                                                    storeId: widget
+                                                        .argument
+                                                        .productModel!
+                                                        .shopModel!
+                                                        .id
                                                         .toString(),
-                                                productId: widget.argument.productModel!.id.toString()
-
-                                                );
+                                                    productId: widget.argument
+                                                        .productModel!.id
+                                                        .toString());
                                               }
                                             },
                                           ),
@@ -567,12 +562,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         buttonTextFontWeight: FontWeight.w600,
                                         elevation: 0,
                                         buttonBackgroundColor:
-                                        AppConstants.lightWhiteColor,
+                                            AppConstants.lightWhiteColor,
                                         buttonTextColor:
-                                        AppConstants.lightRedColor,
+                                            AppConstants.lightRedColor,
                                         buttonText:
-                                        AppLocalizations.of(context)!
-                                            .lblCancel,
+                                            AppLocalizations.of(context)!
+                                                .lblCancel,
                                         onPressedFunction: () {
                                           Navigator.of(context).pop();
                                         },
