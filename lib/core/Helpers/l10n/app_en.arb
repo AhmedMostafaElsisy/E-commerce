@@ -182,5 +182,7 @@
   "lblCategoriesLabel": "Categories",
   "lblShowAll": "Show All",
   "lblFeaturedStores": "Featured Stores",
-  "lblFeaturedProducts": "Featured Products"
+  "lblFeaturedProducts": "Featured Products",
+  "lblPrice": "Price",
+  "lblDelete": "Delete"
 }
