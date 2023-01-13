@@ -59,4 +59,15 @@ class ProductRepository extends ProductRepositoryInterface {
         productId: productId,
         productImage: productImage);
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> deleteProductDetails({required int productId}) {
+    return remoteDataSourceInterface.deleteProductDetails(productId: productId);
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getProductDetails({required int productId}) {
+    return remoteDataSourceInterface.getProductDetails(productId: productId);
+
+  }
 }
