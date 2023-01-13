@@ -15,6 +15,8 @@ import '../../../features/Profile_feature/presentation/screens/edit_profile_scre
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
+import '../../../features/order_feature/presentation/my_order_screen.dart';
+import '../../../features/order_feature/presentation/store_order_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
@@ -96,6 +98,12 @@ class RouteGenerator {
         case RouteNames.showProductPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: ShowProductDetailsScreen(argument: args as RouteArgument));
+   case RouteNames.storeOrderPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: StoreOrderScreen(argument: args as RouteArgument));
+        case RouteNames.myOrderPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page:const MyOrderScreen());
 
       default:
         return MaterialPageRoute(

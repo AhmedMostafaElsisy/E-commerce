@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
+import '../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
@@ -140,7 +142,7 @@ class StoreInfoCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ///Store notification
+            ///Store order
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: getWidgetHeight(4)),
@@ -148,18 +150,25 @@ class StoreInfoCard extends StatelessWidget {
                     borderRadius:
                         BorderRadius.circular(AppConstants.smallRadius),
                     color: AppConstants.lightGreenColor),
-                child: Column(
-                  children: [
-                    const CommonAssetSvgImageWidget(
-                        imageString: "store_cart.svg", height: 16, width: 16),
-                    getSpaceHeight(AppConstants.smallPadding),
-                    CommonTitleText(
-                      textKey: AppLocalizations.of(context)!.lblStoreOrder,
-                      textWeight: FontWeight.w600,
-                      textFontSize: AppConstants.smallFontSize - 2,
-                      textColor: AppConstants.greenColor,
-                    )
-                  ],
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        RouteNames.storeOrderPageRoute,
+                        arguments: RouteArgument(shopModel: shopModel));
+                  },
+                  child: Column(
+                    children: [
+                      const CommonAssetSvgImageWidget(
+                          imageString: "store_cart.svg", height: 16, width: 16),
+                      getSpaceHeight(AppConstants.smallPadding),
+                      CommonTitleText(
+                        textKey: AppLocalizations.of(context)!.lblStoreOrder,
+                        textWeight: FontWeight.w600,
+                        textFontSize: AppConstants.smallFontSize - 2,
+                        textColor: AppConstants.greenColor,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -191,6 +200,8 @@ class StoreInfoCard extends StatelessWidget {
               ),
             ),
             getSpaceWidth(AppConstants.smallPadding),
+
+            ///store notification
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: getWidgetHeight(4)),

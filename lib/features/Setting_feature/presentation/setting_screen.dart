@@ -88,6 +88,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ///my order
                           SectionContentItem(
                             title: AppLocalizations.of(context)!.lblOrders,
+                            screenName: RouteNames.myOrderPageRoute,
                           ),
 
                           ///favorite
