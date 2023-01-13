@@ -52,7 +52,7 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
       backgroundColor: AppConstants.lightWhiteColor,
       body: MainAppPage(
         screenContent: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             CommonAppBar(
                 withBack: true,
@@ -179,6 +179,7 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                           return const SizedBox();
                                         } else {
                                           return ProductItemWidget(
+                                            showFavIcon: false,
                                             model: myStoreCtx
                                                 .read<MyStoreCubit>()
                                                 .productList[index],
