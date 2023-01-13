@@ -18,9 +18,12 @@ import 'common_global_button.dart';
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
   final bool? showActionButton;
+  final bool? showFavIcon;
 
   const ProductItemWidget(
-      {Key? key, required this.model, this.showActionButton = false})
+      {Key? key, required this.model, this.showActionButton = false,
+      this.showFavIcon=true
+      })
       : super(key: key);
 
   @override
@@ -44,6 +47,7 @@ class ProductItemWidget extends StatelessWidget {
           children: [
             commonCachedImageWidget(model.image!,
                 height: 168, width: 168, fit: BoxFit.fill),
+            if(showFavIcon!)
             Positioned(
                 top: getWidgetHeight(8),
                 right: getWidgetWidth(8),
@@ -228,7 +232,9 @@ class ProductItemWidget extends StatelessWidget {
                       buttonBackgroundColor: AppConstants.mainColor,
                       buttonText: AppLocalizations.of(context)!.lblShow,
                       onPressedFunction: () {
-                        ///Todo: add show product action
+                        Navigator.of(context).pushNamed(
+                            RouteNames.showProductPageRoute,
+                            arguments: RouteArgument(productModel: model));
                       },
                       height: 32,
                       radius: AppConstants.containerBorderRadius,
