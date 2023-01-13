@@ -32,6 +32,12 @@ abstract class ProductRemoteDataSourceInterface {
       required String productDescription,
       required String storeId,
       required String productId});
+
+  Future<Either<CustomError, BaseModel>> getProductDetails(
+      {required int productId});
+
+  Future<Either<CustomError, BaseModel>> deleteProductDetails(
+      {required int productId});
 }
 
 class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
@@ -126,6 +132,74 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       Map<String, dynamic> dataMap = {
         "code": 200,
         "massage": "success",
+      };
+      await Future.delayed(const Duration(seconds: 3));
+      return right(BaseModel.fromJson(dataMap));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> deleteProductDetails({required int productId}) async {
+    try {
+      String pathUrl = ApiKeys.productKey;
+
+      // Response response = await DioHelper.postData(url: pathUrl, data: staticData);
+
+      Map<String, dynamic> dataMap = {
+        "code": 200,
+        "massage": "success",
+
+      };
+      await Future.delayed(const Duration(seconds: 3));
+      return right(BaseModel.fromJson(dataMap));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getProductDetails({required int productId})  async {
+    try {
+      String pathUrl = ApiKeys.productKey;
+
+      // Response response = await DioHelper.postData(url: pathUrl, data: staticData);
+
+      Map<String, dynamic> dataMap = {
+        "code": 200,
+        "massage": "success",
+        "data":   {
+          "id": 2,
+          "product_name": "product one",
+          "product_image":
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+          "price": "1500",
+          "description": "electronic , photos",
+          "time": "15h",
+          "is_fav": true,
+          "shop": {
+            "id": 1,
+            "shop_name": "متجر الكتروني",
+            "shop_image":
+            "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+            "category": "electronic",
+            "location": "cairo",
+            "phone": "0100000",
+            "email": "abc@gmail.com",
+            "owner_name": "ahmed",
+            "city": "cairo",
+            "area": "cairo",
+            "sub_category": "electronic , hardware",
+            "rate": "2"
+          }
+        },
       };
       await Future.delayed(const Duration(seconds: 3));
       return right(BaseModel.fromJson(dataMap));
