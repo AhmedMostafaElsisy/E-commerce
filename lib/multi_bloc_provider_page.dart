@@ -17,6 +17,8 @@ import 'features/notification_feature/data/reposiroty/notification_repository.da
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
+import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
+import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
 
 class MultiBlocProvidersPage extends StatefulWidget {
@@ -53,6 +55,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
         BlocProvider<FavoriteCubit>(create: (_) => di.sl<FavoriteCubit>()),
         BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
+        BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
+        BlocProvider<ProductCubit>(create: (_) => di.sl<ProductCubit>()),
       ],
       child: widget.body,
     );
