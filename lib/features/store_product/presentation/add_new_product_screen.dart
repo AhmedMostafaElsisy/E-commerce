@@ -34,8 +34,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   late ProductCubit _productCubit;
   final formKey = GlobalKey<FormState>();
 
-  late TextEditingController storeNameController;
-  late TextEditingController ownerNameController;
+
   late TextEditingController adsDetailsController;
   late TextEditingController adsMainPriceController;
   late TextEditingController adsDiscountPriceController;
@@ -49,8 +48,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void initState() {
     super.initState();
     _productCubit = BlocProvider.of<ProductCubit>(context);
-    storeNameController = TextEditingController();
-    ownerNameController = TextEditingController();
+
     adsNameController = TextEditingController();
 
     adsDetailsController = TextEditingController();
@@ -61,8 +59,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     adsBrandController = TextEditingController();
     _productCubit.isDataFound = false;
     _productCubit.controllerList.clear();
-    _productCubit.controllerList.add(storeNameController);
-    _productCubit.controllerList.add(ownerNameController);
+
     _productCubit.controllerList.add(adsNameController);
     _productCubit.controllerList.add(adsDetailsController);
     _productCubit.controllerList.add(adsMainPriceController);
@@ -74,8 +71,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void dispose() {
-    storeNameController.dispose();
-    ownerNameController.dispose();
+
     adsNameController.dispose();
     adsDetailsController.dispose();
     adsMainPriceController.dispose();
@@ -399,62 +395,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         },
                                       ),
 
-                                      ///spacer
-                                      getSpaceHeight(AppConstants.smallPadding),
-
-                                      ///store name
-                                      CommonTextFormField(
-                                        controller: storeNameController,
-                                        hintKey: AppLocalizations.of(context)!
-                                            .lblShopName,
-                                        keyboardType: TextInputType.text,
-                                        labelHintColor: AppConstants.mainColor,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return AppLocalizations.of(context)!
-                                                .lblNameIsEmpty;
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) {
-                                          _productCubit.isDataFount(
-                                              _productCubit.controllerList);
-                                          return null;
-                                        },
-                                      ),
-
-                                      ///Spacer
-                                      getSpaceHeight(AppConstants.smallPadding),
-
-                                      ///owner name
-                                      CommonTextFormField(
-                                        controller: ownerNameController,
-                                        hintKey: AppLocalizations.of(context)!
-                                            .lblShopOwnerName,
-                                        keyboardType: TextInputType.text,
-                                        labelHintColor: AppConstants.mainColor,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return AppLocalizations.of(context)!
-                                                .lblNameIsEmpty;
-                                          } else if (nameValidator(value)) {
-                                            return AppLocalizations.of(context)!
-                                                .lblNameBadFormat;
-                                          } else if (value.length < 2) {
-                                            return AppLocalizations.of(context)!
-                                                .lblNameLength;
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) {
-                                          _productCubit.isDataFount(
-                                              _productCubit.controllerList);
-                                          return null;
-                                        },
-                                      ),
-
                                       ///Spacer
                                       getSpaceHeight(AppConstants.smallPadding),
 
@@ -540,25 +480,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           ),
                                         ],
                                       ),
-                                      getSpaceHeight(AppConstants.pagePadding),
-                                      CommonGlobalButton(
-                                        showBorder: true,
-                                        borderColor: AppConstants.lightRedColor,
-                                        buttonTextSize: 18,
-                                        buttonTextFontWeight: FontWeight.w600,
-                                        elevation: 0,
-                                        buttonBackgroundColor:
-                                            AppConstants.lightWhiteColor,
-                                        buttonTextColor:
-                                            AppConstants.lightRedColor,
-                                        buttonText:
-                                            AppLocalizations.of(context)!
-                                                .lblCancel,
-                                        onPressedFunction: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        height: 48,
-                                      ),
+                                 
                                     ],
                                   ))
                             ],

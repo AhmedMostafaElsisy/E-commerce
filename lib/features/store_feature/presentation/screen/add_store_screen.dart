@@ -535,25 +535,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                           ),
                                         ],
                                       ),
-                                      getSpaceHeight(AppConstants.pagePadding),
-                                      CommonGlobalButton(
-                                        showBorder: true,
-                                        borderColor: AppConstants.lightRedColor,
-                                        buttonTextSize: 18,
-                                        buttonTextFontWeight: FontWeight.w600,
-                                        elevation: 0,
-                                        buttonBackgroundColor:
-                                            AppConstants.lightWhiteColor,
-                                        buttonTextColor:
-                                            AppConstants.lightRedColor,
-                                        buttonText:
-                                            AppLocalizations.of(context)!
-                                                .lblCancel,
-                                        onPressedFunction: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        height: 48,
-                                      ),
+
                                     ],
                                   ))
                             ],
