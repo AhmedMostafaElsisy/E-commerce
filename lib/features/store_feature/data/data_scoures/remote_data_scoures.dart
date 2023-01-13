@@ -225,9 +225,16 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
-              "location": "cairo"
+              "location": "cairo",
+              "phone": "0100000",
+              "email": "abc@gmail.com",
+              "owner_name": "ahmed",
+              "city": "cairo",
+              "area": "cairo",
+              "sub_category": "electronic , hardware",
+              "rate": "2"
             }
           },
           {
@@ -243,9 +250,16 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
               "id": 1,
               "shop_name": "متجر الكتروني",
               "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
-              "location": "cairo"
+              "location": "cairo",
+              "phone": "0100000",
+              "email": "abc@gmail.com",
+              "owner_name": "ahmed",
+              "city": "cairo",
+              "area": "cairo",
+              "sub_category": "electronic , hardware",
+              "rate": "2"
             }
           },
           {
@@ -259,11 +273,19 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
             "is_fav": false,
             "shop": {
               "id": 1,
+
               "shop_name": "متجر الكتروني",
               "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
+              "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
               "category": "electronic",
-              "location": "cairo"
+              "location": "cairo",
+              "phone": "0100000",
+              "email": "abc@gmail.com",
+              "owner_name": "ahmed",
+              "city": "cairo",
+              "area": "cairo",
+              "sub_category": "electronic , hardware",
+              "rate": "2"
             }
           },
         ]
