@@ -22,6 +22,7 @@ import '../../../features/store_feature/presentation/screen/my_store_screen.dart
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
 import '../../../features/store_product/presentation/edit_my_product_screen.dart';
+import '../../../features/store_product/presentation/show_product_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -92,6 +93,9 @@ class RouteGenerator {
       case RouteNames.editProductPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: EditProductScreen(argument: args as RouteArgument));
+        case RouteNames.showProductPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: ShowProductDetailsScreen(argument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(
