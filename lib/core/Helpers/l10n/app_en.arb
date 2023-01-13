@@ -184,5 +184,7 @@
   "lblFeaturedStores": "Featured Stores",
   "lblFeaturedProducts": "Featured Products",
   "lblPrice": "Price",
-  "lblDelete": "Delete"
+  "lblDelete": "Delete",
+  "lblOrder": "Order",
+  "lblOrderSearch": "Search by order code"
 }
