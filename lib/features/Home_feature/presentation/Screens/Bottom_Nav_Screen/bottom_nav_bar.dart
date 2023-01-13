@@ -26,7 +26,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       HomeScreen(),
       HomeScreen(),
       CategoriesScreen(),
-      HomeScreen(),
       SettingScreen(),
     ];
 
@@ -72,19 +71,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       ),
                     ),
 
-                    ///Shop icon
+                    ///store icon
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(1);
                       },
                       child: BottomBarItem(
-                        image: "stores.svg",
+                        image: "store.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
                                 1,
                         title: AppLocalizations.of(context)!.lblStores,
                       ),
                     ),
+
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(2);
@@ -97,27 +97,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         title: AppLocalizations.of(context)!.lblCategories,
                       ),
                     ),
+
                     InkWell(
                       onTap: () {
                         bottomNavCtx.read<BottomNavCubit>().selectItem(3);
                       },
                       child: BottomBarItem(
-                        image: "orders.svg",
-                        isSelected:
-                            bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
-                                3,
-                        title: AppLocalizations.of(context)!.lblOrders,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        bottomNavCtx.read<BottomNavCubit>().selectItem(4);
-                      },
-                      child: BottomBarItem(
                         image: "setting.svg",
                         isSelected:
                             bottomNavCtx.read<BottomNavCubit>().selectedIndex ==
-                                4,
+                                3,
                         title: AppLocalizations.of(context)!.lblSetting,
                       ),
                     ),

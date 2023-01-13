@@ -7,6 +7,7 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../core/Helpers/shared.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 
@@ -24,7 +25,6 @@ class _StoreOrderScreenState extends State<StoreOrderScreen> {
 
   @override
   void initState() {
-   
     super.initState();
     searchController = TextEditingController();
   }
@@ -98,11 +98,16 @@ class _StoreOrderScreenState extends State<StoreOrderScreen> {
                     shrinkWrap: true,
                     padding: EdgeInsets.symmetric(
                         horizontal: getWidgetWidth(AppConstants.pagePadding),
-                    vertical: getWidgetHeight(AppConstants.smallPadding)
-                    ),
+                        vertical: getWidgetHeight(AppConstants.smallPadding)),
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return const OrderItem();
+                      return InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                                RouteNames.orderDetailsPageRoute,
+                                arguments: RouteArgument());
+                          },
+                          child: const OrderItem());
                     },
                     separatorBuilder: (context, index) {
                       return getSpaceHeight(AppConstants.pagePadding);

@@ -1,3 +1,5 @@
+import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/features/order_feature/presentation/widget/order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -100,7 +102,13 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                     ),
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return const OrderItem();
+                      return InkWell(
+                      onTap: (){
+                        Navigator.of(context).pushNamed(
+                            RouteNames.orderDetailsPageRoute,
+                        arguments: RouteArgument());
+                      }
+                      ,child: const OrderItem());
                     },
                     separatorBuilder: (context, index) {
                       return getSpaceHeight(AppConstants.pagePadding);

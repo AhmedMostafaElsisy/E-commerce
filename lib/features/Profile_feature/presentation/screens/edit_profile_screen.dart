@@ -619,25 +619,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   buttonTextColor: AppConstants.lightWhiteColor,
                                 ),
                               ),
-                              getSpaceHeight(AppConstants.pagePadding),
-                              Center(
-                                child: CommonGlobalButton(
-                                  showBorder: true,
-                                  borderColor: AppConstants.lightRedColor,
-                                  buttonTextSize: 18,
-                                  buttonTextFontWeight: FontWeight.w600,
-                                  elevation: 0,
-                                  buttonBackgroundColor:
-                                      AppConstants.lightWhiteColor,
-                                  buttonTextColor: AppConstants.lightRedColor,
-                                  buttonText:
-                                      AppLocalizations.of(context)!.lblCancel,
-                                  onPressedFunction: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  height: 48,
-                                ),
-                              ),
+
 
                               ///Spacer
                               getSpaceHeight(50),

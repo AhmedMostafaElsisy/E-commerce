@@ -185,6 +185,7 @@
   "lblPrice": "السعر",
   "lblDelete": "حذف",
   "lblOrder": "طلبات",
-  "lblOrderSearch": "البحث عن طريق كود الطلب"
+  "lblOrderSearch": "البحث عن طريق كود الطلب",
+  "lblQty": "الكمية:"
 
 }

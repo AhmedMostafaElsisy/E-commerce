@@ -186,5 +186,7 @@
   "lblPrice": "Price",
   "lblDelete": "Delete",
   "lblOrder": "Order",
-  "lblOrderSearch": "Search by order code"
+  "lblOrderSearch": "Search by order code",
+  "lblQty": "Quantity:"
+
 }
