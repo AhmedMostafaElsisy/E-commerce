@@ -17,3 +17,24 @@ class AddNewProductErrorState extends ProductState {
 class CheckInputValidationState extends ProductInitialState {}
 
 class UploadingUserImageLoadingState extends ProductInitialState {}
+
+class GetProductDetailsLoadingState extends ProductState {}
+
+class GetProductDetailsSuccessState extends ProductState {}
+
+class GetProductDetailsErrorState extends ProductState {
+  CustomError error;
+
+  GetProductDetailsErrorState(this.error);
+}
+
+
+class DeleteProductLoadingState extends ProductState {}
+
+class DeleteProductSuccessState extends ProductState {}
+
+class DeleteProductErrorState extends ProductState {
+  CustomError error;
+
+  DeleteProductErrorState(this.error);
+}
