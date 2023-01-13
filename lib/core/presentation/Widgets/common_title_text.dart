@@ -15,7 +15,7 @@ class CommonTitleText extends StatelessWidget {
 
   final int lines;
   final TextOverflow textOverflow;
-  final bool? isUnderLine;
+  final TextDecoration? textDecoration;
 
   const CommonTitleText(
       {Key? key,
@@ -27,7 +27,7 @@ class CommonTitleText extends StatelessWidget {
       this.textAlignment = TextAlign.center,
       this.lines = 1,
       this.textOverflow = TextOverflow.visible,
-      this.isUnderLine = false})
+      this.textDecoration })
       : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class CommonTitleText extends StatelessWidget {
             fontSize: textFontSize,
             fontWeight: textWeight,
             overflow: textOverflow,
-            decoration: isUnderLine! ? TextDecoration.underline:null,
+            decoration: textDecoration,
           ),
       textAlign: textAlignment,
       maxLines: lines,
