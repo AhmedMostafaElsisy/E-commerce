@@ -300,7 +300,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                               textFontSize:
                                                   AppConstants.normalFontSize,
                                               textWeight: FontWeight.w700,
-                                              isUnderLine: true,
+                                              textDecoration:  TextDecoration.underline,
                                             ),
                                           ),
                                   ],

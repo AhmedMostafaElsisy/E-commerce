@@ -18,9 +18,13 @@ import 'common_global_button.dart';
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
   final bool? showActionButton;
+  final bool? showFavIcon;
 
   const ProductItemWidget(
-      {Key? key, required this.model, this.showActionButton = false})
+      {Key? key,
+      required this.model,
+      this.showActionButton = false,
+      this.showFavIcon = true})
       : super(key: key);
 
   @override
@@ -31,7 +35,8 @@ class ProductItemWidget extends StatelessWidget {
       // height: getWidgetHeight(300),
       decoration: BoxDecoration(
           color: AppConstants.lightWhiteColor,
-          borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+          borderRadius: BorderRadius.circular(
+              AppConstants.containerOfListTitleBorderRadius),
           boxShadow: [
             BoxShadow(
                 color: AppConstants.lightBlackColor.withOpacity(0.16),
@@ -42,52 +47,57 @@ class ProductItemWidget extends StatelessWidget {
         ///product image
         Stack(
           children: [
-            commonCachedImageWidget(model.image!,
-                height: 168, width: 168, fit: BoxFit.fill),
-            Positioned(
-                top: getWidgetHeight(8),
-                right: getWidgetWidth(8),
-                child: BlocConsumer<FavoriteCubit, FavoriteStates>(
-                  listener: (favCtx, favState) {
-                    if (favState is FavoriteRemoveFavSuccessStates) {
-                      if (favState.productId == model.id) {
-                        model.isFav = false;
-                      }
-                    } else if (favState is FavoriteAddFavSuccessStates) {
-                      if (favState.productId == model.id) {
-                        model.isFav = true;
-                      }
-                    }
-                  },
-                  builder: (favCtx, favState) {
-                    if (favState is FavoriteFavLoadingStates &&
-                        favState.productId == model.id) {
-                      return SizedBox(
-                          height: getWidgetHeight(14),
-                          width: getWidgetWidth(14),
-                          child: const CircularProgressIndicator(
-                            color: AppConstants.mainColor,
-                          ));
-                    }
-                    return CommonProfileHeaderWidget(
-                      imagePath:
-                          model.isFav! ? "fav_enable.svg" : "fav_disable.svg",
-                      imageHeight: 14,
-                      imageWidth: 14,
-                      onClick: () {
-                        if (favState is! FavoriteFavLoadingStates) {
-                          model.isFav!
-                              ? favCtx
-                                  .read<FavoriteCubit>()
-                                  .removeItemFromFav(productId: model.id!)
-                              : favCtx
-                                  .read<FavoriteCubit>()
-                                  .addItemToFav(productId: model.id!);
+            commonCachedImageWidget(
+              model.image!,
+              height: 168,
+              width: 168,
+              fit: BoxFit.contain,
+            ),
+            if (showFavIcon!)
+              Positioned(
+                  top: getWidgetHeight(8),
+                  right: getWidgetWidth(8),
+                  child: BlocConsumer<FavoriteCubit, FavoriteStates>(
+                    listener: (favCtx, favState) {
+                      if (favState is FavoriteRemoveFavSuccessStates) {
+                        if (favState.productId == model.id) {
+                          model.isFav = false;
                         }
-                      },
-                    );
-                  },
-                )),
+                      } else if (favState is FavoriteAddFavSuccessStates) {
+                        if (favState.productId == model.id) {
+                          model.isFav = true;
+                        }
+                      }
+                    },
+                    builder: (favCtx, favState) {
+                      if (favState is FavoriteFavLoadingStates &&
+                          favState.productId == model.id) {
+                        return SizedBox(
+                            height: getWidgetHeight(14),
+                            width: getWidgetWidth(14),
+                            child: const CircularProgressIndicator(
+                              color: AppConstants.mainColor,
+                            ));
+                      }
+                      return CommonProfileHeaderWidget(
+                        imagePath:
+                            model.isFav! ? "fav_enable.svg" : "fav_disable.svg",
+                        imageHeight: 14,
+                        imageWidth: 14,
+                        onClick: () {
+                          if (favState is! FavoriteFavLoadingStates) {
+                            model.isFav!
+                                ? favCtx
+                                    .read<FavoriteCubit>()
+                                    .removeItemFromFav(productId: model.id!)
+                                : favCtx
+                                    .read<FavoriteCubit>()
+                                    .addItemToFav(productId: model.id!);
+                          }
+                        },
+                      );
+                    },
+                  )),
           ],
         ),
 
@@ -228,7 +238,9 @@ class ProductItemWidget extends StatelessWidget {
                       buttonBackgroundColor: AppConstants.mainColor,
                       buttonText: AppLocalizations.of(context)!.lblShow,
                       onPressedFunction: () {
-                        ///Todo: add show product action
+                        Navigator.of(context).pushNamed(
+                            RouteNames.showProductPageRoute,
+                            arguments: RouteArgument(productModel: model));
                       },
                       height: 32,
                       radius: AppConstants.containerBorderRadius,

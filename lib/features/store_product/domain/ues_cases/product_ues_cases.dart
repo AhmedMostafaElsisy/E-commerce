@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/core/Error_Handling/custom_error.dart';
 import 'package:captien_omda_customer/core/model/base_model.dart';
+import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -54,5 +55,17 @@ class ProductUesCase {
         storeId: storeId,
         productId: productId,
         productImage: productImage);
+  }
+
+  Future<Either<CustomError, ProductModel>> callGetProductDetails(
+      {required int productId}) {
+    return repositoryInterface.getProductDetails(productId: productId).then(
+        (value) => value.fold(
+            (l) => left(l), (r) => right(ProductModel.fromJson(r.data))));
+  }
+
+  Future<Either<CustomError, BaseModel>> callDeleteProduct(
+      {required int productId}) {
+    return repositoryInterface.deleteProductDetails(productId: productId);
   }
 }
