@@ -88,6 +88,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ///my order
                           SectionContentItem(
                             title: AppLocalizations.of(context)!.lblOrders,
+                            screenName: RouteNames.myOrderPageRoute,
                           ),
 
                           ///favorite
@@ -198,9 +199,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           }
                         },
                         child: Container(
-                          color: profileState is UserLoginLoadingState
-                              ? AppConstants.greyColor
-                              : AppConstants.lightRedColor,
+                          decoration: BoxDecoration(
+                            color:AppConstants.lightContentColor,
+                            borderRadius: BorderRadius.circular(AppConstants.smallRadius)
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 8),

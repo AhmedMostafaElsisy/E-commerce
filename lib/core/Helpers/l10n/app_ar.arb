@@ -183,6 +183,9 @@
   "lblFeaturedStores": "ابرز المتاجر",
   "lblFeaturedProducts": "ابرز الاعلانات",
   "lblPrice": "السعر",
-  "lblDelete": "حذف"
+  "lblDelete": "حذف",
+  "lblOrder": "طلبات",
+  "lblOrderSearch": "البحث عن طريق كود الطلب",
+  "lblQty": "الكمية:"
 
 }
