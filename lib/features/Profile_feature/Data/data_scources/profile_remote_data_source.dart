@@ -21,6 +21,7 @@ abstract class ProfileRemoteDataSourceInterface {
     required String userAddressDetails,
     required String userCity,
     required String userArea,
+    required String locationId,
     XFile? userImage,
   });
 }
@@ -51,6 +52,7 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSourceInterface {
     required String userAddressDetails,
     required String userCity,
     required String userArea,
+    required String locationId,
     XFile? userImage,
   }) async {
     try {
@@ -62,6 +64,7 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSourceInterface {
       staticData.fields.add(MapEntry('email', emailAddress));
       staticData.fields.add(MapEntry('phone', phoneNumber));
       staticData.fields.add(MapEntry('address', userAddressDetails));
+      staticData.fields.add(MapEntry('location_id', locationId));
       staticData.fields.add(MapEntry('city', userCity));
       staticData.fields.add(MapEntry('area', userArea));
       if (userImage != null && userImage.path != "") {

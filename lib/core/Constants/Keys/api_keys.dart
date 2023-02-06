@@ -1,26 +1,26 @@
 class ApiKeys {
   /// user type key
-  static const String userTypeKey = "/customer";
+  static const String userTypeKey = "";
 
   ///Auth Keys
-  static const String loginKey = "$userTypeKey/login";
-  static const String singUpKey = "$userTypeKey/register";
-  static const String logOutKey = "$userTypeKey/logout";
+  static const String loginKey = "$userTypeKey/login-api";
+  static const String singUpKey = "$userTypeKey/register-api";
+  static const String logOutKey = "$userTypeKey/logout-api";
 
   ///profile keys
-  static const String profileKey = "$userTypeKey/profile";
-  static const String updateProfileKey = "$userTypeKey/updateProfile";
-  static const String deleteProfileKey = "$userTypeKey/delete";
+  static const String profileKey = "$userTypeKey/profile-api";
+  static const String updateProfileKey = "$userTypeKey/update-profile-api";
+  static const String deleteProfileKey = "$userTypeKey/delete-api";
 
   ///Password keys
-  static const String changePasswordKey = "$userTypeKey/changePassword";
-  static const String forgetPasswordKey = "$userTypeKey/forgetPassword";
-  static const String resetPasswordKey = "$userTypeKey/resetPassword";
+  static const String changePasswordKey = "$userTypeKey/change-password-api";
+  static const String forgetPasswordKey = "$userTypeKey/forget-api";
+  static const String resetPasswordKey = "$userTypeKey/reset-password-api";
 
   ///Otp Keys
-  static const String checkAndVerifyKey = "$userTypeKey/register-verify";
+  static const String checkAndVerifyKey = "$userTypeKey/verify-otp-api";
   static const String checkOtpKey = "$userTypeKey/otp-check";
-  static const String reSendOtpKey = "$userTypeKey/resend-otp";
+  static const String reSendOtpKey = "$userTypeKey/resend-otp-api";
 
   ///notification keys
   static const String notificationKey = "/notifications";
@@ -45,7 +45,9 @@ class ApiKeys {
 
   ///location key
   static const String locationListKey = "/general/places";
-
+  ///location key
+  static const String cityListKey = "/cities";
+  static const String areaListKey = "/area";
   ///Setting
   static const String settingKey = "/general/settings";
 

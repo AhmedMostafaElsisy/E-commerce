@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
 import '../../Domain/entities/base_user_entity.dart';
+import 'location_model.dart';
+
 UserBaseEntity userBaseModelFromJson(String str) =>
     UserBaseModel.fromJson(json.decode(str));
 
@@ -13,7 +15,7 @@ class UserBaseModel extends UserBaseEntity {
     String? name,
     String? email,
     String? phone,
-    String? address,
+    LocationModel? address,
     int? active,
     int? verified,
     int? id,
@@ -24,12 +26,11 @@ class UserBaseModel extends UserBaseEntity {
             image: image,
             name: name,
             active: active,
-            address: address,
+            locationModel: address,
             email: email,
             phone: phone,
             verified: verified,
-  otp: otp
-  );
+            otp: otp);
 
   factory UserBaseModel.fromJson(Map<String, dynamic> json) {
     try {
@@ -37,13 +38,12 @@ class UserBaseModel extends UserBaseEntity {
         name: json["name"],
         email: json["email"],
         phone: json["phone"],
-        address: json["address"],
+        address: LocationModel.fromJson(json["location"]),
         active: json["active"],
         verified: json["verified"],
         id: json["id"],
         image: json["image"],
         otp: json["otp"],
-
       );
     } catch (e) {
       debugPrint("here is the error in parsing UserBaseModel ${e.toString()}");
@@ -53,13 +53,13 @@ class UserBaseModel extends UserBaseEntity {
 
   @override
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "email": email,
-    "phone": phone,
-    "address": address,
-    "active": active,
-    "verified": verified,
-    "id": id,
-    "image": image,
-  };
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "location": locationModel!.toJson(),
+        "active": active,
+        "verified": verified,
+        "id": id,
+        "image": image,
+      };
 }

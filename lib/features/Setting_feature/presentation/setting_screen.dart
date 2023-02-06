@@ -184,25 +184,33 @@ class _SettingScreenState extends State<SettingScreen> {
                     }, builder: (profileCtx, profileState) {
                       return InkWell(
                         onTap: () {
-                          if (profileState is! UserLoginLoadingState) {
-                            showAlertDialog(context, [
-                              CommonPopUpContent(
-                                title: AppLocalizations.of(context)!.lblLogOut,
-                                subTitle:
-                                    AppLocalizations.of(context)!.lblIsLogOut,
-                                onSubmitClick: () {
-                                  Navigator.of(context).pop();
-                                  profileCtx.read<LoginCubit>().logOut();
-                                },
-                              ),
-                            ]);
+                          if (SharedText.currentUser != null) {
+                            if (profileState is! UserLoginLoadingState) {
+                              showAlertDialog(context, [
+                                CommonPopUpContent(
+                                  title:
+                                      AppLocalizations.of(context)!.lblLogOut,
+                                  subTitle:
+                                      AppLocalizations.of(context)!.lblIsLogOut,
+                                  onSubmitClick: () {
+                                    Navigator.of(context).pop();
+                                    profileCtx.read<LoginCubit>().logOut();
+                                  },
+                                ),
+                              ]);
+                            }
+                          } else {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                RouteNames.loginHomePageRoute,
+                                (route) => false);
                           }
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color:AppConstants.lightContentColor,
-                            borderRadius: BorderRadius.circular(AppConstants.smallRadius)
-                          ),
+                              color: AppConstants.lightContentColor,
+                              borderRadius: BorderRadius.circular(
+                                  AppConstants.smallRadius)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 8),

@@ -2,10 +2,8 @@ import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/Enums/exception_enums.dart';
 import '../../../../core/Constants/app_constants.dart';
-import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
@@ -83,275 +81,260 @@ class _LoginHomePageState extends State<LoginHomePage> {
               FocusScope.of(context).requestFocus(FocusNode());
             },
             child: MainAppPage(
-              screenContent: SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getWidgetWidth(AppConstants.pagePadding)),
-                  child: Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ///spacer
-                          getSpaceHeight(60),
+              screenContent: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getWidgetWidth(AppConstants.pagePadding)),
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ///spacer
+                        getSpaceHeight(60),
 
-                          ///app logo
-                          commonAssetImageWidget(
-                            imageString: "side_logo.png",
-                            height: 48,
-                            width: 130,
-                          ),
+                        ///app logo
+                        commonAssetImageWidget(
+                          imageString: "side_logo.png",
+                          height: 48,
+                          width: 130,
+                        ),
 
-                          ///spacer
-                          getSpaceHeight(AppConstants.pagePaddingDouble),
-                          Expanded(
-                            child: ListView(
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              children: [
-                                Form(
-                                  key: formKey,
-                                  child: Column(
-                                    children: [
-                                      /// Email
-                                      CommonTextFormField(
-                                        controller: emailController,
-                                        hintKey: AppLocalizations.of(context)!
-                                            .lblEnterEmail,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        labelHintColor: AppConstants.mainColor,
-                                        withSuffixIcon: false,
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            if (!validateEmail(value)) {
-                                              return AppLocalizations.of(
-                                                      context)!
-                                                  .lblEmailBadFormat;
-                                            } else {
-                                              return null;
-                                            }
-                                          } else {
-                                            return null;
-                                          }
+                        ///spacer
+                        getSpaceHeight(AppConstants.pagePaddingDouble),
+                        Expanded(
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            children: [
+                              Form(
+                                key: formKey,
+                                child: Column(
+                                  children: [
+                                    /// Email
+                                    CommonTextFormField(
+                                      controller: emailController,
+                                      hintKey: AppLocalizations.of(context)!
+                                          .lblEnterEmail,
+                                      keyboardType:
+                                          TextInputType.emailAddress,
+                                      labelHintColor: AppConstants.mainColor,
+                                      withSuffixIcon: false,
+                                      onChanged: (value) {
+                                        setState(() {});
+                                        return null;
+                                      },
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
+
+                                    /// Password
+                                    CommonTextFormField(
+                                      controller: passwordController,
+                                      prefixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            hidePassword = !hidePassword;
+                                          });
                                         },
-                                        onChanged: (value) {
-                                          setState(() {});
-                                          return null;
-                                        },
-                                      ),
-
-                                      ///spacer
-                                      getSpaceHeight(AppConstants.smallPadding),
-
-                                      /// Password
-                                      CommonTextFormField(
-                                        controller: passwordController,
-                                        prefixIcon: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              hidePassword = !hidePassword;
-                                            });
-                                          },
-                                          child: SizedBox(
-                                            width: getWidgetWidth(30),
-                                            height: getWidgetHeight(30),
-                                            child: Center(
-                                              child: Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 10),
-                                                  child: CommonAssetSvgImageWidget(
-                                                      imageString:
-                                                          hidePassword
-                                                              ? "eye_open.svg"
-                                                              : "eye_close.svg",
-                                                      height: 30,
-                                                      width: 30,
-                                                      imageColor: AppConstants
-                                                          .mainColor,
-                                                      fit: BoxFit.contain)),
-                                            ),
+                                        child: SizedBox(
+                                          width: getWidgetWidth(30),
+                                          height: getWidgetHeight(30),
+                                          child: Center(
+                                            child: Padding(
+                                                padding: const EdgeInsets
+                                                        .symmetric(
+                                                    vertical: 10,
+                                                    horizontal: 10),
+                                                child: CommonAssetSvgImageWidget(
+                                                    imageString:
+                                                        hidePassword
+                                                            ? "eye_open.svg"
+                                                            : "eye_close.svg",
+                                                    height: 30,
+                                                    width: 30,
+                                                    imageColor: AppConstants
+                                                        .mainColor,
+                                                    fit: BoxFit.contain)),
                                           ),
                                         ),
-                                        keyboardType: TextInputType.text,
-                                        minLines: 1,
-                                        maxLines: 1,
-                                        isObscureText: hidePassword,
-                                        hintKey: AppLocalizations.of(context)!
-                                            .lblPassword,
-                                        labelHintColor: AppConstants.mainColor,
-                                        withSuffixIcon: false,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return AppLocalizations.of(context)!
-                                                .lblPasswordIsEmpty;
-                                          } else if (value.length < 8) {
-                                            return AppLocalizations.of(context)!
-                                                .lblPasswordMustBeMoreThan;
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (value) {
-                                          setState(() {});
+                                      ),
+                                      keyboardType: TextInputType.text,
+                                      minLines: 1,
+                                      maxLines: 1,
+                                      isObscureText: hidePassword,
+                                      hintKey: AppLocalizations.of(context)!
+                                          .lblPassword,
+                                      labelHintColor: AppConstants.mainColor,
+                                      withSuffixIcon: false,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordIsEmpty;
+                                        } else if (value.length < 8) {
+                                          return AppLocalizations.of(context)!
+                                              .lblPasswordMustBeMoreThan;
+                                        } else {
                                           return null;
-                                        },
-                                      ),
+                                        }
+                                      },
+                                      onChanged: (value) {
+                                        setState(() {});
+                                        return null;
+                                      },
+                                    ),
 
-                                      ///spacer
-                                      getSpaceHeight(AppConstants.smallPadding),
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
 
-                                      /// Forget Password Button
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.pushNamed(
-                                                  context,
-                                                  RouteNames
-                                                      .forgetPasswordPageRoute);
-                                            },
-                                            child: CommonTitleText(
-                                              textKey:
-                                                  AppLocalizations.of(context)!
-                                                      .lblIsForgetPassword,
-                                              textColor: AppConstants.mainColor,
-                                              textFontSize: 10,
-                                              textWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      ///spacer
-                                      getSpaceHeight(AppConstants.smallPadding),
-
-                                      ///login button
-                                      BlocConsumer<OtpCubit, OtpStates>(
-                                        listener: (otpCtx, otpState) {
-                                          if (otpState
-                                              is ResendOtpSuccessState) {
-                                            Navigator.pushReplacementNamed(
+                                    /// Forget Password Button
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.pushNamed(
                                                 context,
                                                 RouteNames
-                                                    .verificationCodePageRoute,
-                                                arguments: RouteArgument(
-                                                    emailAddress:
-                                                        emailController.text,
-                                                    otp: otpState.otp));
-                                          } else if (otpState
-                                              is OtpErrorState) {
-                                            // showSnackBar(
-                                            //   context: otpCtx,
-                                            //   title:
-                                            //       otpState.error!.errorMassage!,
-                                            // );
-                                          }
-                                        },
-                                        builder: (otpCtx, otpState) {
-                                          return CommonGlobalButton(
-                                            height: 48,
-                                            buttonBackgroundColor:
-                                                AppConstants.mainColor,
-                                            isEnable: emailController
-                                                    .text.isNotEmpty &&
-                                                passwordController
-                                                    .text.isNotEmpty,
-                                            isLoading: loginState
-                                                    is UserLoginLoadingState ||
-                                                otpState
-                                                    is ResendOtpLoadingState,
-                                            buttonTextSize:
-                                                AppConstants.normalFontSize,
-                                            buttonTextFontWeight:
-                                                FontWeight.w700,
-                                            buttonText:
+                                                    .forgetPasswordPageRoute);
+                                          },
+                                          child: CommonTitleText(
+                                            textKey:
                                                 AppLocalizations.of(context)!
-                                                    .lblLogin,
-                                            onPressedFunction: () {
-                                              if (formKey.currentState!
-                                                  .validate()) {
-                                                FocusScope.of(context)
-                                                    .requestFocus(FocusNode());
-                                                loginCtx
-                                                    .read<LoginCubit>()
-                                                    .login(
-                                                        email: emailController
-                                                            .text,
-                                                        password:
-                                                            passwordController
-                                                                .text,
-                                                        token: SharedText
-                                                            .deviceToken);
-                                              }
-                                            },
-                                          );
-                                        },
-                                      ),
+                                                    .lblIsForgetPassword,
+                                            textColor: AppConstants.mainColor,
+                                            textFontSize: 10,
+                                            textWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
 
-                                      ///spacer
-                                      getSpaceHeight(
-                                          AppConstants.pagePaddingDouble),
+                                    ///spacer
+                                    getSpaceHeight(AppConstants.smallPadding),
 
-                                      SocialMediaWidget(
-                                        title: AppLocalizations.of(context)!
-                                            .lblLoginWithSocialMedia,
-                                        onFacebookClicked: () {
-                                          ///Todo:add facebook integration
-                                        },
-                                        onGoogleClicked: () {
-                                          ///Todo:add google integration
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                    ///login button
+                                    BlocConsumer<OtpCubit, OtpStates>(
+                                      listener: (otpCtx, otpState) {
+                                        if (otpState
+                                            is ResendOtpSuccessState) {
+                                          Navigator.pushReplacementNamed(
+                                              context,
+                                              RouteNames
+                                                  .verificationCodePageRoute,
+                                              arguments: RouteArgument(
+                                                  emailAddress:
+                                                      emailController.text,
+                                                  otp: otpState.otp));
+                                        } else if (otpState
+                                            is OtpErrorState) {
+                                          // showSnackBar(
+                                          //   context: otpCtx,
+                                          //   title:
+                                          //       otpState.error!.errorMassage!,
+                                          // );
+                                        }
+                                      },
+                                      builder: (otpCtx, otpState) {
+                                        return CommonGlobalButton(
+                                          height: 48,
+                                          buttonBackgroundColor:
+                                              AppConstants.mainColor,
+                                          isEnable: emailController
+                                                  .text.isNotEmpty &&
+                                              passwordController
+                                                  .text.isNotEmpty,
+                                          isLoading: loginState
+                                                  is UserLoginLoadingState ||
+                                              otpState
+                                                  is ResendOtpLoadingState,
+                                          buttonTextSize:
+                                              AppConstants.normalFontSize,
+                                          buttonTextFontWeight:
+                                              FontWeight.w700,
+                                          buttonText:
+                                              AppLocalizations.of(context)!
+                                                  .lblLogin,
+                                          onPressedFunction: () {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              FocusScope.of(context)
+                                                  .requestFocus(FocusNode());
+                                              loginCtx
+                                                  .read<LoginCubit>()
+                                                  .login(
+                                                      email: emailController
+                                                          .text,
+                                                      password:
+                                                          passwordController
+                                                              .text,
+                                                      token: SharedText
+                                                          .deviceToken);
+                                            }
+                                          },
+                                        );
+                                      },
+                                    ),
+
+                                    ///spacer
+                                    getSpaceHeight(
+                                        AppConstants.pagePaddingDouble),
+
+                                    SocialMediaWidget(
+                                      title: AppLocalizations.of(context)!
+                                          .lblLoginWithSocialMedia,
+                                      onFacebookClicked: () {
+                                        ///Todo:add facebook integration
+                                      },
+                                      onGoogleClicked: () {
+                                        ///Todo:add google integration
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, RouteNames.singUpPageRoute);
+                          },
+                          child: SizedBox(
+                            height: getWidgetHeight(50),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CommonTitleText(
+                                  textKey: AppLocalizations.of(context)!
+                                      .lblDoNotHaveAccount,
+                                  textColor: AppConstants.lightBlackColor,
+                                  textFontSize: 14,
+                                  textWeight: FontWeight.w600,
+                                ),
+                                CommonTitleText(
+                                  textKey: AppLocalizations.of(context)!
+                                      .lblCreateAccount,
+                                  textColor: AppConstants.lightBlackColor,
+                                  textFontSize: 14,
+                                  textWeight: FontWeight.w700,
                                 ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RouteNames.singUpPageRoute);
-                            },
-                            child: SizedBox(
-                              height: getWidgetHeight(50),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CommonTitleText(
-                                    textKey: AppLocalizations.of(context)!
-                                        .lblDoNotHaveAccount,
-                                    textColor: AppConstants.lightBlackColor,
-                                    textFontSize: 14,
-                                    textWeight: FontWeight.w600,
-                                  ),
-                                  CommonTitleText(
-                                    textKey: AppLocalizations.of(context)!
-                                        .lblCreateAccount,
-                                    textColor: AppConstants.lightBlackColor,
-                                    textFontSize: 14,
-                                    textWeight: FontWeight.w700,
-                                  ),
-                                ],
-                              ),
-                            ),
                           ),
-                          getSpaceHeight(30),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                        getSpaceHeight(30),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Language_Cubit/language_cubit.dart';
+import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
@@ -57,6 +58,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
         BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
         BlocProvider<ProductCubit>(create: (_) => di.sl<ProductCubit>()),
+        BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
       ],
       child: widget.body,
     );

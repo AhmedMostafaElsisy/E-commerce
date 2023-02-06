@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -198,19 +197,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   controller: otpController,
                                   enablePinAutofill: true,
                                   onCompleted: (v) {
-                                    if (widget.routeArgument.sourcePage ==
-                                        "forget") {
-                                      log("call the check otp func");
-                                      otpCtx.read<OtpCubit>().checkOtp(
-                                          emailAddress: widget
-                                              .routeArgument.emailAddress!,
-                                          otp: otpController.text);
-                                    } else {
-                                      otpCtx.read<OtpCubit>().verifyAccount(
-                                          emailAddress: widget
-                                              .routeArgument.emailAddress!,
-                                          otp: otpController.text);
-                                    }
+                                    otpCtx.read<OtpCubit>().verifyAccount(
+                                        emailAddress: widget
+                                            .routeArgument.emailAddress!,
+                                        otp: otpController.text);
                                   },
                                   onChanged: (value) {
                                     setState(() {});
@@ -321,19 +311,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                   buttonText:
                                       AppLocalizations.of(otpCtx)!.lblCheck,
                                   onPressedFunction: () {
-                                    if (widget.routeArgument.sourcePage ==
-                                        "forget") {
-                                      log("call the check otp func");
-                                      otpCtx.read<OtpCubit>().checkOtp(
-                                          emailAddress: widget
-                                              .routeArgument.emailAddress!,
-                                          otp: otpController.text);
-                                    } else {
-                                      otpCtx.read<OtpCubit>().verifyAccount(
-                                          emailAddress: widget
-                                              .routeArgument.emailAddress!,
-                                          otp: otpController.text);
-                                    }
+                                    otpCtx.read<OtpCubit>().verifyAccount(
+                                        emailAddress: widget
+                                            .routeArgument.emailAddress!,
+                                        otp: otpController.text);
                                   },
                                   withIcon: false)
                             ],

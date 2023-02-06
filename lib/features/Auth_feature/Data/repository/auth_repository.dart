@@ -57,7 +57,7 @@ class AuthRepository extends AuthRepositoryInterface {
             }, (success) {
               ///save the user model in cache
               localDataSourceInterface.cacheUser(
-                  user: UserBaseEntity.fromJson(success.data["customer"]),
+                  user: UserBaseEntity.fromJson(success.data["user"]),
                   token: success.data["token"]);
               return right(success);
             }));

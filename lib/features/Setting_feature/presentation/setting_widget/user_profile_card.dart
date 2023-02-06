@@ -1,3 +1,4 @@
+
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
@@ -17,6 +18,7 @@ class UserProfileCard extends StatefulWidget {
 }
 
 class _UserProfileCardState extends State<UserProfileCard> {
+
   @override
   Widget build(BuildContext context) {
     return Container(

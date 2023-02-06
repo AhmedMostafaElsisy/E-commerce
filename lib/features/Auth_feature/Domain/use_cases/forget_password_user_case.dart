@@ -18,7 +18,7 @@ class PasswordUesCases {
         .then((value) => value.fold((failure) {
               return left(failure);
             }, (success) {
-              return right(success.otp!);
+              return right(success.data["otp"]!.toString());
             }));
   }
 

@@ -5,6 +5,11 @@ import 'package:captien_omda_customer/features/Categories_feature/domain/use_cas
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
+import 'core/location_feature/Data/data_scources/location_remote_data_scources.dart';
+import 'core/location_feature/Data/repository/location_repository.dart';
+import 'core/location_feature/domain/repository/location_interface.dart';
+import 'core/location_feature/domain/uesCaes/location_use_caes.dart';
+import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/setting_feature/Data/data_scources/local_data_scources.dart';
 import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
@@ -78,6 +83,7 @@ Future<void> init() async {
   sl.registerFactory(() => StoreCubit(sl()));
   sl.registerFactory(() => MyStoreCubit(sl()));
   sl.registerFactory(() => ProductCubit(sl()));
+  sl.registerFactory(() => PickLocationCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -86,6 +92,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => HomeUesCases(sl()));
   sl.registerLazySingleton(() => ProfileUesCases(sl()));
   sl.registerLazySingleton(() => RatingUesCases(sl()));
+  sl.registerLazySingleton(() => LocationUesCases(sl()));
   sl.registerLazySingleton(
       () => CategoryUseCase(categoryRepositoryInterface: sl()));
   sl.registerLazySingleton(() => FavoriteUesCase(sl()));
@@ -112,6 +119,8 @@ Future<void> init() async {
       () => StoreRepository(sl()));
   sl.registerLazySingleton<ProductRepositoryInterface>(
       () => ProductRepository(sl()));
+  sl.registerLazySingleton<LocationRepositoryInterface>(
+      () => LocationRepository(sl()));
   sl.registerLazySingleton<CategoryRepositoryInterface>(() =>
       CategoryRepositoryImplementation(
           categoryRemoteDataSourceInterface: sl()));
@@ -145,6 +154,8 @@ Future<void> init() async {
       () => ProductRemoteDataSourceImpl());
   sl.registerLazySingleton<CategoryRemoteDataSourceInterface>(
       () => CategoryRemoteDataSourceImplementation());
+  sl.registerLazySingleton<LocationRemoteDataSourceInterface>(
+      () => LocationRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

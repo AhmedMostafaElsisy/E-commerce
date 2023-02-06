@@ -86,7 +86,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
       FormData staticData = FormData();
       staticData.fields.clear();
       String loginUrl = ApiKeys.loginKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
       staticData.fields.add(MapEntry('password', password));
       staticData.fields.add(MapEntry('device_token', token));
 
