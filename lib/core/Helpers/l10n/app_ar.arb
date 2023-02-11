@@ -187,5 +187,9 @@
   "lblOrder": "طلبات",
   "lblOrderSearch": "البحث عن طريق كود الطلب",
   "lblQty": "الكمية:",
-  "lblSelectCityFirst": "اختر المحافظة اولا"
+  "lblSelectCityFirst": "اختر المحافظة اولا",
+  "lblSearchHere": "ابحث هنا . . .",
+  "lblNoResultFount": "لايوجد نتائج",
+  "lblAdjustYourSearch": "برجاء تعديل بحثك لتجد ما تبحث عنه",
+  "lblCreateStoreAndSelectPlan": "انشاء متجر و اختيار خطة الاسعار"
 }

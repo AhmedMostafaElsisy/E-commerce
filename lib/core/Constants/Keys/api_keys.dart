@@ -60,6 +60,7 @@ class ApiKeys {
   ///Store
   static const String storeKey = "/Store";
   static const String myStoreListKey = "/get-my-stores";
+  static const String addStoreKey = "/add-store";
 
   ///product
   static const String productKey = "/product";
