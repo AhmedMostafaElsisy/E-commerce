@@ -5,16 +5,17 @@ import 'package:captien_omda_customer/core/presentation/Widgets/common_error_wid
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/shop_item_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/general_store_cubit/store_cubit.dart';
-import '../logic/general_store_cubit/store_states.dart';
+import '../logic/my_stores_cubit/store_cubit.dart';
+import '../logic/my_stores_cubit/store_states.dart';
 
 class MyStoresListScreen extends StatefulWidget {
   const MyStoresListScreen({Key? key}) : super(key: key);
@@ -87,7 +88,8 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                     listener: (storeCtx, storeState) {
                       if (storeState is StoreFailedStates) {
                         checkUserAuth(
-                            context: storeCtx, errorType: storeState.error.type);
+                            context: storeCtx,
+                            errorType: storeState.error.type);
                       }
                     },
                     builder: (storeCtx, storeState) {
@@ -99,12 +101,16 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                           withButton: true,
                           onTap: () => myStoreCubit.getMyStoreListData(),
                         );
-                      } else if (storeCtx.read<StoreCubit>().myStoreList.isEmpty) {
+                      } else if (storeCtx
+                          .read<StoreCubit>()
+                          .myStoreList
+                          .isEmpty) {
                         return EmptyScreen(
                             imageString: "category.svg",
-                            titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
-                            description:
-                                AppLocalizations.of(context)!.lblNoStoreFoundDesc,
+                            titleKey:
+                                AppLocalizations.of(context)!.lblNoStoreFound,
+                            description: AppLocalizations.of(context)!
+                                .lblNoStoreFoundDesc,
                             imageHeight: 80,
                             imageWidth: 08);
                       } else {
@@ -126,20 +132,24 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                                     childAspectRatio: MediaQuery.of(context)
                                             .size
                                             .width /
-                                        (MediaQuery.of(context).size.height / 1.28),
+                                        (MediaQuery.of(context).size.height /
+                                            1.28),
                                   ),
                                   itemCount: storeCtx
                                           .read<StoreCubit>()
                                           .myStoreList
                                           .length +
                                       1,
-                                  itemBuilder: (BuildContext context, int index) {
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
                                     if (index >=
                                             storeCtx
                                                 .read<StoreCubit>()
                                                 .myStoreList
                                                 .length &&
-                                        storeCtx.read<StoreCubit>().hasMoreData) {
+                                        storeCtx
+                                            .read<StoreCubit>()
+                                            .hasMoreData) {
                                       return const CommonLoadingWidget();
                                     } else if (index >=
                                         storeCtx
