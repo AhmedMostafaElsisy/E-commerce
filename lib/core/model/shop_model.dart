@@ -42,7 +42,7 @@ class ShopModel {
       ownerName: json["owner_name"] ?? "--",
       city: json["city"] ?? "--",
       area: json["area"] ?? "--",
-      rate: double.parse(json["rate"].toString()) ?? 0.0,
+      rate: double.parse((json["rate"] ?? "0.0").toString()),
     );
   }
 
