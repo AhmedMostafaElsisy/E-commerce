@@ -111,7 +111,7 @@ class _GeneralStoresListScreenState extends State<GeneralStoresListScreen> {
                           crossAxisSpacing: getWidgetWidth(8),
                           mainAxisSpacing: getWidgetHeight(8),
                           childAspectRatio: MediaQuery.of(context).size.width /
-                              (MediaQuery.of(context).size.height / 1.8),
+                              (MediaQuery.of(context).size.height / 1.78),
                         ),
                         itemCount: storeCtx
                                 .read<GeneralStoresCubit>()

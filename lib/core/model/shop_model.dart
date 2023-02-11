@@ -13,8 +13,7 @@ class ShopModel {
   String? ownerName;
   String? city;
   String? area;
-  String? rate;
-
+  double? rate;
 
   ShopModel(
       {this.id,
@@ -27,7 +26,8 @@ class ShopModel {
       this.email,
       this.ownerName,
       this.city,
-      this.area,this.rate});
+      this.area,
+      this.rate});
 
   factory ShopModel.fromJson(Map<String, dynamic> json) {
     return ShopModel(
@@ -42,7 +42,7 @@ class ShopModel {
       ownerName: json["owner_name"] ?? "--",
       city: json["city"] ?? "--",
       area: json["area"] ?? "--",
-      rate: json["rate"]??"0.0"
+      rate: double.parse(json["rate"].toString()) ?? 0.0,
     );
   }
 
