@@ -6,6 +6,9 @@ import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/location_feature/presentation/area_pop_up.dart';
+import '../../../../core/location_feature/presentation/city_pop_up.dart';
+import '../../../../core/location_feature/presentation/logic/pick_location_cubit.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -39,18 +42,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController phoneNumberController;
   late ProfileCubit _profileCubit;
   final formKey = GlobalKey<FormState>();
+  late PickLocationCubit _locationCubit;
 
   @override
   void initState() {
     super.initState();
+    _locationCubit = BlocProvider.of<PickLocationCubit>(context);
+    _locationCubit.getCityData(limit: 50);
+    _locationCubit.getAreaData(cityID:SharedText.currentUser!.locationModel!.cityModel!.id! ,);
+    _locationCubit.clearAllData();
     userFirstNameController = TextEditingController(
         text: SharedText.currentUser!.name!.split(" ").first);
     userLastNameController = TextEditingController(
         text: SharedText.currentUser!.name!.split(" ").last);
-    emailAddressController =
-        TextEditingController(text: SharedText.currentUser!.email!);
-    phoneNumberController =
-        TextEditingController(text: SharedText.currentUser!.phone!);
+    emailAddressController = TextEditingController(text: SharedText.currentUser!.email!);
+    phoneNumberController = TextEditingController(text: SharedText.currentUser!.phone!);
     userAddressController = TextEditingController(
         text: SharedText.currentUser!.locationModel!.streetName!);
     userCityController = TextEditingController(
@@ -58,6 +64,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     userAreaController = TextEditingController(
         text: SharedText.currentUser!.locationModel!.areaModel!.name);
     _profileCubit = BlocProvider.of<ProfileCubit>(context);
+    _profileCubit.setNewCitySelected(SharedText.currentUser!.locationModel!.cityModel!);
+    _profileCubit.setSelectedArea(SharedText.currentUser!.locationModel!.areaModel!);
     _profileCubit.deleteImage = false;
     _profileCubit.imageXFile = null;
     _profileCubit.isDataFound = false;
@@ -515,17 +523,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ///City
                                           Expanded(
                                             child: CommonTextFormField(
+                                              onTap: () {
+                                                showCityPopUp(
+                                                    context: profileCtx,
+                                                    preSelectedCity: _profileCubit.selectedCity??SharedText.currentUser!.locationModel!.cityModel! ,
+                                                    title: AppLocalizations.of(
+                                                        profileCtx)!
+                                                        .lblCity,
+                                                    onApply: (model) {
+                                                      userCityController.text = model.name!;
+                                                      _profileCubit.setNewCitySelected(model);
+                                                      _locationCubit.getAreaData(cityID: model.id!,limit: 50);
+                                                      userAreaController.clear();
+                                                      _profileCubit.isDataFount(
+                                                          _profileCubit
+                                                              .controllerList);
+                                                    });
+                                              },
                                               controller: userCityController,
-                                              hintKey: AppLocalizations.of(
-                                                      profileCtx)!
+                                              hintKey:
+                                              AppLocalizations.of(profileCtx)!
                                                   .lblCity,
+                                              isReadOnly: true,
                                               keyboardType: TextInputType.text,
                                               labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                          profileCtx)!
+                                                      profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -548,16 +574,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           Expanded(
                                             child: CommonTextFormField(
                                               controller: userAreaController,
-                                              hintKey: AppLocalizations.of(
-                                                      profileCtx)!
+                                              onTap: () {
+                                                showAreaPopUp(
+                                                    context: profileCtx,
+                                                    preSelectedCity:_profileCubit.selectedArea,
+
+                                                    title: AppLocalizations.of(
+                                                        profileCtx)!
+                                                        .lblArea,
+                                                    onApply: (model) {
+                                                      userAreaController.text =
+                                                      model.name!;
+                                                      _profileCubit
+                                                          .setSelectedArea(model);
+                                                      _profileCubit.isDataFount(
+                                                          _profileCubit
+                                                              .controllerList);
+
+                                                    });
+                                              },
+                                              hintKey:
+                                              AppLocalizations.of(profileCtx)!
                                                   .lblArea,
                                               keyboardType: TextInputType.text,
+                                              isReadOnly: true,
                                               labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                          profileCtx)!
+                                                      profileCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -573,6 +619,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ),
                                         ],
                                       ),
+
                                     ],
                                   ),
                                 ),
@@ -595,8 +642,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   userFirstNameController.text,
                                               userLastName:
                                                   userLastNameController.text,
-                                              userCity: userCityController.text,
-                                              userArea: userAreaController.text,
+                                              userCity: _profileCubit.selectedCity!.id.toString(),
+                                              userArea:_profileCubit.selectedArea!.id.toString(),
                                               userAddressDetails:
                                                   userAddressController.text,
                                               locationId: SharedText.currentUser!.locationModel!.id!.toString(),
