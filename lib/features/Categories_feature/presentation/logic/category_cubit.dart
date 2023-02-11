@@ -19,11 +19,11 @@ class CategoriesCubit extends Cubit<CategoryState> {
                     GetCategoryFailedState(
                       error: l.error,
                     ),
-                  ), (r) {
-            categories.addAll(r);
+                  ), (data) {
+            categories=data;
             emit(
               GetCategorySuccessState(
-                categories: r,
+                categories: data,
               ),
             );
           }),

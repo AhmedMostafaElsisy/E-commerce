@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/Constants/Keys/api_keys.dart';
+import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
 import '../../../../core/model/base_model.dart';
@@ -97,52 +98,17 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getStoreData(
       {int page = 1, int? limit}) async {
     try {
-      Map<String, dynamic> data = {
-        "code": 200,
-        "massage": "success",
-        "data": [
-          {
-            "id": 1,
-            "shop_name": "متجر الكتروني",
-            "shop_image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-            "category": "electronic",
-            "location": "cairo",
-            "phone": "0100000",
-            "email": "abc@gmail.com",
-            "owner_name": "ahmed",
-            "city": "cairo",
-            "area": "cairo",
-            "sub_category": "electronic , hardware",
-            "rate": "2"
-          },
-          {
-            "id": 1,
-            "shop_name": "متجر الكتروني",
-            "shop_image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-            "category": "electronic",
-            "location": "cairo",
-            "phone": "0100000",
-            "email": "abc@gmail.com",
-            "owner_name": "ahmed",
-            "city": "cairo",
-            "area": "cairo",
-            "sub_category": "electronic , hardware",
-            "rate": "2"
-          },
-        ]
-      };
+
       String pathUrl = "";
       if (limit == null) {
-        pathUrl = "${ApiKeys.favoriteKey}?page=$page";
+        pathUrl = "${ApiKeys.myStoreListKey}?page=$page";
       } else {
-        pathUrl = "${ApiKeys.favoriteKey}?limit=$limit&page=$page";
+        pathUrl = "${ApiKeys.myStoreListKey}?limit=$limit&page=$page";
       }
       await Future.delayed(const Duration(seconds: 3));
 
-      // Response response = await DioHelper.getDate(url: pathUrl);
-      return right(BaseModel.fromJson(data));
+      Response response = await DioHelper.getDate(url: pathUrl);
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
         type: ex.error.type,

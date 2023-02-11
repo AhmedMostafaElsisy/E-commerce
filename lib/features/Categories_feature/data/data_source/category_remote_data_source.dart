@@ -1,6 +1,10 @@
 import 'package:captien_omda_customer/core/Error_Handling/custom_exception.dart';
 import 'package:captien_omda_customer/core/model/base_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+
+import '../../../../core/Constants/Keys/api_keys.dart';
+import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 
 abstract class CategoryRemoteDataSourceInterface {
   Future<Either<CustomException, BaseModel>> getCategoriesData();
@@ -11,55 +15,12 @@ class CategoryRemoteDataSourceImplementation
   @override
   Future<Either<CustomException, BaseModel>> getCategoriesData() async {
     try {
-      // String pathUrl = "${ApiKeys.favoriteKey}?id?=$productId";
-      // FormData data = FormData();
+      String pathUrl = ApiKeys.categoryKey;
 
-      // Response response = await DioHelper.postData(url: pathUrl, data: data);
-      Map<String, dynamic> json = {
-        "code": 200,
-        "massage": "success",
-        "data": [
-          {
-            "id": 1,
-            "name": "عقارات",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-          {
-            "id": 2,
-            "name": "سيارات",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-          {
-            "id": 3,
-            "name": "موبايلات",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-          {
-            "id": 4,
-            "name": "كمبيوتر",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-          {
-            "id": 5,
-            "name": "اجهزة منزلية",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-          {
-            "id": 6,
-            "name": "أثاث",
-            "image":
-                "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-          },
-        ]
-      };
-      await Future.delayed(const Duration(seconds: 3));
+      Response response = await DioHelper.getDate(url: pathUrl, );
 
-      return right(BaseModel.fromJson(json));
+
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(ex);
     }

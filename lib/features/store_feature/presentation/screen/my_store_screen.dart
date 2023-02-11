@@ -87,7 +87,8 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                     listener: (storeCtx, storeState) {
                       if (storeState is StoreFailedStates) {
                         checkUserAuth(
-                            context: storeCtx, errorType: storeState.error.type);
+                            context: storeCtx,
+                            errorType: storeState.error.type);
                       }
                     },
                     builder: (storeCtx, storeState) {
@@ -99,13 +100,24 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                           withButton: true,
                           onTap: () => myStoreCubit.getMyStoreListData(),
                         );
-                      } else if (storeCtx.read<StoreCubit>().myStoreList.isEmpty) {
+                      } else if (storeCtx
+                          .read<StoreCubit>()
+                          .myStoreList
+                          .isEmpty) {
                         return EmptyScreen(
                             imageString: "category.svg",
-                            titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
-                            description:
-                                AppLocalizations.of(context)!.lblNoStoreFoundDesc,
+                            titleKey:
+                                AppLocalizations.of(context)!.lblNoStoreFound,
+                            description: AppLocalizations.of(context)!
+                                .lblNoStoreFoundDesc,
                             imageHeight: 80,
+                            withButton: true,
+                            buttonText:
+                                AppLocalizations.of(context)!.lblAddStore,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteNames.addStoresPageRoute);
+                            },
                             imageWidth: 08);
                       } else {
                         return SizedBox(
@@ -126,20 +138,24 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                                     childAspectRatio: MediaQuery.of(context)
                                             .size
                                             .width /
-                                        (MediaQuery.of(context).size.height / 1.28),
+                                        (MediaQuery.of(context).size.height /
+                                            1.28),
                                   ),
                                   itemCount: storeCtx
                                           .read<StoreCubit>()
                                           .myStoreList
                                           .length +
                                       1,
-                                  itemBuilder: (BuildContext context, int index) {
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
                                     if (index >=
                                             storeCtx
                                                 .read<StoreCubit>()
                                                 .myStoreList
                                                 .length &&
-                                        storeCtx.read<StoreCubit>().hasMoreData) {
+                                        storeCtx
+                                            .read<StoreCubit>()
+                                            .hasMoreData) {
                                       return const CommonLoadingWidget();
                                     } else if (index >=
                                         storeCtx

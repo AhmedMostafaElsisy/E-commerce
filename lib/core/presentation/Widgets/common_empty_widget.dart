@@ -76,15 +76,16 @@ class EmptyScreen extends StatelessWidget {
             getSpaceHeight(8),
             CommonGlobalButton(
                 width: 140,
-                height: 40,
-                buttonBackgroundColor: AppConstants.verificationCodeColor,
+                height: 48,
+                buttonBackgroundColor: AppConstants.mainColor,
+                buttonTextSize: AppConstants.normalFontSize,
+                buttonTextFontWeight: FontWeight.w700,
                 onPressedFunction: onTap ?? () {},
                 buttonText:
                     buttonText ?? AppLocalizations.of(context)!.lblRetry,
                 withIcon: false,
-                buttonTextFontWeight: FontWeight.w400,
                 elevation: 0,
-                buttonTextColor: AppConstants.mainColor)
+                buttonTextColor: AppConstants.lightWhiteColor)
           ]
         ],
       ),
