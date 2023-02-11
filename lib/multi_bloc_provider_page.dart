@@ -6,6 +6,7 @@ import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Language_Cubit/language_cubit.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
@@ -59,6 +60,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
         BlocProvider<ProductCubit>(create: (_) => di.sl<ProductCubit>()),
         BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<TagsCubit>(create: (_) => di.sl<TagsCubit>()),
       ],
       child: widget.body,
     );

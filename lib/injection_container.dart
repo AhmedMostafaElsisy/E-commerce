@@ -16,6 +16,11 @@ import 'core/setting_feature/Data/repository/setting_repository.dart';
 import 'core/setting_feature/Domain/repository/setting_interface.dart';
 import 'core/setting_feature/Domain/ues_cases/setting_ues_cases.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/tags_feature/Data/data_scources/tags_remote_data_scources.dart';
+import 'core/tags_feature/Data/repository/tags_repository.dart';
+import 'core/tags_feature/domain/repository/tags_interface.dart';
+import 'core/tags_feature/domain/uesCaes/tags_use_caes.dart';
+import 'core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/otp_remote_data_scources.dart';
@@ -84,6 +89,7 @@ Future<void> init() async {
   sl.registerFactory(() => MyStoreCubit(sl()));
   sl.registerFactory(() => ProductCubit(sl()));
   sl.registerFactory(() => PickLocationCubit(sl()));
+  sl.registerFactory(() => TagsCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -99,6 +105,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => StoreUesCase(sl()));
   sl.registerLazySingleton(() => ProductUesCase(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
+  sl.registerLazySingleton(() => TagsUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -124,6 +131,9 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoryRepositoryInterface>(() =>
       CategoryRepositoryImplementation(
           categoryRemoteDataSourceInterface: sl()));
+  sl.registerLazySingleton<TagsRepositoryInterface>(() =>
+      TagsRepository(
+       sl()));
 
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
@@ -156,6 +166,8 @@ Future<void> init() async {
       () => CategoryRemoteDataSourceImplementation());
   sl.registerLazySingleton<LocationRemoteDataSourceInterface>(
       () => LocationRemoteDataSourceImpl());
+  sl.registerLazySingleton<TagsRemoteDataSourceInterface>(
+      () => TagsRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
