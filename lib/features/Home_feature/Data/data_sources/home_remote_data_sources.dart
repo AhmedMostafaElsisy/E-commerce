@@ -51,7 +51,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSourceInterface {
               "city": "cairo",
               "area": "cairo",
               "sub_category": "electronic , hardware",
-              "rate": "2"
+              "rate": 2
             },
             {
               "id": 1,
@@ -66,7 +66,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSourceInterface {
               "city": "cairo",
               "area": "cairo",
               "sub_category": "electronic , hardware",
-              "rate": "2"
+              "rate": 2
             },
           ],
           "products": [

@@ -44,6 +44,7 @@ class _GeneralStoresListScreenState extends State<GeneralStoresListScreen> {
   Widget build(BuildContext context) {
     return MainAppPage(
       screenContent: Scaffold(
+        backgroundColor: AppConstants.transparent,
         appBar: CommonAppBar(
           withBack: false,
           appBarBackGroundColor: AppConstants.transparent,
