@@ -279,6 +279,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: ListView.separated(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
+                                        padding: EdgeInsets.zero,
+                                        physics: const BouncingScrollPhysics(),
                                         itemBuilder: (itemCtx, itemPos) {
                                           return CategoryGridItemWidget(
                                             categoryModel: categoriesCubit

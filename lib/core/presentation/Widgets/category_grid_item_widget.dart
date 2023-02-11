@@ -15,17 +15,14 @@ class CategoryGridItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: getWidgetWidth(52),
-          height: getWidgetHeight(52),
-          decoration: const BoxDecoration(shape: BoxShape.circle),
-          child: ClipOval(
-            child: commonCachedImageWidget(
-              categoryModel.image,
-              height: 52,
-              width: 52,
-            ),
-          ),
+        commonCachedImageWidget(
+          categoryModel.image,
+          height: 52,
+          width: 52,
+          fit: BoxFit.contain,
+          radius: 1000,
+          isCircular: true,
+
         ),
         getSpaceHeight(12),
         CommonTitleText(
