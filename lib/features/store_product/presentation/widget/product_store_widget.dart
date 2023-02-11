@@ -100,7 +100,7 @@ class ProductStoreInformation extends StatelessWidget {
                 ),
                 getSpaceWidth(4),
                 CommonTitleText(
-                  textKey: "${model.shopModel!.location}   ,",
+                  textKey: "${model.shopModel!.address}   ,",
                   textFontSize: AppConstants.xxSmallFontSize + 2,
                   textColor: AppConstants.mainColor,
                   textWeight: FontWeight.w600,

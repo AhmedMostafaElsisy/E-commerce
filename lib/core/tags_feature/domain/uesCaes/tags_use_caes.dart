@@ -13,7 +13,7 @@ class TagsUesCases {
     return repositoryInterface
         .getTagsData(page: page, limit: limit,)
         .then((value) => value.fold(
-            (l) => Left(l), (r) => right(TagsListFromJson(r.data))));
+            (l) => Left(l), (r) => right(tagsListFromJson(r.data))));
   }
 
 

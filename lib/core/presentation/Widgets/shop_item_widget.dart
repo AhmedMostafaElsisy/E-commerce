@@ -66,7 +66,7 @@ class ShopItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.category ?? "asd",
+                    textKey: model.category!.name,
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
@@ -87,7 +87,7 @@ class ShopItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.location ?? "asda",
+                    textKey: model.city!.name! ,
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,

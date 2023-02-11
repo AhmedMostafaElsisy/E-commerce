@@ -209,7 +209,7 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.shopModel!.location!,
+                    textKey: model.shopModel!.address!,
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,

@@ -12,6 +12,7 @@ import 'common_empty_widget.dart';
 import 'common_global_button.dart';
 import 'common_text_form_field_widget.dart';
 import 'common_title_text.dart';
+
 /// model list pop up with search
 advancedSearchPopUP({
   required BuildContext context,
@@ -25,11 +26,10 @@ advancedSearchPopUP({
   AllFilterCubit.get(context).setList(listOfItem);
   if (isMultiSelect!) {
     AllFilterCubit.get(context).setMultiModelData(multiSelectData!);
-  }else{
-    if(multiSelectData!=null) {
+  } else {
+    if (multiSelectData != null) {
       AllFilterCubit.get(context).setModelSingleSelect(multiSelectData.first);
     }
-
   }
   return await showDialog(
     barrierDismissible: true,
@@ -47,7 +47,6 @@ advancedSearchPopUP({
                 child: Container(
                   padding: const EdgeInsets.all(AppConstants.pagePadding),
                   color: AppConstants.lightWhiteColor,
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -86,7 +85,8 @@ advancedSearchPopUP({
                               /// Search filed
 
                               CommonTextFormField(
-                                  hintKey: AppLocalizations.of(context)!.lblArea,
+                                  hintKey:
+                                      AppLocalizations.of(context)!.lblArea,
                                   onChanged: (val) {
                                     filterCtx
                                         .read<AllFilterCubit>()
@@ -127,55 +127,51 @@ advancedSearchPopUP({
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: const BouncingScrollPhysics(),
-                                itemCount:  filterCtx
-                  .read<AllFilterCubit>()
-                  .listOfModelsTemp
-                  .length,
+                                itemCount: filterCtx
+                                    .read<AllFilterCubit>()
+                                    .listOfModelsTemp
+                                    .length,
                                 gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 4.0,
                                   childAspectRatio: 4.0,
                                   mainAxisSpacing: 4.0,
                                 ),
-                                itemBuilder:
-                                    (BuildContext context, int index) {
+                                itemBuilder: (BuildContext context, int index) {
                                   return InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       if (isMultiSelect) {
                                         filterCtx
                                             .read<AllFilterCubit>()
                                             .setModelMultiSelect(filterCtx
-                                            .read<AllFilterCubit>()
-                                            .listOfModelsTemp[index]);
+                                                .read<AllFilterCubit>()
+                                                .listOfModelsTemp[index]);
                                       } else {
                                         filterCtx
                                             .read<AllFilterCubit>()
                                             .setModelSingleSelect(filterCtx
-                                            .read<AllFilterCubit>()
-                                            .listOfModelsTemp[index]);
+                                                .read<AllFilterCubit>()
+                                                .listOfModelsTemp[index]);
                                       }
                                     },
                                     child: PopUpItemWidget(
-                                      isSelected:filterCtx
-                                        .read<AllFilterCubit>()
+                                      isSelected: filterCtx
+                                          .read<AllFilterCubit>()
                                           .isModelSelected(
-                                      filterCtx
-                                          .read<
-                                      AllFilterCubit>()
-                                          .listOfModelsTemp[index],
-                                      isMultiSelect),
-                                      name:filterCtx
+                                              filterCtx
+                                                  .read<AllFilterCubit>()
+                                                  .listOfModelsTemp[index],
+                                              isMultiSelect),
+                                      name: filterCtx
                                           .read<AllFilterCubit>()
                                           .listOfModelsTemp[index]
                                           .name
-                                          .toString() ,
+                                          .toString(),
                                     ),
                                   );
-
                                 },
                               ),
-
                             ],
                           ],
                         ),
@@ -184,9 +180,13 @@ advancedSearchPopUP({
                       CommonGlobalButton(
                         height: 48,
                         buttonBackgroundColor: AppConstants.mainColor,
-                        isEnable: isMultiSelect ? filterCtx
-                          .read<AllFilterCubit>().listOfSelectedModelItem.isNotEmpty:filterCtx
-                            .read<AllFilterCubit>().modelItem != null,
+                        isEnable: isMultiSelect
+                            ? filterCtx
+                                .read<AllFilterCubit>()
+                                .listOfSelectedModelItem
+                                .isNotEmpty
+                            : filterCtx.read<AllFilterCubit>().modelItem !=
+                                null,
                         isLoading: false,
                         radius: AppConstants.containerOfListTitleBorderRadius,
                         buttonTextSize: 18,
@@ -198,8 +198,7 @@ advancedSearchPopUP({
                                 .read<AllFilterCubit>()
                                 .listOfSelectedModelItem);
                           } else {
-                            onApply(
-                                filterCtx.read<AllFilterCubit>().modelItem);
+                            onApply(filterCtx.read<AllFilterCubit>().modelItem);
                           }
 
                           Navigator.pop(context);

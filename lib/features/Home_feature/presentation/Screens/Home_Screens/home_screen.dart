@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/category_grid_item_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_app_bar_icon_with_counter.dart';
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     homeContentCubit.getHomeContent();
     categoriesCubit.getAllCategories();
     _tagsCubit.getTagsData();
+    print("this token ${SharedText.userToken}");
   }
 
   @override

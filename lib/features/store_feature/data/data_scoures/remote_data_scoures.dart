@@ -44,7 +44,8 @@ abstract class StoreRemoteDataSourceInterface {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
-    required String storeSubCategory,
+    required List<TagsModel> storeSubCategory,
+    int? planId,
   });
 }
 
@@ -85,7 +86,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
           storeImage.path,
           filename: storeImage.path.split("/").last.toString(),
         ),
-        "plan_id":planId
+        "plan_id": planId
       };
 
       log("this the update data $postData");
@@ -139,39 +140,48 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
-    required String storeSubCategory,
+    required List<TagsModel> storeSubCategory,
+    int? planId,
   }) async {
     try {
-      String pathUrl = ApiKeys.storeKey;
+      String pathUrl = ApiKeys.updateStoreKey;
 
       FormData staticData = FormData();
-      staticData.fields.add(MapEntry('store_id', storeId.toString()));
-      staticData.fields.add(MapEntry('store_name', storeName));
-      staticData.fields.add(MapEntry('owner_name', ownerName));
-      staticData.fields.add(MapEntry('store_phone', storeNumber));
-      staticData.fields.add(MapEntry('store_email', storeEmail));
-      staticData.fields.add(MapEntry('store_address', storeAddress));
-      staticData.fields.add(MapEntry('store_city', storeCity));
-      staticData.fields.add(MapEntry('store_area', storeArea));
-      staticData.fields.add(MapEntry('store_category', storeMainCategory));
-      staticData.fields.add(MapEntry('store_subCategory', storeSubCategory));
-      if (storeImage != null) {
-        staticData.files.add(MapEntry(
-            'image',
-            await MultipartFile.fromFile(
-              storeImage.path,
-              filename: storeImage.path.split("/").last.toString(),
-            )));
+      var tags = [];
+      for (var element in storeSubCategory) {
+        tags.add(element.id);
       }
 
-      // Response response = await DioHelper.postData(url: pathUrl, data: staticData);
-
-      Map<String, dynamic> dataMap = {
-        "code": 200,
-        "massage": "success",
+      Map<String, dynamic> postData = {
+        "store_id": storeId,
+        "store_name": storeName,
+        "username": ownerName,
+        "phone": storeNumber,
+        "email": storeEmail,
+        "address": storeAddress,
+        "city": storeCity,
+        "area": storeArea,
+        "category_id": storeMainCategory,
+        "tag_id": tags,
+        'image': storeImage == null
+            ? null
+            : await MultipartFile.fromFile(
+                storeImage.path,
+                filename: storeImage.path.split("/").last.toString(),
+              ),
+        "plan_id": planId
       };
-      await Future.delayed(const Duration(seconds: 3));
-      return right(BaseModel.fromJson(dataMap));
+
+      log("this the update data $postData");
+      staticData = FormData.fromMap(
+        postData,
+        ListFormat.multiCompatible,
+      );
+
+      Response response =
+          await DioHelper.postData(url: pathUrl, data: staticData);
+
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
         type: ex.error.type,
@@ -184,99 +194,16 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getStoreProductData(
       {required int shopId, int page = 1, int? limit}) async {
     try {
-      Map<String, dynamic> data = {
-        "code": 200,
-        "massage": "success",
-        "data": [
-          {
-            "id": 1,
-            "product_name": "product one",
-            "product_image":
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
-            "price": "1500",
-            "description": "electronic , photos",
-            "time": "15h",
-            "is_fav": true,
-            "shop": {
-              "id": 1,
-              "shop_name": "متجر الكتروني",
-              "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-              "category": "electronic",
-              "location": "cairo",
-              "phone": "0100000",
-              "email": "abc@gmail.com",
-              "owner_name": "ahmed",
-              "city": "cairo",
-              "area": "cairo",
-              "sub_category": "electronic , hardware",
-              "rate": "2"
-            }
-          },
-          {
-            "id": 2,
-            "product_name": "product one",
-            "product_image":
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
-            "price": "1500",
-            "description": "electronic , photos",
-            "time": "15h",
-            "is_fav": true,
-            "shop": {
-              "id": 1,
-              "shop_name": "متجر الكتروني",
-              "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-              "category": "electronic",
-              "location": "cairo",
-              "phone": "0100000",
-              "email": "abc@gmail.com",
-              "owner_name": "ahmed",
-              "city": "cairo",
-              "area": "cairo",
-              "sub_category": "electronic , hardware",
-              "rate": "2"
-            }
-          },
-          {
-            "id": 3,
-            "product_name": "product one",
-            "product_image":
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
-            "price": "1500",
-            "description": "electronic , photos",
-            "time": "15h",
-            "is_fav": false,
-            "shop": {
-              "id": 1,
-              "shop_name": "متجر الكتروني",
-              "shop_image":
-                  "https://m.media-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png",
-              "category": "electronic",
-              "location": "cairo",
-              "phone": "0100000",
-              "email": "abc@gmail.com",
-              "owner_name": "ahmed",
-              "city": "cairo",
-              "area": "cairo",
-              "sub_category": "electronic , hardware",
-              "rate": "2"
-            }
-          },
-        ]
-      };
-
       String pathUrl = "";
       if (limit == null) {
-        pathUrl = "${ApiKeys.productKey}?storeId=$shopId&page=$page";
+        pathUrl = "${ApiKeys.showStoreKey}?store_id=$shopId&page=$page";
       } else {
         pathUrl =
-            "${ApiKeys.productKey}?storeId=$shopId&limit=$limit&page=$page";
+            "${ApiKeys.showStoreKey}?store_id=$shopId&limit=$limit&page=$page";
       }
-      await Future.delayed(const Duration(seconds: 3));
 
-      // Response response = await DioHelper.getDate(url: pathUrl);
-      return right(BaseModel.fromJson(data));
+      Response response = await DioHelper.getDate(url: pathUrl);
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
         type: ex.error.type,
