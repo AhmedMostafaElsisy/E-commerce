@@ -15,12 +15,18 @@ import 'core/location_feature/Data/repository/location_repository.dart';
 import 'core/location_feature/domain/repository/location_interface.dart';
 import 'core/location_feature/domain/uesCaes/location_use_caes.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
+import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import 'core/setting_feature/Data/data_scources/local_data_scources.dart';
 import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
 import 'core/setting_feature/Domain/repository/setting_interface.dart';
 import 'core/setting_feature/Domain/ues_cases/setting_ues_cases.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/tags_feature/Data/data_scources/tags_remote_data_scources.dart';
+import 'core/tags_feature/Data/repository/tags_repository.dart';
+import 'core/tags_feature/domain/repository/tags_interface.dart';
+import 'core/tags_feature/domain/uesCaes/tags_use_caes.dart';
+import 'core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'features/Auth_feature/Data/data_scources/auth_local_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/auth_remote_data_source.dart';
 import 'features/Auth_feature/Data/data_scources/otp_remote_data_scources.dart';
@@ -54,6 +60,11 @@ import 'features/favorite_feature/data/repository/favorite_repository.dart';
 import 'features/favorite_feature/domain/repository/favorite_repository_interface.dart';
 import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
+import 'features/plans_feature/Data/repository/plans_repository.dart';
+import 'features/plans_feature/domain/repository/plans_interface.dart';
+import 'features/plans_feature/domain/uesCaes/plans_use_caes.dart';
+import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/Data/data_scoures/remote_data_scoures.dart';
 import 'features/rating_feature/Data/repository/rating_repository.dart';
 import 'features/rating_feature/Domain/repository/repository_interface.dart';
@@ -63,6 +74,7 @@ import 'features/store_feature/data/data_scoures/remote_data_scoures.dart';
 import 'features/store_feature/data/repository/my_store_repository.dart';
 import 'features/store_feature/domain/repository/store_repository_interface.dart';
 import 'features/store_feature/domain/ues_cases/ues_cases.dart';
+import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/data/data_scoures/remote_data_scoures.dart';
@@ -89,6 +101,10 @@ Future<void> init() async {
   sl.registerFactory(() => MyStoreCubit(sl()));
   sl.registerFactory(() => ProductCubit(sl()));
   sl.registerFactory(() => PickLocationCubit(sl()));
+  sl.registerFactory(() => TagsCubit(sl()));
+  sl.registerFactory(() => EditStoreCubit(sl()));
+  sl.registerFactory(() => PlansCubit(sl()));
+  sl.registerFactory(() => AllFilterCubit());
   sl.registerFactory(() => GeneralStoresCubit(sl()));
 
   ///User case
@@ -106,6 +122,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductUesCase(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
   sl.registerLazySingleton(() => GeneralStoresUesCase(sl()));
+  sl.registerLazySingleton(() => TagsUesCases(sl()));
+  sl.registerLazySingleton(() => PlansUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -131,6 +149,13 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoryRepositoryInterface>(() =>
       CategoryRepositoryImplementation(
           categoryRemoteDataSourceInterface: sl()));
+  sl.registerLazySingleton<TagsRepositoryInterface>(() =>
+      TagsRepository(
+       sl()));
+  sl.registerLazySingleton<PlansRepositoryInterface>(() =>
+      PlansRepository(
+       sl()));
+
   sl.registerLazySingleton<GeneralStoresRepositoryInterface>(
       () => GeneralStoresRepository(sl()));
 
@@ -167,6 +192,10 @@ Future<void> init() async {
       () => LocationRemoteDataSourceImpl());
   sl.registerLazySingleton<GeneralStoresRemoteDataSourceInterface>(
       () => GeneralStoresRemoteDataSourceImpl());
+  sl.registerLazySingleton<TagsRemoteDataSourceInterface>(
+      () => TagsRemoteDataSourceImpl());
+  sl.registerLazySingleton<PlansRemoteDataSourceInterface>(
+      () => PlansRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

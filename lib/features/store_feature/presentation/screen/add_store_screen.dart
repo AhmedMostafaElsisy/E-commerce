@@ -1,12 +1,16 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
+import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
+import 'package:captien_omda_customer/core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/location_feature/presentation/area_pop_up.dart';
+import '../../../../core/location_feature/presentation/city_pop_up.dart';
+import '../../../../core/location_feature/presentation/logic/pick_location_cubit.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -15,13 +19,18 @@ import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/Widgets/select_item_pop_up.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/my_stores_cubit/store_cubit.dart';
 import '../logic/my_stores_cubit/store_states.dart';
+import '../../../../core/presentation/search_filter_cubit/search_filet_cubit.dart';
+import '../../../Categories_feature/presentation/logic/category_cubit.dart';
 
 class AddStoreScreen extends StatefulWidget {
-  const AddStoreScreen({Key? key}) : super(key: key);
+  final RouteArgument argument;
+
+  const AddStoreScreen({Key? key, required this.argument}) : super(key: key);
 
   @override
   State<AddStoreScreen> createState() => _AddStoreScreenState();
@@ -30,56 +39,51 @@ class AddStoreScreen extends StatefulWidget {
 class _AddStoreScreenState extends State<AddStoreScreen> {
   late StoreCubit _storeCubit;
   final formKey = GlobalKey<FormState>();
-
-  late TextEditingController storeNameController;
-  late TextEditingController ownerNameController;
-  late TextEditingController userAddressController;
-  late TextEditingController userCityController;
-  late TextEditingController userAreaController;
-  late TextEditingController emailAddressController;
-
-  late TextEditingController phoneNumberController;
-  late TextEditingController storeMainCategoryController;
-  late TextEditingController storeSubCategoryController;
+  late PickLocationCubit _locationCubit;
 
   @override
   void initState() {
     super.initState();
     _storeCubit = BlocProvider.of<StoreCubit>(context);
-    storeNameController = TextEditingController();
-    ownerNameController = TextEditingController();
-    emailAddressController = TextEditingController();
-    phoneNumberController = TextEditingController();
+    _locationCubit = BlocProvider.of<PickLocationCubit>(context);
+    AllFilterCubit.get(context).clearAll();
+    _locationCubit.getCityData(limit: 50);
+    _locationCubit.clearAllData();
+    _storeCubit.clearAllData();
+    _storeCubit.storeNameController = TextEditingController();
+    _storeCubit.ownerNameController = TextEditingController();
+    _storeCubit.emailAddressController = TextEditingController();
+    _storeCubit.phoneNumberController = TextEditingController();
 
-    userAddressController = TextEditingController();
-    userCityController = TextEditingController();
-    userAreaController = TextEditingController();
-    storeMainCategoryController = TextEditingController();
-    storeSubCategoryController = TextEditingController();
+    _storeCubit.userAddressController = TextEditingController();
+    _storeCubit.userCityController = TextEditingController();
+    _storeCubit.userAreaController = TextEditingController();
+    _storeCubit.storeMainCategoryController = TextEditingController();
+    _storeCubit.storeSubCategoryController = TextEditingController();
     _storeCubit.isDataFound = false;
     _storeCubit.controllerList.clear();
-    _storeCubit.controllerList.add(storeNameController);
-    _storeCubit.controllerList.add(ownerNameController);
-    _storeCubit.controllerList.add(emailAddressController);
-    _storeCubit.controllerList.add(phoneNumberController);
-    _storeCubit.controllerList.add(userAddressController);
-    _storeCubit.controllerList.add(userCityController);
-    _storeCubit.controllerList.add(userAreaController);
-    _storeCubit.controllerList.add(storeMainCategoryController);
-    _storeCubit.controllerList.add(storeSubCategoryController);
+    _storeCubit.controllerList.add(_storeCubit.storeNameController);
+    _storeCubit.controllerList.add(_storeCubit.ownerNameController);
+    _storeCubit.controllerList.add(_storeCubit.emailAddressController);
+    _storeCubit.controllerList.add(_storeCubit.phoneNumberController);
+    _storeCubit.controllerList.add(_storeCubit.userAddressController);
+    _storeCubit.controllerList.add(_storeCubit.userCityController);
+    _storeCubit.controllerList.add(_storeCubit.userAreaController);
+    _storeCubit.controllerList.add(_storeCubit.storeMainCategoryController);
+    _storeCubit.controllerList.add(_storeCubit.storeSubCategoryController);
   }
 
   @override
   void dispose() {
-    storeNameController.dispose();
-    ownerNameController.dispose();
-    emailAddressController.dispose();
-    phoneNumberController.dispose();
-    userAddressController.dispose();
-    userCityController.dispose();
-    userAreaController.dispose();
-    storeMainCategoryController.dispose();
-    storeSubCategoryController.dispose();
+    _storeCubit.storeNameController.dispose();
+    _storeCubit.ownerNameController.dispose();
+    _storeCubit.emailAddressController.dispose();
+    _storeCubit.phoneNumberController.dispose();
+    _storeCubit.userAddressController.dispose();
+    _storeCubit.userCityController.dispose();
+    _storeCubit.userAreaController.dispose();
+    _storeCubit.storeMainCategoryController.dispose();
+    _storeCubit.storeSubCategoryController.dispose();
     _storeCubit.imageXFile = null;
     super.dispose();
   }
@@ -111,23 +115,27 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
               BlocConsumer<StoreCubit, StoreStates>(
                 listener: (storeCtx, storeState) {
                   if (storeState is CreateStoreFailedStates) {
-                    checkUserAuth(
-                        context: storeCtx, errorType: storeState.error.type);
+                    // checkUserAuth(
+                    //     context: storeCtx, errorType: storeState.error.type);
                     showSnackBar(
                       context: storeCtx,
                       title: storeState.error.errorMassage!,
                     );
                   } else if (storeState is CreateStoreSuccessStates) {
-                    showSnackBar(
-                        context: storeCtx,
-                        title: AppLocalizations.of(context)!
-                            .lblStoreCreatedSuccess,
-                        color: AppConstants.successColor);
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouteNames.mainBottomNavPageRoute,
-                      (route) => false,
-                    );
+                    if(! widget
+                        .argument.firstStoreCreate!){
+                      showSnackBar(
+                          context: storeCtx,
+                          title: AppLocalizations.of(context)!
+                              .lblStoreCreatedSuccess,
+                          color: AppConstants.successColor);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.mainBottomNavPageRoute,
+                            (route) => false,
+                      );
+                    }
+
                   }
                 },
                 builder: (storeCtx, storeState) {
@@ -209,7 +217,8 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       ///store name
                                       CommonTextFormField(
-                                        controller: storeNameController,
+                                        controller:
+                                            _storeCubit.storeNameController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopName,
                                         keyboardType: TextInputType.text,
@@ -240,7 +249,8 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       ///owner name
                                       CommonTextFormField(
-                                        controller: ownerNameController,
+                                        controller:
+                                            _storeCubit.ownerNameController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopOwnerName,
                                         keyboardType: TextInputType.text,
@@ -271,7 +281,8 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       /// Phone
                                       CommonTextFormField(
-                                        controller: phoneNumberController,
+                                        controller:
+                                            _storeCubit.phoneNumberController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopPhone,
                                         keyboardType: TextInputType.phone,
@@ -303,7 +314,8 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       /// Email
                                       CommonTextFormField(
-                                        controller: emailAddressController,
+                                        controller:
+                                            _storeCubit.emailAddressController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopEmail,
                                         keyboardType: TextInputType.text,
@@ -335,7 +347,8 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                       CommonTextFormField(
                                         minLines: 3,
                                         maxLines: 5,
-                                        controller: userAddressController,
+                                        controller:
+                                            _storeCubit.userAddressController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopAddressDetails,
                                         keyboardType: TextInputType.text,
@@ -364,17 +377,44 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                           ///City
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller: userCityController,
+                                              onTap: () {
+                                                showCityPopUp(
+                                                    context: storeCtx,
+                                                    title: AppLocalizations.of(
+                                                            storeCtx)!
+                                                        .lblCity,
+                                                    onApply: (model) {
+                                                      _storeCubit
+                                                          .userCityController
+                                                          .text = model.name!;
+                                                      _storeCubit
+                                                          .setNewCitySelected(
+                                                              model);
+                                                      _storeCubit
+                                                          .userAreaController
+                                                          .clear();
+                                                      _locationCubit
+                                                          .getAreaData(
+                                                              cityID: model.id!,
+                                                              limit: 50);
+                                                      _storeCubit.isDataFount(
+                                                          _storeCubit
+                                                              .controllerList);
+                                                    });
+                                              },
+                                              controller: _storeCubit
+                                                  .userCityController,
                                               hintKey:
-                                                  AppLocalizations.of(context)!
+                                                  AppLocalizations.of(storeCtx)!
                                                       .lblCity,
+                                              isReadOnly: true,
                                               keyboardType: TextInputType.text,
                                               labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                          context)!
+                                                          storeCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -395,17 +435,48 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                           ///Area
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller: userAreaController,
+                                              controller: _storeCubit
+                                                  .userAreaController,
+                                              onTap: () {
+                                                if (_storeCubit.selectedCity ==
+                                                    null) {
+                                                  showSnackBar(
+                                                    context: storeCtx,
+                                                    title: AppLocalizations.of(
+                                                            context)!
+                                                        .lblSelectCityFirst,
+                                                  );
+                                                } else {
+                                                  showAreaPopUp(
+                                                      context: storeCtx,
+                                                      title:
+                                                          AppLocalizations.of(
+                                                                  storeCtx)!
+                                                              .lblArea,
+                                                      onApply: (model) {
+                                                        _storeCubit
+                                                            .userAreaController
+                                                            .text = model.name!;
+                                                        _storeCubit
+                                                            .setSelectedArea(
+                                                                model);
+                                                        _storeCubit.isDataFount(
+                                                            _storeCubit
+                                                                .controllerList);
+                                                      });
+                                                }
+                                              },
                                               hintKey:
-                                                  AppLocalizations.of(context)!
+                                                  AppLocalizations.of(storeCtx)!
                                                       .lblArea,
                                               keyboardType: TextInputType.text,
+                                              isReadOnly: true,
                                               labelHintColor:
                                                   AppConstants.mainColor,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return AppLocalizations.of(
-                                                          context)!
+                                                          storeCtx)!
                                                       .lblNameIsEmpty;
                                                 } else {
                                                   return null;
@@ -426,9 +497,32 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       ///main category
                                       CommonTextFormField(
-                                        controller: storeMainCategoryController,
+                                        controller: _storeCubit
+                                            .storeMainCategoryController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblMainCategory,
+                                        onTap: () {
+                                          advancedSearchPopUP(
+                                            context: context,
+                                            isMultiSelect: false,
+                                            title: AppLocalizations.of(context)!
+                                                .lblMainCategory,
+                                            isListHaveSearch: true,
+                                            listOfItem: BlocProvider.of<
+                                                    CategoriesCubit>(context)
+                                                .categories,
+                                            onApply: (dynamic) {
+                                              _storeCubit
+                                                  .storeMainCategoryController
+                                                  .text = dynamic.name;
+                                              _storeCubit
+                                                  .setSelectedCategory(dynamic);
+                                              _storeCubit.isDataFount(
+                                                  _storeCubit.controllerList);
+                                            },
+                                          );
+                                        },
+                                        isReadOnly: true,
                                         keyboardType: TextInputType.text,
                                         labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
@@ -454,9 +548,37 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
 
                                       ///sub category
                                       CommonTextFormField(
-                                        controller: storeSubCategoryController,
+                                        controller: _storeCubit
+                                            .storeSubCategoryController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblSubCategory,
+                                        onTap: () {
+                                          advancedSearchPopUP(
+                                            context: context,
+                                            isMultiSelect: true,
+                                            multiSelectData:
+                                                _storeCubit.selectedTag ?? [],
+                                            title: AppLocalizations.of(context)!
+                                                .lblSubCategory,
+                                            isListHaveSearch: true,
+                                            listOfItem:
+                                                BlocProvider.of<TagsCubit>(
+                                                        context)
+                                                    .tagsList,
+                                            onApply: (dynamic) {
+                                              _storeCubit.setSelectedTags(
+                                                  List.from(dynamic));
+                                              _storeCubit
+                                                      .storeSubCategoryController
+                                                      .text =
+                                                  getNameFromList(
+                                                      List.from(dynamic));
+                                              _storeCubit.isDataFount(
+                                                  _storeCubit.controllerList);
+                                            },
+                                          );
+                                        },
+                                        isReadOnly: true,
                                         keyboardType: TextInputType.text,
                                         labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
@@ -494,42 +616,25 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                             buttonTextSize: 18,
                                             buttonTextFontWeight:
                                                 FontWeight.w600,
-                                            buttonText:
-                                                AppLocalizations.of(context)!
+                                            buttonText: widget
+                                                    .argument.firstStoreCreate!
+                                                ? AppLocalizations.of(context)!
+                                                    .lblCreateStoreAndSelectPlan
+                                                : AppLocalizations.of(context)!
                                                     .lblSave,
                                             onPressedFunction: () {
                                               if (formKey.currentState!
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                storeCtx.read<StoreCubit>().createNewStore(
-                                                    storeImage:
-                                                        _storeCubit.imageXFile!,
-                                                    storeName:
-                                                        storeNameController
-                                                            .text,
-                                                    ownerName:
-                                                        ownerNameController
-                                                            .text,
-                                                    storeNumber:
-                                                        phoneNumberController
-                                                            .text,
-                                                    storeEmail:
-                                                        emailAddressController
-                                                            .text,
-                                                    storeAddress:
-                                                        userAddressController
-                                                            .text,
-                                                    storeCity:
-                                                        userCityController.text,
-                                                    storeArea:
-                                                        userAreaController.text,
-                                                    storeMainCategory:
-                                                        storeMainCategoryController
-                                                            .text,
-                                                    storeSubCategory:
-                                                        storeSubCategoryController
-                                                            .text);
+                                                if( widget
+                                                    .argument.firstStoreCreate!) {
+                                                  Navigator.of(context).pushNamed(RouteNames.planPageRoute);
+                                                }else {
+                                                  storeCtx
+                                                    .read<StoreCubit>()
+                                                    .createNewStore();
+                                                }
                                               }
                                             },
                                           ),
@@ -546,5 +651,13 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
         ),
       ),
     );
+  }
+
+  String getNameFromList(List<dynamic> listData) {
+    String name = "";
+    for (var element in listData) {
+      name = "$name , ${element.name}";
+    }
+    return name;
   }
 }

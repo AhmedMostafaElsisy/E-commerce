@@ -4,6 +4,7 @@ import 'package:captien_omda_customer/core/model/base_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/tags_feature/domain/model/tags_model.dart';
 import '../../domain/repository/store_repository_interface.dart';
 import '../data_scoures/remote_data_scoures.dart';
 
@@ -23,7 +24,8 @@ class StoreRepository extends StoreRepositoryInterface {
       required String storeCity,
       required String storeArea,
       required String storeMainCategory,
-      required String storeSubCategory}) {
+        int? planId,
+      required List<TagsModel> storeSubCategory}) {
     return remoteDataSourceInterface.createStore(
         storeImage: storeImage,
         storeName: storeName,
@@ -34,6 +36,7 @@ class StoreRepository extends StoreRepositoryInterface {
         storeCity: storeCity,
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
+        planId: planId,
         storeSubCategory: storeSubCategory);
   }
 

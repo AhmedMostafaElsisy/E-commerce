@@ -27,7 +27,9 @@ class StoreFailedMoreDataStates extends StoreStates {
 }
 
 
+class LocationSelectedState extends StoreStates {}
 class CreateStoreLoadingStates extends StoreStates {}
+
 
 
 class CreateStoreSuccessStates extends StoreStates {}
@@ -36,13 +38,4 @@ class CreateStoreFailedStates extends StoreStates {
   CustomError error;
 
   CreateStoreFailedStates(this.error);
-}class EditStoreLoadingStates extends StoreStates {}
-
-
-class EditStoreSuccessStates extends StoreStates {}
-
-class EditStoreFailedStates extends StoreStates {
-  CustomError error;
-
-  EditStoreFailedStates(this.error);
 }

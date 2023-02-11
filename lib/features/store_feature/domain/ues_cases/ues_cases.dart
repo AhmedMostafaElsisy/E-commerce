@@ -5,6 +5,7 @@ import 'package:captien_omda_customer/core/model/shop_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/tags_feature/domain/model/tags_model.dart';
 import '../repository/store_repository_interface.dart';
 
 class StoreUesCase {
@@ -37,7 +38,9 @@ class StoreUesCase {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
-    required String storeSubCategory,
+    required List<TagsModel> storeSubCategory,
+    int? planId,
+
   }) {
     return repositoryInterface.addNewStore(
         storeImage: storeImage,
@@ -49,6 +52,7 @@ class StoreUesCase {
         storeCity: storeCity,
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
+        planId: planId,
         storeSubCategory: storeSubCategory);
   }
 

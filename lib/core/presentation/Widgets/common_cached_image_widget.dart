@@ -53,15 +53,15 @@ Widget commonCachedImageWidget(
     errorWidget: (context, url, error) => isProfile
         ? commonAssetImageWidget(
             imageString: 'avatar.png',
-            height: imageHeight,
-            width: imageWidth,
+      height: height,
+      width: width,
             radius: radius,
             fit: fit,
           )
         : CommonAssetSvgImageWidget(
             imageString: 'logo.svg',
-            height: imageHeight,
-            width: imageWidth,
+            height: height,
+            width: width,
             fit: fit,
             radius: radius,
             isCircular: isCircular,

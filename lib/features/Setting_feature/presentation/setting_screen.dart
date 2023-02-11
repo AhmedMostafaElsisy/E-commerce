@@ -25,6 +25,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  bool enableRecommendation = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +150,20 @@ class _SettingScreenState extends State<SettingScreen> {
                           SectionContentItem(
                             title:
                                 AppLocalizations.of(context)!.lblNotification,
+                            actionWidget:   Transform.scale(
+                              scale: 1.3,
+                              child: Switch(
+                                onChanged: (value) {
+                                  setState(() {
+                                    enableRecommendation = !enableRecommendation;
+                                  });
+                                },
+                                activeColor: AppConstants.lightWhiteColor,
+                                activeTrackColor: AppConstants.greenColor,
+                                inactiveTrackColor: AppConstants.borderInputColor,
+                                value: enableRecommendation,
+                              ),
+                            ),
                           ),
 
                           ///Call support

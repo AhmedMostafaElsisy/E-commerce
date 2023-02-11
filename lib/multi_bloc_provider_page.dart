@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Language_Cubit/language_cubit.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
+import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
@@ -16,9 +18,11 @@ import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
+import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
@@ -63,6 +67,11 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => di.sl<PickLocationCubit>()),
         BlocProvider<GeneralStoresCubit>(
             create: (_) => di.sl<GeneralStoresCubit>()),
+        BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<TagsCubit>(create: (_) => di.sl<TagsCubit>()),
+        BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),
+        BlocProvider<EditStoreCubit>(create: (_) => di.sl<EditStoreCubit>()),
+        BlocProvider<PlansCubit>(create: (_) => di.sl<PlansCubit>()),
       ],
       child: widget.body,
     );

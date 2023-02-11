@@ -28,5 +28,6 @@ class RouteNames {
   static const String storeOrderPageRoute = "/storeOrderPage";
   static const String myOrderPageRoute = "/myOrderPage";
   static const String orderDetailsPageRoute = "/orderDetailsPage";
+  static const String planPageRoute = "/planPage";
 
 }

@@ -7,20 +7,26 @@ List<CategoryModel> categoriesListFromJson(List str) =>
     List<CategoryModel>.from(str.map((x) => CategoryModel.fromJson(x)));
 
 class CategoryModel extends CategoryEntityModel {
-  CategoryModel({
-    required int id,
-    required String name,
-    required String image,
-  }) : super(id: id, name: name, image: image);
+  CategoryModel(
+      {required int id,
+      required String name,
+      required String image,
+      required String slug,
+      required bool active})
+      : super(id: id, name: name, image: image, active: active, slug: slug);
 
-  ///Todo:check the json key when integrate with the api
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     try {
       return CategoryModel(
-        id: json["id"],
-        name: json["name"] ?? "",
-        image: json["image"] ?? "",
-      );
+          id: json["id"],
+          name: json["name"] ?? "",
+          image: json["image"] ?? "",
+          slug: json["slug"] ?? "",
+          active: json["activated"] == null
+              ? false
+              : json["activated"] == 1
+                  ? true
+                  : false);
     } catch (error) {
       throw CustomException(
         error: CustomError(

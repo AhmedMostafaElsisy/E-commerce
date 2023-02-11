@@ -188,7 +188,11 @@
   "lblOrder": "Order",
   "lblOrderSearch": "Search by order code",
   "lblQty": "Quantity:",
-  "lblSelectCityFirst":"Please select city first"
-
-
+  "lblSelectCityFirst": "Please select city first",
+  "lblSearchHere": "Search here . . .",
+  "lblNoResultFount": "No result found",
+  "lblAdjustYourSearch": "Please adjust your search",
+  "lblCreateStoreAndSelectPlan": "Create store and select plan",
+  "lblPricePlan": "Price plan",
+  "lblContinueAndPay": "Continue And Pay"
 }

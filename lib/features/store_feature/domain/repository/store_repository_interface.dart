@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/model/base_model.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
+import '../../../../core/tags_feature/domain/model/tags_model.dart';
 
 abstract class StoreRepositoryInterface  {
   Future<Either<CustomError, BaseModel>> getMyStoreData(
@@ -20,7 +21,8 @@ abstract class StoreRepositoryInterface  {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
-    required String storeSubCategory,
+    int? planId,
+    required List<TagsModel> storeSubCategory,
   });
 
   Future<Either<CustomError, BaseModel>> editStore({

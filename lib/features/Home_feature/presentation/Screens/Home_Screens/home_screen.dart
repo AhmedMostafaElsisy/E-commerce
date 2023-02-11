@@ -22,6 +22,7 @@ import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
+import '../../../../../core/tags_feature/presentation/logic/tags_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late HomeCubit homeContentCubit;
   late SettingCubit settingCubit;
+  late TagsCubit _tagsCubit;
   late TextEditingController searchController;
   late CategoriesCubit categoriesCubit;
 
@@ -44,11 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
     homeContentCubit = BlocProvider.of<HomeCubit>(context);
     settingCubit = BlocProvider.of<SettingCubit>(context);
     categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
+    _tagsCubit = BlocProvider.of<TagsCubit>(context);
     searchController = TextEditingController();
     locationController = TextEditingController();
     settingCubit.getSetting();
     homeContentCubit.getHomeContent();
     categoriesCubit.getAllCategories();
+    _tagsCubit.getTagsData();
   }
 
   @override
@@ -279,6 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: ListView.separated(
                                         shrinkWrap: true,
                                         scrollDirection: Axis.horizontal,
+                                        padding: EdgeInsets.zero,
+                                        physics: const BouncingScrollPhysics(),
                                         itemBuilder: (itemCtx, itemPos) {
                                           return CategoryGridItemWidget(
                                             categoryModel: categoriesCubit
