@@ -62,7 +62,7 @@ dependencies:
   connectivity_plus: ^2.2.0
 
   # Local_Storage
-  flutter_secure_storage: ^5.0.2
+  shared_preferences: ^2.0.17
 
   # Responsive_Text
   auto_size_text: ^3.0.0

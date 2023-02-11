@@ -2,6 +2,11 @@ import 'package:captien_omda_customer/features/Categories_feature/data/data_sour
 import 'package:captien_omda_customer/features/Categories_feature/data/repository_imp/category_repository_implement.dart';
 import 'package:captien_omda_customer/features/Categories_feature/domain/repository_interface/category_repository_interface.dart';
 import 'package:captien_omda_customer/features/Categories_feature/domain/use_case/category_use_case.dart';
+import 'package:captien_omda_customer/features/store_feature/data/data_scoures/general_stores_remote_data_scoures.dart';
+import 'package:captien_omda_customer/features/store_feature/data/repository/general_stores_repository.dart';
+import 'package:captien_omda_customer/features/store_feature/domain/repository/general_stores_repository_interface.dart';
+import 'package:captien_omda_customer/features/store_feature/domain/ues_cases/general_stores_ues_cases.dart';
+import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
@@ -58,7 +63,7 @@ import 'features/store_feature/data/data_scoures/remote_data_scoures.dart';
 import 'features/store_feature/data/repository/my_store_repository.dart';
 import 'features/store_feature/domain/repository/store_repository_interface.dart';
 import 'features/store_feature/domain/ues_cases/ues_cases.dart';
-import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
+import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/data/data_scoures/remote_data_scoures.dart';
 import 'features/store_product/data/repository/product_repository.dart';
@@ -84,6 +89,7 @@ Future<void> init() async {
   sl.registerFactory(() => MyStoreCubit(sl()));
   sl.registerFactory(() => ProductCubit(sl()));
   sl.registerFactory(() => PickLocationCubit(sl()));
+  sl.registerFactory(() => GeneralStoresCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -99,6 +105,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => StoreUesCase(sl()));
   sl.registerLazySingleton(() => ProductUesCase(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
+  sl.registerLazySingleton(() => GeneralStoresUesCase(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -124,6 +131,8 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoryRepositoryInterface>(() =>
       CategoryRepositoryImplementation(
           categoryRemoteDataSourceInterface: sl()));
+  sl.registerLazySingleton<GeneralStoresRepositoryInterface>(
+      () => GeneralStoresRepository(sl()));
 
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
@@ -156,6 +165,8 @@ Future<void> init() async {
       () => CategoryRemoteDataSourceImplementation());
   sl.registerLazySingleton<LocationRemoteDataSourceInterface>(
       () => LocationRemoteDataSourceImpl());
+  sl.registerLazySingleton<GeneralStoresRemoteDataSourceInterface>(
+      () => GeneralStoresRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

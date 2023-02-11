@@ -1,4 +1,3 @@
-
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
@@ -18,7 +17,6 @@ class UserProfileCard extends StatefulWidget {
 }
 
 class _UserProfileCardState extends State<UserProfileCard> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +30,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           ///User image
           commonCachedImageWidget(
-            SharedText.currentUser!.image!,
+            SharedText.currentUser!.image ?? "",
             height: 48,
             width: 48,
             isProfile: true,
@@ -48,7 +46,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CommonTitleText(
-                    textKey: SharedText.currentUser!.name!,
+                    textKey: SharedText.currentUser!.name ?? "",
                     textFontSize: AppConstants.normalFontSize,
                     textWeight: FontWeight.w600,
                     textColor: AppConstants.lightBlackColor,
@@ -56,8 +54,8 @@ class _UserProfileCardState extends State<UserProfileCard> {
                   getSpaceWidth(AppConstants.smallPadding / 2),
                   StarRating(
                     color: AppConstants.starRatingColor,
-                    rating:
-                        double.parse(SharedText.currentUser!.rate!.toString()),
+                    rating: double.parse(
+                        SharedText.currentUser!.rate ?? 0.toString()),
                   ),
                 ],
               ),
