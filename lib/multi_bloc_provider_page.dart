@@ -17,7 +17,8 @@ import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
-import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
+import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
+import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
@@ -58,7 +59,10 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
         BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
         BlocProvider<ProductCubit>(create: (_) => di.sl<ProductCubit>()),
-        BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<PickLocationCubit>(
+            create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<GeneralStoresCubit>(
+            create: (_) => di.sl<GeneralStoresCubit>()),
       ],
       child: widget.body,
     );
