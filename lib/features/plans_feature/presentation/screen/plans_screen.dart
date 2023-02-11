@@ -14,8 +14,8 @@ import '../../../../core/presentation/Widgets/common_loading_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../../../store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
-import '../../../store_feature/presentation/logic/general_store_cubit/store_states.dart';
+import '../../../store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
+import '../../../store_feature/presentation/logic/my_stores_cubit/store_states.dart';
 import '../logic/plans_states.dart';
 
 class PlansScreen extends StatefulWidget {
