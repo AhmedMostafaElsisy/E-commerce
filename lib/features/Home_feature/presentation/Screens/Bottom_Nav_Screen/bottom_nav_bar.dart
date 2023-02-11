@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/features/Categories_feature/presentation/screens/categories_screen.dart';
+import 'package:captien_omda_customer/features/store_feature/presentation/screen/general_stores/general_stores_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     /// Pages
     const List<Widget> widgetOptions = <Widget>[
       HomeScreen(),
-      HomeScreen(),
+      GeneralStoresListScreen(),
       CategoriesScreen(),
       SettingScreen(),
     ];
