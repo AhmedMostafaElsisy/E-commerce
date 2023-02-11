@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
+import '../../../../core/location_feature/presentation/area_pop_up.dart';
+import '../../../../core/location_feature/presentation/city_pop_up.dart';
+import '../../../../core/location_feature/presentation/logic/pick_location_cubit.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_image_widget.dart';
@@ -29,6 +31,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late SignUpCubit _signUpCubit;
+  late PickLocationCubit _locationCubit;
   final formKey = GlobalKey<FormState>();
 
   late TextEditingController userFirstNameController;
@@ -37,17 +40,18 @@ class _SignUpPageState extends State<SignUpPage> {
   late TextEditingController userCityController;
   late TextEditingController userAreaController;
   late TextEditingController emailAddressController;
-
   late TextEditingController phoneNumberController;
-
   late TextEditingController passwordController;
-
   late TextEditingController confirmPasswordController;
 
   @override
   void initState() {
     super.initState();
     _signUpCubit = BlocProvider.of<SignUpCubit>(context);
+    _locationCubit = BlocProvider.of<PickLocationCubit>(context);
+    _locationCubit.getCityData(limit: 50);
+    _locationCubit.clearAllData();
+    _signUpCubit.clearAllData();
     userFirstNameController = TextEditingController();
     userLastNameController = TextEditingController();
     emailAddressController = TextEditingController();
@@ -431,10 +435,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                         ///City
                                         Expanded(
                                           child: CommonTextFormField(
+                                            onTap: () {
+                                              showCityPopUp(
+                                                  context: signUpCtx,
+                                                  title: AppLocalizations.of(
+                                                          signUpCtx)!
+                                                      .lblCity,
+                                                  onApply: (model) {
+                                                    userCityController.text =
+                                                        model.name!;
+                                                    _signUpCubit
+                                                        .setNewCitySelected(model);
+                                                    userAreaController.clear();
+                                                    _locationCubit.getAreaData(
+                                                        cityID: model.id!,limit: 50);
+                                                    _signUpCubit.isDataFount(
+                                                        _signUpCubit.controllerList);
+                                                  });
+                                            },
                                             controller: userCityController,
                                             hintKey:
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblCity,
+                                            isReadOnly: true,
                                             keyboardType: TextInputType.text,
                                             labelHintColor:
                                                 AppConstants.mainColor,
@@ -463,10 +486,34 @@ class _SignUpPageState extends State<SignUpPage> {
                                         Expanded(
                                           child: CommonTextFormField(
                                             controller: userAreaController,
+                                            onTap: () {
+                                              if(_signUpCubit.selectedCity==null){
+                                                showSnackBar(
+                                                  context: signUpCtx,
+
+                                                  title: AppLocalizations.of(context)!.lblSelectCityFirst,
+                                                );
+                                              }else {
+                                                showAreaPopUp(
+                                                  context: signUpCtx,
+                                                  title: AppLocalizations.of(
+                                                      signUpCtx)!
+                                                      .lblArea,
+                                                  onApply: (model) {
+                                                    userAreaController.text =
+                                                    model.name!;
+                                                    _signUpCubit
+                                                        .setSelectedArea(model);
+                                                    _signUpCubit.isDataFount(
+                                                        _signUpCubit.controllerList);
+                                                  });
+                                              }
+                                            },
                                             hintKey:
                                                 AppLocalizations.of(signUpCtx)!
                                                     .lblArea,
                                             keyboardType: TextInputType.text,
+                                            isReadOnly: true,
                                             labelHintColor:
                                                 AppConstants.mainColor,
                                             validator: (value) {
@@ -520,8 +567,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   userFirstNameController.text,
                                               userLastName:
                                                   userLastNameController.text,
-                                              userCity: userCityController.text,
-                                              userArea: userAreaController.text,
+                                              userCity: _signUpCubit.selectedCity!.id.toString(),
+                                              userArea: _signUpCubit.selectedArea!.id.toString(),
                                               userAddressDetails:
                                                   userAddressController.text,
                                               token: SharedText.deviceToken);
