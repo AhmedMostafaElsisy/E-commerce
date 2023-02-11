@@ -48,6 +48,7 @@ class ApiKeys {
 
   ///location key
   static const String cityListKey = "/cities";
+
   static const String areaListKey = "/areas";
 
   ///Setting
@@ -62,8 +63,11 @@ class ApiKeys {
   static const String myStoreListKey = "/get-my-stores";
   static const String addStoreKey = "/add-store";
 
+  static const String homeStoresKey = "/home-stores";
+
   ///product
   static const String productKey = "/product";
+  static const String productOfStoreKey = "/store-products";
 
   ///category
   static const String categoryKey = "/home-categories";

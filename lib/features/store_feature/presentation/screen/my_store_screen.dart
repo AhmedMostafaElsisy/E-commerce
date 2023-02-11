@@ -5,17 +5,18 @@ import 'package:captien_omda_customer/core/presentation/Widgets/common_error_wid
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/presentation/Widgets/shop_item_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/general_store_cubit/store_cubit.dart';
-import '../logic/general_store_cubit/store_states.dart';
+import '../logic/my_stores_cubit/store_cubit.dart';
+import '../logic/my_stores_cubit/store_states.dart';
 
 class MyStoresListScreen extends StatefulWidget {
   const MyStoresListScreen({Key? key}) : super(key: key);

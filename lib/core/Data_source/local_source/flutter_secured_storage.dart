@@ -1,86 +1,99 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Constants/Keys/local_keys.dart';
 
 class DefaultSecuredStorage {
-  static const _securedStorage = FlutterSecureStorage();
+  static late SharedPreferences _securedStorage;
 
-
+  static initLocalStorage() async {
+    _securedStorage = await SharedPreferences.getInstance();
+  }
 
   /// SETTERS
   static Future setIsFirstUse(String firstUse) async {
-    await _securedStorage.write(key: DbKeys.isFirstUse , value: firstUse);
+    await _securedStorage.setString(DbKeys.isFirstUse, firstUse);
   }
 
   static Future setIsLogged(String isLogged) async {
-    await _securedStorage.write(key: DbKeys.isLogged, value: isLogged);
+    await _securedStorage.setString(DbKeys.isLogged, isLogged);
   }
 
   static Future setUserName(String userName) async {
-    await _securedStorage.write(key: DbKeys.userName, value: userName);
+    await _securedStorage.setString(DbKeys.userName, userName);
   }
 
   static Future setPassword(String password) async {
-    await _securedStorage.write(key: DbKeys.password, value: password);
+    await _securedStorage.setString(DbKeys.password, password);
   }
 
-  static Future setUserMap(String? userMap) async {
-    await _securedStorage.write(key: DbKeys.userMap, value: userMap);
+  static Future setUserMap(String userMap) async {
+    await _securedStorage.setString(DbKeys.userMap, userMap);
   }
 
-  static Future setAccessToken(String? token) async {
-    await _securedStorage.write(key: DbKeys.token, value: token);
+  static Future setAccessToken(String token) async {
+    await _securedStorage.setString(DbKeys.token, token);
   }
 
-  static void setLang(String lang) async {
-    await _securedStorage.write(key: DbKeys.lang, value: lang);
+  static Future setLang(String lang) async {
+    await _securedStorage.setString(DbKeys.lang, lang);
   }
 
-  static void setCountryCode(String countryCode) async {
-    await _securedStorage.write(key: DbKeys.countryCode, value: countryCode);
+  static Future setCountryCode(String countryCode) async {
+    await _securedStorage.setString(DbKeys.countryCode, countryCode);
   }
 
-  static void setDoctorMap(String doctorMap) async {
-    await _securedStorage.write(key: DbKeys.countryCode, value: doctorMap);
+  static Future setDoctorMap(String doctorMap) async {
+    await _securedStorage.setString(DbKeys.countryCode, doctorMap);
   }
+
   static Future setSettingMap(String settingMap) async {
-    await _securedStorage.write(key: DbKeys.settingKey, value: settingMap);
+    await _securedStorage.setString(DbKeys.settingKey, settingMap);
   }
 
   /// GETTERS
   ///
   static Future<String?> getIsFirstUse() async {
-    return await _securedStorage.read(key: DbKeys.isFirstUse);
+    return _securedStorage.getString(DbKeys.isFirstUse);
   }
 
   static Future<String?> getIsLogged() async {
-    return await _securedStorage.read(key: DbKeys.isLogged);
+    return _securedStorage.getString(DbKeys.isLogged);
   }
 
   static Future<String?> getUserName() async {
-    return await _securedStorage.read(key: DbKeys.userName);
+    return _securedStorage.getString(DbKeys.userName);
   }
 
   static Future<String?> getPassword() async {
-    return await _securedStorage.read(key: DbKeys.password);
+    return _securedStorage.getString(DbKeys.password);
   }
 
   static Future<String?> getUserMap() async {
-    return await _securedStorage.read(key: DbKeys.userMap);
+    return _securedStorage.getString(DbKeys.userMap);
   }
 
   static Future<String?> getAccessToken() async {
-    return await _securedStorage.read(key:DbKeys.token);
+    return _securedStorage.getString(DbKeys.token);
   }
 
   static Future<String?> getLang() async {
-    return await _securedStorage.read(key:DbKeys.lang);
+    return _securedStorage.getString(DbKeys.lang);
   }
 
   static Future<String?> getCountryCode() async {
-    return await _securedStorage.read(key: DbKeys.countryCode);
+    return _securedStorage.getString(DbKeys.countryCode);
   }
+
   static Future<String?> getSetting() async {
-    return await _securedStorage.read(key: DbKeys.settingKey);
+    return _securedStorage.getString(DbKeys.settingKey);
+  }
+
+  ///remove key
+  static Future removeUserMapFromCache() async {
+    return _securedStorage.remove(DbKeys.userMap);
+  }
+
+  static Future removeAccessTokenFromCache() async {
+    return _securedStorage.remove(DbKeys.token);
   }
 }

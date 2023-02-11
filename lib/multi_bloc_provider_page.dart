@@ -20,6 +20,8 @@ import 'features/notification_feature/data/reposiroty/notification_repository.da
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
+import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
@@ -62,6 +64,10 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<StoreCubit>(create: (_) => di.sl<StoreCubit>()),
         BlocProvider<MyStoreCubit>(create: (_) => di.sl<MyStoreCubit>()),
         BlocProvider<ProductCubit>(create: (_) => di.sl<ProductCubit>()),
+        BlocProvider<PickLocationCubit>(
+            create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<GeneralStoresCubit>(
+            create: (_) => di.sl<GeneralStoresCubit>()),
         BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
         BlocProvider<TagsCubit>(create: (_) => di.sl<TagsCubit>()),
         BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:captien_omda_customer/core/Constants/Enums/exception_enums.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,8 +25,8 @@ class AuthLocalDataSourceImp extends AuthLocalDataSourceInterface {
 
   @override
   Future<void> deleteUserFromCache() async {
-    await DefaultSecuredStorage.setUserMap(null);
-    await DefaultSecuredStorage.setAccessToken(null);
+    await DefaultSecuredStorage.removeUserMapFromCache();
+    await DefaultSecuredStorage.removeAccessTokenFromCache();
     await DefaultSecuredStorage.setIsLogged('false');
     SharedText.userToken = "";
   }
