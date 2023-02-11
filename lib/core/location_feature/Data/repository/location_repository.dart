@@ -18,9 +18,9 @@ class LocationRepository extends LocationRepositoryInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> getCityData(
-      {int page = 1, int limit = 10, required int countryId}) {
+      {int page = 1, int limit = 10, }) {
     return remoteDataSourceInterface.getCityData(
-        countryId: countryId, page: page, limit: limit);
+         page: page, limit: limit);
   }
 
 

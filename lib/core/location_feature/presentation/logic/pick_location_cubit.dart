@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../domain/model/location_area_model.dart';
 import '../../domain/uesCaes/location_use_caes.dart';
 import 'pick_location_states.dart';
@@ -30,6 +29,22 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
   late ScrollController areaScrollController;
   bool areaHasMoreData = false;
 
+  setSelectedCity(LocationAreaModel model) {
+    selectedCity = model;
+    emit(FilterSearchState());
+  }
+  setSelectedArea(LocationAreaModel model) {
+    selectedArea = model;
+    emit(FilterSearchState());
+  }
+
+
+  isThisCitySelected(LocationAreaModel model) {
+    if (selectedCity == null) return false;
+    if (selectedCity!.id != model.id) return false;
+    return true;
+  }
+
   ///search in city list by name
   searchInCityList(String value) {
     tempCityList = cityList
@@ -40,11 +55,10 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
   }
 
   ///get city data
-  getCityData({required countyId}) async {
+  getCityData({int limit=10}) async {
     emit(CityLocationLoadingState());
     cityPageNumber = 1;
-    var result = await _locationUesCases.callCityList(
-        page: cityPageNumber, countryId: countyId);
+    var result = await _locationUesCases.callCityList(page: cityPageNumber,limit: limit);
 
     result.fold(
       (failure) => emit(CityLocationFailedState(failure)),
@@ -55,7 +69,8 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
           cityHasMoreData = cityData.length == 10;
           cityList = cityData;
           tempCityList = cityData;
-
+          tempAreaList.clear();
+          areaList.clear();
           emit(CityLocationSuccessState());
         }
       },
@@ -68,17 +83,16 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
         cityScrollController.offset >=
             cityScrollController.position.maxScrollExtent) {
       if (state is! CityLocationLoadingMoreDataState && cityHasMoreData) {
-        whenScrollCountryPagination(countyId: countyId);
+        whenScrollCountryPagination();
       }
     }
   }
 
   ///get category pagination
-  whenScrollCountryPagination({required countyId}) async {
+  whenScrollCountryPagination() async {
     emit(CityLocationLoadingMoreDataState());
     cityPageNumber = cityPageNumber + 1;
-    var result = await _locationUesCases.callCityList(
-        page: cityPageNumber, countryId: countyId);
+    var result = await _locationUesCases.callCityList(page: cityPageNumber);
 
     result.fold(
       (failure) => emit(CityLocationFailedMoreDataState(failure)),
@@ -90,7 +104,11 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
       },
     );
   }
-
+  isThisAreaSelected(LocationAreaModel model) {
+    if (selectedArea == null) return false;
+    if (selectedArea!.id != model.id) return false;
+    return true;
+  }
   ///search in country list by name
   searchInAreaList(String value) {
     tempAreaList = areaList
@@ -101,11 +119,11 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
   }
 
   ///get area data
-  getAreaData({required int cityID}) async {
+  getAreaData({required int cityID,int limit=10}) async {
     emit(AreaLocationLoadingState());
     areaPageNumber = 1;
     var result = await _locationUesCases.callAreaList(
-        page: areaPageNumber, cityId: cityID);
+        page: areaPageNumber, cityId: cityID,limit: limit);
 
     result.fold(
       (failure) => emit(AreaLocationFailedState(failure)),
@@ -116,7 +134,7 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
           areaHasMoreData = areaData.length == 10;
           areaList = areaData;
           tempAreaList = areaData;
-
+          selectedArea=null;
           emit(AreaLocationSuccessState());
         }
       },
@@ -150,5 +168,9 @@ class PickLocationCubit extends Cubit<PickLocationStates> {
         emit(AreaLocationSuccessState());
       },
     );
+  }
+  clearAllData(){
+    selectedArea=null;
+    selectedCity=null;
   }
 }
