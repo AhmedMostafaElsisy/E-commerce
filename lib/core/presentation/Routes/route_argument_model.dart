@@ -27,6 +27,7 @@ class RouteArgument {
 
   ShopModel? shopModel;
   ProductModel? productModel;
+  bool? firstStoreCreate;
 
   RouteArgument(
       {this.id,
@@ -44,7 +45,9 @@ class RouteArgument {
       this.onTap,
       this.otp,
       this.requestId,
-      this.shopModel,this.productModel});
+      this.shopModel,
+      this.productModel,
+      this.firstStoreCreate});
 
   @override
   String toString() {

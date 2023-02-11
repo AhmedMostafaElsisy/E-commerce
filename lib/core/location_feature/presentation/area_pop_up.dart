@@ -9,6 +9,7 @@ import '../../presentation/Widgets/common_error_widget.dart';
 import '../../presentation/Widgets/common_global_button.dart';
 import '../../presentation/Widgets/common_text_form_field_widget.dart';
 import '../../presentation/Widgets/common_title_text.dart';
+import '../../presentation/Widgets/pop_up_item.dart';
 import '../domain/model/location_area_model.dart';
 import 'logic/pick_location_cubit.dart';
 import 'logic/pick_location_states.dart';
@@ -152,81 +153,28 @@ showAreaPopUp({
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return InkWell(
-                                      onTap: () {
+                                      onTap: (){
                                         pickLocationCtx
                                             .read<PickLocationCubit>()
                                             .setSelectedArea(pickLocationCtx
                                             .read<PickLocationCubit>()
                                             .tempAreaList[index]);
                                       },
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(pickLocationCtx
-                                                .read<PickLocationCubit>()
-                                                .isThisAreaSelected(pickLocationCtx
-                                                .read<
-                                                PickLocationCubit>()
-                                                .tempAreaList[index])
-                                                ? 1
-                                                : 0),
-                                            width: getWidgetWidth(16),
-                                            height: getWidgetHeight(16),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: pickLocationCtx
-                                                      .read<PickLocationCubit>()
-                                                      .isThisAreaSelected(pickLocationCtx
-                                                      .read<
-                                                      PickLocationCubit>()
-                                                      .tempAreaList[index])
-                                                      ? AppConstants.mainColor
-                                                      : Colors.transparent,
-                                                ),
-                                                shape: BoxShape.circle),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color:pickLocationCtx
-                                                      .read<PickLocationCubit>()
-                                                      .isThisAreaSelected(pickLocationCtx
-                                                      .read<
-                                                      PickLocationCubit>()
-                                                      .tempAreaList[index])
-                                                      ? AppConstants.mainColor
-                                                      : Colors.transparent,
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      color: AppConstants
-                                                          .mainColor)),
-                                            ),
-                                          ),
-
-                                          /// Spacer
-                                          getSpaceWidth(4),
-
-                                          Expanded(
-                                            child: CommonTitleText(
-                                              textAlignment: TextAlign.start,
-                                              lines: 2,
-                                              textOverflow:
-                                              TextOverflow.ellipsis,
-                                              textKey: pickLocationCtx
-                                                  .read<PickLocationCubit>()
-                                                  .tempAreaList[index]
-                                                  .name
-                                                  .toString(),
-                                              textWeight: FontWeight.w400,
-                                              textFontSize:
-                                              AppConstants.smallFontSize,
-                                              minTextFontSize:
-                                              AppConstants.smallFontSize,
-                                              textColor:
-                                              AppConstants.mainTextColor,
-                                            ),
-                                          ),
-                                        ],
+                                      child: PopUpItemWidget(
+                                        isSelected: pickLocationCtx
+                                            .read<PickLocationCubit>()
+                                            .isThisAreaSelected(pickLocationCtx
+                                            .read<
+                                            PickLocationCubit>()
+                                            .tempAreaList[index]),
+                                        name: pickLocationCtx
+                                            .read<PickLocationCubit>()
+                                            .tempAreaList[index]
+                                            .name
+                                            .toString() ,
                                       ),
                                     );
+
                                   },
                                 ),
                               ]

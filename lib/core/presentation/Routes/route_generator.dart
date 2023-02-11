@@ -83,7 +83,7 @@ class RouteGenerator {
             page: const MyStoresListScreen());
       case RouteNames.addStoresPageRoute:
         return RouteAnimation()
-            .animationFromCenterRightToCenterLeft(page: const AddStoreScreen());
+            .animationFromCenterRightToCenterLeft(page:  AddStoreScreen(argument: args as RouteArgument,));
       case RouteNames.editStoresPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: EditStoreScreen(argument: args as RouteArgument));

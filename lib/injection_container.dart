@@ -10,6 +10,7 @@ import 'core/location_feature/Data/repository/location_repository.dart';
 import 'core/location_feature/domain/repository/location_interface.dart';
 import 'core/location_feature/domain/uesCaes/location_use_caes.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
+import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import 'core/setting_feature/Data/data_scources/local_data_scources.dart';
 import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
@@ -63,6 +64,7 @@ import 'features/store_feature/data/data_scoures/remote_data_scoures.dart';
 import 'features/store_feature/data/repository/my_store_repository.dart';
 import 'features/store_feature/domain/repository/store_repository_interface.dart';
 import 'features/store_feature/domain/ues_cases/ues_cases.dart';
+import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/data/data_scoures/remote_data_scoures.dart';
@@ -90,6 +92,8 @@ Future<void> init() async {
   sl.registerFactory(() => ProductCubit(sl()));
   sl.registerFactory(() => PickLocationCubit(sl()));
   sl.registerFactory(() => TagsCubit(sl()));
+  sl.registerFactory(() => EditStoreCubit(sl()));
+  sl.registerFactory(() => AllFilterCubit());
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));

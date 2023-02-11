@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../../core/location_feature/domain/model/location_area_model.dart';
+import '../../../../../core/model/category_model.dart';
 import '../../../../../core/model/shop_model.dart';
+import '../../../../../core/tags_feature/domain/model/tags_model.dart';
 import '../../../domain/ues_cases/ues_cases.dart';
 import 'store_states.dart';
 
@@ -14,7 +17,16 @@ class StoreCubit extends Cubit<StoreStates> {
   List<ShopModel> myStoreList = [];
   List<TextEditingController> controllerList = [];
   late bool isDataFound;
+  late TextEditingController storeNameController;
+  late TextEditingController ownerNameController;
+  late TextEditingController userAddressController;
+  late TextEditingController userCityController;
+  late TextEditingController userAreaController;
+  late TextEditingController emailAddressController;
 
+  late TextEditingController phoneNumberController;
+  late TextEditingController storeMainCategoryController;
+  late TextEditingController storeSubCategoryController;
   void isDataFount(List<TextEditingController> list) {
     isDataFound = true;
     emit(CheckInputValidationState());
@@ -43,7 +55,39 @@ class StoreCubit extends Cubit<StoreStates> {
   int page = 1;
   late ScrollController scrollController;
   bool hasMoreData = false;
+  LocationAreaModel? selectedCity;
+  LocationAreaModel? selectedArea;
+  CategoryModel? selectedCategory;
+  List<TagsModel>? selectedTag;
 
+  setNewCitySelected(LocationAreaModel model) {
+    selectedCity = model;
+    selectedArea = null;
+    emit(LocationSelectedState());
+  }
+
+  setSelectedArea(LocationAreaModel model) {
+    selectedArea = model;
+    emit(LocationSelectedState());
+  }
+
+  setSelectedCategory(CategoryModel model) {
+    selectedCategory = model;
+    emit(LocationSelectedState());
+  }
+
+  setSelectedTags(List<TagsModel> model) {
+    selectedTag = model;
+    emit(LocationSelectedState());
+  }
+clearAllData(){
+  selectedArea=null;
+  selectedCity=null;
+  selectedCategory=null;
+    selectedTag=null;
+  emit(LocationSelectedState());
+
+}
   getMyStoreListData() async {
     emit(StoreLoadingStates());
     page = 1;
@@ -85,62 +129,31 @@ class StoreCubit extends Cubit<StoreStates> {
   }
 
   ///create store
-  createNewStore({
-    required XFile storeImage,
-    required String storeName,
-    required String ownerName,
-    required String storeNumber,
-    required String storeEmail,
-    required String storeAddress,
-    required String storeCity,
-    required String storeArea,
-    required String storeMainCategory,
-    required String storeSubCategory,
-  }) async {
+  createNewStore() async {
     emit(CreateStoreLoadingStates());
     var result = await uesCase.createNewStore(
-        storeImage: storeImage,
-        storeName: storeName,
-        ownerName: ownerName,
-        storeNumber: storeNumber,
-        storeEmail: storeEmail,
-        storeAddress: storeAddress,
-        storeCity: storeCity,
-        storeArea: storeArea,
-        storeMainCategory: storeMainCategory,
-        storeSubCategory: storeSubCategory);
+        storeImage: imageXFile!,
+        storeName: storeNameController
+            .text,
+        ownerName:  ownerNameController
+            .text,
+        storeNumber:  phoneNumberController
+            .text,
+        storeEmail:  emailAddressController
+            .text,
+        storeAddress: userAddressController
+            .text,
+        storeCity: selectedCity!.id
+            .toString(),
+        storeArea: selectedArea!.id
+            .toString(),
+        storeMainCategory: selectedCategory!
+            .id
+            .toString(),
+        storeSubCategory: selectedTag!);
     result.fold((error) => emit(CreateStoreFailedStates(error)),
         (success) => emit(CreateStoreSuccessStates()));
   }
 
-  ///edit store
-  editStore({
-    required int storeId,
-    XFile? storeImage,
-    required String storeName,
-    required String ownerName,
-    required String storeNumber,
-    required String storeEmail,
-    required String storeAddress,
-    required String storeCity,
-    required String storeArea,
-    required String storeMainCategory,
-    required String storeSubCategory,
-  }) async {
-    emit(EditStoreLoadingStates());
-    var result = await uesCase.editStore(
-        storeId: storeId,
-        storeImage: storeImage,
-        storeName: storeName,
-        ownerName: ownerName,
-        storeNumber: storeNumber,
-        storeEmail: storeEmail,
-        storeAddress: storeAddress,
-        storeCity: storeCity,
-        storeArea: storeArea,
-        storeMainCategory: storeMainCategory,
-        storeSubCategory: storeSubCategory);
-    result.fold((error) => emit(EditStoreFailedStates(error)),
-        (success) => emit(EditStoreSuccessStates()));
-  }
+
 }

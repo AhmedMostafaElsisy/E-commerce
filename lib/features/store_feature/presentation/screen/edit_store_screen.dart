@@ -1,6 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_store_cubit/store_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,8 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/general_store_cubit/store_cubit.dart';
+import '../logic/edit_my_store/edit_my_store_cubit.dart';
+import '../logic/edit_my_store/edit_my_store_states.dart';
 
 class EditStoreScreen extends StatefulWidget {
   final RouteArgument argument;
@@ -32,69 +32,59 @@ class EditStoreScreen extends StatefulWidget {
 }
 
 class _EditStoreScreenState extends State<EditStoreScreen> {
-  late StoreCubit _storeCubit;
+  late EditStoreCubit _editStoreCubit;
   final formKey = GlobalKey<FormState>();
 
-  late TextEditingController storeNameController;
-  late TextEditingController ownerNameController;
-  late TextEditingController userAddressController;
-  late TextEditingController userCityController;
-  late TextEditingController userAreaController;
-  late TextEditingController emailAddressController;
-
-  late TextEditingController phoneNumberController;
-  late TextEditingController storeMainCategoryController;
-  late TextEditingController storeSubCategoryController;
 
   @override
   void initState() {
     super.initState();
-    _storeCubit = BlocProvider.of<StoreCubit>(context);
-    storeNameController =
+    _editStoreCubit = BlocProvider.of<EditStoreCubit>(context);
+    _editStoreCubit. storeNameController =
         TextEditingController(text: widget.argument.shopModel!.name!);
-    ownerNameController =
+    _editStoreCubit.  ownerNameController =
         TextEditingController(text: widget.argument.shopModel!.ownerName!);
-    emailAddressController =
+    _editStoreCubit.   emailAddressController =
         TextEditingController(text: widget.argument.shopModel!.email!);
-    phoneNumberController =
+    _editStoreCubit.  phoneNumberController =
         TextEditingController(text: widget.argument.shopModel!.phone!);
 
-    userAddressController =
+    _editStoreCubit.   userAddressController =
         TextEditingController(text: widget.argument.shopModel!.location!);
-    userCityController =
+    _editStoreCubit.   userCityController =
         TextEditingController(text: widget.argument.shopModel!.city!);
-    userAreaController =
+    _editStoreCubit.  userAreaController =
         TextEditingController(text: widget.argument.shopModel!.area!);
-    storeMainCategoryController =
+    _editStoreCubit.   storeMainCategoryController =
         TextEditingController(text: widget.argument.shopModel!.category!);
-    storeSubCategoryController =
+    _editStoreCubit.   storeSubCategoryController =
         TextEditingController(text: widget.argument.shopModel!.subCategory!);
-    _storeCubit.isDataFound = false;
-    _storeCubit.controllerList.clear();
-    _storeCubit.controllerList.add(storeNameController);
-    _storeCubit.controllerList.add(ownerNameController);
-    _storeCubit.controllerList.add(emailAddressController);
-    _storeCubit.controllerList.add(phoneNumberController);
-    _storeCubit.controllerList.add(userAddressController);
-    _storeCubit.controllerList.add(userCityController);
-    _storeCubit.controllerList.add(userAreaController);
-    _storeCubit.controllerList.add(storeMainCategoryController);
-    _storeCubit.controllerList.add(storeSubCategoryController);
-    _storeCubit.isDataFount(_storeCubit.controllerList);
+    _editStoreCubit.isDataFound = false;
+    _editStoreCubit.controllerList.clear();
+    _editStoreCubit.controllerList.add( _editStoreCubit.storeNameController);
+    _editStoreCubit.controllerList.add( _editStoreCubit.ownerNameController);
+    _editStoreCubit.controllerList.add( _editStoreCubit.emailAddressController);
+    _editStoreCubit.controllerList.add( _editStoreCubit.phoneNumberController);
+    _editStoreCubit.controllerList.add( _editStoreCubit.userAddressController);
+    _editStoreCubit.controllerList.add( _editStoreCubit.userCityController);
+    _editStoreCubit.controllerList.add(_editStoreCubit.userAreaController);
+    _editStoreCubit.controllerList.add(_editStoreCubit.storeMainCategoryController);
+    _editStoreCubit.controllerList.add(_editStoreCubit.storeSubCategoryController);
+    _editStoreCubit.isDataFount(_editStoreCubit.controllerList);
   }
 
   @override
   void dispose() {
-    storeNameController.dispose();
-    ownerNameController.dispose();
-    emailAddressController.dispose();
-    phoneNumberController.dispose();
-    userAddressController.dispose();
-    userCityController.dispose();
-    userAreaController.dispose();
-    storeMainCategoryController.dispose();
-    storeSubCategoryController.dispose();
-    _storeCubit.imageXFile = null;
+    _editStoreCubit. storeNameController.dispose();
+    _editStoreCubit. ownerNameController.dispose();
+    _editStoreCubit.  emailAddressController.dispose();
+    _editStoreCubit. phoneNumberController.dispose();
+    _editStoreCubit.  userAddressController.dispose();
+    _editStoreCubit.  userCityController.dispose();
+    _editStoreCubit. userAreaController.dispose();
+    _editStoreCubit.  storeMainCategoryController.dispose();
+    _editStoreCubit.  storeSubCategoryController.dispose();
+    _editStoreCubit.imageXFile = null;
     super.dispose();
   }
 
@@ -122,7 +112,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                   textFontSize: AppConstants.normalFontSize,
                 ),
               ),
-              BlocConsumer<StoreCubit, StoreStates>(
+              BlocConsumer<EditStoreCubit, EditMyStoreState>(
                 listener: (storeCtx, storeState) {
                   if (storeState is EditStoreFailedStates) {
                     checkUserAuth(
@@ -163,7 +153,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           takePhotoBottomSheet(
                                               context: context,
                                               getPhoto: storeCtx
-                                                  .read<StoreCubit>()
+                                                  .read<EditStoreCubit>()
                                                   .photoPicked);
                                         },
                                         child: Container(
@@ -186,10 +176,10 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  _storeCubit.imageXFile != null
+                                                  _editStoreCubit.imageXFile != null
                                                       ? commonFileImageWidget(
                                                           imageString:
-                                                              _storeCubit
+                                                              _editStoreCubit
                                                                   .imageXFile!
                                                                   .path,
                                                           height: 40,
@@ -218,7 +208,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       ///store name
                                       CommonTextFormField(
-                                        controller: storeNameController,
+                                        controller:  _editStoreCubit.storeNameController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopName,
                                         keyboardType: TextInputType.text,
@@ -238,8 +228,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -249,7 +239,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       ///owner name
                                       CommonTextFormField(
-                                        controller: ownerNameController,
+                                        controller:  _editStoreCubit.ownerNameController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopOwnerName,
                                         keyboardType: TextInputType.text,
@@ -269,8 +259,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -280,7 +270,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       /// Phone
                                       CommonTextFormField(
-                                        controller: phoneNumberController,
+                                        controller:  _editStoreCubit.phoneNumberController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopPhone,
                                         keyboardType: TextInputType.phone,
@@ -301,8 +291,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -312,7 +302,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       /// Email
                                       CommonTextFormField(
-                                        controller: emailAddressController,
+                                        controller:  _editStoreCubit.emailAddressController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopEmail,
                                         keyboardType: TextInputType.text,
@@ -331,8 +321,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -344,7 +334,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                       CommonTextFormField(
                                         minLines: 3,
                                         maxLines: 5,
-                                        controller: userAddressController,
+                                        controller:  _editStoreCubit.userAddressController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblShopAddressDetails,
                                         keyboardType: TextInputType.text,
@@ -358,8 +348,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -373,7 +363,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           ///City
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller: userCityController,
+                                              controller:  _editStoreCubit.userCityController,
                                               hintKey:
                                                   AppLocalizations.of(context)!
                                                       .lblCity,
@@ -390,8 +380,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                                 }
                                               },
                                               onChanged: (value) {
-                                                _storeCubit.isDataFount(
-                                                    _storeCubit.controllerList);
+                                                _editStoreCubit.isDataFount(
+                                                    _editStoreCubit.controllerList);
                                                 return null;
                                               },
                                             ),
@@ -404,7 +394,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           ///Area
                                           Expanded(
                                             child: CommonTextFormField(
-                                              controller: userAreaController,
+                                              controller:  _editStoreCubit.userAreaController,
                                               hintKey:
                                                   AppLocalizations.of(context)!
                                                       .lblArea,
@@ -421,8 +411,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                                 }
                                               },
                                               onChanged: (value) {
-                                                _storeCubit.isDataFount(
-                                                    _storeCubit.controllerList);
+                                                _editStoreCubit.isDataFount(
+                                                    _editStoreCubit.controllerList);
                                                 return null;
                                               },
                                             ),
@@ -435,7 +425,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       ///main category
                                       CommonTextFormField(
-                                        controller: storeMainCategoryController,
+                                        controller: _editStoreCubit. storeMainCategoryController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblMainCategory,
                                         keyboardType: TextInputType.text,
@@ -452,8 +442,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -463,7 +453,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
 
                                       ///sub category
                                       CommonTextFormField(
-                                        controller: storeSubCategoryController,
+                                        controller: _editStoreCubit. storeSubCategoryController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblSubCategory,
                                         keyboardType: TextInputType.text,
@@ -480,8 +470,8 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                           }
                                         },
                                         onChanged: (value) {
-                                          _storeCubit.isDataFount(
-                                              _storeCubit.controllerList);
+                                          _editStoreCubit.isDataFount(
+                                              _editStoreCubit.controllerList);
                                           return null;
                                         },
                                       ),
@@ -496,7 +486,7 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                             height: 48,
                                             buttonBackgroundColor:
                                                 AppConstants.mainColor,
-                                            isEnable: _storeCubit.isDataFound,
+                                            isEnable: _editStoreCubit.isDataFound,
                                             isLoading: storeState
                                                 is EditStoreLoadingStates,
                                             buttonTextSize: 18,
@@ -510,36 +500,12 @@ class _EditStoreScreenState extends State<EditStoreScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                storeCtx.read<StoreCubit>().editStore(
+                                                storeCtx.read<EditStoreCubit>().editStore(
                                                     storeId: widget.argument
                                                         .shopModel!.id!,
                                                     storeImage:
-                                                        _storeCubit.imageXFile,
-                                                    storeName:
-                                                        storeNameController
-                                                            .text,
-                                                    ownerName:
-                                                        ownerNameController
-                                                            .text,
-                                                    storeNumber:
-                                                        phoneNumberController
-                                                            .text,
-                                                    storeEmail:
-                                                        emailAddressController
-                                                            .text,
-                                                    storeAddress:
-                                                        userAddressController
-                                                            .text,
-                                                    storeCity:
-                                                        userCityController.text,
-                                                    storeArea:
-                                                        userAreaController.text,
-                                                    storeMainCategory:
-                                                        storeMainCategoryController
-                                                            .text,
-                                                    storeSubCategory:
-                                                        storeSubCategoryController
-                                                            .text);
+                                                        _editStoreCubit.imageXFile,
+                                                  );
                                               }
                                             },
                                           ),
