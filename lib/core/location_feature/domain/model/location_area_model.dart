@@ -4,24 +4,28 @@ List<LocationAreaModel> locationAreaListFromJson(List str) =>
 class LocationAreaModel {
   int? id;
   String? name;
-  int? countryId;
+  int? cityId;
 
   LocationAreaModel({
     this.id,
-    this.countryId,
+    this.cityId,
     this.name,
   });
 
   factory LocationAreaModel.fromJson(Map<String, dynamic> json) {
     return LocationAreaModel(
       id: json["id"],
-      countryId: json["country_id"],
+      cityId: json["city_id"],
       name: json["name"],
     );
   }
-
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "id": id,
+    "city_id": cityId,
+  };
   @override
   String toString() {
-    return 'LocationModel{id: $id, name: $name, countryId: $countryId}';
+    return 'LocationModel{id: $id, name: $name, cityId: $cityId}';
   }
 }

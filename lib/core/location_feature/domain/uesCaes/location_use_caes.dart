@@ -9,9 +9,9 @@ class LocationUesCases {
   LocationUesCases(this.repositoryInterface);
 
   Future<Either<CustomError, List<LocationAreaModel>>> callCityList(
-      {int page = 1, int limit = 10, required int countryId}) {
+      {int page = 1, int limit = 10, }) {
     return repositoryInterface
-        .getCityData(page: page, limit: limit, countryId: countryId)
+        .getCityData(page: page, limit: limit,)
         .then((value) => value.fold(
             (l) => Left(l), (r) => right(locationAreaListFromJson(r.data))));
   }

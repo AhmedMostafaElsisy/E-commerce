@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/location_feature/domain/model/location_area_model.dart';
 import '../../../Domain/entities/base_user_entity.dart';
 import '../../../Domain/use_cases/auth_use_case.dart';
 import 'sign_up_states.dart';
@@ -17,6 +18,20 @@ class SignUpCubit extends Cubit<SignUpStates> {
   bool hidePassword = true;
   List<TextEditingController> controllerList = [];
   late bool isDataFound;
+
+  LocationAreaModel? selectedCity;
+  LocationAreaModel? selectedArea;
+
+  setNewCitySelected(LocationAreaModel model) {
+    selectedCity = model;
+    selectedArea = null;
+    emit(LocationSelectedState());
+  }
+
+  setSelectedArea(LocationAreaModel model) {
+    selectedArea = model;
+    emit(LocationSelectedState());
+  }
 
   switchPasswordToggle() {
     hidePassword = !hidePassword;
@@ -63,5 +78,10 @@ class SignUpCubit extends Cubit<SignUpStates> {
       }
     }
     emit(CheckInputValidationState());
+  }
+
+  clearAllData() {
+    selectedArea = null;
+    selectedCity = null;
   }
 }

@@ -96,6 +96,7 @@ class CommonTextFormField extends StatelessWidget {
           : TextDirection.rtl,
       child: Center(
         child: TextFormField(
+          onTap: onTap,
           textAlignVertical: TextAlignVertical.center,
           controller: controller,
           minLines: minLines,

@@ -186,6 +186,6 @@
   "lblDelete": "حذف",
   "lblOrder": "طلبات",
   "lblOrderSearch": "البحث عن طريق كود الطلب",
-  "lblQty": "الكمية:"
-
+  "lblQty": "الكمية:",
+  "lblSelectCityFirst": "اختر المحافظة اولا"
 }

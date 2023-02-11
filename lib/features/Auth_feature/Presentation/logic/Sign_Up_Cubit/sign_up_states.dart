@@ -46,3 +46,4 @@ class UploadingUserImageLoadingState extends SignUpStates {}
 class ShowOrHidePasswordState extends SignUpStates {}
 
 class CheckInputValidationState extends SignUpStates {}
+class LocationSelectedState extends SignUpStates {}

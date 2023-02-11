@@ -10,7 +10,7 @@ abstract class LocationRemoteDataSourceInterface {
 
 
   Future<Either<CustomError, BaseModel>> getCityData(
-      {int page = 1, int limit = 10, required int countryId});
+      {int page = 1, int limit = 10,});
 
   Future<Either<CustomError, BaseModel>> getAreaData(
       {int page = 1, int limit = 10, required int cityId});
@@ -37,11 +37,10 @@ class LocationRemoteDataSourceImpl extends LocationRemoteDataSourceInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> getCityData(
-      {int page = 1, int limit = 10, required int countryId}) async {
+      {int page = 1, int limit = 10,}) async {
     try {
-      ///Todo: add country id
-      String pathUrl = "";
-      pathUrl = "${ApiKeys.cityListKey}?limit=$limit&page=$page";
+
+      String pathUrl  = "${ApiKeys.cityListKey}?limit=$limit&page=$page";
 
       Response response = await DioHelper.getDate(url: pathUrl);
 

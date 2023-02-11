@@ -18,6 +18,7 @@ class ProfileErrorState extends ProfileCubitStates {
   });
 }
 
+class ProfileAreaSelectedState extends ProfileCubitStates {}
 class UploadingUserImageLoadingState extends ProfileCubitStates {}
 class CheckInputValidationState extends ProfileCubitStates {}
 

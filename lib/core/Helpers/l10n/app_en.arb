@@ -187,6 +187,8 @@
   "lblDelete": "Delete",
   "lblOrder": "Order",
   "lblOrderSearch": "Search by order code",
-  "lblQty": "Quantity:"
+  "lblQty": "Quantity:",
+  "lblSelectCityFirst":"Please select city first"
+
 
 }

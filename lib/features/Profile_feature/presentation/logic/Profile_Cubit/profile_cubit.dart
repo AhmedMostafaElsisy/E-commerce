@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../../../core/location_feature/domain/model/location_area_model.dart';
 import '../../../../Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../../Domain/user_cases/profile_ues_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,21 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   UserBaseEntity baseUser = UserBaseEntity();
   List<TextEditingController> controllerList = [];
   late bool isDataFound;
-
+  LocationAreaModel? selectedCity;
+  LocationAreaModel? selectedArea;
+  setNewCitySelected(LocationAreaModel model) {
+    selectedCity = model;
+    selectedArea=null;
+    emit(ProfileAreaSelectedState());
+  }
+  setSelectedArea(LocationAreaModel model) {
+    selectedArea = model;
+    emit(ProfileAreaSelectedState());
+  }
+  clearAllData(){
+    selectedArea=null;
+    selectedCity=null;
+  }
   /// user Profile_Cubit data
   getUserProfileData() async {
     emit(ProfileLoadingState());

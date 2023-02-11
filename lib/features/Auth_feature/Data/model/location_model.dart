@@ -1,11 +1,11 @@
-import 'package:captien_omda_customer/features/Auth_feature/Data/model/area_model.dart';
-import 'package:captien_omda_customer/features/Auth_feature/Data/model/city_model.dart';
+
+import '../../../../core/location_feature/domain/model/location_area_model.dart';
 
 class LocationModel {
   int? id;
   String? streetName;
-  CityModel? cityModel;
-  AreaModel? areaModel;
+  LocationAreaModel? cityModel;
+  LocationAreaModel? areaModel;
 
   LocationModel({this.id, this.streetName, this.cityModel, this.areaModel});
 
@@ -13,8 +13,8 @@ class LocationModel {
     return LocationModel(
       id: json["id"],
       streetName: json["street"],
-      areaModel: AreaModel.fromJson(json["area"]),
-      cityModel: CityModel.fromJson(json["city"]),
+      areaModel: LocationAreaModel.fromJson(json["area"]),
+      cityModel: LocationAreaModel.fromJson(json["city"]),
     );
   }
 
