@@ -1,7 +1,7 @@
 class BaseUrls {
-  ///omda dev Stage
-  static String stage = 'Omda dev';
-  static String domainUrl = 'https://omda.queendemos.com/api';
+  ///cezma dev Stage
+  static String stage = 'cezma dev';
+  static String domainUrl = 'https://pre.cezma.com/api';
 
   static String mapPlaceUrl = 'https://maps.googleapis.com/maps/api/place';
 }

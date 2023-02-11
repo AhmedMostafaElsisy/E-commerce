@@ -21,6 +21,7 @@ class ProfileUesCases {
       required String userAddressDetails,
       required String userCity,
       required String userArea,
+      required String locationId,
       XFile? userImage}) {
     return repositoryInterface.updateUserProfile(
         userFirstName: userFirstName,
@@ -30,6 +31,7 @@ class ProfileUesCases {
         userAddressDetails: userAddressDetails,
         userCity: userCity,
         userArea: userArea,
+        locationId: locationId,
         userImage: userImage);
   }
 }

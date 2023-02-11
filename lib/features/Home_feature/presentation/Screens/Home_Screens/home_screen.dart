@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () => categoriesCubit.getAllCategories(),
                         );
                       } else {
-                        return Container(
+                        return SizedBox(
                           width: getWidgetWidth(375),
                           height: getWidgetHeight(130),
                           child: Column(

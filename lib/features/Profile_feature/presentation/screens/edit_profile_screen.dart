@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared.dart';
@@ -44,25 +43,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    userFirstNameController = TextEditingController();
-    userLastNameController = TextEditingController();
-    emailAddressController = TextEditingController();
-    phoneNumberController = TextEditingController();
-    userAddressController = TextEditingController();
-    userCityController = TextEditingController();
-    userAreaController = TextEditingController();
+    userFirstNameController = TextEditingController(
+        text: SharedText.currentUser!.name!.split(" ").first);
+    userLastNameController = TextEditingController(
+        text: SharedText.currentUser!.name!.split(" ").last);
+    emailAddressController =
+        TextEditingController(text: SharedText.currentUser!.email!);
+    phoneNumberController =
+        TextEditingController(text: SharedText.currentUser!.phone!);
+    userAddressController = TextEditingController(
+        text: SharedText.currentUser!.locationModel!.streetName!);
+    userCityController = TextEditingController(
+        text: SharedText.currentUser!.locationModel!.cityModel!.name);
+    userAreaController = TextEditingController(
+        text: SharedText.currentUser!.locationModel!.areaModel!.name);
     _profileCubit = BlocProvider.of<ProfileCubit>(context);
     _profileCubit.deleteImage = false;
     _profileCubit.imageXFile = null;
-
-    ///Todo:change data set
-    userFirstNameController.text = SharedText.currentUser!.name!;
-    userLastNameController.text = SharedText.currentUser!.name!;
-    phoneNumberController.text = SharedText.currentUser!.phone!;
-    emailAddressController.text = SharedText.currentUser!.email!;
-    userAddressController.text = "10th or ramada ";
-    userCityController.text = "Cairo";
-    userAreaController.text = "Cairo";
     _profileCubit.isDataFound = false;
     _profileCubit.controllerList.clear();
     _profileCubit.controllerList.add(userFirstNameController);
@@ -602,6 +599,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               userArea: userAreaController.text,
                                               userAddressDetails:
                                                   userAddressController.text,
+                                              locationId: SharedText.currentUser!.locationModel!.id!.toString(),
                                               image: profileCtx
                                                   .read<ProfileCubit>()
                                                   .imageXFile);
@@ -619,7 +617,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   buttonTextColor: AppConstants.lightWhiteColor,
                                 ),
                               ),
-
 
                               ///Spacer
                               getSpaceHeight(50),

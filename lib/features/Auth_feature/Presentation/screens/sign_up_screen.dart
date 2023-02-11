@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: ListView(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             children: [
                               Form(
                                 key: formKey,

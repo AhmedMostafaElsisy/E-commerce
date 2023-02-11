@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../Data/model/location_model.dart';
+
 UserBaseEntity userBaseModelFromJson(String str) =>
     UserBaseEntity.fromJson(json.decode(str));
 
@@ -11,20 +13,19 @@ class UserBaseEntity {
   String? name;
   String? email;
   String? phone;
-  String? address;
   int? active;
   int? verified;
-
   int? id;
   String? image;
   String? otp;
   String? rate;
+  LocationModel? locationModel;
 
   UserBaseEntity(
       {this.name,
       this.email,
       this.phone,
-      this.address,
+      this.locationModel,
       this.active,
       this.verified,
       this.id,
@@ -38,7 +39,7 @@ class UserBaseEntity {
           name: json["name"],
           email: json["email"],
           phone: json["phone"],
-          address: json["address"],
+          locationModel: LocationModel.fromJson(json["location"]),
           active: json["active"],
           verified: json["verified"],
           id: json["id"],
@@ -55,11 +56,16 @@ class UserBaseEntity {
         "name": name,
         "email": email,
         "phone": phone,
-        "address": address,
+        "location": locationModel!.toJson(),
         "active": active,
         "verified": verified,
         "id": id,
         "image": image,
-    "rate":rate
+        "rate": rate
       };
+
+  @override
+  String toString() {
+    return 'UserBaseEntity{name: $name, email: $email, phone: $phone, active: $active, verified: $verified, id: $id, image: $image, otp: $otp, rate: $rate, locationModel: $locationModel}';
+  }
 }

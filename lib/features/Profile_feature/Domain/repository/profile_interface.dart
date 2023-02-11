@@ -16,6 +16,7 @@ abstract class ProfileRepositoryInterface extends BaseInterface {
     required String userAddressDetails,
     required String userCity,
     required String userArea,
+    required String locationId,
     XFile? userImage,
 });
 }

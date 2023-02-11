@@ -41,6 +41,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
     required String userAddressDetails,
     required String userCity,
     required String userArea,
+    required String locationId,
     XFile? image,
   }) async {
     emit(ProfileUpdateLoadingState());
@@ -49,7 +50,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
         userLastName: userLastName,
         emailAddress: emailAddress,
         phoneNumber: phoneNumber,
-
+        locationId: locationId,
         userAddressDetails: userAddressDetails,
         userCity: userCity,
         userArea: userArea,

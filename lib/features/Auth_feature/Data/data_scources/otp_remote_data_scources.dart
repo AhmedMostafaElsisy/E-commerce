@@ -1,7 +1,6 @@
 import 'package:captien_omda_customer/core/Constants/Keys/api_keys.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-
 import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
@@ -33,7 +32,7 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.reSendOtpKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
 
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
@@ -53,9 +52,8 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.checkAndVerifyKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
       staticData.fields.add(MapEntry('otp', code));
-
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));
@@ -74,7 +72,7 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.checkOtpKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
       staticData.fields.add(MapEntry('otp_code', code));
 
       Response response =
@@ -95,7 +93,7 @@ class OtpRemoteDataSourceImp extends OtpRemoteDataSourceInterface {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.forgetPasswordKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
 
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);

@@ -45,7 +45,7 @@ class AuthUserCase {
               return left(failure);
             }, (success) {
               return right(
-                  UserBaseEntity.fromJson(success.data["customer"]).otp!);
+                  UserBaseEntity.fromJson(success.data["user"]).otp!);
             }));
   }
 

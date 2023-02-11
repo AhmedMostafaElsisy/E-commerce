@@ -63,7 +63,7 @@ class _StoresListWidgetState extends State<StoresListWidget> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              CommonAssetSvgImageWidget(
+                              const CommonAssetSvgImageWidget(
                                 imageString: "stores.svg",
                                 height: 16,
                                 width: 16,
@@ -90,7 +90,7 @@ class _StoresListWidgetState extends State<StoresListWidget> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              CommonAssetSvgImageWidget(
+                              const CommonAssetSvgImageWidget(
                                 imageString: "location.svg",
                                 height: 16,
                                 width: 16,

@@ -31,6 +31,7 @@ class ProfileRepository extends ProfileRepositoryInterface {
       required String userAddressDetails,
       required String userCity,
       required String userArea,
+      required String locationId,
       XFile? userImage}) {
     return remoteDataSourceInterface
         .updateProfileData(
@@ -41,6 +42,7 @@ class ProfileRepository extends ProfileRepositoryInterface {
             userAddressDetails: userAddressDetails,
             userCity: userCity,
             userArea: userArea,
+            locationId: locationId,
             userImage: userImage)
         .then((value) => value.fold((l) => left(l), (r) {
               localDataSourceInterface.cacheUser(
