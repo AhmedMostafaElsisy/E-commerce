@@ -55,6 +55,11 @@ import 'features/favorite_feature/data/repository/favorite_repository.dart';
 import 'features/favorite_feature/domain/repository/favorite_repository_interface.dart';
 import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
+import 'features/plans_feature/Data/repository/plans_repository.dart';
+import 'features/plans_feature/domain/repository/plans_interface.dart';
+import 'features/plans_feature/domain/uesCaes/plans_use_caes.dart';
+import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/Data/data_scoures/remote_data_scoures.dart';
 import 'features/rating_feature/Data/repository/rating_repository.dart';
 import 'features/rating_feature/Domain/repository/repository_interface.dart';
@@ -93,6 +98,7 @@ Future<void> init() async {
   sl.registerFactory(() => PickLocationCubit(sl()));
   sl.registerFactory(() => TagsCubit(sl()));
   sl.registerFactory(() => EditStoreCubit(sl()));
+  sl.registerFactory(() => PlansCubit(sl()));
   sl.registerFactory(() => AllFilterCubit());
 
   ///User case
@@ -110,6 +116,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductUesCase(sl()));
   sl.registerLazySingleton(() => SettingUserCase(repository: sl()));
   sl.registerLazySingleton(() => TagsUesCases(sl()));
+  sl.registerLazySingleton(() => PlansUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -138,6 +145,10 @@ Future<void> init() async {
   sl.registerLazySingleton<TagsRepositoryInterface>(() =>
       TagsRepository(
        sl()));
+  sl.registerLazySingleton<PlansRepositoryInterface>(() =>
+      PlansRepository(
+       sl()));
+
 
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
@@ -172,6 +183,8 @@ Future<void> init() async {
       () => LocationRemoteDataSourceImpl());
   sl.registerLazySingleton<TagsRemoteDataSourceInterface>(
       () => TagsRemoteDataSourceImpl());
+  sl.registerLazySingleton<PlansRemoteDataSourceInterface>(
+      () => PlansRemoteDataSourceImpl());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

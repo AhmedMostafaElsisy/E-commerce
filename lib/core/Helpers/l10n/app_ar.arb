@@ -191,5 +191,7 @@
   "lblSearchHere": "ابحث هنا . . .",
   "lblNoResultFount": "لايوجد نتائج",
   "lblAdjustYourSearch": "برجاء تعديل بحثك لتجد ما تبحث عنه",
-  "lblCreateStoreAndSelectPlan": "انشاء متجر و اختيار خطة الاسعار"
+  "lblCreateStoreAndSelectPlan": "انشاء متجر و اختيار خطة الاسعار",
+  "lblPricePlan": "خطط الاسعار",
+  "lblContinueAndPay": "الاستمرار و الدفع"
 }

@@ -122,16 +122,20 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                       title: storeState.error.errorMassage!,
                     );
                   } else if (storeState is CreateStoreSuccessStates) {
-                    showSnackBar(
-                        context: storeCtx,
-                        title: AppLocalizations.of(context)!
-                            .lblStoreCreatedSuccess,
-                        color: AppConstants.successColor);
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RouteNames.mainBottomNavPageRoute,
-                      (route) => false,
-                    );
+                    if(! widget
+                        .argument.firstStoreCreate!){
+                      showSnackBar(
+                          context: storeCtx,
+                          title: AppLocalizations.of(context)!
+                              .lblStoreCreatedSuccess,
+                          color: AppConstants.successColor);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouteNames.mainBottomNavPageRoute,
+                            (route) => false,
+                      );
+                    }
+
                   }
                 },
                 builder: (storeCtx, storeState) {
@@ -623,9 +627,14 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                storeCtx
+                                                if( widget
+                                                    .argument.firstStoreCreate!) {
+                                                  Navigator.of(context).pushNamed(RouteNames.planPageRoute);
+                                                }else {
+                                                  storeCtx
                                                     .read<StoreCubit>()
                                                     .createNewStore();
+                                                }
                                               }
                                             },
                                           ),

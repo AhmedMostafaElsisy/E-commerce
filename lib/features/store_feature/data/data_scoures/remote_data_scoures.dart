@@ -30,6 +30,7 @@ abstract class StoreRemoteDataSourceInterface {
     required String storeArea,
     required String storeMainCategory,
     required List<TagsModel> storeSubCategory,
+    int? planId,
   });
 
   Future<Either<CustomError, BaseModel>> editStore({
@@ -60,6 +61,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
     required String storeArea,
     required String storeMainCategory,
     required List<TagsModel> storeSubCategory,
+    int? planId,
   }) async {
     try {
       String pathUrl = ApiKeys.addStoreKey;
@@ -83,6 +85,7 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
           storeImage.path,
           filename: storeImage.path.split("/").last.toString(),
         ),
+        "plan_id":planId
       };
 
       log("this the update data $postData");

@@ -21,6 +21,7 @@ abstract class StoreRepositoryInterface  {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
+    int? planId,
     required List<TagsModel> storeSubCategory,
   });
 

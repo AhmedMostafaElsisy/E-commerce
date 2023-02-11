@@ -18,6 +18,7 @@ import '../../../features/notification_feature/presentation/notification_screen.
 import '../../../features/order_feature/presentation/my_order_screen.dart';
 import '../../../features/order_feature/presentation/order_details_Screen.dart';
 import '../../../features/order_feature/presentation/store_order_screen.dart';
+import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
@@ -108,6 +109,9 @@ class RouteGenerator {
       case RouteNames.orderDetailsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: OrderDetailsScreen(argument: args as RouteArgument));
+        case RouteNames.planPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page:const PlansScreen());
 
       default:
         return MaterialPageRoute(

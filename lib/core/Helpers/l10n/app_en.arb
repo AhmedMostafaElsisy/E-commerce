@@ -192,5 +192,7 @@
   "lblSearchHere": "Search here . . .",
   "lblNoResultFount": "No result found",
   "lblAdjustYourSearch": "Please adjust your search",
-  "lblCreateStoreAndSelectPlan": "Create store and select plan"
+  "lblCreateStoreAndSelectPlan": "Create store and select plan",
+  "lblPricePlan": "Price plan",
+  "lblContinueAndPay": "Continue And Pay"
 }

@@ -27,6 +27,7 @@ class StoreCubit extends Cubit<StoreStates> {
   late TextEditingController phoneNumberController;
   late TextEditingController storeMainCategoryController;
   late TextEditingController storeSubCategoryController;
+
   void isDataFount(List<TextEditingController> list) {
     isDataFound = true;
     emit(CheckInputValidationState());
@@ -80,14 +81,15 @@ class StoreCubit extends Cubit<StoreStates> {
     selectedTag = model;
     emit(LocationSelectedState());
   }
-clearAllData(){
-  selectedArea=null;
-  selectedCity=null;
-  selectedCategory=null;
-    selectedTag=null;
-  emit(LocationSelectedState());
 
-}
+  clearAllData() {
+    selectedArea = null;
+    selectedCity = null;
+    selectedCategory = null;
+    selectedTag = null;
+    emit(LocationSelectedState());
+  }
+
   getMyStoreListData() async {
     emit(StoreLoadingStates());
     page = 1;
@@ -129,31 +131,21 @@ clearAllData(){
   }
 
   ///create store
-  createNewStore() async {
+  createNewStore({int? planId}) async {
     emit(CreateStoreLoadingStates());
     var result = await uesCase.createNewStore(
         storeImage: imageXFile!,
-        storeName: storeNameController
-            .text,
-        ownerName:  ownerNameController
-            .text,
-        storeNumber:  phoneNumberController
-            .text,
-        storeEmail:  emailAddressController
-            .text,
-        storeAddress: userAddressController
-            .text,
-        storeCity: selectedCity!.id
-            .toString(),
-        storeArea: selectedArea!.id
-            .toString(),
-        storeMainCategory: selectedCategory!
-            .id
-            .toString(),
-        storeSubCategory: selectedTag!);
+        storeName: storeNameController.text,
+        ownerName: ownerNameController.text,
+        storeNumber: phoneNumberController.text,
+        storeEmail: emailAddressController.text,
+        storeAddress: userAddressController.text,
+        storeCity: selectedCity!.id.toString(),
+        storeArea: selectedArea!.id.toString(),
+        storeMainCategory: selectedCategory!.id.toString(),
+        storeSubCategory: selectedTag!,
+        planId: planId);
     result.fold((error) => emit(CreateStoreFailedStates(error)),
         (success) => emit(CreateStoreSuccessStates()));
   }
-
-
 }

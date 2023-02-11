@@ -24,6 +24,7 @@ class StoreRepository extends StoreRepositoryInterface {
       required String storeCity,
       required String storeArea,
       required String storeMainCategory,
+        int? planId,
       required List<TagsModel> storeSubCategory}) {
     return remoteDataSourceInterface.createStore(
         storeImage: storeImage,
@@ -35,6 +36,7 @@ class StoreRepository extends StoreRepositoryInterface {
         storeCity: storeCity,
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
+        planId: planId,
         storeSubCategory: storeSubCategory);
   }
 

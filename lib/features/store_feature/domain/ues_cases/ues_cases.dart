@@ -39,6 +39,8 @@ class StoreUesCase {
     required String storeArea,
     required String storeMainCategory,
     required List<TagsModel> storeSubCategory,
+    int? planId,
+
   }) {
     return repositoryInterface.addNewStore(
         storeImage: storeImage,
@@ -50,6 +52,7 @@ class StoreUesCase {
         storeCity: storeCity,
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
+        planId: planId,
         storeSubCategory: storeSubCategory);
   }
 

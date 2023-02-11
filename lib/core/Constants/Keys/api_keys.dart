@@ -69,5 +69,7 @@ class ApiKeys {
   static const String categoryKey = "/home-categories";
   ///Tags
   static const String tagsKey = "/home-tags";
+  ///plans
+  static const String plansKey = "/plans";
 
 }

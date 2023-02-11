@@ -18,6 +18,7 @@ import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/general_store_cubit/store_cubit.dart';
@@ -65,6 +66,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<TagsCubit>(create: (_) => di.sl<TagsCubit>()),
         BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),
         BlocProvider<EditStoreCubit>(create: (_) => di.sl<EditStoreCubit>()),
+        BlocProvider<PlansCubit>(create: (_) => di.sl<PlansCubit>()),
       ],
       child: widget.body,
     );
