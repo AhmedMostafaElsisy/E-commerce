@@ -193,5 +193,7 @@
   "lblAdjustYourSearch": "برجاء تعديل بحثك لتجد ما تبحث عنه",
   "lblCreateStoreAndSelectPlan": "انشاء متجر و اختيار خطة الاسعار",
   "lblPricePlan": "خطط الاسعار",
-  "lblContinueAndPay": "الاستمرار و الدفع"
+  "lblContinueAndPay": "الاستمرار و الدفع",
+  "lblNoProductFound": "لا يوجد لديك منتجات",
+  "lblNoProductFoundDesc": "قم باضاقة منتجات"
 }

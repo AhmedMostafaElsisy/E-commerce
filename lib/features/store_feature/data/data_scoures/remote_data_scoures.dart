@@ -196,10 +196,10 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
     try {
       String pathUrl = "";
       if (limit == null) {
-        pathUrl = "${ApiKeys.showStoreKey}?store_id=$shopId&page=$page";
+        pathUrl = "${ApiKeys.storeProductsKey}?store_id=$shopId&page=$page";
       } else {
         pathUrl =
-            "${ApiKeys.showStoreKey}?store_id=$shopId&limit=$limit&page=$page";
+            "${ApiKeys.storeProductsKey}?store_id=$shopId&limit=$limit&page=$page";
       }
 
       Response response = await DioHelper.getDate(url: pathUrl);

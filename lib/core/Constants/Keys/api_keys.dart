@@ -64,18 +64,23 @@ class ApiKeys {
   static const String addStoreKey = "/add-store";
   static const String updateStoreKey = "/update-store";
   static const String showStoreKey = "/show-store";
+  static const String storeProductsKey = "/store-products";
 
   static const String homeStoresKey = "/home-stores";
 
   ///product
   static const String productKey = "/product";
+  static const String showProductKey = "/show-product";
   static const String productOfStoreKey = "/store-products";
+  static const String addProductKey = "/add-product";
+  static const String deleteProductKey = "/delete-product";
 
   ///category
   static const String categoryKey = "/home-categories";
+
   ///Tags
   static const String tagsKey = "/home-tags";
+
   ///plans
   static const String plansKey = "/plans";
-
 }

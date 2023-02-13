@@ -76,7 +76,7 @@ class ProductStoreInformation extends StatelessWidget {
                 ),
                 getSpaceWidth(4),
                 CommonTitleText(
-                  textKey: model.time!,
+                  textKey: model.time??"==",
                   textFontSize: AppConstants.xxSmallFontSize + 2,
                   textColor: AppConstants.mainColor,
                   textWeight: FontWeight.w600,
@@ -100,14 +100,14 @@ class ProductStoreInformation extends StatelessWidget {
                 ),
                 getSpaceWidth(4),
                 CommonTitleText(
-                  textKey: "${model.shopModel!.address}   ,",
+                  textKey: "${model.shopModel!.city!.name!}   ,",
                   textFontSize: AppConstants.xxSmallFontSize + 2,
                   textColor: AppConstants.mainColor,
                   textWeight: FontWeight.w600,
                 ),
                 getSpaceWidth(8),
                 CommonTitleText(
-                  textKey: "${model.shopModel!.city}",
+                  textKey: model.shopModel!.area!.name!,
                   textFontSize: AppConstants.xxSmallFontSize + 2,
                   textColor: AppConstants.mainColor,
                   textWeight: FontWeight.w600,

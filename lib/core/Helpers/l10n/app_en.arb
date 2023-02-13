@@ -194,5 +194,7 @@
   "lblAdjustYourSearch": "Please adjust your search",
   "lblCreateStoreAndSelectPlan": "Create store and select plan",
   "lblPricePlan": "Price plan",
-  "lblContinueAndPay": "Continue And Pay"
+  "lblContinueAndPay": "Continue And Pay",
+  "lblNoProductFound": "No product found",
+  "lblNoProductFoundDesc": "Add your product now"
 }

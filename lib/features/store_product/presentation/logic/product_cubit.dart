@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/model/category_model.dart';
+import '../../../../core/model/shop_model.dart';
 import '../../domain/ues_cases/product_ues_cases.dart';
 
 class ProductCubit extends Cubit<ProductState> {
@@ -12,17 +14,14 @@ class ProductCubit extends Cubit<ProductState> {
   static ProductCubit get(context) => BlocProvider.of(context);
   final ProductUesCase uesCase;
 
-  set _imageFile(XFile? value) {
-    imageXFile = value;
-  }
 
-  XFile? imageXFile;
+  List<XFile> imageXFile=[];
   List<TextEditingController> controllerList = [];
   late bool isDataFound;
   late ProductModel productModel;
 
   photoPicked(XFile xFile) {
-    _imageFile = xFile;
+    imageXFile.add(xFile);
     emit(UploadingUserImageLoadingState());
   }
 
@@ -38,6 +37,12 @@ class ProductCubit extends Cubit<ProductState> {
     }
     emit(CheckInputValidationState());
   }
+  CategoryModel? selectedCategory;
+
+  setSelectedCategory(CategoryModel model) {
+    selectedCategory = model;
+    emit(CheckInputValidationState());
+  }
 
   ///add new product
   addNewProduct(
@@ -49,7 +54,7 @@ class ProductCubit extends Cubit<ProductState> {
       required String productStates,
       required String productBrand,
       required String productDescription,
-      required String storeId}) async {
+      required ShopModel shopModel }) async {
     emit(AddNewProductLoadingState());
     var result = await uesCase.callCreateNewProduct(
         productName: productName,
@@ -60,7 +65,7 @@ class ProductCubit extends Cubit<ProductState> {
         productStates: productStates,
         productBrand: productBrand,
         productDescription: productDescription,
-        storeId: storeId);
+        shopModel: shopModel);
     result.fold((failed) => emit(AddNewProductErrorState(failed)),
         (r) => emit(AddNewProductSuccessState()));
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +27,7 @@ class MyStoreCubit extends Cubit<MyStoreStates> {
         await uesCase.getMyShopProductListList(shopId: shopID, page: page);
     result.fold((error) => emit(MyStoreFailedStates(error)), (data) {
       productList = data;
+      log("this the product list data ${productList.toString()}");
       if (productList.isEmpty) {
         emit(MyStoreEmptySuccessStates());
       } else {

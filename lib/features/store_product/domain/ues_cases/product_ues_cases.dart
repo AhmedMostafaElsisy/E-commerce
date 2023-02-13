@@ -4,6 +4,7 @@ import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/model/shop_model.dart';
 import '../repository/product_repository_interface.dart';
 
 class ProductUesCase {
@@ -20,7 +21,7 @@ class ProductUesCase {
       required String productStates,
       required String productBrand,
       required String productDescription,
-      required String storeId}) {
+      required ShopModel shopModel}) {
     return repositoryInterface.addNewProduct(
         productName: productName,
         productMainPrice: productMainPrice,
@@ -30,7 +31,7 @@ class ProductUesCase {
         productStates: productStates,
         productBrand: productBrand,
         productDescription: productDescription,
-        storeId: storeId);
+        shopModel: shopModel);
   }
 
   Future<Either<CustomError, BaseModel>> callEditProduct(
