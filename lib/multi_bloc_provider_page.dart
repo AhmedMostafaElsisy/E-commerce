@@ -20,9 +20,9 @@ import 'features/notification_feature/data/reposiroty/notification_repository.da
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
 import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
-import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
@@ -55,7 +55,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<NotificationCubit>(
             create: (_) => NotificationCubit(NotificationListRepository())),
         BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
-        BlocProvider<HomeCubit>(create: (_) => di.sl<HomeCubit>()),
+        BlocProvider<BannersCubit>(create: (_) => di.sl<BannersCubit>()),
         BlocProvider<CategoriesCubit>(create: (_) => di.sl<CategoriesCubit>()),
         BlocProvider<SettingCubit>(create: (_) => di.sl<SettingCubit>()),
         BlocProvider<RatingCubit>(create: (_) => di.sl<RatingCubit>()),
@@ -67,7 +67,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => di.sl<PickLocationCubit>()),
         BlocProvider<GeneralStoresCubit>(
             create: (_) => di.sl<GeneralStoresCubit>()),
-        BlocProvider<PickLocationCubit>(create: (_) => di.sl<PickLocationCubit>()),
+        BlocProvider<PickLocationCubit>(
+            create: (_) => di.sl<PickLocationCubit>()),
         BlocProvider<TagsCubit>(create: (_) => di.sl<TagsCubit>()),
         BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),
         BlocProvider<EditStoreCubit>(create: (_) => di.sl<EditStoreCubit>()),

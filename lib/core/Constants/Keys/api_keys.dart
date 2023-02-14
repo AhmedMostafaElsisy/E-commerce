@@ -74,6 +74,7 @@ class ApiKeys {
   static const String productOfStoreKey = "/store-products";
   static const String addProductKey = "/add-product";
   static const String deleteProductKey = "/delete-product";
+  static const String homeAdds = "/home-ads";
 
   ///category
   static const String categoryKey = "/home-categories";

@@ -91,7 +91,7 @@ Future<void> init() async {
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => OtpCubit(sl()));
   sl.registerFactory(() => PasswordCubit(sl()));
-  sl.registerFactory(() => HomeCubit(sl()));
+  sl.registerFactory(() => BannersCubit(sl()));
   sl.registerFactory(() => CategoriesCubit(sl()));
   sl.registerFactory(() => ProfileCubit(sl()));
   sl.registerFactory(() => SettingCubit(sl()));
@@ -149,12 +149,9 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoryRepositoryInterface>(() =>
       CategoryRepositoryImplementation(
           categoryRemoteDataSourceInterface: sl()));
-  sl.registerLazySingleton<TagsRepositoryInterface>(() =>
-      TagsRepository(
-       sl()));
-  sl.registerLazySingleton<PlansRepositoryInterface>(() =>
-      PlansRepository(
-       sl()));
+  sl.registerLazySingleton<TagsRepositoryInterface>(() => TagsRepository(sl()));
+  sl.registerLazySingleton<PlansRepositoryInterface>(
+      () => PlansRepository(sl()));
 
   sl.registerLazySingleton<GeneralStoresRepositoryInterface>(
       () => GeneralStoresRepository(sl()));

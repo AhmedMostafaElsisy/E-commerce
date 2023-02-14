@@ -8,14 +8,16 @@ class BannerModel {
   String? title;
   String? description;
   String? image;
-  BannerNavigationType? navigationType;
+  String? url;
+  // BannerNavigationType? navigationType;
 
   BannerModel({
     this.id,
     this.title,
     this.description,
     this.image,
-    this.navigationType,
+    this.url,
+    // this.navigationType,
   });
 
   factory BannerModel.fromJson(Map<String, dynamic> json) {
@@ -38,12 +40,13 @@ class BannerModel {
       title: json["title"],
       description: json["description"],
       image: json["banner_image"],
-      navigationType: getRequestStates(json["navigation"]),
+      url: json["url"],
+      // navigationType: getRequestStates(json["navigation"]),
     );
   }
 
   @override
   String toString() {
-    return 'BannerModel{id: $id, title: $title, description: $description, navigationType: $navigationType,}';
+    return 'BannerModel{id: $id, title: $title, description: $description, navigationType: $url,}';
   }
 }
