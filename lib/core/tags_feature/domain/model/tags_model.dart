@@ -1,4 +1,4 @@
-List<TagsModel> TagsListFromJson(List str) =>
+List<TagsModel> tagsListFromJson(List str) =>
     List<TagsModel>.from(str.map((x) => TagsModel.fromJson(x)));
 
 class TagsModel {

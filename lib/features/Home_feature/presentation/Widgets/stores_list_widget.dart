@@ -73,7 +73,7 @@ class _StoresListWidgetState extends State<StoresListWidget> {
                               Expanded(
                                 child: CommonTitleText(
                                   textKey:
-                                      widget.stores[itemPos].category ?? "",
+                                      widget.stores[itemPos].category!.name,
                                   textFontSize: AppConstants.xxSmallFontSize,
                                   textWeight: FontWeight.w400,
                                   textColor: AppConstants.lightBorderColor,
@@ -100,7 +100,7 @@ class _StoresListWidgetState extends State<StoresListWidget> {
                               Expanded(
                                 child: CommonTitleText(
                                   textKey:
-                                      widget.stores[itemPos].location ?? "",
+                                      widget.stores[itemPos].address ?? "",
                                   textFontSize: AppConstants.xxSmallFontSize,
                                   textWeight: FontWeight.w400,
                                   textColor: AppConstants.lightBorderColor,

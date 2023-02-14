@@ -65,7 +65,7 @@ class ShopGridItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.category ?? "asd",
+                    textKey: model.category!.name,
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,
@@ -91,7 +91,7 @@ class ShopGridItemWidget extends StatelessWidget {
                     ),
                     getSpaceWidth(4),
                     CommonTitleText(
-                      textKey: model.location ?? "asda",
+                      textKey: model.address ?? "asda",
                       textFontSize: AppConstants.xxSmallFontSize,
                       textColor: AppConstants.lightContentColor,
                       textWeight: FontWeight.w400,

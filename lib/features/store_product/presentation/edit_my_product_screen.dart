@@ -87,7 +87,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     adsTypeController.dispose();
     adsStatesController.dispose();
     adsBrandController.dispose();
-    _productCubit.imageXFile = null;
+    _productCubit.imageXFile = [];
     super.dispose();
   }
 
@@ -315,11 +315,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                         .spaceBetween,
                                                 children: [
                                                   _productCubit.imageXFile !=
-                                                          null
+                                                          []
                                                       ? commonFileImageWidget(
                                                           imageString:
                                                               _productCubit
-                                                                  .imageXFile!
+                                                                  .imageXFile.first
                                                                   .path,
                                                           height: 40,
                                                           width: 40,
@@ -328,7 +328,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                           widget
                                                               .argument
                                                               .productModel!
-                                                              .image!,
+                                                              .images!.first.imageUrl!,
                                                           height: 40,
                                                           width: 40,
                                                           fit: BoxFit.fill,
@@ -438,7 +438,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                             isEnable:
                                                 _productCubit.isDataFound &&
                                                     _productCubit.imageXFile !=
-                                                        null,
+                                                        [],
                                             isLoading: productState
                                                 is AddNewProductLoadingState,
                                             buttonTextSize: 18,
@@ -464,12 +464,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                     productType:
                                                         adsTypeController.text,
                                                     productImage:
-                                                        _productCubit.imageXFile == null
+                                                        _productCubit.imageXFile == []
                                                             ? null
-                                                            : [
-                                                                _productCubit
-                                                                    .imageXFile!
-                                                              ],
+                                                            :
+                                                        _productCubit
+                                                            .imageXFile,
                                                     productStates:
                                                         adsStatesController
                                                             .text,

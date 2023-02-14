@@ -19,6 +19,8 @@ import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../core/presentation/Widgets/select_item_pop_up.dart';
+import '../../Categories_feature/presentation/logic/category_cubit.dart';
 import 'logic/product_cubit.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -33,7 +35,6 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   late ProductCubit _productCubit;
   final formKey = GlobalKey<FormState>();
-
 
   late TextEditingController adsDetailsController;
   late TextEditingController adsMainPriceController;
@@ -71,7 +72,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void dispose() {
-
     adsNameController.dispose();
     adsDetailsController.dispose();
     adsMainPriceController.dispose();
@@ -79,7 +79,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     storeMainCategoryController.dispose();
     adsStatesController.dispose();
     adsBrandController.dispose();
-    _productCubit.imageXFile = null;
+    _productCubit.imageXFile = [];
     super.dispose();
   }
 
@@ -306,16 +306,44 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  _productCubit.imageXFile !=
-                                                          null
-                                                      ? commonFileImageWidget(
-                                                          imageString:
-                                                              _productCubit
-                                                                  .imageXFile!
-                                                                  .path,
-                                                          height: 40,
-                                                          width: 40,
-                                                          fit: BoxFit.fill)
+                                                  _productCubit.imageXFile != []
+                                                      ? SizedBox(
+                                                          height:
+                                                              getWidgetHeight(
+                                                                  45),
+                                                          child: ListView
+                                                              .separated(
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  scrollDirection:
+                                                                      Axis
+                                                                          .horizontal,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    return commonFileImageWidget(
+                                                                        imageString: _productCubit
+                                                                            .imageXFile[
+                                                                                index]
+                                                                            .path,
+                                                                        height:
+                                                                            40,
+                                                                        width:
+                                                                            40,
+                                                                        fit: BoxFit
+                                                                            .fill);
+                                                                  },
+                                                                  separatorBuilder:
+                                                                      (context,
+                                                                          index) {
+                                                                    return getSpaceWidth(
+                                                                        AppConstants
+                                                                            .smallPadding);
+                                                                  },
+                                                                  itemCount: _productCubit
+                                                                      .imageXFile
+                                                                      .length),
+                                                        )
                                                       : CommonTitleText(
                                                           textKey:
                                                               AppLocalizations.of(
@@ -375,6 +403,27 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         controller: adsBrandController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblBrand,
+                                        onTap: () {
+                                          advancedSearchPopUP(
+                                            context: context,
+                                            isMultiSelect: false,
+                                            title: AppLocalizations.of(context)!
+                                                .lblMainCategory,
+                                            isListHaveSearch: true,
+                                            listOfItem: BlocProvider.of<
+                                                CategoriesCubit>(context)
+                                                .categories,
+                                            onApply: (dynamic) {
+                                              adsBrandController
+                                                  .text = dynamic.name;
+                                              _productCubit
+                                                  .setSelectedCategory(dynamic);
+                                              _productCubit.isDataFount(
+                                                  _productCubit.controllerList);
+                                            },
+                                          );
+                                        },
+                                        isReadOnly: true,
                                         keyboardType: TextInputType.text,
                                         labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
@@ -432,10 +481,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             height: 48,
                                             buttonBackgroundColor:
                                                 AppConstants.mainColor,
-                                            isEnable:
-                                                _productCubit.isDataFound &&
-                                                    _productCubit.imageXFile !=
-                                                        null,
+                                            isEnable: _productCubit
+                                                    .isDataFound &&
+                                                _productCubit.imageXFile != [],
                                             isLoading: productState
                                                 is AddNewProductLoadingState,
                                             buttonTextSize: 18,
@@ -461,26 +509,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                     productType:
                                                         storeMainCategoryController
                                                             .text,
-                                                    productImage: [
-                                                      _productCubit.imageXFile!
-                                                    ],
+                                                    productImage: _productCubit
+                                                        .imageXFile,
                                                     productStates:
                                                         adsStatesController
                                                             .text,
                                                     productBrand:
-                                                        adsBrandController.text,
+                                                    _productCubit.selectedCategory!.id.toString(),
                                                     productDescription:
                                                         adsDetailsController
                                                             .text,
-                                                    storeId: widget
-                                                        .argument.shopModel!.id
-                                                        .toString());
+                                                    shopModel: widget
+                                                        .argument.shopModel!);
                                               }
                                             },
                                           ),
                                         ],
                                       ),
-                                 
                                     ],
                                   ))
                             ],

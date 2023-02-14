@@ -116,7 +116,7 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
                               ProductPriceWidget(
                                 productPrice:
                                     widget.argument.productModel!.price!,
-                                oldPrice: "1500",
+                                oldPrice:   widget.argument.productModel!.discount!,
                               ),
 
                               ///Spacer

@@ -73,7 +73,7 @@ class StoreInfoCard extends StatelessWidget {
                 Row(
                   children: [
                     CommonTitleText(
-                      textKey: shopModel.category!,
+                      textKey: shopModel.category!.name,
                       textFontSize: AppConstants.xxSmallFontSize + 2,
                       textWeight: FontWeight.w600,
                       textColor: AppConstants.mainColor,
@@ -94,7 +94,7 @@ class StoreInfoCard extends StatelessWidget {
 
                     ///sub category
                     CommonTitleText(
-                      textKey: shopModel.subCategory!.split(" ").first,
+                      textKey: shopModel.subCategory!.first.name!,
                       textFontSize: AppConstants.xxSmallFontSize + 2,
                       textWeight: FontWeight.w600,
                       textColor: AppConstants.mainColor,
@@ -118,14 +118,14 @@ class StoreInfoCard extends StatelessWidget {
                     ),
                     getSpaceWidth(4),
                     CommonTitleText(
-                      textKey: "${shopModel.location}   ,",
+                      textKey: "${shopModel.city!.name}   ,",
                       textFontSize: AppConstants.xxSmallFontSize + 2,
                       textColor: AppConstants.mainColor,
                       textWeight: FontWeight.w600,
                     ),
                     getSpaceWidth(8),
                     CommonTitleText(
-                      textKey: "${shopModel.city}",
+                      textKey: "${shopModel.area!.name}",
                       textFontSize: AppConstants.xxSmallFontSize + 2,
                       textColor: AppConstants.mainColor,
                       textWeight: FontWeight.w600,

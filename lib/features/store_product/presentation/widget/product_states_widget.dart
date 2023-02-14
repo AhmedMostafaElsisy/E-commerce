@@ -55,7 +55,7 @@ class ProductInformationWidget extends StatelessWidget {
             ///Product states
             ProductStatesItem(
               title: AppLocalizations.of(context)!.lblBrand,
-              value:model.brand! ,
+              value:model.shopModel!.category!.name ,
             ),
 
           ]),

@@ -67,7 +67,8 @@ class StoreUesCase {
     required String storeCity,
     required String storeArea,
     required String storeMainCategory,
-    required String storeSubCategory,
+    int? planId,
+    required List<TagsModel> storeSubCategory
   }) {
     return repositoryInterface.editStore(
         storeId: storeId,
@@ -80,6 +81,8 @@ class StoreUesCase {
         storeCity: storeCity,
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
-        storeSubCategory: storeSubCategory);
+        storeSubCategory: storeSubCategory,
+    planId: planId
+    );
   }
 }

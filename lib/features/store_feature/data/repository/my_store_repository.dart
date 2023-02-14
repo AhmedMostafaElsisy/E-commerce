@@ -52,7 +52,8 @@ class StoreRepository extends StoreRepositoryInterface {
       required String storeCity,
       required String storeArea,
       required String storeMainCategory,
-      required String storeSubCategory}) {
+        int? planId,
+        required List<TagsModel> storeSubCategory}) {
     return remoteDataSourceInterface.editStore(
         storeId: storeId,
         storeName: storeName,
@@ -64,6 +65,7 @@ class StoreRepository extends StoreRepositoryInterface {
         storeArea: storeArea,
         storeMainCategory: storeMainCategory,
         storeSubCategory: storeSubCategory,
+planId: planId,
         storeImage: storeImage);
   }
 

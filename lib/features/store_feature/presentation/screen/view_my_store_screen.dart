@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_empty_widget.dart';
@@ -37,6 +39,8 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
     myStoreCubit = BlocProvider.of<MyStoreCubit>(context);
     myStoreCubit.getStoreProductList(shopID: widget.argument.shopModel!.id!);
     myStoreCubit.scrollController = ScrollController();
+    log("this my token ${SharedText.userToken}");
+    log("this my token ${widget.argument.shopModel!.id!}");
     myStoreCubit.scrollController.addListener(
       () {
         myStoreCubit.setupScrollController(
@@ -125,11 +129,18 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                             .isEmpty) {
                           return EmptyScreen(
                               imageString: "category.svg",
-                              titleKey:
-                                  AppLocalizations.of(context)!.lblNoStoreFound,
-                              description: AppLocalizations.of(context)!
-                                  .lblNoStoreFoundDesc,
+                              titleKey: AppLocalizations.of(context)!
+                                  .lblNoProductFound,
                               imageHeight: 80,
+                              withButton: true,
+                              buttonText: AppLocalizations.of(context)!
+                                  .lblNoProductFoundDesc,
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    RouteNames.addNewProductPageRoute,
+                                    arguments: RouteArgument(
+                                        shopModel: widget.argument.shopModel!));
+                              },
                               imageWidth: 08);
                         } else {
                           return SizedBox(
@@ -151,7 +162,7 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                               .size
                                               .width /
                                           (MediaQuery.of(context).size.height /
-                                              1.0),
+                                              1.025),
                                     ),
                                     itemCount: myStoreCtx
                                             .read<MyStoreCubit>()
