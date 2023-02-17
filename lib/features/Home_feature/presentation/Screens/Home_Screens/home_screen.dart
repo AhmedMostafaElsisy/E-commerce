@@ -12,6 +12,8 @@ import 'package:captien_omda_customer/features/Home_feature/presentation/Widgets
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_cubit/home_states.dart';
+import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_cubit.dart';
+import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_states.dart';
 import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_states.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
+import '../../Widgets/products_grid_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late GeneralStoresCubit generalStoresCubit;
   late TextEditingController searchController;
   late CategoriesCubit categoriesCubit;
+  late HomeProductCubit productCubit;
 
   late TextEditingController locationController;
 
@@ -48,13 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
     settingCubit = BlocProvider.of<SettingCubit>(context);
     categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
     generalStoresCubit = BlocProvider.of<GeneralStoresCubit>(context);
+    productCubit = BlocProvider.of<HomeProductCubit>(context);
     searchController = TextEditingController();
     locationController = TextEditingController();
     settingCubit.getSetting();
     bannersCubit.getBanners();
     categoriesCubit.getAllCategories();
     generalStoresCubit.getGeneralStoresListData();
-    print("this token ${SharedText.userToken}");
+    productCubit.getHomeProducts();
   }
 
   @override
@@ -366,37 +371,98 @@ class _HomeScreenState extends State<HomeScreen> {
             getSpaceHeight(12),
 
             ///products
-            // if (bannersCubit.homeContent.products.isNotEmpty)
-            //   getSpaceHeight(12),
-            // if (bannersCubit.homeContent.products.isNotEmpty)
-            //   Padding(
-            //     padding: EdgeInsets.symmetric(horizontal: getWidgetWidth(16)),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         CommonTitleText(
-            //           textKey:
-            //               AppLocalizations.of(context)!.lblFeaturedProducts,
-            //           textWeight: FontWeight.w600,
-            //         ),
-            //         InkWell(
-            //           onTap: () {
-            //             BlocProvider.of<BottomNavCubit>(context).selectItem(2);
-            //           },
-            //           child: CommonTitleText(
-            //             textKey: AppLocalizations.of(context)!.lblShowAll,
-            //             textFontSize: AppConstants.xSmallFontSize,
-            //             textColor: AppConstants.lightContentColor,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // if (bannersCubit.homeContent.products.isNotEmpty) getSpaceHeight(8),
-            // if (bannersCubit.homeContent.products.isNotEmpty)
-            //   ProductsGridWidget(
-            //     products: bannersCubit.homeContent.products,
-            //   ),
+            BlocConsumer<HomeProductCubit, HomeProductStates>(
+                listener: (productCtx, productState) {},
+                builder: (productCtx, productState) {
+                  if (productState is HomeProductLoadingStates) {
+                    return Column(
+                      children: const [
+                        Center(
+                          child: CircularProgressIndicator(
+                            color: AppConstants.mainColor,
+                          ),
+                        )
+                      ],
+                    );
+                  } else if (productState is HomeProductFailedStates) {
+                    return CommonError(
+                      errorMassage: productState.error.errorMassage,
+                      withButton: true,
+                      onTap: () =>
+                          generalStoresCubit.getGeneralStoresListData(),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getWidgetWidth(16)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonTitleText(
+                                textKey: AppLocalizations.of(context)!
+                                    .lblFeaturedProducts,
+                                textWeight: FontWeight.w600,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  BlocProvider.of<BottomNavCubit>(context)
+                                      .selectItem(2);
+                                },
+                                child: CommonTitleText(
+                                  textKey:
+                                      AppLocalizations.of(context)!.lblShowAll,
+                                  textFontSize: AppConstants.xSmallFontSize,
+                                  textColor: AppConstants.lightContentColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        getSpaceHeight(8),
+                        ProductsGridWidget(
+                          products: productCubit.products,
+                        )
+                      ],
+                    );
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getWidgetWidth(16)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonTitleText(
+                                textKey: AppLocalizations.of(context)!
+                                    .lblFeaturedStores,
+                                textWeight: FontWeight.w600,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  BlocProvider.of<BottomNavCubit>(context)
+                                      .selectItem(2);
+                                },
+                                child: CommonTitleText(
+                                  textKey:
+                                      AppLocalizations.of(context)!.lblShowAll,
+                                  textFontSize: AppConstants.xSmallFontSize,
+                                  textColor: AppConstants.lightContentColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        getSpaceHeight(12),
+                        StoresListWidget(
+                          stores: generalStoresCubit.generalGeneralStoressList,
+                        ),
+                      ],
+                    );
+                  }
+                }),
+
             getSpaceHeight(80),
           ],
         ),
