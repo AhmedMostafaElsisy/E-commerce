@@ -1,4 +1,5 @@
 import 'package:captien_omda_customer/features/Categories_feature/presentation/logic/category_cubit.dart';
+import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,6 +74,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),
         BlocProvider<EditStoreCubit>(create: (_) => di.sl<EditStoreCubit>()),
         BlocProvider<PlansCubit>(create: (_) => di.sl<PlansCubit>()),
+        BlocProvider<HomeProductCubit>(
+            create: (_) => di.sl<HomeProductCubit>()),
       ],
       child: widget.body,
     );
