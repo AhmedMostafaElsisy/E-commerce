@@ -76,6 +76,9 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
                     if (favState is FavoriteFailedStates) {
                       checkUserAuth(
                           context: favCtx, errorType: favState.error.type);
+                    }else if (favState is FavoriteRemoveFavSuccessStates){
+                      favCtx
+                          .read<FavoriteCubit>().removeItemFromFavLocal(productId: favState.productId);
                     }
                   },
                   builder: (favCtx, favState) {

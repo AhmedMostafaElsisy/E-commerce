@@ -81,6 +81,7 @@ import 'features/store_product/data/data_scoures/remote_data_scoures.dart';
 import 'features/store_product/data/repository/product_repository.dart';
 import 'features/store_product/domain/repository/product_repository_interface.dart';
 import 'features/store_product/domain/ues_cases/product_ues_cases.dart';
+import 'features/store_product/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 
 final sl = GetIt.instance;
@@ -106,6 +107,7 @@ Future<void> init() async {
   sl.registerFactory(() => PlansCubit(sl()));
   sl.registerFactory(() => AllFilterCubit());
   sl.registerFactory(() => GeneralStoresCubit(sl()));
+  sl.registerFactory(() => EditProductCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));

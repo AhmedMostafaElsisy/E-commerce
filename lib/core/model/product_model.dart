@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/core/model/shop_model.dart';
 
+import 'category_model.dart';
 import 'image_model.dart';
 
 List<ProductModel> productListFromJson(List str) =>
@@ -18,6 +19,7 @@ class ProductModel {
   String? brand;
   ShopModel? shopModel;
   bool? isFav;
+  CategoryModel? categoryModel;
 
   ProductModel(
       {this.id,
@@ -31,6 +33,7 @@ class ProductModel {
       this.discount,
       this.type,
       this.state,
+      this.categoryModel,
       this.brand});
 
   ///Todo:check the json key when integrate with the api
@@ -38,20 +41,20 @@ class ProductModel {
     return ProductModel(
         id: json["id"],
         name: json["name"] ?? "--",
-      images:
-      json['image'].isNotEmpty ? imageListFromJson(json['image']) : [],
-        price: json["price"]==null?  "00" :json["price"].toString(),
-      discount: json["discount"]==null?  "00" :json["discount"].toString() ,
+        images:
+            json['image'].isNotEmpty ? imageListFromJson(json['image']) : [ImageModel(imageUrl: "")],
+        price: json["price"] == null ? "00" : json["price"].toString(),
+        discount: json["discount"] == null ? "00" : json["discount"].toString(),
         description: json["description"] ?? "--",
         isFav: json["favorite"] ?? false,
         shopModel: json["store"] == null
             ? ShopModel()
             : ShopModel.fromJson(json["store"]),
-        time: json["time"],
-    state: json["state"]??"state",
-      type: json["type"]??"type",
-      brand: json["brand"]??"brand",
-    );
+        time: json["time"]??"--",
+        state: json["state"] ?? "--",
+        type: json["type"] ?? "--",
+        brand: json["brand"] ?? "--",
+        categoryModel: CategoryModel.fromJson(json["category"]));
   }
 
   @override

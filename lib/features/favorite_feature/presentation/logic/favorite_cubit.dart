@@ -71,4 +71,9 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
     result.fold((error) => emit(FavoriteFavFailedStates(error)),
         (success) => emit(FavoriteRemoveFavSuccessStates(productId)));
   }
+
+  removeItemFromFavLocal({required int productId}) {
+    productList.removeWhere((element) => element.id == productId);
+    emit(FavoriteInitialStates());
+  }
 }

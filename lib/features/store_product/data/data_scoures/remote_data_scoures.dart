@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -33,7 +34,8 @@ abstract class ProductRemoteDataSourceInterface {
       required String productBrand,
       required String productDescription,
       required String storeId,
-      required String productId});
+      required String productId,
+      required ShopModel shopModel});
 
   Future<Either<CustomError, BaseModel>> getProductDetails(
       {required int productId});
@@ -106,41 +108,46 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       required String productBrand,
       required String productDescription,
       required String storeId,
-      required String productId}) async {
+      required String productId,
+      required ShopModel shopModel}) async {
     try {
-      String pathUrl = ApiKeys.storeKey;
+      String pathUrl = ApiKeys.addProductKey;
 
       FormData staticData = FormData();
-      staticData.fields.add(MapEntry('productId', productId));
-      staticData.fields.add(MapEntry('product_name', productName));
-      staticData.fields.add(MapEntry('product_price', productMainPrice));
-      staticData.fields
-          .add(MapEntry('product_discount_price', productDiscountPrice));
-
-      staticData.fields.add(MapEntry('product_type', productType));
-      staticData.fields.add(MapEntry('product_states', productStates));
-      staticData.fields.add(MapEntry('product_brand', productBrand));
-      staticData.fields.add(MapEntry('description', productDescription));
-      staticData.fields.add(MapEntry('store_id', storeId));
       var photoList = [];
-
-      if (productImage != null) {
+      if (productImage != null && productImage.isNotEmpty) {
         for (var element in productImage) {
-          photoList.add(await MultipartFile.fromFile(
-            element.path,
-            filename: element.path.split("/").last.toString(),
-          ));
+          photoList.add({
+            "value": await MultipartFile.fromFile(
+              element.path,
+              filename: element.path.split("/").last.toString(),
+            )
+          });
         }
       }
-
-      // Response response = await DioHelper.postData(url: pathUrl, data: staticData);
-
-      Map<String, dynamic> dataMap = {
-        "code": 200,
-        "massage": "success",
+      Map<String, dynamic> postData = {
+        "name": productName,
+        "description": productDescription,
+        "images": photoList,
+        "price": productMainPrice,
+        "discount": productDiscountPrice,
+        "type": productType,
+        "category_id": productBrand,
+        "city_id": shopModel.city!.id,
+        "area_id": shopModel.area!.id,
+        "store_id": shopModel.id,
+        "weight": 0,
+        "product_id": productId
       };
-      await Future.delayed(const Duration(seconds: 3));
-      return right(BaseModel.fromJson(dataMap));
+      staticData = FormData.fromMap(
+        postData,
+        ListFormat.multiCompatible,
+      );
+      log("this edit data ${postData}");
+      Response response =
+          await DioHelper.postData(url: pathUrl, data: staticData);
+
+      return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
         type: ex.error.type,
@@ -156,7 +163,8 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       String pathUrl = ApiKeys.deleteProductKey;
       FormData staticData = FormData();
       staticData.fields.add(MapEntry('product_id', productId.toString()));
-      Response response = await DioHelper.postData(url: pathUrl, data: staticData);
+      Response response =
+          await DioHelper.postData(url: pathUrl, data: staticData);
 
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
@@ -173,8 +181,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
     try {
       String pathUrl = "${ApiKeys.showProductKey}?product_id=$productId";
 
-      Response response = await DioHelper.getDate(url: pathUrl, );
-
+      Response response = await DioHelper.getDate(
+        url: pathUrl,
+      );
 
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {

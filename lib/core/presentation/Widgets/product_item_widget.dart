@@ -14,6 +14,7 @@ import '../../../features/favorite_feature/presentation/logic/favorite_cubit.dar
 import '../Routes/route_argument_model.dart';
 import '../Routes/route_names.dart';
 import 'common_global_button.dart';
+import 'custom_snack_bar.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final ProductModel model;
@@ -59,7 +60,12 @@ class ProductItemWidget extends StatelessWidget {
                   right: getWidgetWidth(8),
                   child: BlocConsumer<FavoriteCubit, FavoriteStates>(
                     listener: (favCtx, favState) {
-                      if (favState is FavoriteRemoveFavSuccessStates) {
+                      if (favState is FavoriteFavFailedStates) {
+                        showSnackBar(
+                          context: favCtx,
+                          title: favState.error.errorMassage!,
+                        );
+                      } else if (favState is FavoriteRemoveFavSuccessStates) {
                         if (favState.productId == model.id) {
                           model.isFav = false;
                         }
@@ -132,7 +138,7 @@ class ProductItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ///Shop image
-            commonCachedImageWidget(model.shopModel!.image??"",
+            commonCachedImageWidget(model.shopModel!.image ?? "",
                 height: 24,
                 width: 24,
                 fit: BoxFit.fill,
@@ -189,7 +195,7 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.time??"--",
+                    textKey: model.time ?? "--",
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,

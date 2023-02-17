@@ -47,7 +47,9 @@ class ProductRepository extends ProductRepositoryInterface {
       required String productBrand,
       required String productDescription,
       required String storeId,
-      required String productId}) {
+      required String productId,
+        required ShopModel shopModel
+      }) {
     return remoteDataSourceInterface.editProduct(
         productName: productName,
         productMainPrice: productMainPrice,
@@ -58,6 +60,7 @@ class ProductRepository extends ProductRepositoryInterface {
         productDescription: productDescription,
         storeId: storeId,
         productId: productId,
+        shopModel: shopModel,
         productImage: productImage);
   }
 

@@ -188,7 +188,7 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                         return const SizedBox();
                                       } else {
                                         return ProductItemWidget(
-                                          showFavIcon: false,
+                                          showFavIcon: true,
                                           model: myStoreCtx
                                               .read<MyStoreCubit>()
                                               .productList[index],

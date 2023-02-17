@@ -44,7 +44,7 @@ class ProductUesCase {
       required String productBrand,
       required String productDescription,
       required String storeId,
-      required String productId}) {
+      required String productId, required ShopModel shopModel}) {
     return repositoryInterface.editProduct(
         productName: productName,
         productMainPrice: productMainPrice,
@@ -55,6 +55,7 @@ class ProductUesCase {
         productDescription: productDescription,
         storeId: storeId,
         productId: productId,
+        shopModel: shopModel,
         productImage: productImage);
   }
 

@@ -22,14 +22,17 @@ advancedSearchPopUP({
   List<dynamic>? multiSelectData,
   bool? isMultiSelect = false,
   bool? isListHaveSearch = true,
+  dynamic preSelectedData,
 }) async {
   AllFilterCubit.get(context).setList(listOfItem);
   if (isMultiSelect!) {
     AllFilterCubit.get(context).setMultiModelData(multiSelectData!);
+    AllFilterCubit.get(context).setModelMultiSelect(preSelectedData);
   } else {
     if (multiSelectData != null) {
       AllFilterCubit.get(context).setModelSingleSelect(multiSelectData.first);
     }
+    AllFilterCubit.get(context).setModelSingleSelect(preSelectedData);
   }
   return await showDialog(
     barrierDismissible: true,

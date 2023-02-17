@@ -56,7 +56,9 @@ class ApiKeys {
 
   ///Todo:check the endpoint when integrate with the api
   ///Favorite
-  static const String favoriteKey = "/Favorite";
+  static const String favoriteKey = "/fav-products";
+  static const String addFavoriteKey = "/add-fav-product";
+  static const String removeFavoriteKey = "/remove-fav-product";
 
   ///Store
   static const String storeKey = "/Store";
