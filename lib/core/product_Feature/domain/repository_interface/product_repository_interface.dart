@@ -7,10 +7,15 @@ import 'package:dartz/dartz.dart';
 abstract class GeneralProductRepositoryInterface {
   Future<Either<CustomError, List<ProductModel>>> getProductWithOptionParams({
     required int page,
+    String? searchName,
     int limit = 10,
     List<CategoryModel>? categories,
     List<TagsModel>? tags,
     String? cityId,
     String? areaId,
+  });
+
+  Future<Either<CustomError, ProductModel>> getProductDetails({
+    required String productId,
   });
 }

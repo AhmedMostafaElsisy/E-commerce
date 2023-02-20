@@ -18,6 +18,7 @@ class GeneralProductUseCase {
 
   Future<Either<CustomError, List<ProductModel>>> getProductWithFilterUseCase({
     required int page,
+    String? searchName,
     List<CategoryModel>? categories,
     List<TagsModel>? tags,
     String? cityId,
@@ -25,9 +26,18 @@ class GeneralProductUseCase {
   }) {
     return repository.getProductWithOptionParams(
         page: page,
+        searchName: searchName,
         categories: categories,
         tags: tags,
         areaId: areaId,
         cityId: cityId);
+  }
+
+  Future<Either<CustomError, ProductModel>> getProductDetailsUseCase({
+    required String productId,
+  }) {
+    return repository.getProductDetails(
+      productId: productId,
+    );
   }
 }

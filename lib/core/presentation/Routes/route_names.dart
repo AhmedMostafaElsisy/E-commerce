@@ -29,5 +29,5 @@ class RouteNames {
   static const String myOrderPageRoute = "/myOrderPage";
   static const String orderDetailsPageRoute = "/orderDetailsPage";
   static const String planPageRoute = "/planPage";
-
+  static const String productWithFilterScreen = "/productWithFilterScreen";
 }

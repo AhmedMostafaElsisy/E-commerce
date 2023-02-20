@@ -18,6 +18,7 @@ class GeneralProductRepositoryImpl extends GeneralProductRepositoryInterface {
   @override
   Future<Either<CustomError, List<ProductModel>>> getProductWithOptionParams({
     required int page,
+    String? searchName,
     int limit = 10,
     List<CategoryModel>? categories,
     List<TagsModel>? tags,
@@ -40,6 +41,23 @@ class GeneralProductRepositoryImpl extends GeneralProductRepositoryInterface {
                 List<ProductModel> products =
                     productListFromJson(response.data);
                 return Right(products);
+              },
+            ));
+  }
+
+  @override
+  Future<Either<CustomError, ProductModel>> getProductDetails(
+      {required String productId}) {
+    return dataSource
+        .getProductDetails(
+          productId: productId,
+        )
+        .then((value) => value.fold(
+              (l) => Left(l),
+              (response) {
+                debugPrint("response of product details is ${response.data}");
+                ProductModel product = ProductModel.fromJson(response.data);
+                return Right(product);
               },
             ));
   }

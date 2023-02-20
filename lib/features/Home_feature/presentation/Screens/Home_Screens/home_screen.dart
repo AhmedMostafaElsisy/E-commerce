@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               InkWell(
                                 onTap: () {
                                   BlocProvider.of<BottomNavCubit>(context)
-                                      .selectItem(2);
+                                      .selectItem(1);
                                 },
                                 child: CommonTitleText(
                                   textKey:
@@ -407,8 +407,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  BlocProvider.of<BottomNavCubit>(context)
-                                      .selectItem(2);
+                                  SharedText.filterModel?.clear();
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteNames.productWithFilterScreen,
+                                  );
                                 },
                                 child: CommonTitleText(
                                   textKey:
