@@ -14,6 +14,7 @@ import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_sc
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
+import '../../../features/general_prodcut_feature/presentation/screen/product_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/order_feature/presentation/my_order_screen.dart';
 import '../../../features/order_feature/presentation/order_details_Screen.dart';
@@ -83,8 +84,10 @@ class RouteGenerator {
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const MyStoresListScreen());
       case RouteNames.addStoresPageRoute:
-        return RouteAnimation()
-            .animationFromCenterRightToCenterLeft(page:  AddStoreScreen(argument: args as RouteArgument,));
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: AddStoreScreen(
+          argument: args as RouteArgument,
+        ));
       case RouteNames.editStoresPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: EditStoreScreen(argument: args as RouteArgument));
@@ -97,21 +100,24 @@ class RouteGenerator {
       case RouteNames.editProductPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: EditProductScreen(argument: args as RouteArgument));
-        case RouteNames.showProductPageRoute:
+      case RouteNames.showProductPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: ShowProductDetailsScreen(argument: args as RouteArgument));
-   case RouteNames.storeOrderPageRoute:
+      case RouteNames.storeOrderPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: StoreOrderScreen(argument: args as RouteArgument));
-        case RouteNames.myOrderPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page:const MyOrderScreen());
+      case RouteNames.myOrderPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const MyOrderScreen());
       case RouteNames.orderDetailsPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: OrderDetailsScreen(argument: args as RouteArgument));
-        case RouteNames.planPageRoute:
+      case RouteNames.planPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const PlansScreen());
+      case RouteNames.productWithFilterScreen:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page:const PlansScreen());
+            page: const ProductListScreen());
 
       default:
         return MaterialPageRoute(

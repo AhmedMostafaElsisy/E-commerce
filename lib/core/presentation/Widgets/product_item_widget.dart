@@ -48,7 +48,7 @@ class ProductItemWidget extends StatelessWidget {
         Stack(
           children: [
             commonCachedImageWidget(
-              model.images!.first.imageUrl!,
+              model.images!.isNotEmpty ? model.images!.first.imageUrl! : "",
               height: 168,
               width: 168,
               fit: BoxFit.fill,
@@ -132,7 +132,7 @@ class ProductItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ///Shop image
-            commonCachedImageWidget(model.shopModel!.image??"",
+            commonCachedImageWidget(model.shopModel!.image ?? "",
                 height: 24,
                 width: 24,
                 fit: BoxFit.fill,
@@ -189,7 +189,7 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                   getSpaceWidth(4),
                   CommonTitleText(
-                    textKey: model.time??"--",
+                    textKey: model.time ?? "--",
                     textFontSize: AppConstants.xxSmallFontSize,
                     textColor: AppConstants.lightContentColor,
                     textWeight: FontWeight.w400,

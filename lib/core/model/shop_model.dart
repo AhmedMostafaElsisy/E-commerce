@@ -56,8 +56,12 @@ class ShopModel {
         phone: json["phone"] ?? "--",
         email: json["email"] ?? "--",
         ownerName: json["username"] ?? "--",
-        city: LocationAreaModel.fromJson(json["city"]),
-        area: LocationAreaModel.fromJson(json["area"]),
+        city: json["city"] != null
+            ? LocationAreaModel.fromJson(json["city"])
+            : LocationAreaModel(id: -1, name: "--"),
+        area: json["area"] != null
+            ? LocationAreaModel.fromJson(json["area"])
+            : LocationAreaModel(id: -1, name: "--"),
         currentUser: UserBaseEntity.fromJson(json["user"]),
         rate: double.parse((json["rate"] ?? "0.0").toString()),
         plansModel: PlansModel.fromJson(json["plan"]));

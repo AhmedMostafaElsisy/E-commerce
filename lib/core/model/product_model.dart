@@ -36,21 +36,22 @@ class ProductModel {
   ///Todo:check the json key when integrate with the api
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-        id: json["id"],
-        name: json["name"] ?? "--",
-      images:
-      json['image'].isNotEmpty ? imageListFromJson(json['image']) : [],
-        price: json["price"]==null?  "00" :json["price"].toString(),
-      discount: json["discount"]==null?  "00" :json["discount"].toString() ,
-        description: json["description"] ?? "--",
-        isFav: json["favorite"] ?? false,
-        shopModel: json["store"] == null
-            ? ShopModel()
-            : ShopModel.fromJson(json["store"]),
-        time: json["time"],
-    state: json["state"]??"state",
-      type: json["type"]??"type",
-      brand: json["brand"]??"brand",
+      id: json["id"],
+      name: json["name"] ?? "--",
+      images: json['image'] != null && json['image'].isNotEmpty
+          ? imageListFromJson(json['image'])
+          : [],
+      price: json["price"] == null ? "00" : json["price"].toString(),
+      discount: json["discount"] == null ? "00" : json["discount"].toString(),
+      description: json["description"] ?? "--",
+      isFav: json["favorite"] ?? false,
+      shopModel: json["store"] == null
+          ? ShopModel()
+          : ShopModel.fromJson(json["store"]),
+      time: json["time"],
+      state: json["state"] ?? "state",
+      type: json["type"] ?? "type",
+      brand: json["brand"] ?? "brand",
     );
   }
 

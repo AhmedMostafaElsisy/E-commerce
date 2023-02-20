@@ -56,6 +56,7 @@ class AuthLocalDataSourceImp extends AuthLocalDataSourceInterface {
 
       String? token = await DefaultSecuredStorage.getAccessToken();
       if (token != null && token.isNotEmpty) {
+        debugPrint("here is token $token");
         return right(token);
       } else {
         return left(CustomError(
