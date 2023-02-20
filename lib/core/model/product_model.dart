@@ -41,8 +41,9 @@ class ProductModel {
     return ProductModel(
         id: json["id"],
         name: json["name"] ?? "--",
-        images:
-        json['image'] != null &&  json['image'].isNotEmpty ? imageListFromJson(json['image']) : [ImageModel(imageUrl: "")],
+        images: json['image'] != null && json['image'].isNotEmpty
+            ? imageListFromJson(json['image'])
+            : [ImageModel(imageUrl: "")],
         price: json["price"] == null ? "00" : json["price"].toString(),
         discount: json["discount"] == null ? "00" : json["discount"].toString(),
         description: json["description"] ?? "--",
@@ -50,11 +51,13 @@ class ProductModel {
         shopModel: json["store"] == null
             ? ShopModel()
             : ShopModel.fromJson(json["store"]),
-        time: json["time"]??"--",
+        time: json["time"] ?? "--",
         state: json["state"] ?? "state",
         type: json["type"] ?? "type",
         brand: json["brand"] ?? "brand",
-        categoryModel: CategoryModel.fromJson(json["category"]));
+        categoryModel: json['category'] != null
+            ? CategoryModel.fromJson(json["category"])
+            : null);
   }
 
   @override
