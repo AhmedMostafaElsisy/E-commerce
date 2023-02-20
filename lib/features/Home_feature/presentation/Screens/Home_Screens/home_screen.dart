@@ -429,40 +429,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     );
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getWidgetWidth(16)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonTitleText(
-                                textKey: AppLocalizations.of(context)!
-                                    .lblFeaturedStores,
-                                textWeight: FontWeight.w600,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  BlocProvider.of<BottomNavCubit>(context)
-                                      .selectItem(2);
-                                },
-                                child: CommonTitleText(
-                                  textKey:
-                                      AppLocalizations.of(context)!.lblShowAll,
-                                  textFontSize: AppConstants.xSmallFontSize,
-                                  textColor: AppConstants.lightContentColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        getSpaceHeight(12),
-                        StoresListWidget(
-                          stores: generalStoresCubit.generalGeneralStoressList,
-                        ),
-                      ],
-                    );
                   }
                 }),
 
