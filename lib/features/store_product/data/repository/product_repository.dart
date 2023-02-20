@@ -4,6 +4,7 @@ import 'package:captien_omda_customer/core/model/base_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/form_builder_feature/domain/model/form_builder_model.dart';
 import '../../../../core/model/shop_model.dart';
 import '../../domain/repository/product_repository_interface.dart';
 import '../data_scoures/remote_data_scoures.dart';
@@ -23,7 +24,9 @@ class ProductRepository extends ProductRepositoryInterface {
       required String productStates,
       required String productBrand,
       required String productDescription,
-      required ShopModel shopModel}) {
+      required ShopModel shopModel,
+        required List<FormBuilderModel> formData
+      }) {
     return remoteDataSourceInterface.createProduct(
         productName: productName,
         productMainPrice: productMainPrice,
@@ -33,7 +36,9 @@ class ProductRepository extends ProductRepositoryInterface {
         productStates: productStates,
         productBrand: productBrand,
         productDescription: productDescription,
-        shopModel: shopModel);
+        shopModel: shopModel,
+    formData: formData
+    );
   }
 
   @override

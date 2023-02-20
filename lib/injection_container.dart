@@ -13,6 +13,11 @@ import 'package:captien_omda_customer/features/store_feature/presentation/logic/
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
+import 'core/form_builder_feature/Data/data_scources/form_builder_data_scources.dart';
+import 'core/form_builder_feature/Data/repository/form_builder_product_repository.dart';
+import 'core/form_builder_feature/domain/repository/form_builder_product_interface.dart';
+import 'core/form_builder_feature/domain/uesCaes/form_builder_use_caes.dart';
+import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import 'core/location_feature/Data/data_scources/location_remote_data_scources.dart';
 import 'core/location_feature/Data/repository/location_repository.dart';
 import 'core/location_feature/domain/repository/location_interface.dart';
@@ -118,6 +123,7 @@ Future<void> init() async {
   sl.registerFactory(() => ProductDetailsCubit(sl()));
   sl.registerFactory(() => ProductListCubitWithFilter(sl()));
   sl.registerFactory(() => EditProductCubit(sl()));
+  sl.registerFactory(() => FormBuilderCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -137,6 +143,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => TagsUesCases(sl()));
   sl.registerLazySingleton(() => PlansUesCases(sl()));
   sl.registerLazySingleton(() => GeneralProductUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FormBuilderUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -170,7 +177,8 @@ Future<void> init() async {
       () => GeneralStoresRepository(sl()));
   sl.registerLazySingleton<GeneralProductRepositoryInterface>(
       () => GeneralProductRepositoryImpl(dataSource: sl()));
-
+  sl.registerLazySingleton<FormBuilderInterface>(
+          () => FormBuilderProductRepository(sl()));
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
       () => AuthLocalDataSourceImp(flutterSecureStorage: sl()));
@@ -210,7 +218,8 @@ Future<void> init() async {
       () => PlansRemoteDataSourceImpl());
   sl.registerLazySingleton<GeneralProductsDataSourceInterface>(
       () => GeneralProductRemoteDataSourceImpl());
-
+  sl.registerLazySingleton<FormBuilderRemoteDataSourceInterface>(
+          () => FormBuilderRemoteDataSourceImpl());
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
 }

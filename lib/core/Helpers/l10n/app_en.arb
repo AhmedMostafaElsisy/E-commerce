@@ -196,5 +196,9 @@
   "lblPricePlan": "Price plan",
   "lblContinueAndPay": "Continue And Pay",
   "lblNoProductFound": "No product found",
-  "lblNoProductFoundDesc": "Add your product now"
+  "lblNoProductFoundDesc": "Add your product now",
+  "lblFrom": "Form",
+  "lblNoValid": "this value not valid",
+  "lblTo": "To",
+  "lblNoting": "noting"
 }

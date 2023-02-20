@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Language_Cubit/language_cubit.dart';
+import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
@@ -84,6 +85,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => di.sl<ProductListCubitWithFilter>()),
         BlocProvider<ProductDetailsCubit>(
             create: (_) => di.sl<ProductDetailsCubit>()),
+        BlocProvider<FormBuilderCubit>(
+            create: (_) => di.sl<FormBuilderCubit>()),
       ],
       child: widget.body,
     );

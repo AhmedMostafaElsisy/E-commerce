@@ -372,7 +372,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ///products
             BlocConsumer<HomeProductCubit, HomeProductStates>(
-                listener: (productCtx, productState) {},
+                listener: (productCtx, productState) {
+                  if (productState is HomeProductFailedStates){
+                    checkUserAuth(context: context, errorType: productState.error.type);
+                  }
+                },
                 builder: (productCtx, productState) {
                   if (productState is HomeProductLoadingStates) {
                     return Column(

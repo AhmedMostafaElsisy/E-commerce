@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/logic/product_states.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
+import '../../../core/form_builder_feature/presentation/form_data_screen.dart';
+import '../../../core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../core/presentation/Widgets/select_item_pop_up.dart';
 import '../../Categories_feature/presentation/logic/category_cubit.dart';
@@ -44,6 +48,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   late TextEditingController storeMainCategoryController;
   late TextEditingController adsStatesController;
   late TextEditingController adsBrandController;
+  late FormBuilderCubit formBuilderCubit;
 
   @override
   void initState() {
@@ -60,6 +65,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     adsBrandController = TextEditingController();
     _productCubit.isDataFound = false;
     _productCubit.controllerList.clear();
+    formBuilderCubit = BlocProvider.of<FormBuilderCubit>(context);
 
     _productCubit.controllerList.add(adsNameController);
     _productCubit.controllerList.add(adsDetailsController);
@@ -68,6 +74,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _productCubit.controllerList.add(storeMainCategoryController);
     _productCubit.controllerList.add(adsStatesController);
     _productCubit.controllerList.add(adsBrandController);
+    log("this my token ${SharedText.userToken}");
   }
 
   @override
@@ -411,15 +418,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                 .lblMainCategory,
                                             isListHaveSearch: true,
                                             listOfItem: BlocProvider.of<
-                                                CategoriesCubit>(context)
+                                                    CategoriesCubit>(context)
                                                 .categories,
                                             onApply: (dynamic) {
-                                              adsBrandController
-                                                  .text = dynamic.name;
+                                              adsBrandController.text =
+                                                  dynamic.name;
                                               _productCubit
                                                   .setSelectedCategory(dynamic);
                                               _productCubit.isDataFount(
                                                   _productCubit.controllerList);
+                                              formBuilderCubit.getProductForm(
+                                                  categoryId: dynamic.id!);
                                             },
                                           );
                                         },
@@ -470,6 +479,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           return null;
                                         },
                                       ),
+                                      ///spacer
+                                      getSpaceHeight(AppConstants.smallPadding),
+
+                                      ///select items
+                                      FormDataScreen(
+                                        categoryId:
+                                            _productCubit.selectedCategory ==
+                                                    null
+                                                ? null
+                                                : _productCubit
+                                                    .selectedCategory!.id,
+                                      ),
 
                                       ///spacer
                                       getSpaceHeight(AppConstants.smallPadding),
@@ -497,7 +518,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
+                                                productCtx.read<ProductCubit>().formData =
+                                                    formBuilderCubit.formList.where((element) => element.value !=null).toList();
+
                                                 productCtx.read<ProductCubit>().addNewProduct(
+                                                  formData:  productCtx.read<ProductCubit>().formData,
                                                     productName:
                                                         adsNameController.text,
                                                     productMainPrice:
@@ -514,8 +539,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                     productStates:
                                                         adsStatesController
                                                             .text,
-                                                    productBrand:
-                                                    _productCubit.selectedCategory!.id.toString(),
+                                                    productBrand: _productCubit
+                                                        .selectedCategory!.id
+                                                        .toString(),
                                                     productDescription:
                                                         adsDetailsController
                                                             .text,
