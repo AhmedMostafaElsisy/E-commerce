@@ -7,7 +7,7 @@ import 'common_asset_image_widget.dart';
 import 'common_asset_svg_image_widget.dart';
 
 Widget commonCachedImageWidget(
-  String imageUrl, {
+  String imageUrl,  {
   double radius = 0.0,
   BoxFit fit = BoxFit.fill,
   required double height,

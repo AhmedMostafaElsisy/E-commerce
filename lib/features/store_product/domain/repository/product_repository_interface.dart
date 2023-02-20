@@ -27,7 +27,9 @@ abstract class ProductRepositoryInterface {
       required String productBrand,
       required String productDescription,
       required String storeId,
-      required String productId});
+      required String productId,
+          required ShopModel shopModel
+      });
 
   Future<Either<CustomError, BaseModel>> getProductDetails(
       {required int productId});

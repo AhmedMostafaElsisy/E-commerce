@@ -1,5 +1,5 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/logic/product_states.dart';
+import 'package:captien_omda_customer/features/store_product/presentation/widget/product_image_picked.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +10,6 @@ import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
@@ -19,8 +17,10 @@ import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
-import '../../../core/presentation/Widgets/common_cached_image_widget.dart';
-import 'logic/product_cubit.dart';
+import '../../../core/presentation/Widgets/select_item_pop_up.dart';
+import '../../Categories_feature/presentation/logic/category_cubit.dart';
+import 'logic/edit_product/edit_product_cubit.dart';
+import 'logic/edit_product/edit_product_states.dart';
 
 class EditProductScreen extends StatefulWidget {
   final RouteArgument argument;
@@ -32,9 +32,8 @@ class EditProductScreen extends StatefulWidget {
 }
 
 class _EditProductScreenState extends State<EditProductScreen> {
-  late ProductCubit _productCubit;
+  late EditProductCubit _productCubit;
   final formKey = GlobalKey<FormState>();
-
 
   late TextEditingController adsDetailsController;
   late TextEditingController adsMainPriceController;
@@ -48,7 +47,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void initState() {
     super.initState();
-    _productCubit = BlocProvider.of<ProductCubit>(context);
+    _productCubit = BlocProvider.of<EditProductCubit>(context);
 
     adsNameController =
         TextEditingController(text: widget.argument.productModel!.name);
@@ -57,13 +56,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     adsMainPriceController = TextEditingController(
         text: widget.argument.productModel!.price.toString());
     adsDiscountPriceController = TextEditingController(
-        text: widget.argument.productModel!.price.toString());
+        text: widget.argument.productModel!.discount.toString());
     adsTypeController =
         TextEditingController(text: widget.argument.productModel!.type!);
     adsStatesController =
         TextEditingController(text: widget.argument.productModel!.state!);
-    adsBrandController =
-        TextEditingController(text: widget.argument.productModel!.brand!);
+    adsBrandController = TextEditingController(
+        text: widget.argument.productModel!.categoryModel!.name);
     _productCubit.isDataFound = false;
     _productCubit.controllerList.clear();
 
@@ -75,11 +74,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _productCubit.controllerList.add(adsStatesController);
     _productCubit.controllerList.add(adsBrandController);
     _productCubit.isDataFount(_productCubit.controllerList);
+    _productCubit.selectedProduct = widget.argument.productModel!;
+    _productCubit.selectedCategory =
+        widget.argument.productModel!.categoryModel!;
   }
 
   @override
   void dispose() {
-
     adsNameController.dispose();
     adsDetailsController.dispose();
     adsMainPriceController.dispose();
@@ -115,17 +116,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   textFontSize: AppConstants.normalFontSize,
                 ),
               ),
-              BlocConsumer<ProductCubit, ProductState>(
+              BlocConsumer<EditProductCubit, EditProductState>(
                 listener: (productCtx, productState) {
-                  if (productState is AddNewProductErrorState) {
-                    checkUserAuth(
-                        context: productCtx,
-                        errorType: productState.error.type);
+                  if (productState is EditProductFailState) {
+                    // checkUserAuth(
+                    //     context: productCtx,
+                    //     errorType: productState.error.type);
                     showSnackBar(
                       context: productCtx,
                       title: productState.error.errorMassage!,
                     );
-                  } else if (productState is AddNewProductSuccessState) {
+                  } else if (productState is EditProductSuccessState) {
                     showSnackBar(
                         context: productCtx,
                         title:
@@ -291,7 +292,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           takePhotoBottomSheet(
                                               context: context,
                                               getPhoto: productCtx
-                                                  .read<ProductCubit>()
+                                                  .read<EditProductCubit>()
                                                   .photoPicked);
                                         },
                                         child: Container(
@@ -309,35 +310,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 4.0, horizontal: 8),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  _productCubit.imageXFile !=
-                                                          []
-                                                      ? commonFileImageWidget(
-                                                          imageString:
-                                                              _productCubit
-                                                                  .imageXFile.first
-                                                                  .path,
-                                                          height: 40,
-                                                          width: 40,
-                                                          fit: BoxFit.fill)
-                                                      : commonCachedImageWidget(
-                                                          widget
-                                                              .argument
-                                                              .productModel!
-                                                              .images!.first.imageUrl!,
-                                                          height: 40,
-                                                          width: 40,
-                                                          fit: BoxFit.fill,
-                                                        ),
-                                                  const CommonAssetSvgImageWidget(
-                                                      imageString: "upload.svg",
-                                                      height: 24,
-                                                      width: 24),
-                                                ]),
+                                            child: ProductImagePicked(),
                                           ),
                                         ),
                                       ),
@@ -378,6 +351,29 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                         controller: adsBrandController,
                                         hintKey: AppLocalizations.of(context)!
                                             .lblBrand,
+                                        onTap: () {
+                                          advancedSearchPopUP(
+                                            context: context,
+                                            isMultiSelect: false,
+                                            preSelectedData:
+                                                _productCubit.selectedCategory!,
+                                            title: AppLocalizations.of(context)!
+                                                .lblMainCategory,
+                                            isListHaveSearch: true,
+                                            listOfItem: BlocProvider.of<
+                                                    CategoriesCubit>(context)
+                                                .categories,
+                                            onApply: (dynamic) {
+                                              adsBrandController.text =
+                                                  dynamic.name;
+                                              _productCubit
+                                                  .setSelectedCategory(dynamic);
+                                              _productCubit.isDataFount(
+                                                  _productCubit.controllerList);
+                                            },
+                                          );
+                                        },
+                                        isReadOnly: true,
                                         keyboardType: TextInputType.text,
                                         labelHintColor: AppConstants.mainColor,
                                         validator: (value) {
@@ -397,7 +393,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                           return null;
                                         },
                                       ),
-                                      
+
                                       ///Spacer
                                       getSpaceHeight(AppConstants.smallPadding),
 
@@ -435,12 +431,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                             height: 48,
                                             buttonBackgroundColor:
                                                 AppConstants.mainColor,
-                                            isEnable:
-                                                _productCubit.isDataFound &&
-                                                    _productCubit.imageXFile !=
-                                                        [],
+                                            isEnable: _productCubit.isDataFound,
                                             isLoading: productState
-                                                is AddNewProductLoadingState,
+                                                is EditProductLoadingState,
                                             buttonTextSize: 18,
                                             buttonTextFontWeight:
                                                 FontWeight.w600,
@@ -452,7 +445,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                productCtx.read<ProductCubit>().editProduct(
+                                                productCtx.read<EditProductCubit>().editProduct(
                                                     productName:
                                                         adsNameController.text,
                                                     productMainPrice:
@@ -464,16 +457,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                     productType:
                                                         adsTypeController.text,
                                                     productImage:
-                                                        _productCubit.imageXFile == []
+                                                        _productCubit.imageXFile ==
+                                                                []
                                                             ? null
-                                                            :
-                                                        _productCubit
-                                                            .imageXFile,
+                                                            : _productCubit
+                                                                .imageXFile,
                                                     productStates:
                                                         adsStatesController
                                                             .text,
-                                                    productBrand:
-                                                        adsBrandController.text,
+                                                    productBrand: _productCubit
+                                                        .selectedCategory!.id
+                                                        .toString(),
                                                     productDescription:
                                                         adsDetailsController
                                                             .text,

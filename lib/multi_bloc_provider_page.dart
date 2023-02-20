@@ -27,6 +27,7 @@ import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cu
 import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
+import 'features/store_product/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
 
@@ -76,6 +77,7 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<AllFilterCubit>(create: (_) => di.sl<AllFilterCubit>()),
         BlocProvider<EditStoreCubit>(create: (_) => di.sl<EditStoreCubit>()),
         BlocProvider<PlansCubit>(create: (_) => di.sl<PlansCubit>()),
+        BlocProvider<EditProductCubit>(create: (_) => di.sl<EditProductCubit>()),
         BlocProvider<HomeProductCubit>(
             create: (_) => di.sl<HomeProductCubit>()),
         BlocProvider<ProductListCubitWithFilter>(
