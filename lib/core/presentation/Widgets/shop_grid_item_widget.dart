@@ -53,50 +53,58 @@ class ShopGridItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ///shop category
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const CommonAssetSvgImageWidget(
-                    imageString: "category.svg",
-                    height: 16,
-                    width: 16,
-                    fit: BoxFit.contain,
-                    imageColor: AppConstants.mainColor,
-                  ),
-                  getSpaceWidth(4),
-                  CommonTitleText(
-                    textKey: model.category!.name,
-                    textFontSize: AppConstants.xxSmallFontSize,
-                    textColor: AppConstants.lightContentColor,
-                    textWeight: FontWeight.w400,
-                  ),
-                ],
-              ),
-
-              ///shop location
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 4.0,
-                  vertical: 4,
-                ),
+              Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CommonAssetSvgImageWidget(
-                      imageString: "location.svg",
+                      imageString: "category.svg",
                       height: 16,
                       width: 16,
                       fit: BoxFit.contain,
                       imageColor: AppConstants.mainColor,
                     ),
                     getSpaceWidth(4),
-                    CommonTitleText(
-                      textKey: model.address ?? "asda",
-                      textFontSize: AppConstants.xxSmallFontSize,
-                      textColor: AppConstants.lightContentColor,
-                      textWeight: FontWeight.w400,
+                    Expanded(
+                      child: CommonTitleText(
+                        textKey: model.category!.name,
+                        textFontSize: AppConstants.xxSmallFontSize,
+                        textColor: AppConstants.lightContentColor,
+                        textWeight: FontWeight.w400,
+                      ),
                     ),
                   ],
+                ),
+              ),
+
+              ///shop location
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 4.0,
+                    vertical: 4,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CommonAssetSvgImageWidget(
+                        imageString: "location.svg",
+                        height: 16,
+                        width: 16,
+                        fit: BoxFit.contain,
+                        imageColor: AppConstants.mainColor,
+                      ),
+                      getSpaceWidth(4),
+                      Expanded(
+                        child: CommonTitleText(
+                          textKey: model.address ?? "asda",
+                          textFontSize: AppConstants.xxSmallFontSize,
+                          textColor: AppConstants.lightContentColor,
+                          textWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

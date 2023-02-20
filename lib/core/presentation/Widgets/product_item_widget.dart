@@ -49,7 +49,7 @@ class ProductItemWidget extends StatelessWidget {
         Stack(
           children: [
             commonCachedImageWidget(
-              model.images!.first.imageUrl!,
+              model.images!.isNotEmpty ? model.images!.first.imageUrl! : "",
               height: 168,
               width: 168,
               fit: BoxFit.fill,

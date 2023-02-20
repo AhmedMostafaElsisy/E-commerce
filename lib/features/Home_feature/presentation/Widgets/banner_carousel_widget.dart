@@ -1,8 +1,7 @@
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:captien_omda_customer/features/Home_feature/Data/model/banner_model.dart';
 import 'package:flutter/material.dart';
-
-import '../../Domain/enitiy/banner_model.dart';
 
 class BannerCarouselWidget extends StatefulWidget {
   final List<BannerModel> banners;

@@ -42,7 +42,7 @@ class ProductModel {
         id: json["id"],
         name: json["name"] ?? "--",
         images:
-            json['image'].isNotEmpty ? imageListFromJson(json['image']) : [ImageModel(imageUrl: "")],
+        json['image'] != null &&  json['image'].isNotEmpty ? imageListFromJson(json['image']) : [ImageModel(imageUrl: "")],
         price: json["price"] == null ? "00" : json["price"].toString(),
         discount: json["discount"] == null ? "00" : json["discount"].toString(),
         description: json["description"] ?? "--",
@@ -51,9 +51,9 @@ class ProductModel {
             ? ShopModel()
             : ShopModel.fromJson(json["store"]),
         time: json["time"]??"--",
-        state: json["state"] ?? "--",
-        type: json["type"] ?? "--",
-        brand: json["brand"] ?? "--",
+        state: json["state"] ?? "state",
+        type: json["type"] ?? "type",
+        brand: json["brand"] ?? "brand",
         categoryModel: CategoryModel.fromJson(json["category"]));
   }
 
