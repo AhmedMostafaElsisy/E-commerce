@@ -201,5 +201,7 @@
   "lblNoValid": "this value not valid",
   "lblTo": "To",
   "lblNoting": "noting",
-  "lblDeletePhoto": "Delete photo"
+  "lblDeletePhoto": "Delete photo",
+  "lblTotalPrice": "Total Price"
+
 }

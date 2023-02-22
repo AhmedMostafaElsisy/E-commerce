@@ -88,7 +88,11 @@ class ApiKeys {
 
   ///plans
   static const String plansKey = "/plans";
-  ///form
-  static const String categoryFormKey="/form-category";
 
+  ///form
+  static const String categoryFormKey = "/form-category";
+
+  ///Order
+  static const String orderListKey = "/get-orders";
+  static const String showOrderKey = "/show-order";
 }

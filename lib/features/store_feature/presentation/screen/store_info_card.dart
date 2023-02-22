@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
@@ -156,8 +155,8 @@ class StoreInfoCard extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                        RouteNames.storeOrderPageRoute,
-                        arguments: RouteArgument(shopModel: shopModel));
+                        RouteNames.myOrderPageRoute,
+                       );
                   },
                   child: Column(
                     children: [

@@ -1,6 +1,7 @@
 import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/order_feature/domain/model/order_model.dart';
 import '../../model/shop_model.dart';
 
 class RouteArgument {
@@ -28,7 +29,7 @@ class RouteArgument {
   ShopModel? shopModel;
   ProductModel? productModel;
   bool? firstStoreCreate;
-
+  OrderModel? orderModel;
   RouteArgument(
       {this.id,
       this.sourcePage = '',
@@ -47,6 +48,7 @@ class RouteArgument {
       this.requestId,
       this.shopModel,
       this.productModel,
+        this.orderModel,
       this.firstStoreCreate});
 
   @override

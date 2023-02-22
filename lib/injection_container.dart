@@ -77,6 +77,11 @@ import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_details_cubit/product_details_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_cubit.dart';
+import 'features/order_feature/data/data_scoures/order_remote_data_scoures.dart';
+import 'features/order_feature/data/repository/order_repository.dart';
+import 'features/order_feature/domain/repository/order_repository_interface.dart';
+import 'features/order_feature/domain/ues_cases/ues_cases.dart';
+import 'features/order_feature/presentation/logic/order_cubit.dart';
 import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
 import 'features/plans_feature/Data/repository/plans_repository.dart';
 import 'features/plans_feature/domain/repository/plans_interface.dart';
@@ -128,6 +133,7 @@ Future<void> init() async {
   sl.registerFactory(() => ProductListCubitWithFilter(sl()));
   sl.registerFactory(() => EditProductCubit(sl()));
   sl.registerFactory(() => FormBuilderCubit(sl()));
+  sl.registerFactory(() => OrderCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -149,6 +155,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GeneralProductUseCase(repository: sl()));
   sl.registerLazySingleton(() => FormBuilderUesCases(sl()));
   sl.registerLazySingleton(() => EditProductUesCase(sl()));
+  sl.registerLazySingleton(() => OrderUesCase(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -186,6 +193,8 @@ Future<void> init() async {
           () => FormBuilderProductRepository(sl()));
   sl.registerLazySingleton<EditProductRepositoryInterface>(
           () => EditProductRepository(sl()));
+  sl.registerLazySingleton<OrderRepositoryInterface>(
+          () => OrderRepository(sl()));
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
       () => AuthLocalDataSourceImp(flutterSecureStorage: sl()));
@@ -229,6 +238,8 @@ Future<void> init() async {
           () => FormBuilderRemoteDataSourceImpl());
   sl.registerLazySingleton<EditProductRemoteDataSourceInterface>(
           () => EditProductRemoteDataSourceImpl());
+  sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
+          () => OrderRemoteDataSourceImpl());
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
 }

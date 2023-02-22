@@ -23,6 +23,7 @@ import 'features/general_prodcut_feature/presentation/logic/product_details_cubi
 import 'features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/order_feature/presentation/logic/order_cubit.dart';
 import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
@@ -87,6 +88,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => di.sl<ProductDetailsCubit>()),
         BlocProvider<FormBuilderCubit>(
             create: (_) => di.sl<FormBuilderCubit>()),
+        BlocProvider<OrderCubit>(
+            create: (_) => di.sl<OrderCubit>()),
       ],
       child: widget.body,
     );

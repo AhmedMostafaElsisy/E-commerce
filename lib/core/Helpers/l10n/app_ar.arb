@@ -200,5 +200,6 @@
   "lblNoValid": "هذة القيمة غير صالحة",
   "lblTo": "الي",
   "lblNoting": "لاشئ",
-  "lblDeletePhoto": "مسح الصورة"
+  "lblDeletePhoto": "مسح الصورة",
+  "lblTotalPrice": "السعر الاجمالي"
 }
