@@ -71,6 +71,7 @@ class StoreInfoCard extends StatelessWidget {
               children: [
                 ///store main category
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CommonTitleText(
                       textKey: shopModel.category!.name,
@@ -107,6 +108,8 @@ class StoreInfoCard extends StatelessWidget {
 
                 ///store location
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CommonAssetSvgImageWidget(
@@ -190,7 +193,7 @@ class StoreInfoCard extends StatelessWidget {
                         imageString: "chat.svg", height: 16, width: 16),
                     getSpaceHeight(AppConstants.smallPadding),
                     CommonTitleText(
-                      textKey: AppLocalizations.of(context)!.lblStoreOrder,
+                      textKey: AppLocalizations.of(context)!.lblStoreMassage,
                       textWeight: FontWeight.w600,
                       textFontSize: AppConstants.smallFontSize - 2,
                       textColor: AppConstants.mainTextColor,

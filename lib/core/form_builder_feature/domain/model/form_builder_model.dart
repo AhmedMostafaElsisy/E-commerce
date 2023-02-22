@@ -94,6 +94,7 @@ class FormBuilderModel {
       optionGroup: json["options"] == null
           ? []
           : formOptionBuilderListFromJson(json["options"]),
+      value: null
     );
   }
 

@@ -1,7 +1,9 @@
 import 'package:captien_omda_customer/core/model/shop_model.dart';
 
+import '../form_builder_feature/domain/model/form_builder_model.dart';
 import 'category_model.dart';
 import 'image_model.dart';
+import 'item_meta_data_model.dart';
 
 List<ProductModel> productListFromJson(List str) =>
     List<ProductModel>.from(str.map((x) => ProductModel.fromJson(x)));
@@ -20,7 +22,10 @@ class ProductModel {
   ShopModel? shopModel;
   bool? isFav;
   CategoryModel? categoryModel;
-
+  ///form data
+  List<FormBuilderModel>? formList;
+  ///meta data
+  List<ItemMetaDataModel>? metaData;
   ProductModel(
       {this.id,
       this.name,
@@ -34,6 +39,8 @@ class ProductModel {
       this.type,
       this.state,
       this.categoryModel,
+      this.formList,
+      this.metaData,
       this.brand});
 
   ///Todo:check the json key when integrate with the api
@@ -57,7 +64,17 @@ class ProductModel {
         brand: json["brand"] ?? "brand",
         categoryModel: json['category'] != null
             ? CategoryModel.fromJson(json["category"])
-            : null);
+            : null,
+
+        formList: json["form"] == null
+            ? []
+            : formBuilderListFromJson(json["form"]["fields"]),
+      metaData: json['meta'] == null
+          ? []
+          : json['meta'].isNotEmpty
+          ? metaDataListFromJson(json['meta'])
+          : [],
+    );
   }
 
   @override

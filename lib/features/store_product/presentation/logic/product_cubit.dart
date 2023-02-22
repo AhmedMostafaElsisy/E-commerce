@@ -3,7 +3,6 @@ import 'package:captien_omda_customer/features/store_product/presentation/logic/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../core/form_builder_feature/domain/model/form_builder_model.dart';
 import '../../../../core/model/category_model.dart';
 import '../../../../core/model/shop_model.dart';
@@ -14,16 +13,18 @@ class ProductCubit extends Cubit<ProductState> {
 
   static ProductCubit get(context) => BlocProvider.of(context);
   final ProductUesCase uesCase;
-  List<FormBuilderModel> formData = [];
 
-
-  List<XFile> imageXFile=[];
+  List<XFile> imageXFile = [];
   List<TextEditingController> controllerList = [];
   late bool isDataFound;
   late ProductModel productModel;
 
   photoPicked(XFile xFile) {
     imageXFile.add(xFile);
+    emit(UploadingUserImageLoadingState());
+  }
+  deletePhoto(int index) {
+    imageXFile.removeAt(index);
     emit(UploadingUserImageLoadingState());
   }
 
@@ -39,6 +40,7 @@ class ProductCubit extends Cubit<ProductState> {
     }
     emit(CheckInputValidationState());
   }
+
   CategoryModel? selectedCategory;
 
   setSelectedCategory(CategoryModel model) {
@@ -56,8 +58,8 @@ class ProductCubit extends Cubit<ProductState> {
       required String productStates,
       required String productBrand,
       required String productDescription,
-        required List<FormBuilderModel> formData,
-      required ShopModel shopModel }) async {
+      required List<FormBuilderModel> formData,
+      required ShopModel shopModel}) async {
     emit(AddNewProductLoadingState());
     var result = await uesCase.callCreateNewProduct(
         productName: productName,
@@ -87,6 +89,6 @@ class ProductCubit extends Cubit<ProductState> {
     emit(DeleteProductLoadingState());
     var result = await uesCase.callDeleteProduct(productId: productId);
     result.fold((error) => emit(DeleteProductErrorState(error)),
-        (product) => emit(DeleteProductSuccessState()));
+        (product) => emit(DeleteProductSuccessState(productId)));
   }
 }

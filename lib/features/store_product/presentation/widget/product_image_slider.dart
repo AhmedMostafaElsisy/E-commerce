@@ -69,7 +69,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        3,
+                        widget.model.images!.length,
                             (index) => Container(
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           width: index == pageViewIndex ? 20 : 13,

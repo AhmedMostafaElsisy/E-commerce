@@ -199,5 +199,6 @@
   "lblFrom": "من",
   "lblNoValid": "هذة القيمة غير صالحة",
   "lblTo": "الي",
-  "lblNoting": "لاشئ"
+  "lblNoting": "لاشئ",
+  "lblDeletePhoto": "مسح الصورة"
 }

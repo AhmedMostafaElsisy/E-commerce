@@ -1,19 +1,14 @@
-import 'dart:developer';
-
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/logic/product_states.dart';
+import 'package:captien_omda_customer/features/store_product/presentation/widget/product_image_picked.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
-import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
-import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
-import '../../../../core/presentation/Widgets/common_file_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
@@ -23,7 +18,9 @@ import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../core/form_builder_feature/presentation/form_data_screen.dart';
 import '../../../core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/select_item_pop_up.dart';
+import '../../../core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import '../../Categories_feature/presentation/logic/category_cubit.dart';
 import 'logic/product_cubit.dart';
 
@@ -66,7 +63,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _productCubit.isDataFound = false;
     _productCubit.controllerList.clear();
     formBuilderCubit = BlocProvider.of<FormBuilderCubit>(context);
-
+    formBuilderCubit.formList.clear();
     _productCubit.controllerList.add(adsNameController);
     _productCubit.controllerList.add(adsDetailsController);
     _productCubit.controllerList.add(adsMainPriceController);
@@ -74,7 +71,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _productCubit.controllerList.add(storeMainCategoryController);
     _productCubit.controllerList.add(adsStatesController);
     _productCubit.controllerList.add(adsBrandController);
-    log("this my token ${SharedText.userToken}");
   }
 
   @override
@@ -202,6 +198,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                   return AppLocalizations.of(
                                                           context)!
                                                       .lblNameIsEmpty;
+                                                } else if (int.parse(value) <=
+                                                    int.parse(
+                                                        adsDiscountPriceController
+                                                            .text)) {
+                                                  return AppLocalizations.of(
+                                                          context)!
+                                                      .lblNoValid;
                                                 } else {
                                                   return null;
                                                 }
@@ -239,6 +242,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                   return AppLocalizations.of(
                                                           context)!
                                                       .lblNameIsEmpty;
+                                                } else if (int.parse(value) >=
+                                                    int.parse(
+                                                        adsMainPriceController
+                                                            .text)) {
+                                                  return AppLocalizations.of(
+                                                          context)!
+                                                      .lblNoValid;
                                                 } else {
                                                   return null;
                                                 }
@@ -306,70 +316,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                 width: 1),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                                 vertical: 4.0, horizontal: 8),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  _productCubit.imageXFile != []
-                                                      ? SizedBox(
-                                                          height:
-                                                              getWidgetHeight(
-                                                                  45),
-                                                          child: ListView
-                                                              .separated(
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  scrollDirection:
-                                                                      Axis
-                                                                          .horizontal,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    return commonFileImageWidget(
-                                                                        imageString: _productCubit
-                                                                            .imageXFile[
-                                                                                index]
-                                                                            .path,
-                                                                        height:
-                                                                            40,
-                                                                        width:
-                                                                            40,
-                                                                        fit: BoxFit
-                                                                            .fill);
-                                                                  },
-                                                                  separatorBuilder:
-                                                                      (context,
-                                                                          index) {
-                                                                    return getSpaceWidth(
-                                                                        AppConstants
-                                                                            .smallPadding);
-                                                                  },
-                                                                  itemCount: _productCubit
-                                                                      .imageXFile
-                                                                      .length),
-                                                        )
-                                                      : CommonTitleText(
-                                                          textKey:
-                                                              AppLocalizations.of(
-                                                                      context)!
-                                                                  .lblAdsImages,
-                                                          textWeight:
-                                                              FontWeight.w500,
-                                                          textColor:
-                                                              AppConstants
-                                                                  .mainColor,
-                                                          textFontSize:
-                                                              AppConstants
-                                                                  .smallFontSize,
-                                                        ),
-                                                  const CommonAssetSvgImageWidget(
-                                                      imageString: "upload.svg",
-                                                      height: 24,
-                                                      width: 24),
-                                                ]),
+                                            child: ProductNewImagePicked(),
                                           ),
                                         ),
                                       ),
@@ -416,6 +365,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             isMultiSelect: false,
                                             title: AppLocalizations.of(context)!
                                                 .lblMainCategory,
+                                            preSelectedData:
+                                                _productCubit.selectedCategory,
                                             isListHaveSearch: true,
                                             listOfItem: BlocProvider.of<
                                                     CategoriesCubit>(context)
@@ -427,6 +378,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                   .setSelectedCategory(dynamic);
                                               _productCubit.isDataFount(
                                                   _productCubit.controllerList);
+                                              AllFilterCubit.get(context)
+                                                  .clearAll();
+
                                               formBuilderCubit.getProductForm(
                                                   categoryId: dynamic.id!);
                                             },
@@ -479,6 +433,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           return null;
                                         },
                                       ),
+
                                       ///spacer
                                       getSpaceHeight(AppConstants.smallPadding),
 
@@ -502,9 +457,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             height: 48,
                                             buttonBackgroundColor:
                                                 AppConstants.mainColor,
-                                            isEnable: _productCubit
-                                                    .isDataFound &&
-                                                _productCubit.imageXFile != [],
+                                            isEnable:
+                                                _productCubit.isDataFound &&
+                                                    _productCubit
+                                                        .imageXFile.isNotEmpty,
                                             isLoading: productState
                                                 is AddNewProductLoadingState,
                                             buttonTextSize: 18,
@@ -518,11 +474,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                productCtx.read<ProductCubit>().formData =
-                                                    formBuilderCubit.formList.where((element) => element.value !=null).toList();
 
                                                 productCtx.read<ProductCubit>().addNewProduct(
-                                                  formData:  productCtx.read<ProductCubit>().formData,
+                                                    formData: formBuilderCubit
+                                                        .formList,
                                                     productName:
                                                         adsNameController.text,
                                                     productMainPrice:

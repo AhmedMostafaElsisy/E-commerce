@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:captien_omda_customer/core/form_builder_feature/domain/model/form_builder_model.dart';
 import 'package:dartz/dartz.dart';
@@ -15,7 +14,6 @@ class FormBuilderUesCases {
     return repositoryInterface
         .getProductForm(categoryId: categoryId)
         .then((value) => value.fold((l) => Left(l), (r) {
-              log("this data ${r.data}");
               if(r.data==[]){
                 return right([]);
               }else{

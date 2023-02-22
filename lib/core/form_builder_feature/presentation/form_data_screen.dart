@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_loading_widget.dart';
@@ -58,20 +57,33 @@ class _FormDataScreenState extends State<FormDataScreen> {
                       return const SizedBox();
                     case FormBuilderEnum.radio:
                       return SelectionType(
-                        isRequired: formCtx.read<FormBuilderCubit>().formList[index].isRequired!,
-                       title: formCtx.read<FormBuilderCubit>().formList[index].labelText! ,
-                        onItemSelected: (value){
-
-                          formCtx.read<FormBuilderCubit>().formList[index].value=value;
+                        isRequired: formCtx
+                            .read<FormBuilderCubit>()
+                            .formList[index]
+                            .isRequired!,
+                        title: formCtx
+                            .read<FormBuilderCubit>()
+                            .formList[index]
+                            .labelText!,
+                        onItemSelected: (value) {
+                          formCtx
+                              .read<FormBuilderCubit>()
+                              .formList[index]
+                              .value = value;
                           formCtx
                               .read<FormBuilderCubit>()
                               .formList[index]
                               .displaySelectedValue = value.name!;
-                          log("this selection value ${ formCtx.read<FormBuilderCubit>().formList[index].value}");
                           formCtx.read<FormBuilderCubit>().updateView();
                         },
-                        optionsToSelect: formCtx.read<FormBuilderCubit>().formList[index].optionGroup!,
-                        selectedItem:  formCtx.read<FormBuilderCubit>().formList[index].value,
+                        optionsToSelect: formCtx
+                            .read<FormBuilderCubit>()
+                            .formList[index]
+                            .optionGroup!,
+                        selectedItem: formCtx
+                            .read<FormBuilderCubit>()
+                            .formList[index]
+                            .value,
                       );
                     case FormBuilderEnum.text:
                       return FormInputFiled(
@@ -171,8 +183,8 @@ class _FormDataScreenState extends State<FormDataScreen> {
                                 .read<FormBuilderCubit>()
                                 .formList[index]
                                 .optionGroup!
-                                .firstWhere(
-                                    (element) => element.parentId == dynamic.id);
+                                .firstWhere((element) =>
+                                    element.parentId == dynamic.id);
                             formCtx
                                 .read<FormBuilderCubit>()
                                 .createNewFiledFromOption(

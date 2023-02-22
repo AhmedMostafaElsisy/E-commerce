@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -35,7 +34,6 @@ class RatingRemoteDataSourceImpl extends RatingRemoteDataSourceInterface {
       if (comment.isNotEmpty) {
         staticData.fields.add(MapEntry('comment', comment.toString()));
       }
-      log("this the rating form ${staticData.fields}");
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
 

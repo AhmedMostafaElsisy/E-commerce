@@ -200,5 +200,6 @@
   "lblFrom": "Form",
   "lblNoValid": "this value not valid",
   "lblTo": "To",
-  "lblNoting": "noting"
+  "lblNoting": "noting",
+  "lblDeletePhoto": "Delete photo"
 }

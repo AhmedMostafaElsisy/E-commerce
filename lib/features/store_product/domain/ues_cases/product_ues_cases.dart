@@ -37,30 +37,6 @@ class ProductUesCase {
         shopModel: shopModel);
   }
 
-  Future<Either<CustomError, BaseModel>> callEditProduct(
-      {required String productName,
-      required String productMainPrice,
-      required String productDiscountPrice,
-      required String productType,
-      List<XFile>? productImage,
-      required String productStates,
-      required String productBrand,
-      required String productDescription,
-      required String storeId,
-      required String productId, required ShopModel shopModel}) {
-    return repositoryInterface.editProduct(
-        productName: productName,
-        productMainPrice: productMainPrice,
-        productDiscountPrice: productDiscountPrice,
-        productType: productType,
-        productStates: productStates,
-        productBrand: productBrand,
-        productDescription: productDescription,
-        storeId: storeId,
-        productId: productId,
-        shopModel: shopModel,
-        productImage: productImage);
-  }
 
   Future<Either<CustomError, ProductModel>> callGetProductDetails(
       {required int productId}) {

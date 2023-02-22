@@ -19,20 +19,6 @@ abstract class ProductRepositoryInterface {
           required List<FormBuilderModel> formData,
       required ShopModel shopModel});
 
-  Future<Either<CustomError, BaseModel>> editProduct(
-      {required String productName,
-      required String productMainPrice,
-      required String productDiscountPrice,
-      required String productType,
-      List<XFile>? productImage,
-      required String productStates,
-      required String productBrand,
-      required String productDescription,
-      required String storeId,
-      required String productId,
-          required ShopModel shopModel
-      });
-
   Future<Either<CustomError, BaseModel>> getProductDetails(
       {required int productId});
 

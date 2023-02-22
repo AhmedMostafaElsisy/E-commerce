@@ -17,6 +17,7 @@ import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dar
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
+import 'features/edit_product_feature/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_details_cubit/product_details_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_cubit.dart';
@@ -28,7 +29,6 @@ import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cu
 import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
-import 'features/store_product/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
 

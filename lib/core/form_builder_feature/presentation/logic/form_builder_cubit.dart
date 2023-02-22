@@ -1,3 +1,4 @@
+
 import 'package:captien_omda_customer/core/form_builder_feature/domain/model/form_builder_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/model/form_option_model.dart';
@@ -21,8 +22,9 @@ class FormBuilderCubit extends Cubit<FormBuilderState> {
 
     result.fold((failure) => emit(GetCategoryFormErrorStates(failure)),
         (requestData) {
-      formList.clear();
+      formList = [];
       formList = requestData;
+
       emit(GetCategoryFormSuccessStates());
     });
   }
@@ -44,8 +46,7 @@ class FormBuilderCubit extends Cubit<FormBuilderState> {
       FormBuilderModel parentModel, FormOptionModel childOption,
       {FormOptionModel? oldChild}) {
     if (oldChild != null) {
-      formList.removeWhere((element) =>
-          element.parentId == oldChild.id );
+      formList.removeWhere((element) => element.parentId == oldChild.id);
     }
     formList.add(parentModel.copyWith(childOption));
     emit(FormBuilderProductInitialState());

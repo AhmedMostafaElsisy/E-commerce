@@ -77,6 +77,8 @@ class ApiKeys {
   static const String deleteProductKey = "/delete-product";
   static const String homeAdds = "/home-ads";
   static const String generalProduct = "/home-products";
+  static const String productOnEditKey = "/product-on-edit";
+  static const String productUpdateKey = "/update-product";
 
   ///category
   static const String categoryKey = "/home-categories";
@@ -88,4 +90,5 @@ class ApiKeys {
   static const String plansKey = "/plans";
   ///form
   static const String categoryFormKey="/form-category";
+
 }

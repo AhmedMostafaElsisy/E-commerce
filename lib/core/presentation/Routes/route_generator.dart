@@ -13,6 +13,7 @@ import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bo
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
+import '../../../features/edit_product_feature/presentation/edit_my_product_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/general_prodcut_feature/presentation/screen/product_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
@@ -26,7 +27,6 @@ import '../../../features/store_feature/presentation/screen/edit_store_screen.da
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
-import '../../../features/store_product/presentation/edit_my_product_screen.dart';
 import '../../../features/store_product/presentation/show_product_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';

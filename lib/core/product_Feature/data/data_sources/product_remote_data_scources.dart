@@ -59,7 +59,7 @@ class GeneralProductRemoteDataSourceImpl
       if (areaId != null) {
         pathUrl += "&areaId=$areaId";
       }
-      debugPrint("path of productData ${pathUrl}");
+      debugPrint("path of productData $pathUrl");
       Response response = await DioHelper.getDate(url: pathUrl);
 
       return right(BaseModel.fromJson(response.data));

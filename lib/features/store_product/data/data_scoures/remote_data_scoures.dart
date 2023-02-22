@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:captien_omda_customer/core/Constants/Enums/form_builder_enum.dart';
 import 'package:dartz/dartz.dart';
@@ -25,21 +24,9 @@ abstract class ProductRemoteDataSourceInterface {
       required String productBrand,
       required String productDescription,
       required ShopModel shopModel,
-        required List<FormBuilderModel> formData
-      });
+      required List<FormBuilderModel> formData});
 
-  Future<Either<CustomError, BaseModel>> editProduct(
-      {required String productName,
-      required String productMainPrice,
-      required String productDiscountPrice,
-      required String productType,
-      List<XFile>? productImage,
-      required String productStates,
-      required String productBrand,
-      required String productDescription,
-      required String storeId,
-      required String productId,
-      required ShopModel shopModel});
+
 
   Future<Either<CustomError, BaseModel>> getProductDetails(
       {required int productId});
@@ -60,8 +47,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
       required String productBrand,
       required String productDescription,
       required ShopModel shopModel,
-        required List<FormBuilderModel> formData
-      }) async {
+      required List<FormBuilderModel> formData}) async {
     try {
       String pathUrl = ApiKeys.addProductKey;
 
@@ -74,7 +60,8 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
         ));
       }
       var formDataCollection = [];
-      for (var formElement in formData) {
+      for (var formElement
+          in formData.where((element) => element.value != null)) {
         Map<String, dynamic> singleItem = {};
         if (formElement.inputType == FormBuilderEnum.rang) {
           List<String> values = [];
@@ -90,8 +77,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
             "field_id": formElement.id,
             "key": formElement.key,
             "value": formElement.value.id,
-            "option_key":[ formElement.value.key],
-
+            "option_key": [formElement.value.key],
           };
         } else if (formElement.inputType == FormBuilderEnum.checkbox) {
           List<String> values = [];
@@ -108,14 +94,14 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
             "value": values,
             "option_key": optionKeys,
           };
-        } else if (formElement.inputType == FormBuilderEnum.select){
+        } else if (formElement.inputType == FormBuilderEnum.select) {
           singleItem = {
             "field_id": formElement.id,
             "key": formElement.key,
             "value": formElement.value.id,
-            "option_key":[ formElement.value.key],
+            "option_key": [formElement.value.key],
           };
-        }else {
+        } else {
           singleItem = {
             "key": formElement.key,
             "field_id": formElement.id,
@@ -138,7 +124,6 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
         "store_id": shopModel.id,
         "weight": 0,
         "form": formDataCollection,
-
       };
       staticData = FormData.fromMap(
         postData,
@@ -157,64 +142,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSourceInterface {
     }
   }
 
-  @override
-  Future<Either<CustomError, BaseModel>> editProduct(
-      {required String productName,
-      required String productMainPrice,
-      required String productDiscountPrice,
-      required String productType,
-      List<XFile>? productImage,
-      required String productStates,
-      required String productBrand,
-      required String productDescription,
-      required String storeId,
-      required String productId,
-      required ShopModel shopModel}) async {
-    try {
-      String pathUrl = ApiKeys.addProductKey;
 
-      FormData staticData = FormData();
-      var photoList = [];
-      if (productImage != null && productImage.isNotEmpty) {
-        for (var element in productImage) {
-          photoList.add({
-            "value": await MultipartFile.fromFile(
-              element.path,
-              filename: element.path.split("/").last.toString(),
-            )
-          });
-        }
-      }
-      Map<String, dynamic> postData = {
-        "name": productName,
-        "description": productDescription,
-        "images": photoList,
-        "price": productMainPrice,
-        "discount": productDiscountPrice,
-        "type": productType,
-        "category_id": productBrand,
-        "city_id": shopModel.city!.id,
-        "area_id": shopModel.area!.id,
-        "store_id": shopModel.id,
-        "weight": 0,
-        "product_id": productId
-      };
-      staticData = FormData.fromMap(
-        postData,
-        ListFormat.multiCompatible,
-      );
-      log("this edit data ${postData}");
-      Response response =
-          await DioHelper.postData(url: pathUrl, data: staticData);
-
-      return right(BaseModel.fromJson(response.data));
-    } on CustomException catch (ex) {
-      return Left(CustomError(
-        type: ex.error.type,
-        errorMassage: ex.error.errorMassage,
-      ));
-    }
-  }
 
   @override
   Future<Either<CustomError, BaseModel>> deleteProductDetails(
