@@ -6,7 +6,10 @@ class SharedText {
   static double screenWidth = 0.0;
   static double screenHeight = 0.0;
   static UserBaseEntity? currentUser;
-  static FilterCollectionModel? filterModel;
+  static FilterCollectionModel filterModel = FilterCollectionModel(
+    tags: [],
+    categories: [],
+  );
 
   static DeviceInfo? deviceType;
 

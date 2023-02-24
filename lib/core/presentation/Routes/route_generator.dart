@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
+import 'package:captien_omda_customer/features/general_prodcut_feature/presentation/screen/filter_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/Auth_feature/Presentation/screens/chanage_password_screen.dart';
@@ -14,6 +15,7 @@ import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_sc
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
+import '../../../features/general_prodcut_feature/presentation/screen/general_product_details_screen.dart';
 import '../../../features/general_prodcut_feature/presentation/screen/product_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/order_feature/presentation/my_order_screen.dart';
@@ -118,6 +120,14 @@ class RouteGenerator {
       case RouteNames.productWithFilterScreen:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const ProductListScreen());
+      case RouteNames.generalProductDetailsScreen:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: GeneralProductDetailsScreen(
+          argument: args as RouteArgument,
+        ));
+      case RouteNames.filterScreen:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const FilterScreen());
 
       default:
         return MaterialPageRoute(

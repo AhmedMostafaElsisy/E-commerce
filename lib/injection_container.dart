@@ -65,6 +65,7 @@ import 'features/favorite_feature/data/repository/favorite_repository.dart';
 import 'features/favorite_feature/domain/repository/favorite_repository_interface.dart';
 import 'features/favorite_feature/domain/ues_cases/ues_cases.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
+import 'features/general_prodcut_feature/presentation/logic/Filter_cubit/filter_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_details_cubit/product_details_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_cubit.dart';
 import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
@@ -118,6 +119,7 @@ Future<void> init() async {
   sl.registerFactory(() => ProductDetailsCubit(sl()));
   sl.registerFactory(() => ProductListCubitWithFilter(sl()));
   sl.registerFactory(() => EditProductCubit(sl()));
+  sl.registerFactory(() => FilterCubit());
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));

@@ -28,6 +28,7 @@ class GeneralProductRepositoryImpl extends GeneralProductRepositoryInterface {
     return dataSource
         .getProductWithOption(
           page: page,
+          searchName: searchName,
           limit: limit,
           categories: categories,
           tags: tags,

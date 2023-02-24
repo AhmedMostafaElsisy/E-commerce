@@ -36,4 +36,9 @@ class CategoryModel extends CategoryEntityModel {
       );
     }
   }
+
+  @override
+  String toString() {
+    return "category is -> id: $id, name: $name, image: $image";
+  }
 }

@@ -1,82 +1,113 @@
 import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
+import 'package:captien_omda_customer/features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_events.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../../core/model/product_model.dart';
 import '../../../../../core/product_Feature/domain/use_case/product_use_case.dart';
 import 'product_list_states.dart';
 
-class ProductListCubitWithFilter extends Cubit<ProductListStates> {
+class ProductListCubitWithFilter extends Bloc<SearchEvents, ProductListStates> {
   GeneralProductUseCase productUseCase;
 
   List<ProductModel> products = [];
-
-  ProductListCubitWithFilter(
-    this.productUseCase,
-  ) : super(ProductListInitStates());
+  TextEditingController searchController = TextEditingController();
 
   ///pagination
   int page = 1;
   String? searchNameTemp;
 
   late ScrollController scrollController;
+
   bool hasMoreData = false;
 
-  getProducts({
-    String? searchName,
-  }) {
-    hasMoreData = true;
-    page = 1;
-    searchNameTemp = searchName;
-    emit(ProductListLoadingStates());
-    productUseCase
-        .getProductWithFilterUseCase(
-          page: page,
-          searchName: searchName,
-          categories: SharedText.filterModel?.categories,
-          tags: SharedText.filterModel?.tags,
-          cityId: SharedText.filterModel?.cityId,
-          areaId: SharedText.filterModel?.areaId,
-        )
-        .then(
-          (value) => value.fold(
-            (l) => emit(ProductListFailedStates(error: l)),
-            (productsList) {
-              hasMoreData = productsList.length == 10;
+  ProductListCubitWithFilter(this.productUseCase)
+      : super(ProductListInitStates()) {
+    ///Search event
+    on<SearchClickEvent>(
+      (event, emit) async {
+        await getProducts(emit: emit);
+      },
+    );
+    on<SearchClearEvent>(
+      (event, emit) async {
+        print("call init here");
+        searchController = TextEditingController();
+        emit(ProductListInitStates());
+      },
+    );
+    on<SearchClickWithNameEvent>(
+      (event, emit) async {
+        await getProducts(emit: emit);
+      },
 
-              if (productsList.isEmpty) {
-                products.clear();
-                emit(ProductListEmptyStates());
-              } else {
-                products = productsList;
-                emit(ProductListSuccessStates());
-              }
-            },
-          ),
-        );
+      ///waite 500 mill after user last input then call the func
+      transformer: (eventsStream, mapper) => eventsStream
+          .debounceTime(const Duration(milliseconds: 500))
+          .switchMap(mapper),
+    );
+
+    ///Load more data
+    on<LoadMoreData>((event, emit) async {
+      await setupScrollController(emit: emit);
+    });
   }
 
-  void setupScrollController() {
+  getProducts({
+    emit,
+  }) async {
+    hasMoreData = true;
+    page = 1;
+    emit(ProductListLoadingStates());
+    var result = await productUseCase.getProductWithFilterUseCase(
+      page: page,
+      searchName: searchController.text,
+      categories: SharedText.filterModel.categories,
+      tags: SharedText.filterModel.tags,
+      cityId: SharedText.filterModel.cityId?.id.toString(),
+      areaId: SharedText.filterModel.areaId?.id.toString(),
+    );
+
+    result.fold(
+      (l) => emit(ProductListFailedStates(error: l)),
+      (productsList) {
+        hasMoreData = productsList.length == 10;
+
+        if (productsList.isEmpty) {
+          products.clear();
+          emit(ProductListEmptyStates());
+        } else {
+          products = productsList;
+          emit(ProductListSuccessStates());
+        }
+      },
+    );
+  }
+
+  Future<void> setupScrollController({
+    emit,
+  }) async {
     if (scrollController.offset >
             scrollController.position.maxScrollExtent - 200 &&
         scrollController.offset <= scrollController.position.maxScrollExtent) {
       if (state is! GetMoreProductListLoadingStates && hasMoreData) {
-        whenScrollProductPagination();
+        await whenScrollProductPagination(emit: emit);
       }
     }
   }
 
   ///get request history pagination
-  whenScrollProductPagination() async {
+  whenScrollProductPagination({emit}) async {
     emit(GetMoreProductListLoadingStates());
     page = page + 1;
     var result = await productUseCase.getProductWithFilterUseCase(
       page: page,
-      searchName: searchNameTemp,
-      categories: SharedText.filterModel?.categories,
-      tags: SharedText.filterModel?.tags,
-      cityId: SharedText.filterModel?.cityId,
-      areaId: SharedText.filterModel?.areaId,
+      searchName: searchController.text,
+      categories: SharedText.filterModel.categories,
+      tags: SharedText.filterModel.tags,
+      cityId: SharedText.filterModel.cityId?.id.toString(),
+      areaId: SharedText.filterModel.areaId?.id.toString(),
     );
 
     result.fold(

@@ -40,7 +40,7 @@ class GeneralProductRemoteDataSourceImpl
   }) async {
     try {
       String pathUrl = "${ApiKeys.generalProduct}?limit=$limit&page=$page";
-      if (searchName != null) {
+      if (searchName != null && searchName.isNotEmpty) {
         pathUrl += "&name=$searchName";
       }
       if (categories != null) {
@@ -59,7 +59,7 @@ class GeneralProductRemoteDataSourceImpl
       if (areaId != null) {
         pathUrl += "&areaId=$areaId";
       }
-      debugPrint("path of productData ${pathUrl}");
+      debugPrint("path of productData $pathUrl");
       Response response = await DioHelper.getDate(url: pathUrl);
 
       return right(BaseModel.fromJson(response.data));
