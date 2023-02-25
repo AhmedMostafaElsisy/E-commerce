@@ -55,7 +55,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                     radius: AppConstants.smallRadius),
               );
             },
-
           ),
           Positioned(
             bottom: 0,
@@ -69,8 +68,8 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        3,
-                            (index) => Container(
+                        widget.model.images!.length,
+                        (index) => Container(
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           width: index == pageViewIndex ? 20 : 13,
                           height: 6,
