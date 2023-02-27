@@ -8,6 +8,7 @@ class CommonProfileHeaderWidget extends StatelessWidget {
   final String imagePath;
   final double imageWidth;
   final double imageHeight;
+  final Color backGroundColor;
   final Function() onClick;
 
   const CommonProfileHeaderWidget(
@@ -15,7 +16,7 @@ class CommonProfileHeaderWidget extends StatelessWidget {
       required this.imageHeight,
       required this.imagePath,
       required this.imageWidth,
-
+      this.backGroundColor = AppConstants.lightWhiteColor,
       required this.onClick})
       : super(key: key);
 
@@ -28,16 +29,16 @@ class CommonProfileHeaderWidget extends StatelessWidget {
       child: Container(
         width: getWidgetHeight(24),
         height: getWidgetHeight(24),
-        decoration: const BoxDecoration(
-          color: AppConstants.lightWhiteColor,
-          shape: BoxShape.circle
+        decoration: BoxDecoration(
+          color: backGroundColor,
+          shape: BoxShape.circle,
         ),
         child: Center(
           child: CommonAssetSvgImageWidget(
-              imageString: imagePath,
-              height: imageHeight,
-              width: imageWidth,
-             ),
+            imageString: imagePath,
+            height: imageHeight,
+            width: imageWidth,
+          ),
         ),
       ),
     );

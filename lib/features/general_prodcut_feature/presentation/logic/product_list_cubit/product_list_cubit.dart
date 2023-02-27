@@ -1,11 +1,11 @@
-import 'package:captien_omda_customer/core/Helpers/shared_texts.dart';
-import 'package:captien_omda_customer/features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_events.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../../core/Helpers/shared_texts.dart';
+import '../../../../../core/general_product_feature/domain/use_case/product_use_case.dart';
 import '../../../../../core/model/product_model.dart';
-import '../../../../../core/product_Feature/domain/use_case/product_use_case.dart';
+import 'product_list_events.dart';
 import 'product_list_states.dart';
 
 class ProductListCubitWithFilter extends Bloc<SearchEvents, ProductListStates> {

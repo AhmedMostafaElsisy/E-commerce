@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/general_product_feature/domain/use_case/product_use_case.dart';
 import '../../../../../core/model/product_model.dart';
-import '../../../../../core/product_Feature/domain/use_case/product_use_case.dart';
 import 'product_details_states.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsStates> {
