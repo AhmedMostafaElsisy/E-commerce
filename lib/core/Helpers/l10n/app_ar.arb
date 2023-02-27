@@ -197,6 +197,7 @@
   "lblNoProductFound": "لا يوجد لديك منتجات",
   "lblNoProductFoundDesc": "قم باضاقة منتجات",
   "lblFilterTitle": "فلاتر البحث",
-  "lblApply": "تطبيق"
+  "lblApply": "تطبيق",
+  "addToCart": "اضافة للعربة"
 
 }

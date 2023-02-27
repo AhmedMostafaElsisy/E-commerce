@@ -198,5 +198,6 @@
   "lblNoProductFound": "No product found",
   "lblNoProductFoundDesc": "Add your product now",
   "lblFilterTitle": "Search filters",
-  "lblApply": "Apply"
+  "lblApply": "Apply",
+  "addToCart": "Add to cart"
 }
