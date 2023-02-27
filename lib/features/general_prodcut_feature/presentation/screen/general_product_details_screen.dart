@@ -1,12 +1,8 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/logic/product_cubit.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/logic/product_states.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/widget/product_image_slider.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/widget/product_states_widget.dart';
-import 'package:captien_omda_customer/features/store_product/presentation/widget/product_store_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
@@ -15,10 +11,16 @@ import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../core/presentation/Widgets/common_loading_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
-import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../../../store_product/presentation/widget/product_price_widget.dart';
+import '../../../store_product/presentation/widget/product_image_slider.dart';
+import '../../../store_product/presentation/widget/product_states_widget.dart';
 import '../logic/product_details_cubit/product_details_cubit.dart';
+import '../logic/product_details_cubit/product_details_states.dart';
+import '../widget/product_add_cart_with_quantity.dart';
+import '../widget/product_favorite_button.dart';
+import '../widget/product_location_and_time.dart';
+import '../widget/product_price_and_discount.dart';
+import '../widget/product_store_with_contact_widget.dart';
 
 class GeneralProductDetailsScreen extends StatefulWidget {
   final RouteArgument argument;
@@ -52,20 +54,11 @@ class _GeneralProductDetailsScreenState
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: BlocConsumer<ProductCubit, ProductState>(
+          child: BlocConsumer<ProductDetailsCubit, ProductDetailsStates>(
             listener: (productCtx, productState) {
-              if (productState is GetProductDetailsErrorState) {
+              if (productState is ProductDetailsFailedStates) {
                 checkUserAuth(
                     context: productCtx, errorType: productState.error.type);
-              } else if (productState is DeleteProductErrorState) {
-                checkUserAuth(
-                    context: productCtx, errorType: productState.error.type);
-                showSnackBar(
-                  context: productCtx,
-                  title: productState.error.errorMassage!,
-                );
-              } else if (productState is DeleteProductSuccessState) {
-                Navigator.of(context).pop();
               }
             },
             builder: (productCtx, productState) {
@@ -86,10 +79,10 @@ class _GeneralProductDetailsScreenState
                           textFontSize: AppConstants.normalFontSize,
                         ),
                       ),
-                      if (productState is GetProductDetailsLoadingState) ...[
+                      if (productState is ProductDetailsLoadingStates) ...[
                         const CommonLoadingWidget()
                       ] else if (productState
-                          is GetProductDetailsErrorState) ...[
+                          is ProductDetailsFailedStates) ...[
                         CommonError(
                           errorMassage: productState.error.errorMassage,
                           withButton: true,
@@ -102,66 +95,73 @@ class _GeneralProductDetailsScreenState
                           padding: EdgeInsets.symmetric(
                               horizontal:
                                   getWidgetWidth(AppConstants.pagePadding)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ///product image slider
-                              ProductImageSlider(
-                                model: widget.argument.productModel!,
-                              ),
+                          child: SizedBox(
+                            height: getWidgetHeight(710),
+                            width: getWidgetWidth(375),
+                            child: ListView(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              children: [
+                                ///product image slider
+                                ProductImageSlider(
+                                  model: productCubit.product,
+                                ),
 
-                              ///Spacer
-                              getSpaceHeight(AppConstants.smallPadding),
+                                ///store information
+                                ProductStoreInformationWithRating(
+                                  model: productCubit.product,
+                                ),
 
-                              ///product price
-                              ProductPriceWidget(
-                                productPrice:
-                                    widget.argument.productModel!.price!,
-                                oldPrice:
-                                    widget.argument.productModel!.discount!,
-                              ),
+                                ///Spacer
+                                getSpaceHeight(AppConstants.smallPadding),
+                                ProductLocationAndTime(
+                                    product: productCubit.product),
+                                //space
+                                getSpaceHeight(
+                                  AppConstants.smallPadding,
+                                ),
 
-                              ///Spacer
-                              getSpaceHeight(AppConstants.smallPadding),
+                                ///product information
+                                ProductInformationWidget(
+                                  model: productCubit.product,
+                                ),
 
-                              ///product information
-                              ProductInformationWidget(
-                                model: widget.argument.productModel!,
-                              ),
+                                ///Spacer
+                                getSpaceHeight(AppConstants.smallPadding),
 
-                              ///Spacer
-                              getSpaceHeight(AppConstants.smallPadding),
+                                //description
+                                RichText(
+                                  text: HTML.toTextSpan(
+                                    context,
+                                    productCubit.product.description!,
+                                    defaultTextStyle: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        ?.copyWith(
+                                          color: AppConstants.mainTextColor,
+                                          fontSize: AppConstants.smallFontSize,
+                                          fontWeight: FontWeight.w400,
+                                          overflow: TextOverflow.visible,
+                                        ),
+                                  ),
+                                ),
 
-                              ///store information
-                              ProductStoreInformation(
-                                model: widget.argument.productModel!,
-                              ),
-
-                              ///Spacer
-                              getSpaceHeight(AppConstants.smallPadding),
-                              CommonTitleText(
-                                textKey:
-                                    widget.argument.productModel!.description!,
-                                textFontSize: AppConstants.smallFontSize,
-                                textWeight: FontWeight.w400,
-                                textColor: AppConstants.lightBlackColor,
-                                lines: 15,
-                                textAlignment: TextAlign.start,
-                              ),
-                            ],
+                                getSpaceHeight(100),
+                              ],
+                            ),
                           ),
                         )
                       ],
                     ],
                   ),
-                  if (productState is! GetProductDetailsLoadingState &&
-                      productState is! GetProductDetailsErrorState)
+                  if (productState is! ProductDetailsLoadingStates &&
+                      productState is! ProductDetailsFailedStates)
                     Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Container(
                           width: SharedText.screenWidth,
-                          height: getWidgetHeight(70),
+                          height: getWidgetHeight(80),
                           decoration: BoxDecoration(
                               color: AppConstants.lightWhiteColor,
                               borderRadius: const BorderRadius.only(
@@ -183,9 +183,21 @@ class _GeneralProductDetailsScreenState
                               vertical:
                                   getWidgetHeight(AppConstants.pagePadding)),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              /// todo: add cart buttons
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              getSpaceWidth(16),
+                              Expanded(
+                                child: ProductPriceAndDiscountWidget(
+                                  product: productCubit.product,
+                                ),
+                              ),
+                              AddProductToCartWithQuantity(
+                                product: productCubit.product,
+                              ),
+                              getSpaceWidth(4),
+                              ProductFavoriteButton(
+                                product: productCubit.product,
+                              )
                             ],
                           ),
                         )
