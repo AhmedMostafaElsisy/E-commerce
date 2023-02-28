@@ -210,5 +210,7 @@
   "lblLeaveRate": "Leave rate",
   "lblSelectRate": "Select rate",
   "lblAddRateToHelp": "Write rate for this product to help other users",
-  "lblWriteRate": "Write your rate"
+  "lblWriteRate": "Write your rate",
+  "lblStore": "Store"
+
 }

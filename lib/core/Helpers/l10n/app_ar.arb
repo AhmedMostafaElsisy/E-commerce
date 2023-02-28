@@ -209,5 +209,6 @@
   "lblLeaveRate": "اترك تقييم",
   "lblSelectRate": "اختار نسبة التقيم",
   "lblAddRateToHelp": "اكتب تقيم مفصل للمنتج ليساعد العملاء",
-  "lblWriteRate": "اكتب تقيمك"
+  "lblWriteRate": "اكتب تقيمك",
+  "lblStore": "متجر"
 }

@@ -25,6 +25,7 @@ import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
+import '../../../features/store_feature/presentation/screen/store_details_screen.dart';
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
 import '../../../features/store_product/presentation/show_product_details_screen.dart';
@@ -120,6 +121,9 @@ class RouteGenerator {
       case RouteNames.filterScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const FilterScreen());
+      case RouteNames.storeDetailsScreen:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: StoreDetailsScreen(argument: args as RouteArgument));
 
       default:
         return MaterialPageRoute(
