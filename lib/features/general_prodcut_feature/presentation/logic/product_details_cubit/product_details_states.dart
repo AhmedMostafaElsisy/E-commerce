@@ -1,4 +1,4 @@
-import 'package:captien_omda_customer/core/Error_Handling/custom_error.dart';
+import '../../../../../core/Error_Handling/custom_error.dart';
 
 abstract class ProductDetailsStates {}
 

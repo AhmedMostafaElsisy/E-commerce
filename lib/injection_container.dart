@@ -1,15 +1,3 @@
-import 'package:captien_omda_customer/core/product_Feature/data/data_sources/product_remote_data_scources.dart';
-import 'package:captien_omda_customer/core/product_Feature/data/repository/product_repository_impelement.dart';
-import 'package:captien_omda_customer/core/product_Feature/domain/use_case/product_use_case.dart';
-import 'package:captien_omda_customer/features/Categories_feature/data/data_source/category_remote_data_source.dart';
-import 'package:captien_omda_customer/features/Categories_feature/data/repository_imp/category_repository_implement.dart';
-import 'package:captien_omda_customer/features/Categories_feature/domain/repository_interface/category_repository_interface.dart';
-import 'package:captien_omda_customer/features/Categories_feature/domain/use_case/category_use_case.dart';
-import 'package:captien_omda_customer/features/store_feature/data/data_scoures/general_stores_remote_data_scoures.dart';
-import 'package:captien_omda_customer/features/store_feature/data/repository/general_stores_repository.dart';
-import 'package:captien_omda_customer/features/store_feature/domain/repository/general_stores_repository_interface.dart';
-import 'package:captien_omda_customer/features/store_feature/domain/ues_cases/general_stores_ues_cases.dart';
-import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
@@ -18,13 +6,16 @@ import 'core/form_builder_feature/Data/repository/form_builder_product_repositor
 import 'core/form_builder_feature/domain/repository/form_builder_product_interface.dart';
 import 'core/form_builder_feature/domain/uesCaes/form_builder_use_caes.dart';
 import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
+import 'core/general_product_feature/data/data_sources/product_remote_data_scources.dart';
+import 'core/general_product_feature/data/repository/product_repository_impelement.dart';
+import 'core/general_product_feature/domain/repository_interface/product_repository_interface.dart';
+import 'core/general_product_feature/domain/use_case/product_use_case.dart';
 import 'core/location_feature/Data/data_scources/location_remote_data_scources.dart';
 import 'core/location_feature/Data/repository/location_repository.dart';
 import 'core/location_feature/domain/repository/location_interface.dart';
 import 'core/location_feature/domain/uesCaes/location_use_caes.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
-import 'core/product_Feature/domain/repository_interface/product_repository_interface.dart';
 import 'core/setting_feature/Data/data_scources/local_data_scources.dart';
 import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
@@ -53,6 +44,10 @@ import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'features/Categories_feature/data/data_source/category_remote_data_source.dart';
+import 'features/Categories_feature/data/repository_imp/category_repository_implement.dart';
+import 'features/Categories_feature/domain/repository_interface/category_repository_interface.dart';
+import 'features/Categories_feature/domain/use_case/category_use_case.dart';
 import 'features/Categories_feature/presentation/logic/category_cubit.dart';
 import 'features/Home_feature/Data/data_sources/home_remote_data_sources.dart';
 import 'features/Home_feature/Data/repository/home_repository.dart';
@@ -93,11 +88,16 @@ import 'features/rating_feature/Data/repository/rating_repository.dart';
 import 'features/rating_feature/Domain/repository/repository_interface.dart';
 import 'features/rating_feature/Domain/ues_cases/rating_ues_cases.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'features/store_feature/data/data_scoures/general_stores_remote_data_scoures.dart';
 import 'features/store_feature/data/data_scoures/remote_data_scoures.dart';
+import 'features/store_feature/data/repository/general_stores_repository.dart';
 import 'features/store_feature/data/repository/my_store_repository.dart';
+import 'features/store_feature/domain/repository/general_stores_repository_interface.dart';
 import 'features/store_feature/domain/repository/store_repository_interface.dart';
+import 'features/store_feature/domain/ues_cases/general_stores_ues_cases.dart';
 import 'features/store_feature/domain/ues_cases/ues_cases.dart';
 import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
+import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'features/store_product/data/data_scoures/remote_data_scoures.dart';
@@ -192,11 +192,12 @@ Future<void> init() async {
   sl.registerLazySingleton<GeneralProductRepositoryInterface>(
       () => GeneralProductRepositoryImpl(dataSource: sl()));
   sl.registerLazySingleton<FormBuilderInterface>(
-          () => FormBuilderProductRepository(sl()));
+      () => FormBuilderProductRepository(sl()));
   sl.registerLazySingleton<EditProductRepositoryInterface>(
-          () => EditProductRepository(sl()));
+      () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
-          () => OrderRepository(sl()));
+      () => OrderRepository(sl()));
+
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
       () => AuthLocalDataSourceImp(flutterSecureStorage: sl()));
@@ -237,11 +238,12 @@ Future<void> init() async {
   sl.registerLazySingleton<GeneralProductsDataSourceInterface>(
       () => GeneralProductRemoteDataSourceImpl());
   sl.registerLazySingleton<FormBuilderRemoteDataSourceInterface>(
-          () => FormBuilderRemoteDataSourceImpl());
+      () => FormBuilderRemoteDataSourceImpl());
   sl.registerLazySingleton<EditProductRemoteDataSourceInterface>(
-          () => EditProductRemoteDataSourceImpl());
+      () => EditProductRemoteDataSourceImpl());
   sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
-          () => OrderRemoteDataSourceImpl());
+      () => OrderRemoteDataSourceImpl());
+
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
 }

@@ -23,6 +23,7 @@ class AppConstants {
   static const Color lightOrangColor = Color(0XFFFFF5EB);
 
   static const Color lightRedColor = Color(0xFFBF0000);
+  static const Color lightOpacityRedColor = Color(0xFFFCF5F5);
   static const Color lightBlueColor = Color(0xFF3243CD);
   static const Color lightShadowColor = Color(0xFFACACAC);
   static const Color lightBorderColor = Color(0xFFAEAEAE);

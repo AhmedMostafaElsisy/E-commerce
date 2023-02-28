@@ -199,11 +199,11 @@
   "lblNoProductFoundDesc": "Add your product now",
   "lblFilterTitle": "Search filters",
   "lblApply": "Apply",
+  "addToCart": "Add to cart",
   "lblFrom": "Form",
   "lblNoValid": "this value not valid",
   "lblTo": "To",
   "lblNoting": "noting",
   "lblDeletePhoto": "Delete photo",
   "lblTotalPrice": "Total Price"
-
 }

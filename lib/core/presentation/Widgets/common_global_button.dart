@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../Constants/app_constants.dart';
 import '../../Helpers/shared.dart';
 import 'common_asset_svg_image_widget.dart';
@@ -71,7 +72,13 @@ class CommonGlobalButton extends StatelessWidget {
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
             width: 1,
-            color: showBorder ? isLoading || !isEnable  ? AppConstants.greyColor:borderColor! :isLoading || !isEnable  ? AppConstants.greyColor:AppConstants.lightWhiteColor,
+            color: showBorder
+                ? isLoading || !isEnable
+                    ? AppConstants.greyColor
+                    : borderColor!
+                : isLoading || !isEnable
+                    ? AppConstants.greyColor
+                    : AppConstants.lightWhiteColor,
           ),
         ),
         shadowColor: MaterialStateProperty.all(
@@ -97,23 +104,26 @@ class CommonGlobalButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                CommonTitleText(
-                  textKey: isLoading
-                      ? AppLocalizations.of(context)!.lblLoading
-                      : buttonText,
-                  textColor: isEnable
-                      ? isLoading
-                          ? AppConstants.lightWhiteColor
-                          : buttonTextColor!
-                      : AppConstants.lightWhiteColor,
-                  textFontSize: buttonTextSize!,
-                  textWeight: buttonTextFontWeight!,
+                Expanded(
+                  child: CommonTitleText(
+                    textKey: isLoading
+                        ? AppLocalizations.of(context)!.lblLoading
+                        : buttonText,
+                    textColor: isEnable
+                        ? isLoading
+                            ? AppConstants.lightWhiteColor
+                            : buttonTextColor!
+                        : AppConstants.lightWhiteColor,
+                    textFontSize: buttonTextSize!,
+                    textWeight: buttonTextFontWeight!,
+                  ),
                 ),
                 getSpaceWidth(spaceSize!),
                 CommonAssetSvgImageWidget(
                   imageString: iconPath!,
                   height: iconHeight!,
                   width: iconWidth!,
+                  imageColor: iconColor,
                   fit: BoxFit.contain,
                 )
               ],
