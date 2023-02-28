@@ -205,5 +205,10 @@
   "lblTo": "To",
   "lblNoting": "noting",
   "lblDeletePhoto": "Delete photo",
-  "lblTotalPrice": "Total Price"
+  "lblTotalPrice": "Total Price",
+  "lblRateSuccess": "Your rate have send successfully",
+  "lblLeaveRate": "Leave rate",
+  "lblSelectRate": "Select rate",
+  "lblAddRateToHelp": "Write rate for this product to help other users",
+  "lblWriteRate": "Write your rate"
 }

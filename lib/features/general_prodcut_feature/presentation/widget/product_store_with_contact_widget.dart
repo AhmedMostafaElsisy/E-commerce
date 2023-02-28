@@ -10,6 +10,7 @@ import '../../../../core/Helpers/shared.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../rating_feature/presentation/screen/rating_screen.dart';
 
 class ProductStoreInformationWithRating extends StatelessWidget {
   final ProductModel model;
@@ -125,7 +126,9 @@ class ProductStoreInformationWithRating extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  //todo: integrate rating here
+                  showReportSheet(
+                      context: context,
+                      storeId: model.id!);
                 },
                 child: Center(
                   child: CommonTitleText(
