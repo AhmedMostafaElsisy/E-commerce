@@ -95,4 +95,12 @@ class ApiKeys {
   ///Order
   static const String orderListKey = "/get-orders";
   static const String showOrderKey = "/show-order";
+
+  ///cart
+  static const String getCartList = "/cart-products";
+  static const String editProductQuantity = "/add-product-to-cart";
+  static const String removeProductFromCart = "/remove-product-from-cart";
+
+  ///checkout
+  static const String createOrder = "/add-order";
 }
