@@ -1,14 +1,15 @@
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
-import 'core/general_product_feature/data/data_sources/product_remote_data_scources.dart';
-import 'core/general_product_feature/data/repository/product_repository_impelement.dart';
-import 'core/general_product_feature/domain/repository_interface/product_repository_interface.dart';
-import 'core/general_product_feature/domain/use_case/product_use_case.dart';
+import 'core/form_builder_feature/Data/data_scources/form_builder_data_scources.dart';
 import 'core/form_builder_feature/Data/repository/form_builder_product_repository.dart';
 import 'core/form_builder_feature/domain/repository/form_builder_product_interface.dart';
 import 'core/form_builder_feature/domain/uesCaes/form_builder_use_caes.dart';
 import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
+import 'core/general_product_feature/data/data_sources/product_remote_data_scources.dart';
+import 'core/general_product_feature/data/repository/product_repository_impelement.dart';
+import 'core/general_product_feature/domain/repository_interface/product_repository_interface.dart';
+import 'core/general_product_feature/domain/use_case/product_use_case.dart';
 import 'core/location_feature/Data/data_scources/location_remote_data_scources.dart';
 import 'core/location_feature/Data/repository/location_repository.dart';
 import 'core/location_feature/domain/repository/location_interface.dart';
@@ -191,11 +192,12 @@ Future<void> init() async {
   sl.registerLazySingleton<GeneralProductRepositoryInterface>(
       () => GeneralProductRepositoryImpl(dataSource: sl()));
   sl.registerLazySingleton<FormBuilderInterface>(
-          () => FormBuilderProductRepository(sl()));
+      () => FormBuilderProductRepository(sl()));
   sl.registerLazySingleton<EditProductRepositoryInterface>(
-          () => EditProductRepository(sl()));
+      () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
-          () => OrderRepository(sl()));
+      () => OrderRepository(sl()));
+
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
       () => AuthLocalDataSourceImp(flutterSecureStorage: sl()));
@@ -236,11 +238,12 @@ Future<void> init() async {
   sl.registerLazySingleton<GeneralProductsDataSourceInterface>(
       () => GeneralProductRemoteDataSourceImpl());
   sl.registerLazySingleton<FormBuilderRemoteDataSourceInterface>(
-          () => FormBuilderRemoteDataSourceImpl());
+      () => FormBuilderRemoteDataSourceImpl());
   sl.registerLazySingleton<EditProductRemoteDataSourceInterface>(
-          () => EditProductRemoteDataSourceImpl());
+      () => EditProductRemoteDataSourceImpl());
   sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
-          () => OrderRemoteDataSourceImpl());
+      () => OrderRemoteDataSourceImpl());
+
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());
 }
