@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
+import 'package:captien_omda_customer/features/cart_feature/presenation/screens/my_cart_screen.dart';
 import 'package:captien_omda_customer/features/general_prodcut_feature/presentation/screen/filter_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -124,6 +125,9 @@ class RouteGenerator {
       case RouteNames.filterScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const FilterScreen());
+      case RouteNames.myCartScreen:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const MyCartScreen());
 
       default:
         return MaterialPageRoute(

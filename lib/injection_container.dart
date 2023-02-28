@@ -1,3 +1,7 @@
+import 'package:captien_omda_customer/features/cart_feature/data/data_sources/cart_data_source_remote.dart';
+import 'package:captien_omda_customer/features/cart_feature/data/repositories_imp/cart_repo_implement.dart';
+import 'package:captien_omda_customer/features/cart_feature/domain/repo_interface/cart_repo_interface.dart';
+import 'package:captien_omda_customer/features/cart_feature/domain/use_case/cart_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
@@ -60,6 +64,7 @@ import 'features/Profile_feature/Data/repository/profile_repository.dart';
 import 'features/Profile_feature/Domain/repository/profile_interface.dart';
 import 'features/Profile_feature/Domain/user_cases/profile_ues_case.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
+import 'features/cart_feature/presenation/logic/cart_cubit.dart';
 import 'features/edit_product_feature/data/data_scoures/remote_data_scoures.dart';
 import 'features/edit_product_feature/data/repository/product_repository.dart';
 import 'features/edit_product_feature/domain/repository/edit_product_repository_interface.dart';
@@ -136,6 +141,7 @@ Future<void> init() async {
   sl.registerFactory(() => FormBuilderCubit(sl()));
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => FilterCubit());
+  sl.registerFactory(() => CartCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -158,6 +164,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FormBuilderUesCases(sl()));
   sl.registerLazySingleton(() => EditProductUesCase(sl()));
   sl.registerLazySingleton(() => OrderUesCase(sl()));
+  sl.registerLazySingleton(() => CartUseCase(cartRepositoryInterFace: sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -197,6 +204,8 @@ Future<void> init() async {
       () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
       () => OrderRepository(sl()));
+  sl.registerLazySingleton<CartRepositoryInterFace>(
+      () => CartRepositoryImplementation(dataSource: sl()));
 
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
@@ -243,6 +252,8 @@ Future<void> init() async {
       () => EditProductRemoteDataSourceImpl());
   sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
       () => OrderRemoteDataSourceImpl());
+  sl.registerLazySingleton<CartDataSourceRemoteInterface>(
+      () => CartDataSourceRemoteImplement());
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

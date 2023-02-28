@@ -36,7 +36,7 @@ class AddProductToCartWithQuantity extends StatelessWidget {
               ),
               SizedBox(
                 width: getWidgetWidth(24),
-                child: CommonTitleText(
+                child: const CommonTitleText(
                   textKey: "1",
                 ),
               ),

@@ -14,6 +14,8 @@ import 'package:captien_omda_customer/features/Home_feature/presentation/logic/h
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_cubit/home_states.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_cubit.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_states.dart';
+import 'package:captien_omda_customer/features/cart_feature/presenation/logic/cart_cubit.dart';
+import 'package:captien_omda_customer/features/cart_feature/presenation/logic/cart_states.dart';
 import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'package:captien_omda_customer/features/store_feature/presentation/logic/general_stores_cubit/general_stores_states.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController searchController;
   late CategoriesCubit categoriesCubit;
   late HomeProductCubit productCubit;
+  late CartCubit cartCubit;
 
   late TextEditingController locationController;
 
@@ -53,9 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
     categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
     generalStoresCubit = BlocProvider.of<GeneralStoresCubit>(context);
     productCubit = BlocProvider.of<HomeProductCubit>(context);
+    cartCubit = BlocProvider.of<CartCubit>(context);
     searchController = TextEditingController();
     locationController = TextEditingController();
     settingCubit.getSetting();
+    cartCubit.getCartItems();
     bannersCubit.getBanners();
     categoriesCubit.getAllCategories();
     generalStoresCubit.getGeneralStoresListData();
@@ -85,23 +90,42 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  CommonAppBarImageWithCounter(
+                children: [
+                  const CommonAppBarImageWithCounter(
                     imagePath: "fav_disable.svg",
                     withCounter: false,
                     navigationPath: RouteNames.favoritePageRoute,
                   ),
                   //todo: handel click on chat icon by navigation to chat screen
-                  CommonAppBarImageWithCounter(
+                  const CommonAppBarImageWithCounter(
                     imagePath: "chat.svg",
                     withCounter: true,
                     itemCounter: 19,
                   ),
-                  //todo: handel click on cart icon by navigation to cart screen
-                  CommonAppBarImageWithCounter(
-                    imagePath: "cart.svg",
-                    withCounter: true,
-                    itemCounter: 19,
+                  BlocBuilder<CartCubit, CartState>(
+                    builder: (cartCtx, cartState) {
+                      if (cartState is GetCartItemsSuccessState &&
+                          cartCtx.read<CartCubit>().cartItems.isNotEmpty) {
+                        return CommonAppBarImageWithCounter(
+                          imagePath: "cart.svg",
+                          withCounter: true,
+                          itemCounter:
+                              cartCtx.read<CartCubit>().cartItems.length,
+                          navigationPath: RouteNames.myCartScreen,
+                        );
+                      } else if (cartState is GetCartItemsLoadingState) {
+                        return const CircularProgressIndicator(
+                          color: AppConstants.mainColor,
+                        );
+                      } else {
+                        return const CommonAppBarImageWithCounter(
+                          imagePath: "cart.svg",
+                          withCounter: true,
+                          itemCounter: 0,
+                          navigationPath: RouteNames.myCartScreen,
+                        );
+                      }
+                    },
                   ),
                 ],
               )
@@ -382,68 +406,66 @@ class _HomeScreenState extends State<HomeScreen> {
             ///products
             BlocConsumer<HomeProductCubit, HomeProductStates>(
                 listener: (productCtx, productState) {
-                  if (productState is HomeProductFailedStates){
-                    checkUserAuth(context: context, errorType: productState.error.type);
-                  }
-                },
-                builder: (productCtx, productState) {
-                  if (productState is HomeProductLoadingStates) {
-                    return Column(
-                      children: const [
-                        Center(
-                          child: CircularProgressIndicator(
-                            color: AppConstants.mainColor,
+              if (productState is HomeProductFailedStates) {
+                checkUserAuth(
+                    context: context, errorType: productState.error.type);
+              }
+            }, builder: (productCtx, productState) {
+              if (productState is HomeProductLoadingStates) {
+                return Column(
+                  children: const [
+                    Center(
+                      child: CircularProgressIndicator(
+                        color: AppConstants.mainColor,
+                      ),
+                    )
+                  ],
+                );
+              } else if (productState is HomeProductFailedStates) {
+                return CommonError(
+                  errorMassage: productState.error.errorMassage,
+                  withButton: true,
+                  onTap: () => generalStoresCubit.getGeneralStoresListData(),
+                );
+              } else {
+                return Column(
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: getWidgetWidth(16)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonTitleText(
+                            textKey: AppLocalizations.of(context)!
+                                .lblFeaturedProducts,
+                            textWeight: FontWeight.w600,
                           ),
-                        )
-                      ],
-                    );
-                  } else if (productState is HomeProductFailedStates) {
-                    return CommonError(
-                      errorMassage: productState.error.errorMassage,
-                      withButton: true,
-                      onTap: () =>
-                          generalStoresCubit.getGeneralStoresListData(),
-                    );
-                  } else {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getWidgetWidth(16)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CommonTitleText(
-                                textKey: AppLocalizations.of(context)!
-                                    .lblFeaturedProducts,
-                                textWeight: FontWeight.w600,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  SharedText.filterModel.clear();
-                                  Navigator.pushNamed(
-                                    context,
-                                    RouteNames.productWithFilterScreen,
-                                  );
-                                },
-                                child: CommonTitleText(
-                                  textKey:
-                                      AppLocalizations.of(context)!.lblShowAll,
-                                  textFontSize: AppConstants.xSmallFontSize,
-                                  textColor: AppConstants.lightContentColor,
-                                ),
-                              ),
-                            ],
+                          InkWell(
+                            onTap: () {
+                              SharedText.filterModel.clear();
+                              Navigator.pushNamed(
+                                context,
+                                RouteNames.productWithFilterScreen,
+                              );
+                            },
+                            child: CommonTitleText(
+                              textKey: AppLocalizations.of(context)!.lblShowAll,
+                              textFontSize: AppConstants.xSmallFontSize,
+                              textColor: AppConstants.lightContentColor,
+                            ),
                           ),
-                        ),
-                        getSpaceHeight(8),
-                        ProductsGridWidget(
-                          products: productCubit.products,
-                        )
-                      ],
-                    );
-                  }
-                }),
+                        ],
+                      ),
+                    ),
+                    getSpaceHeight(8),
+                    ProductsGridWidget(
+                      products: productCubit.products,
+                    )
+                  ],
+                );
+              }
+            }),
 
             getSpaceHeight(80),
           ],

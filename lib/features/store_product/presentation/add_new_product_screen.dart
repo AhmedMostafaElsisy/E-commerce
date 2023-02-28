@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -315,7 +316,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                     AppConstants.lightGrayColor,
                                                 width: 1),
                                           ),
-                                          child: Padding(
+                                          child: const Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 4.0, horizontal: 8),
                                             child: ProductNewImagePicked(),

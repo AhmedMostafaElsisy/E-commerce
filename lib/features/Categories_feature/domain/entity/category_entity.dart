@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class CategoryEntityModel extends Equatable {
+class CategoryEntityModel {
   int id;
   String name;
   String image;
@@ -13,8 +11,4 @@ class CategoryEntityModel extends Equatable {
       required this.image,
       required this.slug,
       required this.active});
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [id, slug];
 }

@@ -1,5 +1,6 @@
 import 'package:captien_omda_customer/features/Categories_feature/presentation/logic/category_cubit.dart';
 import 'package:captien_omda_customer/features/Home_feature/presentation/logic/home_product_cubit/home_product_cubit.dart';
+import 'package:captien_omda_customer/features/cart_feature/presenation/logic/cart_cubit.dart';
 import 'package:captien_omda_customer/features/general_prodcut_feature/presentation/logic/Filter_cubit/filter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,8 +92,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<FilterCubit>(create: (_) => di.sl<FilterCubit>()),
         BlocProvider<FormBuilderCubit>(
             create: (_) => di.sl<FormBuilderCubit>()),
-        BlocProvider<OrderCubit>(
-            create: (_) => di.sl<OrderCubit>()),
+        BlocProvider<CartCubit>(create: (_) => di.sl<CartCubit>()),
+        BlocProvider<OrderCubit>(create: (_) => di.sl<OrderCubit>()),
       ],
       child: widget.body,
     );
