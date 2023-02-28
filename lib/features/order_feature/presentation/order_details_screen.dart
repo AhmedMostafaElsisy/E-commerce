@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
@@ -91,7 +92,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                   children: [
                                     CommonTitleText(
                                       textKey: widget.argument.orderModel!
-                                          .orderCart![index].cartProduct!.name!,
+                                          .orderCart![index].productModel.name!,
                                       textWeight: FontWeight.w600,
                                       textFontSize: AppConstants.smallFontSize,
                                       textColor: AppConstants.mainTextColor,
@@ -126,7 +127,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                                     .argument
                                                     .orderModel!
                                                     .orderCart![index]
-                                                    .qnt!
+                                                    .quantity
                                                     .toString(),
                                                 textWeight: FontWeight.w600,
                                                 textFontSize:
@@ -139,7 +140,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                           getSpaceWidth(110),
                                           CommonTitleText(
                                             textKey:
-                                                "${widget.argument.orderModel!.orderCart![index].total!.toString()} ${AppLocalizations.of(context)!.lblEGP}",
+                                                "${widget.argument.orderModel!.orderCart![index].total.toString()} ${AppLocalizations.of(context)!.lblEGP}",
                                             textWeight: FontWeight.w600,
                                             textFontSize:
                                                 AppConstants.normalFontSize,
@@ -190,7 +191,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CommonTitleText(
-                            textKey: AppLocalizations.of(context)!.lblTotalPrice,
+                            textKey:
+                                AppLocalizations.of(context)!.lblTotalPrice,
                             textWeight: FontWeight.w700,
                             textFontSize: AppConstants.smallFontSize,
                             textColor: AppConstants.mainTextColor,
