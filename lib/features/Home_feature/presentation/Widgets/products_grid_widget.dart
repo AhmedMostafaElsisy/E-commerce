@@ -21,7 +21,8 @@ class _ProductsGridWidgetState extends State<ProductsGridWidget> {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 168 / 294,
+        childAspectRatio: MediaQuery.of(context).size.width /
+            (MediaQuery.of(context).size.height / 1.25),
         crossAxisSpacing: getWidgetWidth(8),
         mainAxisSpacing: getWidgetHeight(16),
       ),
