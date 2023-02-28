@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/Connectivity_Cubit/connectivity_cubit.dart';
 import 'core/Language_Cubit/language_cubit.dart';
+import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import 'core/setting_feature/Logic/setting_cubit.dart';
@@ -17,18 +18,19 @@ import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dar
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
+import 'features/edit_product_feature/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/favorite_feature/presentation/logic/favorite_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_details_cubit/product_details_cubit.dart';
 import 'features/general_prodcut_feature/presentation/logic/product_list_cubit/product_list_cubit.dart';
 import 'features/notification_feature/data/reposiroty/notification_repository.dart';
 import 'features/notification_feature/presentation/logic/notification_cubit.dart';
+import 'features/order_feature/presentation/logic/order_cubit.dart';
 import 'features/plans_feature/presentation/logic/plans_cubit.dart';
 import 'features/rating_feature/presentation/logic/rating_cubit.dart';
 import 'features/store_feature/presentation/logic/edit_my_store/edit_my_store_cubit.dart';
 import 'features/store_feature/presentation/logic/general_stores_cubit/general_stores_cubit.dart';
 import 'features/store_feature/presentation/logic/my_stores_cubit/store_cubit.dart';
 import 'features/store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
-import 'features/store_product/presentation/logic/edit_product/edit_product_cubit.dart';
 import 'features/store_product/presentation/logic/product_cubit.dart';
 import 'injection_container.dart' as di;
 
@@ -87,6 +89,10 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<ProductDetailsCubit>(
             create: (_) => di.sl<ProductDetailsCubit>()),
         BlocProvider<FilterCubit>(create: (_) => di.sl<FilterCubit>()),
+        BlocProvider<FormBuilderCubit>(
+            create: (_) => di.sl<FormBuilderCubit>()),
+        BlocProvider<OrderCubit>(
+            create: (_) => di.sl<OrderCubit>()),
       ],
       child: widget.body,
     );

@@ -2,6 +2,7 @@ import 'package:captien_omda_customer/core/presentation/Routes/route_argument_mo
 import 'package:captien_omda_customer/features/store_product/presentation/logic/product_cubit.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/logic/product_states.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/widget/product_image_slider.dart';
+import 'package:captien_omda_customer/features/store_product/presentation/widget/product_meta_data_widget.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/widget/product_states_widget.dart';
 import 'package:captien_omda_customer/features/store_product/presentation/widget/product_store_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import '../../../core/presentation/Widgets/common_loading_widget.dart';
 import '../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../core/presentation/screen/main_app_page.dart';
+import '../../store_feature/presentation/logic/single_store_cubit/my_store_cubit.dart';
 import 'widget/product_price_widget.dart';
 
 class ShowProductDetailsScreen extends StatefulWidget {
@@ -66,6 +68,8 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
                 );
               } else if (productState is DeleteProductSuccessState) {
                 Navigator.of(context).pop();
+                BlocProvider.of<MyStoreCubit>(context)
+                    .deleteProductLocal(productState.productID);
               }
             },
             builder: (productCtx, productState) {
@@ -94,7 +98,7 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
                           errorMassage: productState.error.errorMassage,
                           withButton: true,
                           onTap: () => productCubit.getProductDetails(
-                              productId: widget.argument.productModel!.id!),
+                              productId: productCubit.productModel.id!),
                         )
                       ] else ...[
                         Padding(
@@ -106,7 +110,7 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
                             children: [
                               ///product image slider
                               ProductImageSlider(
-                                model: widget.argument.productModel!,
+                                model: productCubit.productModel,
                               ),
 
                               ///Spacer
@@ -114,9 +118,8 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
 
                               ///product price
                               ProductPriceWidget(
-                                productPrice:
-                                    widget.argument.productModel!.price!,
-                                oldPrice:   widget.argument.productModel!.discount!,
+                                productPrice: productCubit.productModel.price!,
+                                oldPrice: productCubit.productModel.discount!,
                               ),
 
                               ///Spacer
@@ -124,7 +127,7 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
 
                               ///product information
                               ProductInformationWidget(
-                                model: widget.argument.productModel!,
+                                model: productCubit.productModel,
                               ),
 
                               ///Spacer
@@ -132,20 +135,28 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
 
                               ///store information
                               ProductStoreInformation(
-                                model: widget.argument.productModel!,
+                                model: productCubit.productModel,
                               ),
 
                               ///Spacer
                               getSpaceHeight(AppConstants.smallPadding),
                               CommonTitleText(
-                                textKey:
-                                    widget.argument.productModel!.description!,
+                                textKey: productCubit.productModel.description!,
                                 textFontSize: AppConstants.smallFontSize,
                                 textWeight: FontWeight.w400,
                                 textColor: AppConstants.lightBlackColor,
                                 lines: 15,
                                 textAlignment: TextAlign.start,
                               ),
+
+                              ///Spacer
+                              getSpaceHeight(AppConstants.smallPadding),
+                              ProductMetaDataWidget(
+                                metaData: productCubit.productModel.metaData!,
+                              ),
+
+                              ///Spacer
+                              getSpaceHeight(AppConstants.smallPadding),
                             ],
                           ),
                         )
@@ -227,7 +238,7 @@ class _ShowProductDetailsScreenState extends State<ShowProductDetailsScreen> {
                                   onPressedFunction: () {
                                     productCubit.deleteProduct(
                                         productId:
-                                            widget.argument.productModel!.id!);
+                                            productCubit.productModel.id!);
                                   },
                                   height: 40,
                                 ),

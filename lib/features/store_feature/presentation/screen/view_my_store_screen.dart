@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:captien_omda_customer/core/presentation/Routes/route_names.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
@@ -39,8 +38,6 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
     myStoreCubit = BlocProvider.of<MyStoreCubit>(context);
     myStoreCubit.getStoreProductList(shopID: widget.argument.shopModel!.id!);
     myStoreCubit.scrollController = ScrollController();
-    log("this my token ${SharedText.userToken}");
-    log("this my token ${widget.argument.shopModel!.id!}");
     myStoreCubit.scrollController.addListener(
       () {
         myStoreCubit.setupScrollController(
@@ -188,7 +185,7 @@ class _ViewMyStoreScreenState extends State<ViewMyStoreScreen> {
                                         return const SizedBox();
                                       } else {
                                         return ProductItemWidget(
-                                          showFavIcon: true,
+                                          showFavIcon: false,
                                           model: myStoreCtx
                                               .read<MyStoreCubit>()
                                               .productList[index],

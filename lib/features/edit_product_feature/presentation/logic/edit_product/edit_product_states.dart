@@ -16,3 +16,12 @@ class EditProductFailState extends EditProductState {
 
   EditProductFailState(this.error);
 }
+class GetEditProductDetailsEditLoadingState extends EditProductState {}
+
+class GetEditProductDetailsEditSuccessState extends EditProductState {}
+
+class GetEditProductDetailsEditFailedState extends EditProductState {
+  CustomError error;
+
+  GetEditProductDetailsEditFailedState(this.error);
+}

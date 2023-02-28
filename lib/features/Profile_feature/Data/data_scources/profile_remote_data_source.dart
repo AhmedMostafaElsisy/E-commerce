@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:captien_omda_customer/core/Constants/Keys/api_keys.dart';
 import 'package:dartz/dartz.dart';
@@ -75,7 +74,6 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSourceInterface {
               filename: userImage.path.split("/").last.toString(),
             )));
       }
-      log("this the profile data ${staticData.fields}");
       Response response =
           await DioHelper.postData(url: pathUrl, data: staticData);
       return right(BaseModel.fromJson(response.data));
