@@ -31,7 +31,11 @@ class GetProductDetailsErrorState extends ProductState {
 
 class DeleteProductLoadingState extends ProductState {}
 
-class DeleteProductSuccessState extends ProductState {}
+class DeleteProductSuccessState extends ProductState {
+  int productID;
+
+  DeleteProductSuccessState(this.productID);
+}
 
 class DeleteProductErrorState extends ProductState {
   CustomError error;

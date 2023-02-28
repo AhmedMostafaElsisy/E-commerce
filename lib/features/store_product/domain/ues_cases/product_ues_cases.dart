@@ -4,6 +4,7 @@ import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/form_builder_feature/domain/model/form_builder_model.dart';
 import '../../../../core/model/shop_model.dart';
 import '../repository/product_repository_interface.dart';
 
@@ -21,6 +22,7 @@ class ProductUesCase {
       required String productStates,
       required String productBrand,
       required String productDescription,
+        required List<FormBuilderModel> formData,
       required ShopModel shopModel}) {
     return repositoryInterface.addNewProduct(
         productName: productName,
@@ -31,33 +33,10 @@ class ProductUesCase {
         productStates: productStates,
         productBrand: productBrand,
         productDescription: productDescription,
+        formData: formData,
         shopModel: shopModel);
   }
 
-  Future<Either<CustomError, BaseModel>> callEditProduct(
-      {required String productName,
-      required String productMainPrice,
-      required String productDiscountPrice,
-      required String productType,
-      List<XFile>? productImage,
-      required String productStates,
-      required String productBrand,
-      required String productDescription,
-      required String storeId,
-      required String productId, required ShopModel shopModel}) {
-    return repositoryInterface.editProduct(
-        productName: productName,
-        productMainPrice: productMainPrice,
-        productDiscountPrice: productDiscountPrice,
-        productType: productType,
-        productStates: productStates,
-        productBrand: productBrand,
-        productDescription: productDescription,
-        storeId: storeId,
-        productId: productId,
-        shopModel: shopModel,
-        productImage: productImage);
-  }
 
   Future<Either<CustomError, ProductModel>> callGetProductDetails(
       {required int productId}) {

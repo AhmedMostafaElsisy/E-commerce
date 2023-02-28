@@ -54,7 +54,6 @@ class ApiKeys {
   ///Setting
   static const String settingKey = "/general/settings";
 
-  ///Todo:check the endpoint when integrate with the api
   ///Favorite
   static const String favoriteKey = "/fav-products";
   static const String addFavoriteKey = "/add-fav-product";
@@ -78,6 +77,8 @@ class ApiKeys {
   static const String deleteProductKey = "/delete-product";
   static const String homeAdds = "/home-ads";
   static const String generalProduct = "/home-products";
+  static const String productOnEditKey = "/product-on-edit";
+  static const String productUpdateKey = "/update-product";
 
   ///category
   static const String categoryKey = "/home-categories";
@@ -87,4 +88,11 @@ class ApiKeys {
 
   ///plans
   static const String plansKey = "/plans";
+
+  ///form
+  static const String categoryFormKey = "/form-category";
+
+  ///Order
+  static const String orderListKey = "/get-orders";
+  static const String showOrderKey = "/show-order";
 }

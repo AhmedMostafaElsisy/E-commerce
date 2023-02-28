@@ -195,9 +195,14 @@
   "lblPricePlan": "خطط الاسعار",
   "lblContinueAndPay": "الاستمرار و الدفع",
   "lblNoProductFound": "لا يوجد لديك منتجات",
-  "lblNoProductFoundDesc": "قم باضاقة منتجات",
   "lblFilterTitle": "فلاتر البحث",
   "lblApply": "تطبيق",
-  "addToCart": "اضافة للعربة"
-
+  "addToCart": "اضافة للعربة",
+  "lblNoProductFoundDesc": "قم باضاقة منتجات",
+  "lblFrom": "من",
+  "lblNoValid": "هذة القيمة غير صالحة",
+  "lblTo": "الي",
+  "lblNoting": "لاشئ",
+  "lblDeletePhoto": "مسح الصورة",
+  "lblTotalPrice": "السعر الاجمالي"
 }

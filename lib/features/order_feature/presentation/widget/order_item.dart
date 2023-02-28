@@ -1,3 +1,4 @@
+import 'package:captien_omda_customer/features/order_feature/domain/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Constants/app_constants.dart';
@@ -6,7 +7,8 @@ import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({Key? key}) : super(key: key);
+  final OrderModel orderModel;
+  const OrderItem({Key? key,required this.orderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,8 @@ class OrderItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const CommonTitleText(
-              textKey: "#12554",
+             CommonTitleText(
+              textKey: "#${orderModel.id!}",
               textColor: AppConstants.mainTextColor,
               textFontSize: 14,
               textWeight: FontWeight.w600,
@@ -44,9 +46,9 @@ class OrderItem extends StatelessWidget {
                   color: AppConstants.lightGreenColor,
                   borderRadius: BorderRadius.circular(
                       AppConstants.smallRadius)),
-              child: const Center(
+              child:  Center(
                 child: CommonTitleText(
-                  textKey: "تم التسليم",
+                  textKey:orderModel.status!,
                   textColor: AppConstants.greenColor,
                   textFontSize: 10,
                   textWeight: FontWeight.w400,
@@ -73,7 +75,7 @@ class OrderItem extends StatelessWidget {
             getSpaceWidth(2),
             CommonTitleText(
               textKey:
-              "14000 ${AppLocalizations.of(context)!.lblEGP}",
+              "${orderModel.total!} ${AppLocalizations.of(context)!.lblEGP}",
               textWeight: FontWeight.w700,
               textFontSize: AppConstants.smallFontSize,
               textColor: AppConstants.lightOrangeColor,

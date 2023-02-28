@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -89,7 +88,6 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
         "plan_id": planId
       };
 
-      log("this the update data $postData");
       staticData = FormData.fromMap(
         postData,
         ListFormat.multiCompatible,
@@ -172,7 +170,6 @@ class StoreRemoteDataSourceImpl extends StoreRemoteDataSourceInterface {
         "plan_id": planId
       };
 
-      log("this the update data $postData");
       staticData = FormData.fromMap(
         postData,
         ListFormat.multiCompatible,

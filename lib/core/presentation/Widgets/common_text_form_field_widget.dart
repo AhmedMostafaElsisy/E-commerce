@@ -44,6 +44,7 @@ class CommonTextFormField extends StatelessWidget {
   final Offset? shadowOffset;
   final double? contentPaddingHorizontal;
   final double? contentPaddingVertical;
+  final Color? focuseAndErrorColor;
 
   const CommonTextFormField({
     Key? key,
@@ -86,6 +87,7 @@ class CommonTextFormField extends StatelessWidget {
     this.shadowOffset = const Offset(0, 8),
     this.contentPaddingHorizontal = 8,
     this.contentPaddingVertical = 13.0,
+    this.focuseAndErrorColor
   }) : super(key: key);
 
   @override
@@ -131,22 +133,22 @@ class CommonTextFormField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius!),
               borderSide: BorderSide(
-                  color: borderColor ?? AppConstants.transparent, width: 1.0),
+                  color:focuseAndErrorColor?? borderColor ?? AppConstants.transparent, width: 1.0),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius!),
               borderSide: BorderSide(
-                  color: borderColor ?? AppConstants.transparent, width: 1.0),
+                  color:focuseAndErrorColor?? borderColor ?? AppConstants.transparent, width: 1.0),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius!),
               borderSide: BorderSide(
-                  color: borderColor ?? AppConstants.transparent, width: 1.0),
+                  color:focuseAndErrorColor?? borderColor ?? AppConstants.transparent, width: 1.0),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius!),
               borderSide: BorderSide(
-                  color: borderColor ?? AppConstants.transparent, width: 1.0),
+                  color:focuseAndErrorColor?? borderColor ?? AppConstants.transparent, width: 1.0),
             ),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(radius!)),

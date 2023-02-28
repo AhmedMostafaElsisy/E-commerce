@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
@@ -71,6 +70,7 @@ class StoreInfoCard extends StatelessWidget {
               children: [
                 ///store main category
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CommonTitleText(
                       textKey: shopModel.category!.name,
@@ -107,6 +107,8 @@ class StoreInfoCard extends StatelessWidget {
 
                 ///store location
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CommonAssetSvgImageWidget(
@@ -153,8 +155,8 @@ class StoreInfoCard extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                        RouteNames.storeOrderPageRoute,
-                        arguments: RouteArgument(shopModel: shopModel));
+                        RouteNames.myOrderPageRoute,
+                       );
                   },
                   child: Column(
                     children: [
@@ -190,7 +192,7 @@ class StoreInfoCard extends StatelessWidget {
                         imageString: "chat.svg", height: 16, width: 16),
                     getSpaceHeight(AppConstants.smallPadding),
                     CommonTitleText(
-                      textKey: AppLocalizations.of(context)!.lblStoreOrder,
+                      textKey: AppLocalizations.of(context)!.lblStoreMassage,
                       textWeight: FontWeight.w600,
                       textFontSize: AppConstants.smallFontSize - 2,
                       textColor: AppConstants.mainTextColor,

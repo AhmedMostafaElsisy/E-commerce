@@ -14,13 +14,13 @@ import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bo
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/profile_screen.dart';
+import '../../../features/edit_product_feature/presentation/edit_my_product_screen.dart';
 import '../../../features/favorite_feature/presentation/screen/favorite_list_screen.dart';
 import '../../../features/general_prodcut_feature/presentation/screen/general_product_details_screen.dart';
 import '../../../features/general_prodcut_feature/presentation/screen/product_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
 import '../../../features/order_feature/presentation/my_order_screen.dart';
-import '../../../features/order_feature/presentation/order_details_Screen.dart';
-import '../../../features/order_feature/presentation/store_order_screen.dart';
+import '../../../features/order_feature/presentation/order_details_screen.dart';
 import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
 import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
@@ -28,7 +28,6 @@ import '../../../features/store_feature/presentation/screen/edit_store_screen.da
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
-import '../../../features/store_product/presentation/edit_my_product_screen.dart';
 import '../../../features/store_product/presentation/show_product_details_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
@@ -105,9 +104,6 @@ class RouteGenerator {
       case RouteNames.showProductPageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: ShowProductDetailsScreen(argument: args as RouteArgument));
-      case RouteNames.storeOrderPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: StoreOrderScreen(argument: args as RouteArgument));
       case RouteNames.myOrderPageRoute:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const MyOrderScreen());

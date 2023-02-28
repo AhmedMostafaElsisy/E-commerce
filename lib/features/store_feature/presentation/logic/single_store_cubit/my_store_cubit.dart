@@ -61,4 +61,10 @@ class MyStoreCubit extends Cubit<MyStoreStates> {
       },
     );
   }
+  deleteProductLocal(productID){
+    productList.removeWhere(
+            (element) => element.id == productID);
+    emit(MyStoreInitialStates());
+
+  }
 }
