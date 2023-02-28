@@ -14,10 +14,11 @@ class AppMainScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: const DecorationImage(
-            image: AssetImage(
-              "assets/images/backGround.png",
-            ),
-            fit: BoxFit.fill),
+          image: AssetImage(
+            "assets/images/backGround.png",
+          ),
+          fit: BoxFit.fill,
+        ),
         gradient: LinearGradient(
           colors: [
             AppConstants.lightWhiteColor.withOpacity(0.28),

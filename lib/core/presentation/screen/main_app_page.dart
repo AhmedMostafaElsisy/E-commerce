@@ -13,20 +13,13 @@ class MainAppPage extends StatelessWidget {
     return Container(
       width: SharedText.screenWidth,
       height: SharedText.screenHeight,
-      decoration: BoxDecoration(
-        image: const DecorationImage(
+      decoration: const BoxDecoration(
+        color: AppConstants.lightWhiteColor,
+        image: DecorationImage(
             image: AssetImage(
               "assets/images/backGround.png",
             ),
             fit: BoxFit.fill),
-        gradient: LinearGradient(
-          colors: [
-            AppConstants.lightWhiteColor.withOpacity(0.28),
-            AppConstants.lightWhiteColor
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
       ),
       child: screenContent,
     );

@@ -1,13 +1,16 @@
+import 'package:captien_omda_customer/core/location_feature/domain/model/location_area_model.dart';
+
 import '../tags_feature/domain/model/tags_model.dart';
 import 'category_model.dart';
 
 class FilterCollectionModel {
-  List<CategoryModel>? categories = [];
-  List<TagsModel>? tags = [];
-  String? cityId;
-  String? areaId;
+  List<CategoryModel> categories = [];
+  List<TagsModel> tags = [];
+  LocationAreaModel? cityId;
+  LocationAreaModel? areaId;
 
-  FilterCollectionModel({this.categories, this.tags, this.areaId, this.cityId});
+  FilterCollectionModel(
+      {required this.categories, required this.tags, this.areaId, this.cityId});
 
   @override
   String toString() {

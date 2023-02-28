@@ -11,35 +11,36 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
-import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
-import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_loading_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../store_product/presentation/widget/product_price_widget.dart';
+import '../logic/product_details_cubit/product_details_cubit.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
+class GeneralProductDetailsScreen extends StatefulWidget {
   final RouteArgument argument;
 
-  const ProductDetailsScreen({Key? key, required this.argument})
+  const GeneralProductDetailsScreen({Key? key, required this.argument})
       : super(key: key);
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+  State<GeneralProductDetailsScreen> createState() =>
+      _GeneralProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  late ProductCubit productCubit;
+class _GeneralProductDetailsScreenState
+    extends State<GeneralProductDetailsScreen> {
+  late ProductDetailsCubit productCubit;
 
   @override
   void initState() {
     super.initState();
-    productCubit = BlocProvider.of<ProductCubit>(context);
+    productCubit = BlocProvider.of<ProductDetailsCubit>(context);
     productCubit.getProductDetails(
-        productId: widget.argument.productModel!.id!);
+        productId: widget.argument.productModel!.id!.toString());
   }
 
   @override
@@ -93,7 +94,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           errorMassage: productState.error.errorMassage,
                           withButton: true,
                           onTap: () => productCubit.getProductDetails(
-                              productId: widget.argument.productModel!.id!),
+                              productId:
+                                  widget.argument.productModel!.id!.toString()),
                         )
                       ] else ...[
                         Padding(
@@ -182,56 +184,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   getWidgetHeight(AppConstants.pagePadding)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              /// edit
-                              Expanded(
-                                child: CommonGlobalButton(
-                                    showBorder: false,
-                                    buttonTextFontWeight: FontWeight.w600,
-                                    buttonTextSize: AppConstants.normalFontSize,
-                                    elevation: 0,
-                                    isEnable: productState
-                                        is! DeleteProductLoadingState,
-                                    buttonBackgroundColor:
-                                        AppConstants.mainColor,
-                                    buttonText:
-                                        AppLocalizations.of(context)!.lblEdit,
-                                    onPressedFunction: () {
-                                      Navigator.of(context).pushNamed(
-                                          RouteNames.editProductPageRoute,
-                                          arguments: RouteArgument(
-                                              productModel: widget
-                                                  .argument.productModel!));
-                                    },
-                                    height: 40,
-                                    radius: AppConstants.containerBorderRadius,
-                                    withIcon: false),
-                              ),
-                              getSpaceWidth(24),
-
-                              /// delete
-                              Expanded(
-                                child: CommonGlobalButton(
-                                  showBorder: true,
-                                  borderColor: AppConstants.lightRedColor,
-                                  buttonTextSize: AppConstants.normalFontSize,
-                                  buttonTextFontWeight: FontWeight.w600,
-                                  elevation: 0,
-                                  isLoading:
-                                      productState is DeleteProductLoadingState,
-                                  buttonBackgroundColor:
-                                      AppConstants.lightWhiteColor,
-                                  buttonTextColor: AppConstants.lightRedColor,
-                                  buttonText:
-                                      AppLocalizations.of(context)!.lblDelete,
-                                  onPressedFunction: () {
-                                    productCubit.deleteProduct(
-                                        productId:
-                                            widget.argument.productModel!.id!);
-                                  },
-                                  height: 40,
-                                ),
-                              ),
+                            children: const [
+                              /// todo: add cart buttons
                             ],
                           ),
                         )

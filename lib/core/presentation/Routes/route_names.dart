@@ -29,4 +29,7 @@ class RouteNames {
   static const String orderDetailsPageRoute = "/orderDetailsPage";
   static const String planPageRoute = "/planPage";
   static const String productWithFilterScreen = "/productWithFilterScreen";
+  static const String generalProductDetailsScreen =
+      "/generalProductDetailsScreen";
+  static const String filterScreen = "/filterScreen";
 }

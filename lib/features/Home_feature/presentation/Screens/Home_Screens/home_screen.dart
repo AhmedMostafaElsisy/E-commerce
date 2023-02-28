@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //todo :change it to screen that cc used on app and remove yours
     return AppMainScreen(
         screen: Scaffold(
       backgroundColor: AppConstants.transparent,
@@ -115,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            /// Email
+            /// search
             SizedBox(
               width: getWidgetWidth(343),
               height: getWidgetHeight(36),
@@ -128,6 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 labelHintFontSize: AppConstants.xxSmallFontSize,
                 radius: AppConstants.textFormBorderRadius,
                 withSuffixIcon: true,
+                onTap: () {
+                  SharedText.filterModel.clear();
+                  Navigator.pushNamed(
+                      context, RouteNames.productWithFilterScreen);
+                },
                 suffixIcon: SizedBox(
                   width: getWidgetWidth(16),
                   height: getWidgetHeight(16),
@@ -159,6 +163,11 @@ class _HomeScreenState extends State<HomeScreen> {
               height: getWidgetHeight(36),
               child: CommonTextFormField(
                 controller: locationController,
+                onTap: () {
+                  SharedText.filterModel.clear();
+                  Navigator.pushNamed(
+                      context, RouteNames.productWithFilterScreen);
+                },
                 radius: AppConstants.textFormBorderRadius,
                 keyboardType: TextInputType.text,
                 isReadOnly: true,
@@ -411,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  SharedText.filterModel?.clear();
+                                  SharedText.filterModel.clear();
                                   Navigator.pushNamed(
                                     context,
                                     RouteNames.productWithFilterScreen,

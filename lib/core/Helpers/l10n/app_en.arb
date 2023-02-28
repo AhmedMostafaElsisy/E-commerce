@@ -197,6 +197,8 @@
   "lblContinueAndPay": "Continue And Pay",
   "lblNoProductFound": "No product found",
   "lblNoProductFoundDesc": "Add your product now",
+  "lblFilterTitle": "Search filters",
+  "lblApply": "Apply",
   "lblFrom": "Form",
   "lblNoValid": "this value not valid",
   "lblTo": "To",

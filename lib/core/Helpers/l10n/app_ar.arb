@@ -195,6 +195,8 @@
   "lblPricePlan": "خطط الاسعار",
   "lblContinueAndPay": "الاستمرار و الدفع",
   "lblNoProductFound": "لا يوجد لديك منتجات",
+  "lblFilterTitle": "فلاتر البحث",
+  "lblApply": "تطبيق",
   "lblNoProductFoundDesc": "قم باضاقة منتجات",
   "lblFrom": "من",
   "lblNoValid": "هذة القيمة غير صالحة",

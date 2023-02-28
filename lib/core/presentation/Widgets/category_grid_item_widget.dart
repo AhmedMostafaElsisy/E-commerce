@@ -19,7 +19,7 @@ class CategoryGridItemWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         SharedText.filterModel =
-            FilterCollectionModel(categories: [categoryModel]);
+            FilterCollectionModel(categories: [categoryModel], tags: []);
         Navigator.pushNamed(context, RouteNames.productWithFilterScreen);
       },
       child: Column(

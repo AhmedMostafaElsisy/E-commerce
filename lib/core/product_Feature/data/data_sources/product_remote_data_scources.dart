@@ -40,7 +40,7 @@ class GeneralProductRemoteDataSourceImpl
   }) async {
     try {
       String pathUrl = "${ApiKeys.generalProduct}?limit=$limit&page=$page";
-      if (searchName != null) {
+      if (searchName != null && searchName.isNotEmpty) {
         pathUrl += "&name=$searchName";
       }
       if (categories != null) {
