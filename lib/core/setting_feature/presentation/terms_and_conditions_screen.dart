@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../core/presentation/Widgets/common_loading_widget.dart';
+import '../../presentation/Widgets/common_app_bar_widget.dart';
+import '../../presentation/Widgets/common_title_text.dart';
 import '../../presentation/screen/main_app_page.dart';
 import 'Logic/setting_cubit.dart';
 import 'Logic/setting_cubit_states.dart';
@@ -31,9 +33,19 @@ class _TermsScreenState extends State<TermsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MainAppPage(
-        screenContent: BlocConsumer<SettingCubit, SettingCubitState>(
+    return MainAppPage(
+      screenContent: Scaffold(
+        backgroundColor: AppConstants.transparent,
+        appBar: CommonAppBar(
+          withBack: true,
+          titleWidget: CommonTitleText(
+            textKey: AppLocalizations.of(context)!.lblOutTermsAndConditions,
+          ),
+          centerTitle: false,
+          showBottomIcon: false,
+          appBarBackGroundColor: AppConstants.transparent,
+        ),
+        body: BlocConsumer<SettingCubit, SettingCubitState>(
           listener: (sittingCtx, sittingState) {},
           builder: (sittingCtx, sittingState) {
             if (sittingState is SettingFailedState) {
