@@ -1,289 +1,167 @@
-import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
-import 'package:captien_omda_customer/features/rating_feature/presentation/logic/rating_cubit.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/features/rating_feature/presentation/screen/rating_start_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/Helpers/shared_texts.dart';
-import '../../../../core/presentation/Routes/route_names.dart';
-import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_global_button.dart';
 import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
-import '../../../Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
+import '../logic/rating_cubit.dart';
 import '../logic/rating_cubit_states.dart';
 
-class RatingScreen extends StatefulWidget {
-  final RouteArgument routeArgument;
-
-  const RatingScreen({Key? key, required this.routeArgument}) : super(key: key);
-
-  @override
-  State<RatingScreen> createState() => _RatingScreenState();
-}
-
-class _RatingScreenState extends State<RatingScreen> {
-  double currentRating = 0.0;
-  late TextEditingController ratingController;
-  final formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    ratingController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    ratingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppConstants.lightWhiteColor,
-      resizeToAvoidBottomInset: false,
-      appBar: CommonAppBar(
-        withNotification: false,
-        showBottomIcon: false,
-        withBack: false,
-        showLeadingWidget: true,
-        titleWidget: CommonTitleText(
-          textKey: AppLocalizations.of(context)!.lblRating,
-          textColor: AppConstants.lightBlackColor,
-          textWeight: FontWeight.w700,
-          textFontSize: AppConstants.normalFontSize,
+Future<void> showReportSheet(
+    {required BuildContext context, required int storeId}) async {
+  TextEditingController commentController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  RatingCubit.get(context).setRate(0);
+  showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(8),
         ),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Column(children: [
-          ///Spacer
-          getSpaceHeight(20),
-
-          ///Rating image
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CommonAssetSvgImageWidget(
-                imageString: "rate_icon.svg",
-                height: 205,
-                width: SharedText.screenWidth - 60,
-                fit: BoxFit.contain,
-              ),
-            ],
-          ),
-
-          ///Spacer
-          getSpaceHeight(25),
-          Container(
-            width: SharedText.screenWidth,
-            height: getWidgetHeight(478),
-            decoration: BoxDecoration(
-                color: AppConstants.lightWhiteColor,
-                boxShadow: [
-                  BoxShadow(
-                      color: AppConstants.lightBlackColor.withOpacity(0.2),
-                      blurRadius: 10.0,
-                      offset: const Offset(0, 1))
-                ],
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(AppConstants.borderRadius),
-                  topLeft: Radius.circular(AppConstants.borderRadius),
-                )),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                      horizontal: getWidgetHeight(AppConstants.pagePadding),
-                      vertical: getWidgetWidth(AppConstants.pagePadding)) +
-                  EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
-                  ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                child: BlocConsumer<RatingCubit, RatingCubitStates>(
-                  listener: (ratingCtx, ratingState) {
-                    if (ratingState is RatingSuccessStates) {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        RouteNames.mainBottomNavPageRoute,
-                        (route) => false,
-                      );
-                      BlocProvider.of<BottomNavCubit>(context).selectItem(0);
-                    } else if (ratingState is RatingFailedStates) {
-                      checkUserAuth(
-                          context: ratingCtx,
-                          errorType: ratingState.error.type);
-                      showSnackBar(
-                        context: ratingCtx,
-                        title: ratingState.error.errorMassage!,
-                      );
-                    }
-                  },
-                  builder: (ratingCtx, ratingState) {
-                    return Form(
-                      key: formKey,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+      builder: (_) => BlocConsumer<RatingCubit, RatingCubitStates>(
+              listener: (rateCtx, rateState) {
+            if (rateState is RatingSuccessStates) {
+              Navigator.of(context).pop();
+              showSnackBar(
+                  context: rateCtx,
+                  title: AppLocalizations.of(context)!.lblRateSuccess,
+                  color: AppConstants.successColor);
+            }
+          }, builder: (rateCtx, rateState) {
+            if (rateState is RatingFailedStates) {
+              return CommonError(
+                withButton: true,
+                errorMassage: rateState.error.errorMassage,
+                onTap: () {
+                  // reportCtx.read<ReportCubit>().getReportReasons();
+                },
+              );
+            } else {
+              return GestureDetector(
+                onTap: () => hideKeyboard(context),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                          vertical: getWidgetHeight(
+                              AppConstants.pagePaddingDouble * 1.5),
+                          horizontal:
+                              getWidgetWidth(AppConstants.pagePadding)) +
+                      EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                  child: Container(
+                    width: double.infinity,
+                    height: getWidgetHeight(325),
+                    padding:   EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppConstants.transparent,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ///total
-                            CommonTitleText(
-                              textKey: AppLocalizations.of(context)!.lblTotal,
-                              textColor: AppConstants.lightBlackColor,
-                              textWeight: FontWeight.w700,
-                              textFontSize: AppConstants.normalFontSize,
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-
-                            ///trip price
                             CommonTitleText(
                               textKey:
-                                  "${5} ${AppLocalizations.of(context)!.lblEGP}",
-                              textColor: AppConstants.lightBorderColor,
-                              textWeight: FontWeight.w700,
-                              textFontSize: AppConstants.titleFontSize,
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-
-                            ///spacer
-                            const Divider(
-                              color: AppConstants.lightGrayColor,
-                              thickness: 1,
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-
-                            ///add rating title
-                            CommonTitleText(
-                              textKey:
-                                  AppLocalizations.of(context)!.lblAddRating,
-                              textColor: AppConstants.lightBlackColor,
-                              textWeight: FontWeight.w700,
+                                  AppLocalizations.of(context)!.lblLeaveRate,
                               textFontSize: AppConstants.normalFontSize,
+                              textWeight: FontWeight.w700,
+                              textColor: AppConstants.mainColor,
                             ),
+                            GestureDetector(
+                                onTap: () {
+                                  if(rateState is! RatingLoadingStates) {
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: const CommonAssetSvgImageWidget(
+                                    imageString: "close.svg",
+                                    height: 16,
+                                    width: 16))
+                          ],
+                        ),
+                        getSpaceHeight(AppConstants.pagePadding),
+                        CommonTitleText(
+                          textKey: AppLocalizations.of(context)!.lblSelectRate,
+                          textFontSize: AppConstants.smallFontSize,
+                          textWeight: FontWeight.w600,
+                          textColor: AppConstants.lightBlackColor,
+                        ),
+                        getSpaceHeight(AppConstants.pagePadding),
+                        commonRatingBarBuilder(
+                          onRatingUpdate: (rating) {
+                            rateCtx.read<RatingCubit>().setRate(rating.toInt());
+                          },
+                        ),
+                        getSpaceHeight(AppConstants.pagePadding),
+                        CommonTitleText(
+                          textKey:
+                              AppLocalizations.of(context)!.lblAddRateToHelp,
+                          textFontSize: AppConstants.smallFontSize,
+                          textWeight: FontWeight.w600,
+                          textColor: AppConstants.lightBlackColor,
+                        ),
+                        getSpaceHeight(AppConstants.pagePadding),
 
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
+                        Form(
+                          key: formKey,
+                          child: CommonTextFormField(
+                            fieldHeight: 80,
+                            minLines: 4,
+                            maxLines: 20,
+                            controller: commentController,
+                            hintKey: AppLocalizations.of(context)!.lblWriteRate,
+                            keyboardType: TextInputType.text,
+                            labelHintColor: AppConstants.greyColor,
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return AppLocalizations.of(context)!.lblWriteRate;
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
 
-                            ///how was driver
-                            CommonTitleText(
-                              textKey:
-                                  "${AppLocalizations.of(context)!.lblHowWas} ${5} ؟ ",
-                              textColor: AppConstants.lightRedColor,
-                              textWeight: FontWeight.w600,
-                              textFontSize: AppConstants.normalFontSize,
-                            ),
+                        ///spacer
+                        getSpaceHeight(AppConstants.smallPadding),
 
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-
-                            ///rating
-                            commonRatingBarBuilder(
-                              onRatingUpdate: (rating) {
-                                setState(() {
-                                  currentRating = rating;
-                                });
-                              },
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-                            CommonTextFormField(
-                              controller: ratingController,
-                              radius: AppConstants.smallBorderRadius * 2,
-                              filledColor: AppConstants.backGroundColor,
-                              hintKey: currentRating <= 3
-                                  ? AppLocalizations.of(context)!.lblAddRate
-                                  : "${AppLocalizations.of(context)!.lblAddRate} (${AppLocalizations.of(context)!.lblOption})",
-                              keyboardType: TextInputType.emailAddress,
-                              labelHintColor: AppConstants.mainTextColor,
-                              contentPaddingHorizontal: getWidgetWidth(16),
-                              contentPaddingVertical: getWidgetHeight(12),
-                              withSuffixIcon: false,
-                              maxLines: 5,
-                              minLines: 5,
-                              validator: (value) {
-                                if (value!.isEmpty & (currentRating <= 3)) {
-                                  return AppLocalizations.of(context)!
-                                      .lblRatingError;
-                                } else {
-                                  return null;
-                                }
-                              },
-                              onChanged: (value) {
-                                setState(() {});
-                                return null;
-                              },
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.pagePadding),
-
-                            ///send rating
-                            CommonGlobalButton(
-                              height: 48,
-                              buttonBackgroundColor: AppConstants.mainColor,
-                              isEnable: currentRating != 0.0,
-                              isLoading: ratingState is RatingLoadingStates,
-                              buttonTextSize: AppConstants.normalFontSize,
-                              buttonTextFontWeight: FontWeight.w700,
-                              buttonText: AppLocalizations.of(context)!.lblSend,
-                              onPressedFunction: () {
-                                if (formKey.currentState!.validate()) {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                  ratingCtx.read<RatingCubit>().addRating(
-                                      driverId: 5,
-                                      requestId: 5,
-                                      rate: currentRating.toInt(),
-                                      comment: ratingController.text);
-                                }
-                              },
-                            ),
-
-                            ///spacer
-                            getSpaceHeight(AppConstants.smallPadding),
-
-                            ///cancel
-                            CommonGlobalButton(
-                              height: 48,
-                              buttonBackgroundColor:
-                                  AppConstants.lightWhiteColor,
-                              buttonTextColor: AppConstants.mainTextColor,
-                              showBorder: false,
-                              buttonTextSize: AppConstants.normalFontSize,
-                              buttonTextFontWeight: FontWeight.w700,
-                              buttonText:
-                                  AppLocalizations.of(context)!.lblCancel,
-                              shadowBackgroundColor:
-                                  AppConstants.lightWhiteColor,
-                              elevation: 0,
-                              onPressedFunction: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ]),
-                    );
-                  },
+                        /// Create Account Button
+                        CommonGlobalButton(
+                          height: 48,
+                          buttonBackgroundColor: AppConstants.mainColor,
+                          isLoading: rateState is RatingLoadingStates,
+                          buttonTextSize: 18,
+                          isEnable: rateCtx.read<RatingCubit>().currentRating!=0 ,
+                          buttonTextFontWeight: FontWeight.w400,
+                          buttonText: AppLocalizations.of(context)!.lblSend,
+                          onPressedFunction: () {
+                            if(formKey.currentState!.validate()){
+                              rateCtx.read<RatingCubit>().addRating(
+                                rate:  rateCtx.read<RatingCubit>().currentRating,
+                                comment: commentController.text,
+                                orderId: storeId
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-        ]),
-      ),
-    );
-  }
+              );
+            }
+          }));
 }

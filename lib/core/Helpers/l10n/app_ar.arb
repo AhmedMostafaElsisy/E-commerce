@@ -118,7 +118,7 @@
   "lblCancelRequest": "تم الاغاء",
   "lblRating": "التقيم",
   "lblTotal": "الاجمالي",
-  "lblAddRate": "اضف تقييم",
+  "lblAddRate": "اترك تقييم",
   "lblHowWas": "كيف كان",
   "lblOption": "اختياري",
   "lblSend": "إرسال",
@@ -204,5 +204,10 @@
   "lblTo": "الي",
   "lblNoting": "لاشئ",
   "lblDeletePhoto": "مسح الصورة",
-  "lblTotalPrice": "السعر الاجمالي"
+  "lblTotalPrice": "السعر الاجمالي",
+  "lblRateSuccess": "تم اضافة تقيمك بنجاح",
+  "lblLeaveRate": "اترك تقييم",
+  "lblSelectRate": "اختار نسبة التقيم",
+  "lblAddRateToHelp": "اكتب تقيم مفصل للمنتج ليساعد العملاء",
+  "lblWriteRate": "اكتب تقيمك"
 }

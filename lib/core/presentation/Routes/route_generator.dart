@@ -22,7 +22,6 @@ import '../../../features/notification_feature/presentation/notification_screen.
 import '../../../features/order_feature/presentation/my_order_screen.dart';
 import '../../../features/order_feature/presentation/order_details_screen.dart';
 import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
-import '../../../features/rating_feature/presentation/screen/rating_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
@@ -75,9 +74,6 @@ class RouteGenerator {
       case RouteNames.editProfilePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const EditProfileScreen());
-      case RouteNames.ratingPageRoute:
-        return RouteAnimation().animationFromCenterRightToCenterLeft(
-            page: RatingScreen(routeArgument: args as RouteArgument));
       case RouteNames.favoritePageRoute:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const FavoriteListScreen());

@@ -8,16 +8,19 @@ class RatingCubit extends Cubit<RatingCubitStates> {
   final RatingUesCases _ratingUesCases;
 
   static RatingCubit get(context) => BlocProvider.of(context);
-
+int currentRating=0;
   addRating(
-      {required int driverId,
-      required int requestId,
+      {required int orderId,
       required int rate,
       required String comment}) async {
     emit(RatingLoadingStates());
     var result = await _ratingUesCases.callAddRating(
-        driverId: driverId, requestId: requestId, rate: rate, comment: comment);
+       orderId: orderId, rate: rate, comment: comment);
     result.fold((error) => emit(RatingFailedStates(error)),
         (success) => emit(RatingSuccessStates()));
+  }
+  setRate(value){
+    currentRating=value;
+    emit(RatingInitialStates());
   }
 }

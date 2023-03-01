@@ -11,8 +11,8 @@ import '../../../../core/model/base_model.dart';
 abstract class RatingRemoteDataSourceInterface {
   ///get requests
   Future<Either<CustomError, BaseModel>> addRating(
-      {required int driverId,
-      required int requestId,
+      {
+      required int orderId,
       required int rate,
       required String comment});
 }
@@ -20,16 +20,16 @@ abstract class RatingRemoteDataSourceInterface {
 class RatingRemoteDataSourceImpl extends RatingRemoteDataSourceInterface {
   @override
   Future<Either<CustomError, BaseModel>> addRating(
-      {required int driverId,
-      required int requestId,
+      {
+      required int orderId,
       required int rate,
       required String comment}) async {
     try {
       FormData staticData = FormData();
 
       String pathUrl = ApiKeys.ratingKey;
-      staticData.fields.add(MapEntry('driver_id', driverId.toString()));
-      staticData.fields.add(MapEntry('request_id', requestId.toString()));
+
+      staticData.fields.add(MapEntry('store_id', orderId.toString()));
       staticData.fields.add(MapEntry('rate', rate.toString()));
       if (comment.isNotEmpty) {
         staticData.fields.add(MapEntry('comment', comment.toString()));
