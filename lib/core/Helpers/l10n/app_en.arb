@@ -205,5 +205,6 @@
   "lblTo": "To",
   "lblNoting": "noting",
   "lblDeletePhoto": "Delete photo",
-  "lblTotalPrice": "Total Price"
+  "lblTotalPrice": "Total Price",
+  "lblMyCart": "shopping cart"
 }

@@ -204,5 +204,6 @@
   "lblTo": "الي",
   "lblNoting": "لاشئ",
   "lblDeletePhoto": "مسح الصورة",
-  "lblTotalPrice": "السعر الاجمالي"
+  "lblTotalPrice": "السعر الاجمالي",
+  "lblMyCart": "عربة التسوق"
 }

@@ -10,11 +10,9 @@ import '../../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../../core/presentation/screen/main_app_page.dart';
 import '../../../../core/Helpers/shared.dart';
-import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../core/presentation/Widgets/common_loading_widget.dart';
-import '../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 
 class MyCartScreen extends StatefulWidget {
   const MyCartScreen({
@@ -61,7 +59,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
               } else if (cartCubit.cartItems.isEmpty) {
                 return EmptyScreen(
                     imageString: "category.svg",
-                    titleKey: AppLocalizations.of(context)!.lblNoStoreFound,
+                    titleKey: AppLocalizations.of(context)!.lblNoResultFound,
                     description:
                         AppLocalizations.of(context)!.lblNoStoreFoundDesc,
                     imageHeight: 80,
@@ -75,51 +73,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       showBottomIcon: false,
                       centerTitle: false,
                       titleWidget: CommonTitleText(
-                        textKey: AppLocalizations.of(context)!.lblOrders,
+                        textKey: AppLocalizations.of(context)!.lblMyCart,
                         textColor: AppConstants.lightBlackColor,
                         textWeight: FontWeight.w400,
                         textFontSize: AppConstants.normalFontSize,
                       ),
                     ),
 
-                    ///search
-                    SizedBox(
-                      width: getWidgetWidth(343),
-                      height: getWidgetHeight(36),
-                      child: CommonTextFormField(
-                        controller: searchController,
-                        isReadOnly: true,
-                        hintKey: AppLocalizations.of(context)!.lblOrderSearch,
-                        keyboardType: TextInputType.text,
-                        labelHintColor: AppConstants.lightBlackColor,
-                        labelHintFontSize: AppConstants.xxSmallFontSize,
-                        radius: AppConstants.textFormBorderRadius,
-                        withSuffixIcon: true,
-                        suffixIcon: SizedBox(
-                          width: getWidgetWidth(16),
-                          height: getWidgetHeight(16),
-                          child: const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              child: CommonAssetSvgImageWidget(
-                                  imageString: "search.svg",
-                                  height: 16,
-                                  width: 16,
-                                  imageColor: AppConstants.mainColor,
-                                  fit: BoxFit.contain),
-                            ),
-                          ),
-                        ),
-                        onChanged: (value) {
-                          setState(() {});
-                          return null;
-                        },
-                      ),
-                    ),
-
                     ///spacer
-                    getSpaceHeight(AppConstants.pagePadding),
                     Expanded(
                       child: ListView.separated(
                           shrinkWrap: true,
