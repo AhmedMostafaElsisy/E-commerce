@@ -49,6 +49,11 @@ import 'features/Categories_feature/data/repository_imp/category_repository_impl
 import 'features/Categories_feature/domain/repository_interface/category_repository_interface.dart';
 import 'features/Categories_feature/domain/use_case/category_use_case.dart';
 import 'features/Categories_feature/presentation/logic/category_cubit.dart';
+import 'features/Contact_feature/Data/data_scouresc/remote_data_scoures.dart';
+import 'features/Contact_feature/Data/repository/help_repository.dart';
+import 'features/Contact_feature/Domain/repoistory/help_interface.dart';
+import 'features/Contact_feature/Domain/ues_cases/help_ues_cases.dart';
+import 'features/Contact_feature/Presentaion/logic/help_cubit/help_cubit.dart';
 import 'features/Home_feature/Data/data_sources/home_remote_data_sources.dart';
 import 'features/Home_feature/Data/repository/home_repository.dart';
 import 'features/Home_feature/Domain/repository/home_interface.dart';
@@ -136,6 +141,7 @@ Future<void> init() async {
   sl.registerFactory(() => FormBuilderCubit(sl()));
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => FilterCubit());
+  sl.registerFactory(() => HelpCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -158,6 +164,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FormBuilderUesCases(sl()));
   sl.registerLazySingleton(() => EditProductUesCase(sl()));
   sl.registerLazySingleton(() => OrderUesCase(sl()));
+  sl.registerLazySingleton(() => HelpUesCases(sl()));
 
   ///repo
   sl.registerLazySingleton<FavoriteRepositoryInterface>(
@@ -197,6 +204,8 @@ Future<void> init() async {
       () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
       () => OrderRepository(sl()));
+  sl.registerLazySingleton<HelpInterface>(
+      () => HelpRepository(sl()));
 
   ///auth local data source interface
   sl.registerLazySingleton<AuthLocalDataSourceInterface>(
@@ -243,6 +252,9 @@ Future<void> init() async {
       () => EditProductRemoteDataSourceImpl());
   sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
       () => OrderRemoteDataSourceImpl());
+  sl.registerLazySingleton<HelpRemoteDataScoursInterface>(
+      () => HelpRemoteDataScoursImp());
+
 
   ///local data source
   sl.registerLazySingleton(() => DefaultSecuredStorage());

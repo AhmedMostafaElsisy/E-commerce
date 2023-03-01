@@ -10,6 +10,7 @@ import '../../../features/Auth_feature/Presentation/screens/login_home_page.dart
 import '../../../features/Auth_feature/Presentation/screens/new_password_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
+import '../../../features/Contact_feature/Presentaion/screen/add_contact_screen.dart';
 import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_screen.dart';
 import '../../../features/Profile_feature/presentation/screens/edit_profile_screen.dart';
@@ -124,6 +125,9 @@ class RouteGenerator {
       case RouteNames.storeDetailsScreen:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: StoreDetailsScreen(argument: args as RouteArgument));
+      case RouteNames.contactUsScreen:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const ContactScreen());
 
       default:
         return MaterialPageRoute(

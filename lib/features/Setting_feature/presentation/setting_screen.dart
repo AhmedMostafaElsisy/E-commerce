@@ -169,6 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ///Call support
                           SectionContentItem(
                             title: AppLocalizations.of(context)!.lblCallSupport,
+                            screenName: RouteNames.contactUsScreen,
                           ),
 
                           ///terms and conditions

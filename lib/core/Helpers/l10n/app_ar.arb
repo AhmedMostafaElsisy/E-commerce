@@ -210,5 +210,14 @@
   "lblSelectRate": "اختار نسبة التقيم",
   "lblAddRateToHelp": "اكتب تقيم مفصل للمنتج ليساعد العملاء",
   "lblWriteRate": "اكتب تقيمك",
-  "lblStore": "متجر"
+  "lblStore": "متجر",
+  "lblContactUs": "تواصل معانا",
+  "lblRequestSendSuccess": "تم ارسال الطلب بنجاح",
+  "lblSendRequestTitle": "ارسال طلب",
+  "lblSendRequestSubTitle": "ارسال طلب عبر لبريد الاكتروني الي خدمة العملاء",
+  "lblSubject": "الموضوع",
+  "lblFieldRequired": "هذا الحقل مطلوب",
+  "lblSubjectIsEmpty": "الموضوع فارغ",
+  "lblDescriptionIsEmpty": "الوصف فارغ",
+  "lblDescription": "وصف"
 }

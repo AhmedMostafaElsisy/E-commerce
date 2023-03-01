@@ -32,4 +32,5 @@ class RouteNames {
       "/generalProductDetailsScreen";
   static const String filterScreen = "/filterScreen";
   static const String storeDetailsScreen = "/storeDetailsScreen";
+  static const String contactUsScreen = "/ContactUsScreen";
 }

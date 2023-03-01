@@ -211,6 +211,14 @@
   "lblSelectRate": "Select rate",
   "lblAddRateToHelp": "Write rate for this product to help other users",
   "lblWriteRate": "Write your rate",
-  "lblStore": "Store"
-
+  "lblStore": "Store",
+  "lblContactUs": "Contact Us",
+  "lblRequestSendSuccess": "Request sent successfully",
+  "lblSendRequestTitle": "Send Request",
+  "lblSendRequestSubTitle": "Send a request via Email to customer service",
+  "lblSubject": "Subject",
+  "lblFieldRequired": "this Field Required",
+  "lblSubjectIsEmpty": "Subject Is Empty",
+  "lblDescriptionIsEmpty": "Description Is Empty ",
+  "lblDescription": "Description"
 }
