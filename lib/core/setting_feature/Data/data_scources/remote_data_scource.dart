@@ -8,8 +8,8 @@ import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.d
 import '../../../../core/Error_Handling/custom_exception.dart';
 
 abstract class SettingRemoteDataSourceInterface {
-  ///change password
   Future<Either<CustomError, BaseModel>> getSettingData();
+  Future<Either<CustomError, BaseModel>> getTerms();
 }
 
 class SettingRemoteDataSourceImpl extends SettingRemoteDataSourceInterface {
@@ -21,10 +21,19 @@ class SettingRemoteDataSourceImpl extends SettingRemoteDataSourceInterface {
       Response response = await DioHelper.getDate(url: pathUrl);
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
-      return Left(CustomError(
-        type: ex.error.type,
-        errorMassage: ex.error.errorMassage,
-      ));
+      return Left( ex.error);
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getTerms() async {
+    try {
+      String pathUrl = ApiKeys.termsKey;
+
+      Response response = await DioHelper.getDate(url: pathUrl);
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left( ex.error);
     }
   }
 }

@@ -220,5 +220,6 @@
   "lblFieldRequired": "this Field Required",
   "lblSubjectIsEmpty": "Subject Is Empty",
   "lblDescriptionIsEmpty": "Description Is Empty ",
-  "lblDescription": "Description"
+  "lblDescription": "Description",
+  "lblNoTermsAndConditions": "No Terms And Conditions Found"
 }

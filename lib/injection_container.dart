@@ -21,7 +21,7 @@ import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
 import 'core/setting_feature/Domain/repository/setting_interface.dart';
 import 'core/setting_feature/Domain/ues_cases/setting_ues_cases.dart';
-import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/setting_feature/presentation/Logic/setting_cubit.dart';
 import 'core/tags_feature/Data/data_scources/tags_remote_data_scources.dart';
 import 'core/tags_feature/Data/repository/tags_repository.dart';
 import 'core/tags_feature/domain/repository/tags_interface.dart';

@@ -177,6 +177,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             title: AppLocalizations.of(context)!
                                 .lblOutTermsAndConditions,
                             isLastItem: true,
+                            screenName: RouteNames.termsScreen,
+
                           ),
                         ]),
                       ),

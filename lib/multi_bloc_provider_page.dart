@@ -9,7 +9,7 @@ import 'core/Language_Cubit/language_cubit.dart';
 import 'core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
 import 'core/location_feature/presentation/logic/pick_location_cubit.dart';
 import 'core/presentation/search_filter_cubit/search_filet_cubit.dart';
-import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/setting_feature/presentation/Logic/setting_cubit.dart';
 import 'core/tags_feature/presentation/logic/tags_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
