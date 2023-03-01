@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:captien_omda_customer/core/location_feature/domain/model/location_area_model.dart';
 import 'package:captien_omda_customer/core/model/category_model.dart';
 import 'package:captien_omda_customer/core/tags_feature/domain/model/tags_model.dart';
@@ -24,30 +26,34 @@ class ShopModel {
   UserBaseEntity? currentUser;
   PlansModel? plansModel;
 
-  ShopModel(
-      {this.id,
-      this.name,
-      this.image,
-      this.address,
-      this.category,
-      this.subCategory,
-      this.phone,
-      this.email,
-      this.ownerName,
-      this.city,
-      this.area,
-      this.currentUser,
-      this.plansModel,
-      this.rate});
+  ShopModel({this.id,
+    this.name,
+    this.image,
+    this.address,
+    this.category,
+    this.subCategory,
+    this.phone,
+    this.email,
+    this.ownerName,
+    this.city,
+    this.area,
+    this.currentUser,
+    this.plansModel,
+    this.rate});
 
   factory ShopModel.fromJson(Map<String, dynamic> json) {
+    log("this json value ${json["tags"]}");
     return ShopModel(
         id: json["id"],
         name: json["name"] ?? "--",
         image: json["image"] ?? "",
         category: json["category"] == null
             ? CategoryModel(
-                name: "--", id: -1, active: false, slug: "", image: "")
+            name: "--",
+            id: -1,
+            active: false,
+            slug: "",
+            image: "")
             : CategoryModel.fromJson(json["category"]),
         address: json["address"] ?? "--",
         subCategory: json["tags"] == null

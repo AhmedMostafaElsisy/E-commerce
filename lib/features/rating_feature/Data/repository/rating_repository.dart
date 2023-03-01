@@ -14,11 +14,12 @@ class RatingRepository extends RatingRepositoryInterface {
 
   @override
   Future<Either<CustomError, BaseModel>> addRating(
-      {required int driverId,
-      required int requestId,
+      {
+      required int orderId,
       required int rate,
+
       required String comment}) {
     return remoteDataSourceInterface.addRating(
-        driverId: driverId, requestId: requestId, rate: rate, comment: comment);
+      orderId: orderId, rate: rate, comment: comment);
   }
 }

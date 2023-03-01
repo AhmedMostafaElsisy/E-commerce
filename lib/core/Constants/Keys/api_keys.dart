@@ -33,7 +33,7 @@ class ApiKeys {
   static const String faqKey = "/faqs";
 
   ///rating keys
-  static const String ratingKey = "$userTypeKey/rate";
+  static const String ratingKey = "$userTypeKey/rate-store";
 
   ///Requests keys
   static const String requestListKey = "$userTypeKey/requests";
@@ -103,4 +103,7 @@ class ApiKeys {
 
   ///checkout
   static const String createOrder = "/add-order";
+
+  ///Contact
+  static const String contactKey = "/contacts";
 }

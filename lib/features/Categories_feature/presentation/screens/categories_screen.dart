@@ -2,7 +2,6 @@ import 'package:captien_omda_customer/core/Constants/app_constants.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/category_grid_item_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_app_bar_widget.dart';
-import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_error_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_title_text.dart';
 import 'package:captien_omda_customer/core/presentation/screens/app_main_screen.dart';
@@ -63,17 +62,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   ),
                   centerTitle: false,
                   appBarBackGroundColor: AppConstants.transparent,
-                  customActionWidget: InkWell(
-                    onTap: () {
-                      //todo:add navigation to filter feature here
-                    },
-                    child: const CommonAssetSvgImageWidget(
-                      imageString: "filter.svg",
-                      width: 24,
-                      height: 24,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
                 ),
                 body: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

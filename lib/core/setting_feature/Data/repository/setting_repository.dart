@@ -27,4 +27,9 @@ class SettingRepository extends SettingRepositoryInterface {
           return right(settingData);
             }));
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getTermData() {
+      return remoteDataSourceInterface.getTerms();
+  }
 }

@@ -13,14 +13,14 @@ Widget commonRatingBarBuilder(
     direction: Axis.horizontal,
     allowHalfRating: false,
     itemCount: 5,
-    itemPadding: const EdgeInsets.symmetric(horizontal: 7.5),
+    itemPadding: const EdgeInsets.symmetric(horizontal: 3),
     itemSize: itemSize!,
     glow: false,
 
     itemBuilder: (context, index) {
       return commonIcon(
         Icons.star,
-        AppConstants.mainColor,
+        AppConstants.starRatingColor,
         itemSize,
       );
     },

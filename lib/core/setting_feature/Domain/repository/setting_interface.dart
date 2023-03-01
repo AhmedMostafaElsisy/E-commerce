@@ -7,4 +7,5 @@ import '../../../model/base_model.dart';
 
 abstract class SettingRepositoryInterface extends BaseInterface {
   Future<Either<CustomError, BaseModel>> getSettingData();
+  Future<Either<CustomError, BaseModel>> getTermData();
 }

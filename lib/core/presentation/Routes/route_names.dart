@@ -16,7 +16,6 @@ class RouteNames {
   static const String currentTripsPageRoute = "/CurrentTripPage";
   static const String requestHistoryDetailsPageRoute =
       "/RequestHistoryDetailsPage";
-  static const String ratingPageRoute = "/ratingPage";
   static const String favoritePageRoute = "/favoritePage";
   static const String myStoresPageRoute = "/myStoresPage";
   static const String addStoresPageRoute = "/addStoresPage";
@@ -32,5 +31,8 @@ class RouteNames {
   static const String generalProductDetailsScreen =
       "/generalProductDetailsScreen";
   static const String filterScreen = "/filterScreen";
+  static const String storeDetailsScreen = "/storeDetailsScreen";
+  static const String contactUsScreen = "/ContactUsScreen";
+  static const String termsScreen = "/TermsScreen";
   static const String myCartScreen = "/cartScreen";
 }

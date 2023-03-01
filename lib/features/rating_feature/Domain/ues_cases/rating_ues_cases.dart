@@ -10,11 +10,11 @@ class RatingUesCases {
   RatingUesCases(this.repositoryInterface);
 
   Future<Either<CustomError, BaseModel>> callAddRating(
-      {required int driverId,
-      required int requestId,
+      {
+      required int orderId,
       required int rate,
       required String comment}) {
     return repositoryInterface.addRating(
-        driverId: driverId, requestId: requestId, rate: rate, comment: comment);
+        orderId: orderId, rate: rate, comment: comment);
   }
 }

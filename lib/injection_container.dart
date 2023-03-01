@@ -25,7 +25,7 @@ import 'core/setting_feature/Data/data_scources/remote_data_scource.dart';
 import 'core/setting_feature/Data/repository/setting_repository.dart';
 import 'core/setting_feature/Domain/repository/setting_interface.dart';
 import 'core/setting_feature/Domain/ues_cases/setting_ues_cases.dart';
-import 'core/setting_feature/Logic/setting_cubit.dart';
+import 'core/setting_feature/presentation/Logic/setting_cubit.dart';
 import 'core/tags_feature/Data/data_scources/tags_remote_data_scources.dart';
 import 'core/tags_feature/Data/repository/tags_repository.dart';
 import 'core/tags_feature/domain/repository/tags_interface.dart';
@@ -53,6 +53,11 @@ import 'features/Categories_feature/data/repository_imp/category_repository_impl
 import 'features/Categories_feature/domain/repository_interface/category_repository_interface.dart';
 import 'features/Categories_feature/domain/use_case/category_use_case.dart';
 import 'features/Categories_feature/presentation/logic/category_cubit.dart';
+import 'features/Contact_feature/Data/data_scouresc/remote_data_scoures.dart';
+import 'features/Contact_feature/Data/repository/help_repository.dart';
+import 'features/Contact_feature/Domain/repoistory/help_interface.dart';
+import 'features/Contact_feature/Domain/ues_cases/help_ues_cases.dart';
+import 'features/Contact_feature/Presentaion/logic/help_cubit/help_cubit.dart';
 import 'features/Home_feature/Data/data_sources/home_remote_data_sources.dart';
 import 'features/Home_feature/Data/repository/home_repository.dart';
 import 'features/Home_feature/Domain/repository/home_interface.dart';
@@ -141,6 +146,7 @@ Future<void> init() async {
   sl.registerFactory(() => FormBuilderCubit(sl()));
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => FilterCubit());
+  sl.registerFactory(() => HelpCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));
 
   ///User case
@@ -164,6 +170,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FormBuilderUesCases(sl()));
   sl.registerLazySingleton(() => EditProductUesCase(sl()));
   sl.registerLazySingleton(() => OrderUesCase(sl()));
+  sl.registerLazySingleton(() => HelpUesCases(sl()));
   sl.registerLazySingleton(() => CartUseCase(cartRepositoryInterFace: sl()));
 
   ///repo
@@ -204,6 +211,8 @@ Future<void> init() async {
       () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
       () => OrderRepository(sl()));
+  sl.registerLazySingleton<HelpInterface>(
+      () => HelpRepository(sl()));
   sl.registerLazySingleton<CartRepositoryInterFace>(
       () => CartRepositoryImplementation(dataSource: sl()));
 
@@ -252,6 +261,8 @@ Future<void> init() async {
       () => EditProductRemoteDataSourceImpl());
   sl.registerLazySingleton<OrderRemoteDataSourceInterface>(
       () => OrderRemoteDataSourceImpl());
+  sl.registerLazySingleton<HelpRemoteDataScoursInterface>(
+      () => HelpRemoteDataScoursImp());
   sl.registerLazySingleton<CartDataSourceRemoteInterface>(
       () => CartDataSourceRemoteImplement());
 
