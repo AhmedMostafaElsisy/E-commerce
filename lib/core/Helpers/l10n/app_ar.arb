@@ -219,5 +219,6 @@
   "lblFieldRequired": "هذا الحقل مطلوب",
   "lblSubjectIsEmpty": "الموضوع فارغ",
   "lblDescriptionIsEmpty": "الوصف فارغ",
-  "lblDescription": "وصف"
+  "lblDescription": "وصف",
+  "lblNoTermsAndConditions": "لا يوجد شروط واحكام"
 }

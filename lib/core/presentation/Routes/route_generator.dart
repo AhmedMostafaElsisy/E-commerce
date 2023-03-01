@@ -30,6 +30,7 @@ import '../../../features/store_feature/presentation/screen/store_details_screen
 import '../../../features/store_feature/presentation/screen/view_my_store_screen.dart';
 import '../../../features/store_product/presentation/add_new_product_screen.dart';
 import '../../../features/store_product/presentation/show_product_details_screen.dart';
+import '../../setting_feature/presentation/terms_and_conditions_screen.dart';
 import 'route_animation.dart';
 import 'route_names.dart';
 
@@ -128,6 +129,9 @@ class RouteGenerator {
       case RouteNames.contactUsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const ContactScreen());
+        case RouteNames.termsScreen:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: const TermsScreen());
 
       default:
         return MaterialPageRoute(

@@ -25,7 +25,6 @@ import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.d
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
-import '../../../../../core/setting_feature/Logic/setting_cubit.dart';
 import '../../Widgets/products_grid_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,7 +36,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late BannersCubit bannersCubit;
-  late SettingCubit settingCubit;
   late GeneralStoresCubit generalStoresCubit;
   late TextEditingController searchController;
   late CategoriesCubit categoriesCubit;
@@ -49,13 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     bannersCubit = BlocProvider.of<BannersCubit>(context);
-    settingCubit = BlocProvider.of<SettingCubit>(context);
     categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
     generalStoresCubit = BlocProvider.of<GeneralStoresCubit>(context);
     productCubit = BlocProvider.of<HomeProductCubit>(context);
     searchController = TextEditingController();
     locationController = TextEditingController();
-    settingCubit.getSetting();
     bannersCubit.getBanners();
     categoriesCubit.getAllCategories();
     generalStoresCubit.getGeneralStoresListData();
