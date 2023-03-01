@@ -15,6 +15,7 @@ import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'features/Contact_feature/Presentaion/logic/help_cubit/help_cubit.dart';
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
@@ -93,6 +94,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
             create: (_) => di.sl<FormBuilderCubit>()),
         BlocProvider<OrderCubit>(
             create: (_) => di.sl<OrderCubit>()),
+        BlocProvider<HelpCubit>(
+            create: (_) => di.sl<HelpCubit>()),
       ],
       child: widget.body,
     );

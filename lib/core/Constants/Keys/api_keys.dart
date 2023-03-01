@@ -95,4 +95,7 @@ class ApiKeys {
   ///Order
   static const String orderListKey = "/get-orders";
   static const String showOrderKey = "/show-order";
+
+  ///Contact
+  static const String contactKey = "/contacts";
 }
