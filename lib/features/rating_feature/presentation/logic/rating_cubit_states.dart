@@ -13,3 +13,23 @@ class RatingFailedStates extends RatingCubitStates {
 
   RatingFailedStates(this.error);
 }
+
+class RatingListLoadingStates extends RatingCubitStates {}
+
+class RatingListEmptyStates extends RatingCubitStates {}
+
+class RatingListSuccessStates extends RatingCubitStates {}
+
+class RatingListFailedStates extends RatingCubitStates {
+  CustomError error;
+
+  RatingListFailedStates(this.error);
+}
+
+class RatingListLoadingMoreDataStates extends RatingCubitStates {}
+
+class RatingListFailedMoreDataStates extends RatingCubitStates {
+  CustomError error;
+
+  RatingListFailedMoreDataStates(this.error);
+}
