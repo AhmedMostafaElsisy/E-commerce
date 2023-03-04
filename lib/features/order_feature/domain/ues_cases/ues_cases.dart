@@ -16,6 +16,13 @@ class OrderUesCase {
         .then((value) => value.fold((error) => left(error),
             (data) => right(orderListFromJson(data.data))));
   }
+  Future<Either<CustomError, List<OrderModel>>> getCustomerOrders(
+      {int page = 1, int? limit}) {
+    return orderRepositoryInterface
+        .getCustomerOrderData(page: page, limit: limit)
+        .then((value) => value.fold((error) => left(error),
+            (data) => right(orderListFromJson(data.data))));
+  }
 
   Future<Either<CustomError, BaseModel>> getOrderDetails(
       {required int orderId}) {
