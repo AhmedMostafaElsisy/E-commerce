@@ -1,7 +1,7 @@
-import 'package:captien_omda_customer/features/cart_feature/data/data_sources/cart_data_source_remote.dart';
-import 'package:captien_omda_customer/features/cart_feature/data/repositories_imp/cart_repo_implement.dart';
-import 'package:captien_omda_customer/features/cart_feature/domain/repo_interface/cart_repo_interface.dart';
-import 'package:captien_omda_customer/features/cart_feature/domain/use_case/cart_use_case.dart';
+import 'features/cart_feature/data/data_sources/cart_data_source_remote.dart';
+import 'features/cart_feature/data/repositories_imp/cart_repo_implement.dart';
+import 'features/cart_feature/domain/repo_interface/cart_repo_interface.dart';
+import 'features/cart_feature/domain/use_case/cart_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
@@ -87,6 +87,7 @@ import 'features/order_feature/data/data_scoures/order_remote_data_scoures.dart'
 import 'features/order_feature/data/repository/order_repository.dart';
 import 'features/order_feature/domain/repository/order_repository_interface.dart';
 import 'features/order_feature/domain/ues_cases/ues_cases.dart';
+import 'features/order_feature/presentation/logic/customer_order/customer_order_cubit.dart';
 import 'features/order_feature/presentation/logic/order_cubit.dart';
 import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
 import 'features/plans_feature/Data/repository/plans_repository.dart';
@@ -148,6 +149,7 @@ Future<void> init() async {
   sl.registerFactory(() => FilterCubit());
   sl.registerFactory(() => HelpCubit(sl()));
   sl.registerFactory(() => CartBloc(sl()));
+  sl.registerFactory(() => CustomerOrderCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));

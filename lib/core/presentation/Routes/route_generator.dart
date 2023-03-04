@@ -21,9 +21,11 @@ import '../../../features/favorite_feature/presentation/screen/favorite_list_scr
 import '../../../features/general_prodcut_feature/presentation/screen/general_product_details_screen.dart';
 import '../../../features/general_prodcut_feature/presentation/screen/product_list_screen.dart';
 import '../../../features/notification_feature/presentation/notification_screen.dart';
+import '../../../features/order_feature/presentation/customer_order_screen.dart';
 import '../../../features/order_feature/presentation/my_order_screen.dart';
 import '../../../features/order_feature/presentation/order_details_screen.dart';
 import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
+import '../../../features/rating_feature/presentation/screen/rating_list_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
@@ -136,6 +138,12 @@ class RouteGenerator {
       case RouteNames.termsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const TermsScreen());
+      case RouteNames.ratingListScreen:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const RatingListScreen());
+        case RouteNames.customerOrderScreen:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const CustomerOrderScreen());
 
       default:
         return MaterialPageRoute(

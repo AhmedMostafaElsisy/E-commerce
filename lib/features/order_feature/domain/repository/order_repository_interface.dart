@@ -7,6 +7,8 @@ import '../../../../core/Error_Handling/custom_error.dart';
 abstract class OrderRepositoryInterface extends BaseInterface {
   Future<Either<CustomError, BaseModel>> getOrderData(
       {int page = 1, int? limit});
+  Future<Either<CustomError, BaseModel>> getCustomerOrderData(
+      {int page = 1, int? limit});
 
   Future<Either<CustomError, BaseModel>> getOrderDetails(
       {required int orderId});

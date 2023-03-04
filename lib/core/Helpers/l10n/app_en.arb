@@ -230,6 +230,8 @@
   "lblCheckout": "Confirm Order",
   "lblCheckoutSuccess": "The order confirmed was successfully",
   "lblCartEmpty": "Your Cart is empty",
-  "lblYouNeedToAddProduct": "Be ready for your first product",  "lblBackToHome": "Return to shop"
-
+  "lblYouNeedToAddProduct": "Be ready for your first product",
+  "lblBackToHome": "Return to shop",
+  "lblAddRateON": "Add rating for",
+  "lblNoRatingFound": "No rating found at this moment"
 }

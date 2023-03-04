@@ -30,40 +30,44 @@ class StoreInfoCard extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Row(
-              children: [
-                ///store image
-                commonCachedImageWidget(
-                  shopModel.image!,
-                  height: 56,
-                  width: 56,
-                  isProfile: true,
-                  isCircular: true,
-                  radius: 1000,
-                ),
+            Expanded(
+              child: Row(
+                children: [
+                  ///store image
+                  commonCachedImageWidget(
+                    shopModel.image!,
+                    height: 56,
+                    width: 56,
+                    isProfile: true,
+                    isCircular: true,
+                    radius: 1000,
+                  ),
 
-                ///Spacer
-                getSpaceWidth(AppConstants.smallPadding),
+                  ///Spacer
+                  getSpaceWidth(AppConstants.smallPadding),
 
-                ///Store name and rating
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CommonTitleText(
-                      textKey: shopModel.name!,
-                      textFontSize: AppConstants.smallFontSize,
-                      textWeight: FontWeight.w700,
-                      textColor: AppConstants.mainColor,
+                  ///Store name and rating
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CommonTitleText(
+                          textKey: shopModel.name!,
+                          textFontSize: AppConstants.smallFontSize,
+                          textWeight: FontWeight.w700,
+                          textColor: AppConstants.mainColor,
+                        ),
+                        getSpaceHeight(AppConstants.smallPadding / 2),
+                        StarRating(
+                          color: AppConstants.starRatingColor,
+                          rating: double.parse(shopModel.rate.toString()),
+                        ),
+                      ],
                     ),
-                    getSpaceHeight(AppConstants.smallPadding / 2),
-                    StarRating(
-                      color: AppConstants.starRatingColor,
-                      rating: double.parse(shopModel.rate.toString()),
-                    ),
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
 
             ///store main category ,location

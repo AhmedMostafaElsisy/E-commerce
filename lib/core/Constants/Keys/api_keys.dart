@@ -34,6 +34,7 @@ class ApiKeys {
 
   ///rating keys
   static const String ratingKey = "$userTypeKey/rate-store";
+  static const String storeRatingKey = "$userTypeKey/customer-store-rates";
 
   ///Requests keys
   static const String requestListKey = "$userTypeKey/requests";
@@ -95,6 +96,7 @@ class ApiKeys {
   ///Order
   static const String orderListKey = "/get-orders";
   static const String showOrderKey = "/show-order";
+  static const String customerOrderKey = "/get-customer-orders";
 
   ///cart
   static const String getCartList = "/cart-products";

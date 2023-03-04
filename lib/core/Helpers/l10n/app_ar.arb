@@ -230,5 +230,7 @@
   "lblCheckoutSuccess": "تمت عملية الدفع بنجاح",
   "lblCartEmpty": "السله فارغة",
   "lblYouNeedToAddProduct": "اسرع باضافة منتج الان",
-  "lblBackToHome": "العودة للتسوق"
+  "lblBackToHome": "العودة للتسوق",
+  "lblAddRateON": "قام باضافة تقييم الي",
+  "lblNoRatingFound": "لا يوجد تقيمات في الوقت الحالي"
 }
