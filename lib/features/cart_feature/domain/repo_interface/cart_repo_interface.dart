@@ -7,22 +7,22 @@ import '../../../../core/Error_Handling/custom_exception.dart';
 abstract class CartRepositoryInterFace {
   Future<Either<CustomException, List<CartModel>>> getCartItems();
 
-  Future<Either<CustomException, CartModel>> addProductToCart({
+  Future<Either<CustomException, List<CartModel>>> addProductToCart({
     required int productId,
     required int quantity,
   });
 
-  Future<Either<CustomException, CartModel>> increaseProductQuantity({
+  Future<Either<CustomException, List<CartModel>>> increaseProductQuantity({
     required int productId,
     required int quantity,
   });
 
-  Future<Either<CustomException, CartModel>> decreaseProductQuantity({
+  Future<Either<CustomException, List<CartModel>>> decreaseProductQuantity({
     required int productId,
     required int quantity,
   });
 
-  Future<Either<CustomException, BaseModel>> removeItemFromCart({
+  Future<Either<CustomException, List<CartModel>>> removeItemFromCart({
     required int productId,
   });
 

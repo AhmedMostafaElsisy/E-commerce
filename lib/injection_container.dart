@@ -147,7 +147,7 @@ Future<void> init() async {
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => FilterCubit());
   sl.registerFactory(() => HelpCubit(sl()));
-  sl.registerFactory(() => CartCubit(sl()));
+  sl.registerFactory(() => CartBloc(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
@@ -211,8 +211,7 @@ Future<void> init() async {
       () => EditProductRepository(sl()));
   sl.registerLazySingleton<OrderRepositoryInterface>(
       () => OrderRepository(sl()));
-  sl.registerLazySingleton<HelpInterface>(
-      () => HelpRepository(sl()));
+  sl.registerLazySingleton<HelpInterface>(() => HelpRepository(sl()));
   sl.registerLazySingleton<CartRepositoryInterFace>(
       () => CartRepositoryImplementation(dataSource: sl()));
 

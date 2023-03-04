@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/Constants/Keys/api_keys.dart';
 import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
@@ -31,6 +32,9 @@ class CartDataSourceRemoteImplement implements CartDataSourceRemoteInterface {
       String pathUrl = ApiKeys.editProductQuantity;
       staticData.fields.add(MapEntry("product_id", productId.toString()));
       staticData.fields.add(MapEntry("count", quantity.toString()));
+      debugPrint("here is your endpoint${pathUrl}");
+      debugPrint("here is your data ${staticData.fields.toString()}");
+
       Response response = await DioHelper.postData(
         url: pathUrl,
         data: staticData,
@@ -68,7 +72,7 @@ class CartDataSourceRemoteImplement implements CartDataSourceRemoteInterface {
       {required int productId}) async {
     try {
       FormData staticData = FormData();
-      String pathUrl = ApiKeys.removeFavoriteKey;
+      String pathUrl = ApiKeys.removeProductFromCart;
       staticData.fields.add(MapEntry("product_id", productId.toString()));
 
       Response response =

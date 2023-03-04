@@ -14,24 +14,24 @@ class CartRepositoryImplementation implements CartRepositoryInterFace {
   });
 
   @override
-  Future<Either<CustomException, CartModel>> addProductToCart(
+  Future<Either<CustomException, List<CartModel>>> addProductToCart(
       {required int productId, required int quantity}) async {
     return await dataSource
         .addOREditProductQuantityCart(productId: productId, quantity: quantity)
         .then((value) => value.fold((l) => left(l), (r) {
-              CartModel cartModel = CartModel.fromJson(r.data);
-              return right(cartModel);
+              List<CartModel> carts = cartsListFromJson(r.data);
+              return right(carts);
             }));
   }
 
   @override
-  Future<Either<CustomException, CartModel>> decreaseProductQuantity(
+  Future<Either<CustomException, List<CartModel>>> decreaseProductQuantity(
       {required int productId, required int quantity}) async {
     return await dataSource
         .addOREditProductQuantityCart(productId: productId, quantity: quantity)
         .then((value) => value.fold((l) => left(l), (r) {
-              CartModel cartModel = CartModel.fromJson(r.data);
-              return right(cartModel);
+              List<CartModel> carts = cartsListFromJson(r.data);
+              return right(carts);
             }));
   }
 
@@ -49,24 +49,24 @@ class CartRepositoryImplementation implements CartRepositoryInterFace {
   }
 
   @override
-  Future<Either<CustomException, CartModel>> increaseProductQuantity(
+  Future<Either<CustomException, List<CartModel>>> increaseProductQuantity(
       {required int productId, required int quantity}) async {
     return await dataSource
         .addOREditProductQuantityCart(productId: productId, quantity: quantity)
         .then((value) => value.fold((l) => left(l), (r) {
-              CartModel cartModel = CartModel.fromJson(r.data);
-              return right(cartModel);
+              List<CartModel> carts = cartsListFromJson(r.data);
+              return right(carts);
             }));
   }
 
   @override
-  Future<Either<CustomException, BaseModel>> removeItemFromCart(
+  Future<Either<CustomException, List<CartModel>>> removeItemFromCart(
       {required int productId}) async {
     return await dataSource.removeProduct(productId: productId).then(
-          (value) => value.fold(
-            (l) => left(l),
-            (r) => right(r),
-          ),
+          (value) => value.fold((l) => left(l), (r) {
+            List<CartModel> carts = cartsListFromJson(r.data);
+            return right(carts);
+          }),
         );
   }
 

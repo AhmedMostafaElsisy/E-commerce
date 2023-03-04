@@ -27,6 +27,7 @@ import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.d
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../cart_feature/presenation/logic/cart_events.dart';
 import '../../Widgets/products_grid_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController searchController;
   late CategoriesCubit categoriesCubit;
   late HomeProductCubit productCubit;
-  late CartCubit cartCubit;
+  late CartBloc cartCubit;
 
   late TextEditingController locationController;
 
@@ -53,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
     categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
     generalStoresCubit = BlocProvider.of<GeneralStoresCubit>(context);
     productCubit = BlocProvider.of<HomeProductCubit>(context);
-    cartCubit = BlocProvider.of<CartCubit>(context);
+    cartCubit = BlocProvider.of<CartBloc>(context);
     searchController = TextEditingController();
     locationController = TextEditingController();
-    cartCubit.getCartItems();
+    cartCubit.add(GetCartItemEvent());
     bannersCubit.getBanners();
     categoriesCubit.getAllCategories();
     generalStoresCubit.getGeneralStoresListData();
@@ -98,26 +99,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     withCounter: true,
                     itemCounter: 19,
                   ),
-                  BlocBuilder<CartCubit, CartState>(
+                  BlocBuilder<CartBloc, CartState>(
                     builder: (cartCtx, cartState) {
-                      if (cartState is GetCartItemsSuccessState &&
-                          cartCtx.read<CartCubit>().cartItems.isNotEmpty) {
-                        return CommonAppBarImageWithCounter(
-                          imagePath: "cart.svg",
-                          withCounter: true,
-                          itemCounter:
-                              cartCtx.read<CartCubit>().cartItems.length,
-                          navigationPath: RouteNames.myCartScreen,
-                        );
-                      } else if (cartState is GetCartItemsLoadingState) {
+                      if (cartState is GetCartItemsLoadingState ||
+                          cartState is AddProductToCartLoadingState ||
+                          cartState is ChangeProductQuantityLoadingState) {
                         return const CircularProgressIndicator(
                           color: AppConstants.mainColor,
                         );
-                      } else {
+                      } else if (cartCtx.read<CartBloc>().cartItems.isEmpty) {
                         return const CommonAppBarImageWithCounter(
                           imagePath: "cart.svg",
                           withCounter: true,
                           itemCounter: 0,
+                          navigationPath: RouteNames.myCartScreen,
+                        );
+                      } else {
+                        return CommonAppBarImageWithCounter(
+                          imagePath: "cart.svg",
+                          withCounter: true,
+                          itemCounter:
+                              cartCtx.read<CartBloc>().cartItems.length,
                           navigationPath: RouteNames.myCartScreen,
                         );
                       }

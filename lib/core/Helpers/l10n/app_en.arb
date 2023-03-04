@@ -222,5 +222,14 @@
   "lblDescriptionIsEmpty": "Description Is Empty ",
   "lblDescription": "Description",
   "lblNoTermsAndConditions": "No Terms And Conditions Found",
-  "lblMyCart": "shopping cart"
+  "lblMyCart": "shopping cart",
+  "lblRemoveFromCart": "Remove From Cart",
+  "lblQuantityNotValid": "The amount of the product cannot be less than 1",
+  "lblProductAddedToCart": "The product was successfully added in the cart",
+  "lblProductRemovedToCart": "The product was successfully removed From the cart",
+  "lblCheckout": "Confirm Order",
+  "lblCheckoutSuccess": "The order confirmed was successfully",
+  "lblCartEmpty": "Your Cart is empty",
+  "lblYouNeedToAddProduct": "Be ready for your first product",  "lblBackToHome": "Return to shop"
+
 }

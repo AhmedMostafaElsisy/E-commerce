@@ -15,7 +15,7 @@ class CartUseCase {
     return cartRepositoryInterFace.getCartItems();
   }
 
-  Future<Either<CustomException, CartModel>> callAddProductToCartUseCase({
+  Future<Either<CustomException, List<CartModel>>> callAddProductToCartUseCase({
     required int productId,
     required int quantity,
   }) async {
@@ -23,7 +23,7 @@ class CartUseCase {
         productId: productId, quantity: quantity);
   }
 
-  Future<Either<CustomException, CartModel>>
+  Future<Either<CustomException, List<CartModel>>>
       callIncreaseProductQuantityInCartUseCase({
     required int productId,
     required int quantity,
@@ -32,7 +32,7 @@ class CartUseCase {
         productId: productId, quantity: quantity);
   }
 
-  Future<Either<CustomException, CartModel>>
+  Future<Either<CustomException, List<CartModel>>>
       callDecreaseProductQuantityInCartUseCase({
     required int productId,
     required int quantity,
@@ -41,7 +41,8 @@ class CartUseCase {
         productId: productId, quantity: quantity);
   }
 
-  Future<Either<CustomException, BaseModel>> callRemoveProductFormCartUseCase({
+  Future<Either<CustomException, List<CartModel>>>
+      callRemoveProductFormCartUseCase({
     required int productId,
   }) async {
     return cartRepositoryInterFace.removeItemFromCart(productId: productId);

@@ -93,10 +93,9 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<FilterCubit>(create: (_) => di.sl<FilterCubit>()),
         BlocProvider<FormBuilderCubit>(
             create: (_) => di.sl<FormBuilderCubit>()),
-        BlocProvider<CartCubit>(create: (_) => di.sl<CartCubit>()),
+        BlocProvider<CartBloc>(create: (_) => di.sl<CartBloc>()),
         BlocProvider<OrderCubit>(create: (_) => di.sl<OrderCubit>()),
-        BlocProvider<HelpCubit>(
-            create: (_) => di.sl<HelpCubit>()),
+        BlocProvider<HelpCubit>(create: (_) => di.sl<HelpCubit>()),
       ],
       child: widget.body,
     );

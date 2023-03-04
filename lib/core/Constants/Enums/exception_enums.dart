@@ -12,4 +12,5 @@ enum CustomStatusCodeErrorType {
   canNotParsing,
   unVerified,
   notFound,
+  quantityNotValid,
 }

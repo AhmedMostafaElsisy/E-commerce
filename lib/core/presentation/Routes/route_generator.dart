@@ -133,7 +133,7 @@ class RouteGenerator {
       case RouteNames.contactUsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const ContactScreen());
-        case RouteNames.termsScreen:
+      case RouteNames.termsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const TermsScreen());
 

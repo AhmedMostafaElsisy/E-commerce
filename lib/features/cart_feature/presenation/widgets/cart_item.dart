@@ -1,12 +1,17 @@
 import 'package:captien_omda_customer/core/model/cart_model.dart';
+import 'package:captien_omda_customer/core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import 'package:captien_omda_customer/core/presentation/Widgets/common_cached_image_widget.dart';
+import 'package:captien_omda_customer/features/cart_feature/presenation/logic/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/Helpers/shared_texts.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../general_prodcut_feature/presentation/widget/product_add_cart_with_quantity.dart';
+import '../logic/cart_events.dart';
 
 class CartItemWidget extends StatelessWidget {
   final CartModel cartItem;
@@ -72,6 +77,29 @@ class CartItemWidget extends StatelessWidget {
                       textWeight: FontWeight.w700,
                       textFontSize: AppConstants.smallFontSize,
                       textColor: AppConstants.lightOrangeColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AddProductToCartWithQuantity(
+                      product: cartItem.productModel,
+                      withAddToCart: false,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        context.read<CartBloc>().add(
+                              RemoveProductFromCartEvent(
+                                productModel: cartItem.productModel,
+                              ),
+                            );
+                      },
+                      child: const CommonAssetSvgImageWidget(
+                        imageString: "remove.svg",
+                        height: 40,
+                        width: 40,
+                      ),
                     ),
                   ],
                 ),

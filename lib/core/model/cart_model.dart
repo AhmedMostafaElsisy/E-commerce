@@ -27,7 +27,8 @@ class CartModel extends CartEntity {
         total: jsonObject["total"],
         price: jsonObject["price"],
         quantity: jsonObject["qnt"],
-        productModel: ProductModel.fromJson(jsonObject["product"]),
+        productModel: ProductModel.fromJson(jsonObject["product"])
+          ..productTempQuantity = jsonObject["qnt"],
       );
     } catch (e) {
       throw Exception(e.toString());

@@ -221,5 +221,14 @@
   "lblDescriptionIsEmpty": "الوصف فارغ",
   "lblDescription": "وصف",
   "lblNoTermsAndConditions": "لا يوجد شروط واحكام",
-  "lblMyCart": "عربة التسوق"
+  "lblMyCart": "عربة التسوق",
+  "lblRemoveFromCart": "حذف من العربة",
+  "lblQuantityNotValid": "لا يمكن ان تقل كمية المنتج عن ١",
+  "lblProductAddedToCart": "تم اضافه المنتج في السلة بنجاح",
+  "lblProductRemovedToCart": "تم حذف المنتج من السلة بنجاح",
+  "lblCheckout": "أكد الطلب",
+  "lblCheckoutSuccess": "تمت عملية الدفع بنجاح",
+  "lblCartEmpty": "السله فارغة",
+  "lblYouNeedToAddProduct": "اسرع باضافة منتج الان",
+  "lblBackToHome": "العودة للتسوق"
 }
