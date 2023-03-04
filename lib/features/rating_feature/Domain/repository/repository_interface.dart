@@ -4,8 +4,7 @@ import '../../../../core/model/base_model.dart';
 
 abstract class RatingRepositoryInterface {
   Future<Either<CustomError, BaseModel>> addRating(
-      {
-      required int orderId,
-      required int rate,
-      required String comment});
+      {required int orderId, required int rate, required String comment});
+
+  Future<Either<CustomError, BaseModel>> getStoresRating( {int page = 1, int? limit});
 }

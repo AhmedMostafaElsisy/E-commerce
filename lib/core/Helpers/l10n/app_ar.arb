@@ -220,5 +220,7 @@
   "lblSubjectIsEmpty": "الموضوع فارغ",
   "lblDescriptionIsEmpty": "الوصف فارغ",
   "lblDescription": "وصف",
-  "lblNoTermsAndConditions": "لا يوجد شروط واحكام"
+  "lblNoTermsAndConditions": "لا يوجد شروط واحكام",
+  "lblAddRateON": "قام باضافة تقييم الي",
+  "lblNoRatingFound": "لا يوجد تقيمات في الوقت الحالي"
 }

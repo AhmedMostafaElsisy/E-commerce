@@ -221,5 +221,7 @@
   "lblSubjectIsEmpty": "Subject Is Empty",
   "lblDescriptionIsEmpty": "Description Is Empty ",
   "lblDescription": "Description",
-  "lblNoTermsAndConditions": "No Terms And Conditions Found"
+  "lblNoTermsAndConditions": "No Terms And Conditions Found",
+  "lblAddRateON": "Add rating for",
+  "lblNoRatingFound": "No rating found at this moment"
 }

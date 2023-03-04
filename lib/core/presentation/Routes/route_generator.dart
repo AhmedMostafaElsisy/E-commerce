@@ -23,6 +23,7 @@ import '../../../features/notification_feature/presentation/notification_screen.
 import '../../../features/order_feature/presentation/my_order_screen.dart';
 import '../../../features/order_feature/presentation/order_details_screen.dart';
 import '../../../features/plans_feature/presentation/screen/plans_screen.dart';
+import '../../../features/rating_feature/presentation/screen/rating_list_screen.dart';
 import '../../../features/store_feature/presentation/screen/add_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/edit_store_screen.dart';
 import '../../../features/store_feature/presentation/screen/my_store_screen.dart';
@@ -129,9 +130,12 @@ class RouteGenerator {
       case RouteNames.contactUsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const ContactScreen());
-        case RouteNames.termsScreen:
+      case RouteNames.termsScreen:
         return RouteAnimation()
             .animationFromCenterRightToCenterLeft(page: const TermsScreen());
+      case RouteNames.ratingListScreen:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: const RatingListScreen());
 
       default:
         return MaterialPageRoute(
