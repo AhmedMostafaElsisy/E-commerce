@@ -32,7 +32,6 @@ class ProductListCubitWithFilter extends Bloc<SearchEvents, ProductListStates> {
     );
     on<SearchClearEvent>(
       (event, emit) async {
-        print("call init here");
         searchController = TextEditingController();
         emit(ProductListInitStates());
       },

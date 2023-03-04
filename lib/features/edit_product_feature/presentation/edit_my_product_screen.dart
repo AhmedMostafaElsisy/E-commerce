@@ -1,10 +1,10 @@
-
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/features/edit_product_feature/presentation/widget/product_image_picked.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -205,12 +205,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                     return AppLocalizations.of(
                                                             context)!
                                                         .lblNameIsEmpty;
-                                                  }else if (int.parse(value) <=
-                                                      int.parse(
-                                                          _productCubit.    adsDiscountPriceController
-                                                              .text)) {
+                                                  } else if (int.parse(value) <=
+                                                      int.parse(_productCubit
+                                                          .adsDiscountPriceController
+                                                          .text)) {
                                                     return AppLocalizations.of(
-                                                        context)!
+                                                            context)!
                                                         .lblNoValid;
                                                   } else {
                                                     return null;
@@ -250,12 +250,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                     return AppLocalizations.of(
                                                             context)!
                                                         .lblNameIsEmpty;
-                                                  }else if (int.parse(value) >=
-                                                      int.parse(
-                                                          _productCubit.  adsMainPriceController
-                                                              .text)) {
+                                                  } else if (int.parse(value) >=
+                                                      int.parse(_productCubit
+                                                          .adsMainPriceController
+                                                          .text)) {
                                                     return AppLocalizations.of(
-                                                        context)!
+                                                            context)!
                                                         .lblNoValid;
                                                   } else {
                                                     return null;
@@ -329,11 +329,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                                       .lightGrayColor,
                                                   width: 1),
                                             ),
-                                            child:  Padding(
-                                              padding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 4.0,
-                                                      horizontal: 8),
+                                            child: const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 4.0, horizontal: 8),
                                               child: ProductImagePicked(),
                                             ),
                                           ),
@@ -484,7 +482,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                               buttonBackgroundColor:
                                                   AppConstants.mainColor,
                                               isEnable:
-                                                  _productCubit.isDataFound && _productCubit.selectedProduct.images!.isNotEmpty,
+                                                  _productCubit.isDataFound &&
+                                                      _productCubit
+                                                          .selectedProduct
+                                                          .images!
+                                                          .isNotEmpty,
                                               isLoading: productState
                                                   is EditProductLoadingState,
                                               buttonTextSize: 18,

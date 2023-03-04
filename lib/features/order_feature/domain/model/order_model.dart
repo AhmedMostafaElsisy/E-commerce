@@ -1,5 +1,6 @@
+import 'package:captien_omda_customer/core/model/cart_model.dart';
+
 import '../../../Auth_feature/Data/model/location_model.dart';
-import 'cart_model.dart';
 
 List<OrderModel> orderListFromJson(List str) =>
     List<OrderModel>.from(str.map((x) => OrderModel.fromJson(x)));
@@ -20,6 +21,6 @@ class OrderModel {
         status: json["status"],
         total: json["total"],
         locationModel: LocationModel.fromJson(json["location"]),
-        orderCart: cartListFromJson(json["carts"]));
+        orderCart: cartsListFromJson(json["carts"]));
   }
 }

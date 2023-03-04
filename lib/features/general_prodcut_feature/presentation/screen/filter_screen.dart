@@ -22,7 +22,7 @@ import '../../../../core/presentation/screen/main_app_page.dart';
 import '../logic/Filter_cubit/filter_cubit.dart';
 import '../logic/product_list_cubit/product_list_cubit.dart';
 import '../logic/product_list_cubit/product_list_events.dart';
-import '../widget/CommonWrapItem.dart';
+import '../widget/common_wrap_item.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({
@@ -273,7 +273,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           );
                         },
                         listener: (tagsCtx, tagsState) {}),
-                    Spacer(),
+                    const Spacer(),
                     CommonGlobalButton(
                       height: 48,
                       buttonBackgroundColor: AppConstants.mainColor,
