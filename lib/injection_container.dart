@@ -1,7 +1,3 @@
-import 'features/cart_feature/data/data_sources/cart_data_source_remote.dart';
-import 'features/cart_feature/data/repositories_imp/cart_repo_implement.dart';
-import 'features/cart_feature/domain/repo_interface/cart_repo_interface.dart';
-import 'features/cart_feature/domain/use_case/cart_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/Data_source/local_source/flutter_secured_storage.dart';
@@ -69,6 +65,10 @@ import 'features/Profile_feature/Data/repository/profile_repository.dart';
 import 'features/Profile_feature/Domain/repository/profile_interface.dart';
 import 'features/Profile_feature/Domain/user_cases/profile_ues_case.dart';
 import 'features/Profile_feature/presentation/logic/Profile_Cubit/profile_cubit.dart';
+import 'features/cart_feature/data/data_sources/cart_data_source_remote.dart';
+import 'features/cart_feature/data/repositories_imp/cart_repo_implement.dart';
+import 'features/cart_feature/domain/repo_interface/cart_repo_interface.dart';
+import 'features/cart_feature/domain/use_case/cart_use_case.dart';
 import 'features/cart_feature/presenation/logic/cart_cubit.dart';
 import 'features/edit_product_feature/data/data_scoures/remote_data_scoures.dart';
 import 'features/edit_product_feature/data/repository/product_repository.dart';

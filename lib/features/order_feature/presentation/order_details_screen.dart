@@ -86,7 +86,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                             .argument
                                             .orderModel!
                                             .orderCart![index]
-                                            .cartProduct!
+                                            .productModel
                                             .images!
                                             .first
                                             .imageUrl ??
