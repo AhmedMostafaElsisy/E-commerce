@@ -82,6 +82,7 @@ import 'features/order_feature/data/data_scoures/order_remote_data_scoures.dart'
 import 'features/order_feature/data/repository/order_repository.dart';
 import 'features/order_feature/domain/repository/order_repository_interface.dart';
 import 'features/order_feature/domain/ues_cases/ues_cases.dart';
+import 'features/order_feature/presentation/logic/customer_order/customer_order_cubit.dart';
 import 'features/order_feature/presentation/logic/order_cubit.dart';
 import 'features/plans_feature/Data/data_scources/plans_remote_data_scources.dart';
 import 'features/plans_feature/Data/repository/plans_repository.dart';
@@ -142,6 +143,7 @@ Future<void> init() async {
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => FilterCubit());
   sl.registerFactory(() => HelpCubit(sl()));
+  sl.registerFactory(() => CustomerOrderCubit(sl()));
 
   ///User case
   sl.registerLazySingleton(() => AuthUserCase(repository: sl()));
