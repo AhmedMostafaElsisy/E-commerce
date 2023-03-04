@@ -21,4 +21,10 @@ class OrderRepository extends OrderRepositoryInterface {
       {int page = 1, int? limit}) {
     return remoteDataSourceInterface.getOrderData(limit: limit, page: page);
   }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getCustomerOrderData({int page = 1, int? limit}) {
+    return remoteDataSourceInterface.getCustomerOrderData(limit: limit, page: page);
+
+  }
 }
