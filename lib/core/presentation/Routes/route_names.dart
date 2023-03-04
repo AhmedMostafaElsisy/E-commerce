@@ -35,4 +35,5 @@ class RouteNames {
   static const String contactUsScreen = "/ContactUsScreen";
   static const String termsScreen = "/TermsScreen";
   static const String ratingListScreen = "/RatingListScreen";
+  static const String customerOrderScreen = "/CustomerOrderScreen";
 }

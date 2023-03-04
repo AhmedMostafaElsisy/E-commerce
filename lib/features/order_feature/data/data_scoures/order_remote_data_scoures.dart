@@ -12,6 +12,8 @@ import '../../../../core/model/base_model.dart';
 abstract class OrderRemoteDataSourceInterface {
   Future<Either<CustomError, BaseModel>> getOrderData(
       {int page = 1, int? limit});
+  Future<Either<CustomError, BaseModel>> getCustomerOrderData(
+      {int page = 1, int? limit});
 
   Future<Either<CustomError, BaseModel>> getOrderDetails(
       {required int orderID});
@@ -44,6 +46,25 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSourceInterface {
         pathUrl = "${ApiKeys.orderListKey}?page=$page";
       } else {
         pathUrl = "${ApiKeys.orderListKey}?limit=$limit&page=$page";
+      }
+      Response response = await DioHelper.getDate(url: pathUrl);
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> getCustomerOrderData({int page = 1, int? limit}) async {
+    try {
+      String pathUrl = "";
+      if (limit == null) {
+        pathUrl = "${ApiKeys.customerOrderKey}?page=$page";
+      } else {
+        pathUrl = "${ApiKeys.customerOrderKey}?limit=$limit&page=$page";
       }
       Response response = await DioHelper.getDate(url: pathUrl);
       return right(BaseModel.fromJson(response.data));

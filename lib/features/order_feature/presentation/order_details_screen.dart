@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
@@ -81,7 +82,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             child: Row(
                               children: [
                                 commonCachedImageWidget(
-                                    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80",
+                                    widget
+                                            .argument
+                                            .orderModel!
+                                            .orderCart![index]
+                                            .cartProduct!
+                                            .images!
+                                            .first
+                                            .imageUrl ??
+                                        "",
                                     height: 90,
                                     width: 90,
                                     fit: BoxFit.fill),
@@ -190,7 +199,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CommonTitleText(
-                            textKey: AppLocalizations.of(context)!.lblTotalPrice,
+                            textKey:
+                                AppLocalizations.of(context)!.lblTotalPrice,
                             textWeight: FontWeight.w700,
                             textFontSize: AppConstants.smallFontSize,
                             textColor: AppConstants.mainTextColor,

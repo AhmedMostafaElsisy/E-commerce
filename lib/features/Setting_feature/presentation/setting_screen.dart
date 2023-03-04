@@ -107,6 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           SectionContentItem(
                             title: AppLocalizations.of(context)!
                                 .lblCustomerRequests,
+                            screenName: RouteNames.customerOrderScreen,
                           ),
                           SectionContentItem(
                             title: AppLocalizations.of(context)!.lblRatings,
