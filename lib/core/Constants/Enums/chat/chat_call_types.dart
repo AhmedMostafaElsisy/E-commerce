@@ -1,0 +1,4 @@
+enum ChatCallType {
+  video,
+  audio,
+}

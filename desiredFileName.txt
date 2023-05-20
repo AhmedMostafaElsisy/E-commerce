@@ -1,6 +1,7 @@
 {
   "ar": [
     "lblShops",
-    "lblCategory"
+    "lblCategory",
+    "lblAddToFav"
   ]
 }

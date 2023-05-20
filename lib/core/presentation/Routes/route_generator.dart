@@ -11,6 +11,8 @@ import '../../../features/Auth_feature/Presentation/screens/login_home_page.dart
 import '../../../features/Auth_feature/Presentation/screens/new_password_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/sign_up_screen.dart';
 import '../../../features/Auth_feature/Presentation/screens/verification_code_screen.dart';
+import '../../../features/Chat_Feature/presentation/Chat_screen/chat_screen.dart';
+import '../../../features/Chat_Feature/presentation/massage_chat_screen/chat_list_screen.dart';
 import '../../../features/Contact_feature/Presentaion/screen/add_contact_screen.dart';
 import '../../../features/Home_feature/presentation/Screens/Bottom_Nav_Screen/bottom_nav_bar.dart';
 import '../../../features/Home_feature/presentation/Screens/Home_Screens/home_screen.dart';
@@ -141,10 +143,15 @@ class RouteGenerator {
       case RouteNames.ratingListScreen:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const RatingListScreen());
-        case RouteNames.customerOrderScreen:
+      case RouteNames.customerOrderScreen:
         return RouteAnimation().animationFromCenterRightToCenterLeft(
             page: const CustomerOrderScreen());
-
+      case RouteNames.chatPageRoute:
+        return RouteAnimation().animationFromCenterRightToCenterLeft(
+            page: ChatScreen(argument: args as RouteArgument));
+      case RouteNames.chatListPageRoute:
+        return RouteAnimation()
+            .animationFromCenterRightToCenterLeft(page: ChatListScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

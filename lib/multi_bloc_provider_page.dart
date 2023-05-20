@@ -16,6 +16,16 @@ import 'features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/OTP_Cubit/otp_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Password_Cubit/password_cubit.dart';
 import 'features/Auth_feature/Presentation/logic/Sign_Up_Cubit/sign_up_cubit.dart';
+import 'features/Chat_Feature/Data/repos/archive_chat_repository.dart';
+import 'features/Chat_Feature/Data/repos/chat_list_repository.dart';
+import 'features/Chat_Feature/Data/repos/chat_realtime_repository.dart';
+import 'features/Chat_Feature/Data/repos/favorite_chats_repository.dart';
+import 'features/Chat_Feature/Data/repos/send_massage_repository.dart';
+import 'features/Chat_Feature/Logic/Chat_Cubit/chat_cubit.dart';
+import 'features/Chat_Feature/Logic/Websocket_Cubit/websocket_cubit.dart';
+import 'features/Chat_Feature/Logic/archive_chat_cubit/archive_chat_cubit.dart';
+import 'features/Chat_Feature/Logic/chat_details_cubit/chat_details_cubit.dart';
+import 'features/Chat_Feature/Logic/favorite_chat_cubit/favorite_chat_cubit.dart';
 import 'features/Contact_feature/Presentaion/logic/help_cubit/help_cubit.dart';
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
@@ -99,6 +109,19 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         BlocProvider<CustomerOrderCubit>(
             create: (_) => di.sl<CustomerOrderCubit>()),
         BlocProvider<CartBloc>(create: (_) => di.sl<CartBloc>()),
+        BlocProvider<ArchiveChatsCubit>(
+            create: (_) => ArchiveChatsCubit(ArchiveChatsRepository())),
+        BlocProvider<ChatUsersCubit>(
+            create: (_) => ChatUsersCubit(ChatListRepository())),
+        BlocProvider<ChatDetailsCubit>(
+            create: (_) => ChatDetailsCubit(SendMassageRepository())),
+        BlocProvider<WebsocketCubit>(
+          create: (_) => WebsocketCubit(
+            chatRealTimeRepositoryInterface: ChatRealTimeRepository(),
+          ),
+        ),
+        BlocProvider<FavoriteChatsCubit>(
+            create: (_) => FavoriteChatsCubit(FavoriteChatsRepository())),
       ],
       child: widget.body,
     );

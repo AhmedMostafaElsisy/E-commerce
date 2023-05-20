@@ -96,7 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   //todo: handel click on chat icon by navigation to chat screen
                   const CommonAppBarImageWithCounter(
                     imagePath: "chat.svg",
-                    withCounter: true,
+                    withCounter: false,
+                    navigationPath: RouteNames.chatListPageRoute,
                     itemCounter: 19,
                   ),
                   BlocBuilder<CartBloc, CartState>(

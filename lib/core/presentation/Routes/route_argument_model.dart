@@ -1,6 +1,7 @@
 import 'package:captien_omda_customer/core/model/product_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/Chat_Feature/Data/chat_models/chat_user_model.dart';
 import '../../../features/order_feature/domain/model/order_model.dart';
 import '../../model/shop_model.dart';
 
@@ -25,11 +26,15 @@ class RouteArgument {
 
   ///request id
   int? requestId;
+  int? userID;
 
   ShopModel? shopModel;
   ProductModel? productModel;
   bool? firstStoreCreate;
   OrderModel? orderModel;
+
+  ChatUserModel? chatUserModel;
+
   RouteArgument(
       {this.id,
       this.sourcePage = '',
@@ -40,15 +45,16 @@ class RouteArgument {
       this.withBack = false,
       this.withActions = false,
       this.withAppBar = false,
-      // this.doctorModel,
+      this.chatUserModel,
       this.imagePath,
       this.emailAddress,
+      this.userID,
       this.onTap,
       this.otp,
       this.requestId,
       this.shopModel,
       this.productModel,
-        this.orderModel,
+      this.orderModel,
       this.firstStoreCreate});
 
   @override

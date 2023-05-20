@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import '../../features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../Constants/Enums/exception_enums.dart';
 import '../presentation/Routes/route_names.dart';
@@ -61,6 +65,42 @@ SizedBox getSpaceHeight(double height) {
 SizedBox getSpaceWidth(double width) {
   double currentWidth = SharedText.screenWidth * (width / 375);
   return SizedBox(width: currentWidth);
+}
+
+String convertToTimeLabelFromMilliseconds(
+    {required int currentPosInMilliseconds}) {
+  //generating the duration label
+  int currentPosInHours =
+      Duration(milliseconds: currentPosInMilliseconds).inHours;
+  int currentPosInMinutes =
+      Duration(milliseconds: currentPosInMilliseconds).inMinutes;
+  int currentPosInSeconds =
+      Duration(milliseconds: currentPosInMilliseconds).inSeconds;
+
+  int rhours = currentPosInHours;
+  int rminutes = currentPosInMinutes - (currentPosInHours * 60);
+  int rseconds = currentPosInSeconds -
+      (currentPosInMinutes * 60 + currentPosInHours * 60 * 60);
+  return "$rhours:$rminutes:$rseconds";
+}
+
+String getRecordFileRandomName() {
+  return 'tau_file_${Random().nextInt(12000)}_${Random().nextInt(12000)}.aac';
+}
+
+Future<bool> checkPermissionOfMicroPhone() async {
+  if (!await Permission.microphone.isGranted) {
+    PermissionStatus status =
+        await Permission.microphone.request().catchError((onErro) {
+      debugPrint("we have an eror ${onErro.toString()}");
+    });
+    debugPrint(
+        "microphone is not granted ${status != PermissionStatus.granted}");
+    if (status != PermissionStatus.granted) {
+      return false;
+    }
+  }
+  return true;
 }
 
 NumberFormat currencyFormat = NumberFormat("#,##0.00", "en_US");

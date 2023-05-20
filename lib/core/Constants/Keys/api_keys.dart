@@ -108,4 +108,26 @@ class ApiKeys {
 
   ///Contact
   static const String contactKey = "/contacts";
+
+  ///chat keys
+  static const String chatKey = "/chat";
+  static const String chatListKey = "$chatKey/getContacts";
+  static const String deleteConversation = "$chatKey/deleteConversation";
+  static const String favoriteListKey = "$chatKey/favorites";
+  static const String addOrRemoveFavoriteUser = "$chatKey/star";
+  static const String chatAuth = "$chatKey$chatKey/auth";
+  static const String sendMassageKey = "$chatKey/sendMessage";
+  static const String fetchMassageKey = "$chatKey/fetchMessages";
+  static const String chatMediaKey = "$chatKey/media";
+
+  static const String chatSettingKey = "/account/chat_settings";
+  static const String chatValueSettingKey = "$chatSettingKey/submit";
+
+  static const String archiveListKey = "$chatKey/archived";
+
+  ///call
+  static const String call = "$chatKey/video";
+  static const String callEnd = "$chatKey/call/end";
+  static const String checkHaveCall = "$chatKey/check_call";
+  static const String callHistoryKey = "/call/history";
 }

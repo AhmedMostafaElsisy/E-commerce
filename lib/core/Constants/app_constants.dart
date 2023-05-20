@@ -45,6 +45,18 @@ class AppConstants {
   static const Color shadowColor = Color(0xFF505588);
   static const Color transparentColor = Colors.transparent;
 
+  ///chat colors
+  static const Color chatTextColor = Color(0XFF12004C);
+  static const Color onlineGreenColor = Color(0XFF2AD750);
+  static const Color audioBGColor = Color(0xFF303030);
+  static const Color gradientColor = Color(0xFF68CBFF);
+
+  static Color fetchUnReadCheckColor(bool isMe) =>
+      isMe ? lightGrayColor : audioBGColor;
+
+  static Color fetchReadedCheckColor(bool isMe) =>
+      isMe ? lightGrayColor : mainColor;
+
   /// Colors in Dark Version ...
   static const Color darkOffWhiteColor = Color(0XFFF6F6F6);
   static const Color darkBackgroundWidgetsColor = Color(0xFF212121);
@@ -67,6 +79,7 @@ class AppConstants {
   static const double containerOfListTitleBorderRadius = 8;
   static const double textFormBorderRadius = 24.0;
   static const double bottomSheetBorderRadius = 25.0;
+  static const double userItemRadius = 18.0;
 
   /// Page Padding
   static const double smallPadding = 8.0;

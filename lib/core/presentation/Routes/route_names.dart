@@ -37,4 +37,7 @@ class RouteNames {
   static const String myCartScreen = "/cartScreen";
   static const String ratingListScreen = "/RatingListScreen";
   static const String customerOrderScreen = "/CustomerOrderScreen";
+  static const String messagesScreen = "/messagesScreen";
+  static const String chatPageRoute = "/ChatPage";
+  static const String chatListPageRoute = "/chatListPage";
 }

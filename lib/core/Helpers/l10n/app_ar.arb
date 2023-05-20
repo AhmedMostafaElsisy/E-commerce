@@ -232,5 +232,18 @@
   "lblYouNeedToAddProduct": "اسرع باضافة منتج الان",
   "lblBackToHome": "العودة للتسوق",
   "lblAddRateON": "قام باضافة تقييم الي",
-  "lblNoRatingFound": "لا يوجد تقيمات في الوقت الحالي"
+  "lblNoRatingFound": "لا يوجد تقيمات في الوقت الحالي",
+  "lblRemoveFromArchive": "خذف من المحادثات المخفية",
+  "lblAddToArchive": "اضافة الي المحادثات المخفية",
+  "lblRemoveChat": "حذف المحادثة",
+  "lblRemoveFromFav": "حذف من  المفضلة",
+  "lblStartChatWithUserFirst": "ابداء المحادثة مع صديق",
+  "lblMassages": "الرسائل",
+  "lblAttachmentDocs": "مستند",
+  "lblAttachmentLocation": "موقع",
+  "lblAttachmentVideo": "فيديو",
+  "lblAttachmentContact": "جهة اتصال",
+  "lblWriteHere": "اكتب هنا",
+  "lblLocationDenied": "تم رفض اذن الموقع",
+  "lblTyping": "يكتب الان..."
 }

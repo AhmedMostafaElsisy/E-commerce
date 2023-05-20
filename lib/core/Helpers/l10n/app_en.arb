@@ -233,5 +233,20 @@
   "lblYouNeedToAddProduct": "Be ready for your first product",
   "lblBackToHome": "Return to shop",
   "lblAddRateON": "Add rating for",
-  "lblNoRatingFound": "No rating found at this moment"
+  "lblNoRatingFound": "No rating found at this moment",
+  "lblRemoveFromArchive": "Remove from Hide List",
+  "lblAddToArchive": "Add to Hide List",
+  "lblRemoveChat": "Delete chat",
+  "lblRemoveFromFav": "Remove from Favourite",
+  "lblAddToFav": "Add to Favourite",
+  "lblStartChatWithUserFirst": "Start conversation with a friend",
+  "lblMassages": "Chats",
+  "lblAttachmentDocs": "Document",
+
+  "lblAttachmentLocation": "Location",
+  "lblAttachmentVideo": "Video",
+  "lblAttachmentContact": "Contact",
+  "lblWriteHere": "Write here",
+  "lblTyping": "Typing Now...",
+  "lblLocationDenied": "Location permission denied"
 }
