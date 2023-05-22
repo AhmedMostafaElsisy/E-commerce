@@ -10,11 +10,18 @@ import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../edit_product_feature/presentation/widget/delete_photo_widget.dart';
 import '../logic/product_cubit.dart';
 
-class ProductNewImagePicked extends StatelessWidget {
+class ProductNewImagePicked extends StatefulWidget {
   const ProductNewImagePicked({Key? key}) : super(key: key);
 
   @override
+  State<ProductNewImagePicked> createState() => _ProductNewImagePickedState();
+}
+
+class _ProductNewImagePickedState extends State<ProductNewImagePicked> {
+  @override
   Widget build(BuildContext context) {
+    debugPrint("i'am updating");
+
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       if (BlocProvider.of<ProductCubit>(context).imageXFile.isNotEmpty)
         SizedBox(

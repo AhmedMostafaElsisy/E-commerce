@@ -7,8 +7,10 @@ import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
 import '../../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../../core/presentation/Routes/route_names.dart';
+import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_empty_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
+import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../Logic/Chat_Cubit/chat_cubit.dart';
 import '../../Logic/Chat_Cubit/chat_states.dart';
@@ -45,6 +47,18 @@ class _ChatListScreenState extends State<ChatListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CommonAppBar(
+        withBack: true,
+        appBarBackGroundColor: AppConstants.transparent,
+        showBottomIcon: false,
+        centerTitle: false,
+        titleWidget: CommonTitleText(
+          textKey: AppLocalizations.of(context)!.lblMassages,
+          textColor: AppConstants.lightBlackColor,
+          textWeight: FontWeight.w400,
+          textFontSize: AppConstants.normalFontSize,
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: getWidgetHeight(AppConstants.pagePadding)),

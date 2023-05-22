@@ -18,6 +18,8 @@ class CheckInputValidationState extends ProductInitialState {}
 
 class UploadingUserImageLoadingState extends ProductInitialState {}
 
+class UploadingUserImageSuccessState extends ProductInitialState {}
+
 class GetProductDetailsLoadingState extends ProductState {}
 
 class GetProductDetailsSuccessState extends ProductState {}
@@ -27,7 +29,6 @@ class GetProductDetailsErrorState extends ProductState {
 
   GetProductDetailsErrorState(this.error);
 }
-
 
 class DeleteProductLoadingState extends ProductState {}
 

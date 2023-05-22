@@ -242,11 +242,11 @@
   "lblStartChatWithUserFirst": "Start conversation with a friend",
   "lblMassages": "Chats",
   "lblAttachmentDocs": "Document",
-
   "lblAttachmentLocation": "Location",
   "lblAttachmentVideo": "Video",
   "lblAttachmentContact": "Contact",
   "lblWriteHere": "Write here",
   "lblTyping": "Typing Now...",
-  "lblLocationDenied": "Location permission denied"
+  "lblLocationDenied": "Location permission denied",
+  "lblMassages": "Chats"
 }

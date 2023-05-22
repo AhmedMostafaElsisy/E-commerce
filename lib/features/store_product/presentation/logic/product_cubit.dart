@@ -3,6 +3,7 @@ import 'package:captien_omda_customer/features/store_product/presentation/logic/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/form_builder_feature/domain/model/form_builder_model.dart';
 import '../../../../core/model/category_model.dart';
 import '../../../../core/model/shop_model.dart';
@@ -20,12 +21,17 @@ class ProductCubit extends Cubit<ProductState> {
   late ProductModel productModel;
 
   photoPicked(XFile xFile) {
+    emit(UploadingUserImageLoadingState());
+
     imageXFile.add(xFile);
-    emit(UploadingUserImageLoadingState());
+    emit(UploadingUserImageSuccessState());
   }
+
   deletePhoto(int index) {
-    imageXFile.removeAt(index);
     emit(UploadingUserImageLoadingState());
+
+    imageXFile.removeAt(index);
+    emit(UploadingUserImageSuccessState());
   }
 
   void isDataFount(List<TextEditingController> list) {

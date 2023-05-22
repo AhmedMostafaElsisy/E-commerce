@@ -40,54 +40,49 @@ class SendMassageWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: getWidgetHeight(10),
                   horizontal: getWidgetWidth(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CommonTextFormField(
-                    controller:
-                        BlocProvider.of<ChatDetailsCubit>(context).controller,
-                    fieldHeight: getWidgetHeight(40),
-                    fieldWidth: getWidgetWidth(250),
-                    onChanged: (str) {
-                      BlocProvider.of<ChatDetailsCubit>(context).updateView();
-                      if (str != null) {
-                        BlocProvider.of<WebsocketCubit>(context)
-                            .sendTypingToAnotherUser(
-                          userToId: receiverId.toString(),
-                          userFromId: SharedText.currentUser!.id.toString(),
-                          isTyping: str.isNotEmpty,
-                        );
-                      }
+              child: CommonTextFormField(
+                controller:
+                    BlocProvider.of<ChatDetailsCubit>(context).controller,
+                fieldHeight: getWidgetHeight(40),
+                fieldWidth: getWidgetWidth(250),
+                onChanged: (str) {
+                  BlocProvider.of<ChatDetailsCubit>(context).updateView();
+                  if (str != null) {
+                    BlocProvider.of<WebsocketCubit>(context)
+                        .sendTypingToAnotherUser(
+                      userToId: receiverId.toString(),
+                      userFromId: SharedText.currentUser!.id.toString(),
+                      isTyping: str.isNotEmpty,
+                    );
+                  }
 
-                      return str;
-                    },
-                    withPrefixIcon: false,
-                    hintKey: AppLocalizations.of(context)!.lblWriteHere,
-                    keyboardType: TextInputType.text,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        BlocProvider.of<ChatDetailsCubit>(context)
-                            .setAttachmentValue(value: true);
-                        FocusScope.of(context).requestFocus(FocusNode());
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CommonAssetSvgImageWidget(
-                          imageString: "add_attachment.svg",
-                          height: 24,
-                          width: 24,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                  return str;
+                },
+                withPrefixIcon: false,
+                hintKey: AppLocalizations.of(context)!.lblWriteHere,
+                keyboardType: TextInputType.text,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    BlocProvider.of<ChatDetailsCubit>(context)
+                        .setAttachmentValue(value: true);
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: CommonAssetSvgImageWidget(
+                      imageString: "add_attachment.svg",
+                      height: 24,
+                      width: 24,
+                      fit: BoxFit.contain,
                     ),
-                    withSuffixIcon: true,
-                    validator: (phone) {
-                      return null;
-                    },
-                    borderColor: AppConstants.transparent,
-                    filledColor: AppConstants.lightBlueColor,
                   ),
-                ],
+                ),
+                withSuffixIcon: true,
+                validator: (phone) {
+                  return null;
+                },
+                borderColor: AppConstants.transparent,
+                filledColor: AppConstants.lightBlueColor,
               ),
             ),
             getSpaceWidth(AppConstants.pagePadding),

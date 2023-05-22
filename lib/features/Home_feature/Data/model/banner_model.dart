@@ -22,7 +22,7 @@ class BannerModel {
     // BannerNavigationType getRequestStates(String state) {
     //   switch (state.toLowerCase()) {
     //     case "product":
-    //       return BannerNavigationType.product;
+    //       return Ban_nerNavigationType.product;
     //     case "offer":
     //       return BannerNavigationType.offer;
     //     case "store":

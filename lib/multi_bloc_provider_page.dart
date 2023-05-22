@@ -22,10 +22,12 @@ import 'features/Chat_Feature/Data/repos/chat_realtime_repository.dart';
 import 'features/Chat_Feature/Data/repos/favorite_chats_repository.dart';
 import 'features/Chat_Feature/Data/repos/send_massage_repository.dart';
 import 'features/Chat_Feature/Logic/Chat_Cubit/chat_cubit.dart';
+import 'features/Chat_Feature/Logic/Recorder_Cubit/recorder_cubit.dart';
 import 'features/Chat_Feature/Logic/Websocket_Cubit/websocket_cubit.dart';
 import 'features/Chat_Feature/Logic/archive_chat_cubit/archive_chat_cubit.dart';
 import 'features/Chat_Feature/Logic/chat_details_cubit/chat_details_cubit.dart';
 import 'features/Chat_Feature/Logic/favorite_chat_cubit/favorite_chat_cubit.dart';
+import 'features/Chat_Feature/Logic/player_Cubit/player_cubit.dart';
 import 'features/Contact_feature/Presentaion/logic/help_cubit/help_cubit.dart';
 import 'features/Home_feature/presentation/logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import 'features/Home_feature/presentation/logic/home_cubit/home_cubit.dart';
@@ -122,6 +124,8 @@ class _MultiBlocProvidersPageState extends State<MultiBlocProvidersPage> {
         ),
         BlocProvider<FavoriteChatsCubit>(
             create: (_) => FavoriteChatsCubit(FavoriteChatsRepository())),
+        BlocProvider<PlayerCubit>(create: (_) => PlayerCubit()),
+        BlocProvider<RecorderCubit>(create: (_) => RecorderCubit()),
       ],
       child: widget.body,
     );

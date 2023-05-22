@@ -245,5 +245,6 @@
   "lblAttachmentContact": "جهة اتصال",
   "lblWriteHere": "اكتب هنا",
   "lblLocationDenied": "تم رفض اذن الموقع",
-  "lblTyping": "يكتب الان..."
+  "lblTyping": "يكتب الان...",
+  "lblMassages": "الرسائل"
 }

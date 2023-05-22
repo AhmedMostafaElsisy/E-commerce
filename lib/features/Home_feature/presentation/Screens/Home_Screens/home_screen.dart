@@ -27,6 +27,7 @@ import '../../../../../core/presentation/Widgets/common_asset_svg_image_widget.d
 import '../../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../../core/presentation/Widgets/common_text_form_field_widget.dart';
 import '../../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../../Chat_Feature/Logic/Websocket_Cubit/websocket_cubit.dart';
 import '../../../../cart_feature/presenation/logic/cart_events.dart';
 import '../../Widgets/products_grid_widget.dart';
 
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late CategoriesCubit categoriesCubit;
   late HomeProductCubit productCubit;
   late CartBloc cartCubit;
+  late WebsocketCubit websocketCubit;
 
   late TextEditingController locationController;
 
@@ -55,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
     generalStoresCubit = BlocProvider.of<GeneralStoresCubit>(context);
     productCubit = BlocProvider.of<HomeProductCubit>(context);
     cartCubit = BlocProvider.of<CartBloc>(context);
+    websocketCubit = BlocProvider.of<WebsocketCubit>(context);
+
     searchController = TextEditingController();
     locationController = TextEditingController();
     cartCubit.add(GetCartItemEvent());
@@ -62,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
     categoriesCubit.getAllCategories();
     generalStoresCubit.getGeneralStoresListData();
     productCubit.getHomeProducts();
+    websocketCubit.initSocket();
   }
 
   @override

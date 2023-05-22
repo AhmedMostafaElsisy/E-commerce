@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../../core/location_feature/domain/model/location_area_model.dart';
 import '../../../../Auth_feature/Domain/entities/base_user_entity.dart';
 import '../../../Domain/user_cases/profile_ues_case.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'profile_states.dart';
 
 class ProfileCubit extends Cubit<ProfileCubitStates> {
@@ -28,17 +28,20 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   LocationAreaModel? selectedArea;
   setNewCitySelected(LocationAreaModel model) {
     selectedCity = model;
-    selectedArea=null;
+    selectedArea = null;
     emit(ProfileAreaSelectedState());
   }
+
   setSelectedArea(LocationAreaModel model) {
     selectedArea = model;
     emit(ProfileAreaSelectedState());
   }
-  clearAllData(){
-    selectedArea=null;
-    selectedCity=null;
+
+  clearAllData() {
+    selectedArea = null;
+    selectedCity = null;
   }
+
   /// user Profile_Cubit data
   getUserProfileData() async {
     emit(ProfileLoadingState());
@@ -77,6 +80,7 @@ class ProfileCubit extends Cubit<ProfileCubitStates> {
   photoPicked(XFile xFile) {
     _imageFile = xFile;
     deleteImage = false;
+    debugPrint("here is file ${xFile.toString()}");
     emit(UploadingUserImageLoadingState());
   }
 

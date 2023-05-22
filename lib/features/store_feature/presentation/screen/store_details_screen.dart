@@ -19,6 +19,7 @@ import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/product_item_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
+import '../../../Chat_Feature/Data/chat_models/chat_user_model.dart';
 import '../logic/single_store_cubit/my_store_cubit.dart';
 import '../logic/single_store_cubit/my_store_states.dart';
 
@@ -121,7 +122,8 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                                       await launchUrl(
                                         Uri(
                                           scheme: "tel",
-                                          path: widget.argument.shopModel!.phone,
+                                          path:
+                                              widget.argument.shopModel!.phone,
                                         ),
                                       );
                                     } else {
@@ -142,7 +144,15 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                                 getSpaceWidth(16),
                                 InkWell(
                                   onTap: () {
-                                    //todo: integrate chat here
+                                    Navigator.of(context).pushNamed(
+                                      RouteNames.chatPageRoute,
+                                      arguments: RouteArgument(
+                                        chatUserModel:
+                                            ChatUserModel.fromUserBaseModel(
+                                                widget
+                                                    .argument.shopModel!.user!),
+                                      ),
+                                    );
                                   },
                                   child: const CommonAssetSvgImageWidget(
                                     imageString: "chat.svg",
@@ -154,7 +164,6 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                                 ),
                               ],
                             ),
-
                           ]),
                     ),
                     getSpaceHeight(AppConstants.smallPadding),
