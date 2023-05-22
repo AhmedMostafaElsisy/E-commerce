@@ -10,13 +10,7 @@ void pressAndHoldBottomSheet({
   context,
   double? height = 190,
   bool withDelete = true,
-  bool showArchive = true,
-  bool showFavorite = true,
-  bool? isFavorite = false,
-  bool? isArchive = false,
-  Function()? favoriteClicked,
   Function()? deleteChatClicked,
-  Function()? archiveChatClicked,
 }) {
   showModalBottomSheet(
       backgroundColor: AppConstants.transparentColor,
@@ -46,38 +40,6 @@ void pressAndHoldBottomSheet({
                   ),
                 ),
                 getSpaceHeight(20),
-                if (showFavorite) ...[
-                  InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    onTap: () {
-                      favoriteClicked!();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        getSpaceWidth(18),
-                        const CommonAssetSvgImageWidget(
-                            imageString: 'navbar_favourite.svg',
-                            height: 18,
-                            width: 20,
-                            imageColor: AppConstants.mainColor),
-                        getSpaceWidth(10),
-                        CommonTitleText(
-                          textKey: isFavorite!
-                              ? AppLocalizations.of(context)!.lblRemoveFromFav
-                              : AppLocalizations.of(context)!.lblAddToFav,
-                          textFontSize: AppConstants.largeFontSize,
-                          textWeight: FontWeight.w600,
-                          textColor: AppConstants.mainColor,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
                 if (withDelete) ...[
                   getSpaceHeight(24),
                   InkWell(
@@ -106,37 +68,6 @@ void pressAndHoldBottomSheet({
                     ),
                   ),
                 ],
-                if (showArchive) ...[
-                  getSpaceHeight(24),
-                  InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    onTap: archiveChatClicked,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        getSpaceWidth(18),
-                        const CommonAssetSvgImageWidget(
-                            imageString: 'search_history.svg',
-                            height: 18,
-                            width: 20),
-                        getSpaceWidth(10),
-                        CommonTitleText(
-                          textKey: isArchive!
-                              ? AppLocalizations.of(context)!
-                                  .lblRemoveFromArchive
-                              : AppLocalizations.of(context)!.lblAddToArchive,
-                          textFontSize: AppConstants.largeFontSize,
-                          textWeight: FontWeight.w600,
-                          textColor: AppConstants.mainColor,
-                        )
-                      ],
-                    ),
-                  ),
-                ]
               ],
             ),
           ));

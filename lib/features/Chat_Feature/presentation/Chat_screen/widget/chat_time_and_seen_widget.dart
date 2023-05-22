@@ -34,7 +34,7 @@ class ChatTimeAndSeenWidget extends StatelessWidget {
           CommonTitleText(
             textKey: dateOfCreation,
             textColor: isMe
-                ? AppConstants.lightWhiteColor
+                ? AppConstants.lightBlackColor
                 : AppConstants.lightBlackColor,
             textFontSize: AppConstants.xxSmallFontSize,
             minTextFontSize: AppConstants.xxSmallFontSize,
@@ -46,7 +46,7 @@ class ChatTimeAndSeenWidget extends StatelessWidget {
           CommonTitleText(
             textKey: dateOfCreation,
             textColor: isMe
-                ? AppConstants.lightWhiteColor
+                ? AppConstants.lightBlackColor
                 : AppConstants.lightBlackColor,
             textFontSize: AppConstants.xxSmallFontSize,
             minTextFontSize: AppConstants.xxSmallFontSize,

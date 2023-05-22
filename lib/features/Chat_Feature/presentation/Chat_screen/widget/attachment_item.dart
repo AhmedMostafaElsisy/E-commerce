@@ -26,7 +26,7 @@ class AttachmentItem extends StatelessWidget {
           textKey: title,
           textWeight: FontWeight.w600,
           textFontSize: 12,
-          textColor: AppConstants.mainColor,
+          textColor: AppConstants.lightBlackColor,
         )
       ],
     );

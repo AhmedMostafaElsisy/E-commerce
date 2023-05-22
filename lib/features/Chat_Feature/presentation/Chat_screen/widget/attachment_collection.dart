@@ -20,10 +20,10 @@ class AttachmentCollection extends StatelessWidget {
       right: getWidgetWidth(40),
       left: getWidgetWidth(40),
       child: Container(
-        width: getWidgetWidth(320),
+        width: getWidgetWidth(200),
         height: getWidgetHeight(170),
         decoration: BoxDecoration(
-            color: AppConstants.lightBlueColor,
+            color: AppConstants.lightWhiteColor,
             borderRadius: BorderRadius.circular(
                 AppConstants.containerOfListTitleBorderRadius),
             boxShadow: [
@@ -36,7 +36,7 @@ class AttachmentCollection extends StatelessWidget {
             vertical: getWidgetHeight(AppConstants.pagePadding),
             horizontal: getWidgetWidth(32)),
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(
@@ -68,6 +68,7 @@ class AttachmentCollection extends StatelessWidget {
                   ),
                 ],
               ),
+              getSpaceWidth(24),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -97,36 +98,36 @@ class AttachmentCollection extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // InkWell(
-                  //   onTap: () {
-                  //     BlocProvider.of<ChatDetailsCubit>(context)
-                  //         .setAttachmentValue(value: false);
-                  //               },
-                  //   child: AttachmentItem(
-                  //     title:
-                  //         AppLocalizations.of(context)!.lblAttachmentLocation,
-                  //     imagePath: "attchment_location.svg",
-                  //   ),
-                  // ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     BlocProvider.of<ChatDetailsCubit>(context)
-                  //         .setAttachmentValue(value: false);
-                  //
-                  //     Navigator.of(context).pushNamed(
-                  //         RouteNames.myContactsPageRoute,
-                  //         arguments: RouteArgument(receiverId: receiverId));
-                  //   },
-                  //   child: AttachmentItem(
-                  //     title: AppLocalizations.of(context)!.lblAttachmentContact,
-                  //     imagePath: "contact_attachment.svg",
-                  //   ),
-                  // ),
-                ],
-              ),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     // InkWell(
+              //     //   onTap: () {
+              //     //     BlocProvider.of<ChatDetailsCubit>(context)
+              //     //         .setAttachmentValue(value: false);
+              //     //               },
+              //     //   child: AttachmentItem(
+              //     //     title:
+              //     //         AppLocalizations.of(context)!.lblAttachmentLocation,
+              //     //     imagePath: "attchment_location.svg",
+              //     //   ),
+              //     // ),
+              //     // InkWell(
+              //     //   onTap: () {
+              //     //     BlocProvider.of<ChatDetailsCubit>(context)
+              //     //         .setAttachmentValue(value: false);
+              //     //
+              //     //     Navigator.of(context).pushNamed(
+              //     //         RouteNames.myContactsPageRoute,
+              //     //         arguments: RouteArgument(receiverId: receiverId));
+              //     //   },
+              //     //   child: AttachmentItem(
+              //     //     title: AppLocalizations.of(context)!.lblAttachmentContact,
+              //     //     imagePath: "contact_attachment.svg",
+              //     //   ),
+              //     // ),
+              //   ],
+              // ),
             ]),
       ),
     );

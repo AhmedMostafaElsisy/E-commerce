@@ -238,12 +238,11 @@
   "lblRemoveChat": "حذف المحادثة",
   "lblRemoveFromFav": "حذف من  المفضلة",
   "lblStartChatWithUserFirst": "ابداء المحادثة مع صديق",
-  "lblMassages": "الرسائل",
   "lblAttachmentDocs": "مستند",
   "lblAttachmentLocation": "موقع",
   "lblAttachmentVideo": "فيديو",
   "lblAttachmentContact": "جهة اتصال",
-  "lblWriteHere": "اكتب هنا",
+  "lblWriteHere": "أكتب رسالتك هنا",
   "lblLocationDenied": "تم رفض اذن الموقع",
   "lblTyping": "يكتب الان...",
   "lblMassages": "الرسائل"

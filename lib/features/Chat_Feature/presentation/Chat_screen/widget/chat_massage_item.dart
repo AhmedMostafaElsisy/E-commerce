@@ -24,7 +24,6 @@ class ChatMassageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(Uri.parse(model.massageContent!).toString());
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
@@ -38,7 +37,14 @@ class ChatMassageItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(
                   AppConstants.containerOfListTitleBorderRadius),
               color:
-                  isMe ? AppConstants.mainColor : AppConstants.lightBlueColor,
+              AppConstants.lightWhiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: AppConstants.lightBlackColor.withOpacity(0.16),
+                  blurRadius: 4,
+                  offset: const Offset(0,0)
+                )
+              ]
             ),
             child: Column(
               crossAxisAlignment:
@@ -52,8 +58,8 @@ class ChatMassageItem extends StatelessWidget {
                   child: CommonTitleText(
                     textKey: model.massageContent!,
                     textColor: isMe
-                        ? AppConstants.lightWhiteColor
-                        : AppConstants.lightBlackColor,
+                        ? AppConstants.mainTextColor
+                        : AppConstants.lightContentColor,
                     textFontSize: AppConstants.smallFontSize,
                     minTextFontSize: AppConstants.smallFontSize,
                     textWeight: FontWeight.w500,
@@ -95,8 +101,15 @@ class ChatMassageItem extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                     AppConstants.containerOfListTitleBorderRadius),
-                color:
-                    isMe ? AppConstants.mainColor : AppConstants.lightBlueColor,
+                  color:
+                  AppConstants.lightWhiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppConstants.lightBlackColor.withOpacity(0.16),
+                        blurRadius: 4,
+                        offset: const Offset(0,0)
+                    )
+                  ]
               ),
               child: SizedBox(
                 width: getWidgetWidth(200),
@@ -150,8 +163,15 @@ class ChatMassageItem extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                     AppConstants.containerOfListTitleBorderRadius),
-                color:
-                    isMe ? AppConstants.mainColor : AppConstants.lightBlueColor,
+                  color:
+                  AppConstants.lightWhiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppConstants.lightBlackColor.withOpacity(0.16),
+                        blurRadius: 4,
+                        offset: const Offset(0,0)
+                    )
+                  ]
               ),
               child: Column(
                 crossAxisAlignment:
@@ -200,8 +220,15 @@ class ChatMassageItem extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                     AppConstants.containerOfListTitleBorderRadius),
-                color:
-                    isMe ? AppConstants.mainColor : AppConstants.lightBlueColor,
+                  color:
+                  AppConstants.lightWhiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppConstants.lightBlackColor.withOpacity(0.16),
+                        blurRadius: 4,
+                        offset: const Offset(0,0)
+                    )
+                  ]
               ),
               child: Column(
                 crossAxisAlignment:
@@ -243,9 +270,15 @@ class ChatMassageItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                       AppConstants.containerOfListTitleBorderRadius),
-                  color: isMe
-                      ? AppConstants.mainColor
-                      : AppConstants.lightBlueColor,
+                    color:
+                    AppConstants.lightWhiteColor,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppConstants.lightBlackColor.withOpacity(0.16),
+                          blurRadius: 4,
+                          offset: const Offset(0,0)
+                      )
+                    ]
                 ),
                 child: Column(
                   crossAxisAlignment:

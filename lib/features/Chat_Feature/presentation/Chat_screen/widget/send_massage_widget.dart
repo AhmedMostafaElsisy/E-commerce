@@ -27,24 +27,28 @@ class SendMassageWidget extends StatelessWidget {
           horizontal: getWidgetWidth(AppConstants.pagePadding)),
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              width: getWidgetWidth(271),
+              width: getWidgetWidth(290),
               height: getWidgetHeight(60),
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(AppConstants.userItemRadius + 2),
-                color: AppConstants.lightBlueColor,
-              ),
+                  borderRadius: BorderRadius.circular(AppConstants.smallRadius),
+                  color: AppConstants.lightWhiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppConstants.lightBlackColor.withOpacity(0.16),
+                        offset: const Offset(0, 0),
+                        blurRadius: 4)
+                  ]),
               padding: EdgeInsets.symmetric(
                   vertical: getWidgetHeight(10),
                   horizontal: getWidgetWidth(10)),
               child: CommonTextFormField(
                 controller:
                     BlocProvider.of<ChatDetailsCubit>(context).controller,
-                fieldHeight: getWidgetHeight(40),
-                fieldWidth: getWidgetWidth(250),
+                fieldHeight: getWidgetHeight(60),
+                fieldWidth: getWidgetWidth(343),
                 onChanged: (str) {
                   BlocProvider.of<ChatDetailsCubit>(context).updateView();
                   if (str != null) {
@@ -61,6 +65,9 @@ class SendMassageWidget extends StatelessWidget {
                 withPrefixIcon: false,
                 hintKey: AppLocalizations.of(context)!.lblWriteHere,
                 keyboardType: TextInputType.text,
+                labelHintColor: AppConstants.lightBorderColor,
+                labelHintFontSize: 14,
+
                 suffixIcon: InkWell(
                   onTap: () {
                     BlocProvider.of<ChatDetailsCubit>(context)
@@ -82,50 +89,50 @@ class SendMassageWidget extends StatelessWidget {
                   return null;
                 },
                 borderColor: AppConstants.transparent,
-                filledColor: AppConstants.lightBlueColor,
+                // filledColor: AppConstants.lightBlueColor,
               ),
             ),
             getSpaceWidth(AppConstants.pagePadding),
             if (isLoading) ...[
-              if (BlocProvider.of<ChatDetailsCubit>(context)
-                  .controller
-                  .text
-                  .isEmpty) ...[
-                GestureDetector(
-                  onTap: () {
-                    debugPrint("test start press ");
-
-                    hideKeyboard(context);
-                    BlocProvider.of<ChatDetailsCubit>(context)
-                        .setVoiceRecord(value: true);
-                  },
+              // if (BlocProvider.of<ChatDetailsCubit>(context)
+              //     .controller
+              //     .text
+              //     .isEmpty) ...[
+              //   GestureDetector(
+              //     onTap: () {
+              //       debugPrint("test start press ");
+              //
+              //       hideKeyboard(context);
+              //       BlocProvider.of<ChatDetailsCubit>(context)
+              //           .setVoiceRecord(value: true);
+              //     },
+              //     child: const CommonAssetSvgImageWidget(
+              //       imageString: "voice_icon.svg",
+              //       height: 40,
+              //       width: 40,
+              //       fit: BoxFit.contain,
+              //     ),
+              //   ),
+              // ] else ...[
+              InkWell(
+                onTap: () {
+                  hideKeyboard(context);
+                  BlocProvider.of<ChatDetailsCubit>(context)
+                      .setAttachmentValue(value: false);
+                  BlocProvider.of<ChatDetailsCubit>(context)
+                      .sendTextMassage(receiverId: receiverId);
+                },
+                child: RotatedBox(
+                  quarterTurns: SharedText.currentLocale == "ar" ? 0 : -2,
                   child: const CommonAssetSvgImageWidget(
-                    imageString: "voice_icon.svg",
+                    imageString: "send.svg",
                     height: 40,
                     width: 40,
                     fit: BoxFit.contain,
                   ),
                 ),
-              ] else ...[
-                InkWell(
-                  onTap: () {
-                    hideKeyboard(context);
-                    BlocProvider.of<ChatDetailsCubit>(context)
-                        .setAttachmentValue(value: false);
-                    BlocProvider.of<ChatDetailsCubit>(context)
-                        .sendTextMassage(receiverId: receiverId);
-                  },
-                  child: RotatedBox(
-                    quarterTurns: SharedText.currentLocale == "ar" ? 0 : -2,
-                    child: const CommonAssetSvgImageWidget(
-                      imageString: "send.svg",
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ]
+              ),
+              // ]
             ] else ...[
               const CommonLoadingWidget(),
             ]

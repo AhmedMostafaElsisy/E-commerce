@@ -240,12 +240,11 @@
   "lblRemoveFromFav": "Remove from Favourite",
   "lblAddToFav": "Add to Favourite",
   "lblStartChatWithUserFirst": "Start conversation with a friend",
-  "lblMassages": "Chats",
   "lblAttachmentDocs": "Document",
   "lblAttachmentLocation": "Location",
   "lblAttachmentVideo": "Video",
   "lblAttachmentContact": "Contact",
-  "lblWriteHere": "Write here",
+  "lblWriteHere": "Write your massage",
   "lblTyping": "Typing Now...",
   "lblLocationDenied": "Location permission denied",
   "lblMassages": "Chats"

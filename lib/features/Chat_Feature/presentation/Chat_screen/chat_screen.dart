@@ -14,6 +14,7 @@ import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
+import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../Logic/Recorder_Cubit/recorder_cubit.dart';
 import '../../Logic/Websocket_Cubit/websocket_cubit.dart';
 import '../../Logic/Websocket_Cubit/websocket_states.dart';
@@ -84,16 +85,13 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
               }
             },
             builder: (webSocketCtx, webSocketState) {
-              return Container(
+              return SizedBox(
                 width: getWidgetWidth(250),
-                padding: EdgeInsets.symmetric(horizontal: getWidgetWidth(10)),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CommonTitleText(
-                        textKey: widget.argument.chatUserModel!.name +
-                            " " +
-                            widget.argument.chatUserModel!.lastName!,
+                        textKey: widget.argument.chatUserModel!.name,
                         textFontSize: AppConstants.normalFontSize,
                         textWeight: FontWeight.w700,
                         textColor: AppConstants.mainColor,
@@ -204,15 +202,11 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                     ),
 
                     ///send massage
-                    chatCtx.read<ChatDetailsCubit>().voiceRecord
-                        ? SendVoiceMassage(
-                            receiverId: widget.argument.chatUserModel!.id,
-                          )
-                        : SendMassageWidget(
-                            receiverId: widget.argument.chatUserModel!.id,
-                            isLoading:
-                                chatStates is! SendChatMassageLoadingStates,
-                          )
+                    SendMassageWidget(
+                      receiverId: widget.argument.chatUserModel!.id,
+                      isLoading:
+                      chatStates is! SendChatMassageLoadingStates,
+                    )
                   ],
                 ),
                 if (chatCtx.read<ChatDetailsCubit>().showAttachment)
