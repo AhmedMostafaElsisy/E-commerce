@@ -1,7 +1,6 @@
 import 'package:captien_omda_customer/features/Chat_Feature/presentation/Chat_screen/widget/attachment_collection.dart';
 import 'package:captien_omda_customer/features/Chat_Feature/presentation/Chat_screen/widget/chat_massage_item.dart';
 import 'package:captien_omda_customer/features/Chat_Feature/presentation/Chat_screen/widget/send_massage_widget.dart';
-import 'package:captien_omda_customer/features/Chat_Feature/presentation/Chat_screen/widget/send_voice_massage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +13,6 @@ import '../../../../core/presentation/Widgets/common_app_bar_widget.dart';
 import '../../../../core/presentation/Widgets/common_error_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
 import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
-import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../Logic/Recorder_Cubit/recorder_cubit.dart';
 import '../../Logic/Websocket_Cubit/websocket_cubit.dart';
 import '../../Logic/Websocket_Cubit/websocket_states.dart';
@@ -94,7 +92,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                         textKey: widget.argument.chatUserModel!.name,
                         textFontSize: AppConstants.normalFontSize,
                         textWeight: FontWeight.w700,
-                        textColor: AppConstants.mainColor,
+                        textColor: AppConstants.lightBlackColor,
                         textAlignment: TextAlign.start,
                       ),
                       if (webSocketState is WebSocketUserTypingState &&
@@ -105,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                           textKey: AppLocalizations.of(context)!.lblTyping,
                           textFontSize: AppConstants.xxSmallFontSize,
                           textWeight: FontWeight.w400,
-                          textColor: AppConstants.mainTextColor,
+                          textColor: AppConstants.lightBlackColor,
                           textAlignment: TextAlign.start,
                         ),
                       ],

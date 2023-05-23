@@ -67,7 +67,6 @@ class SendMassageWidget extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 labelHintColor: AppConstants.lightBorderColor,
                 labelHintFontSize: 14,
-
                 suffixIcon: InkWell(
                   onTap: () {
                     BlocProvider.of<ChatDetailsCubit>(context)

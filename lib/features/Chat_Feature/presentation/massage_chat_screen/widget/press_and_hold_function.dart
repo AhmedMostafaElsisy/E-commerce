@@ -8,7 +8,7 @@ import '../../../../../core/presentation/Widgets/common_title_text.dart';
 
 void pressAndHoldBottomSheet({
   context,
-  double? height = 190,
+  double? height = 150,
   bool withDelete = true,
   Function()? deleteChatClicked,
 }) {

@@ -148,44 +148,47 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           withButton: false,
                         );
                       } else {
-                        return Expanded(
-                          child: ListView.separated(
-                              physics: const BouncingScrollPhysics(),
-                              padding:
-                                  EdgeInsets.only(bottom: getWidgetHeight(50)),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                        RouteNames.chatPageRoute,
-                                        arguments: RouteArgument(
-                                            chatUserModel: chatUsersCubit
-                                                .chatUserList[index]));
-                                  },
-                                  onLongPress: () {
-                                    pressAndHoldBottomSheet(
-                                      context: context,
-                                      deleteChatClicked: () {
-                                        Navigator.pop(context);
-                                        chatUsersCubit.deleteConversion(
-                                            chatUserModel: chatUsersCubit
-                                                .chatUserList[index]);
-                                      },
-                                    );
-                                  },
-                                  child: UserInfoMassageItem(
-                                    isOnline: chatUsersCubit
-                                        .chatUserList[index].isOnline!,
-                                    cardType: ChatCardType.chatting,
-                                    model: chatUsersCubit.chatUserList[index],
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return getSpaceHeight(AppConstants.pagePadding);
-                              },
-                              itemCount: chatUsersCubit.chatUserList.length),
+                        return SizedBox(
+                          height: SharedText.screenHeight-getWidgetHeight(90),
+                          child: Expanded(
+                            child: ListView.separated(
+                                physics: const BouncingScrollPhysics(),
+                                padding:
+                                    EdgeInsets.only(bottom: getWidgetHeight(50)),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(
+                                          RouteNames.chatPageRoute,
+                                          arguments: RouteArgument(
+                                              chatUserModel: chatUsersCubit
+                                                  .chatUserList[index]));
+                                    },
+                                    onLongPress: () {
+                                      pressAndHoldBottomSheet(
+                                        context: context,
+                                        deleteChatClicked: () {
+                                          Navigator.pop(context);
+                                          chatUsersCubit.deleteConversion(
+                                              chatUserModel: chatUsersCubit
+                                                  .chatUserList[index]);
+                                        },
+                                      );
+                                    },
+                                    child: UserInfoMassageItem(
+                                      isOnline: chatUsersCubit
+                                          .chatUserList[index].isOnline!,
+                                      cardType: ChatCardType.chatting,
+                                      model: chatUsersCubit.chatUserList[index],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return getSpaceHeight(AppConstants.pagePadding);
+                                },
+                                itemCount: chatUsersCubit.chatUserList.length),
+                          ),
                         );
                       }
                     },
