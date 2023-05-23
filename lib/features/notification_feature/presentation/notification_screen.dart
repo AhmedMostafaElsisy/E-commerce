@@ -42,7 +42,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
     return Scaffold(
       backgroundColor: AppConstants.lightWhiteColor,
       appBar: CommonAppBar(
-        centerTitle: true,
+        centerTitle: false,
         titleWidget: CommonTitleText(
           textKey: AppLocalizations.of(context)!.lblNotification,
           textFontSize: AppConstants.normalFontSize,

@@ -117,6 +117,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           SectionContentItem(
                             title: AppLocalizations.of(context)!.lblMassage,
                             isLastItem: true,
+                            screenName: RouteNames.chatListPageRoute,
                           ),
                         ]),
                       ),

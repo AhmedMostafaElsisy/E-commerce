@@ -196,18 +196,25 @@ class StoreInfoCard extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(AppConstants.smallRadius),
                       color: AppConstants.lightShadowSecColor),
-                  child: Column(
-                    children: [
-                      const CommonAssetSvgImageWidget(
-                          imageString: "chat.svg", height: 16, width: 16),
-                      getSpaceHeight(AppConstants.smallPadding),
-                      CommonTitleText(
-                        textKey: AppLocalizations.of(context)!.lblStoreMassage,
-                        textWeight: FontWeight.w600,
-                        textFontSize: AppConstants.smallFontSize - 2,
-                        textColor: AppConstants.mainTextColor,
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushNamed(
+                        RouteNames.chatListPageRoute,
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        const CommonAssetSvgImageWidget(
+                            imageString: "chat.svg", height: 16, width: 16),
+                        getSpaceHeight(AppConstants.smallPadding),
+                        CommonTitleText(
+                          textKey: AppLocalizations.of(context)!.lblStoreMassage,
+                          textWeight: FontWeight.w600,
+                          textFontSize: AppConstants.smallFontSize - 2,
+                          textColor: AppConstants.mainTextColor,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,21 +228,28 @@ class StoreInfoCard extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(AppConstants.smallRadius),
                       color: AppConstants.lightOrangColor),
-                  child: Column(
-                    children: [
-                      const CommonAssetSvgImageWidget(
-                          imageString: "store_notification.svg",
-                          height: 16,
-                          width: 16),
-                      getSpaceHeight(AppConstants.smallPadding),
-                      CommonTitleText(
-                        textKey:
-                            AppLocalizations.of(context)!.lblStoreNotification,
-                        textWeight: FontWeight.w600,
-                        textFontSize: AppConstants.smallFontSize - 2,
-                        textColor: AppConstants.lightOrangeColor,
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: (){
+                      // Navigator.of(context).pushNamed(
+                      //   RouteNames.notificationPageRoute,
+                      // );
+                    },
+                    child: Column(
+                      children: [
+                        const CommonAssetSvgImageWidget(
+                            imageString: "store_notification.svg",
+                            height: 16,
+                            width: 16),
+                        getSpaceHeight(AppConstants.smallPadding),
+                        CommonTitleText(
+                          textKey:
+                              AppLocalizations.of(context)!.lblStoreNotification,
+                          textWeight: FontWeight.w600,
+                          textFontSize: AppConstants.smallFontSize - 2,
+                          textColor: AppConstants.lightOrangeColor,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
