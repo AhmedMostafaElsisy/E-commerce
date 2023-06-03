@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../widget/video_item.dart';
 
 Widget videoDialog(context, path, {bool? isFile = false}) {
-  log("this video path ${path} - is image from file ${isFile}");
+  log("this video path $path - is image from file $isFile");
   return Dialog(
     backgroundColor: Colors.transparent,
     elevation: 0,

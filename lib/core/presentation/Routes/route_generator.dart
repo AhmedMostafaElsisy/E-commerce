@@ -151,7 +151,7 @@ class RouteGenerator {
             page: ChatScreen(argument: args as RouteArgument));
       case RouteNames.chatListPageRoute:
         return RouteAnimation()
-            .animationFromCenterRightToCenterLeft(page: ChatListScreen());
+            .animationFromCenterRightToCenterLeft(page: const ChatListScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

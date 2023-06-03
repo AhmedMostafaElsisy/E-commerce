@@ -79,7 +79,6 @@ class ChatDetailsCubit extends Cubit<ChatDetailsStates> {
         if (chatMassageModel.isEmpty) {
           chatMassageModel = chatMassageListFromJson(result.data);
         } else {
-          bool firstMessageOfChatListFoundInTempList = false;
           int indexOfFirstMessageFound;
           List<ChatMassageModel> tempChatMassageModel =
               chatMassageListFromJson(result.data);
@@ -96,7 +95,6 @@ class ChatDetailsCubit extends Cubit<ChatDetailsStates> {
             List<ChatMassageModel> rangeOfFoundedList = tempChatMassageModel
                 .getRange(0, indexOfFirstMessageFound)
                 .toList();
-            int lengthOfChatMessages = chatMassageModel.length;
             debugPrint(
                 "here is founded list after search on tempChatMassageModel ->${rangeOfFoundedList.toString()}");
             debugPrint(
@@ -149,9 +147,9 @@ class ChatDetailsCubit extends Cubit<ChatDetailsStates> {
   /// pick image and send it
   pickGalleryImage(imageSource, int receiverId) async {
     try {
-      final ImagePicker _picker = ImagePicker();
+      final ImagePicker picker = ImagePicker();
 
-      final pickedFile = await _picker.pickImage(source: imageSource);
+      final pickedFile = await picker.pickImage(source: imageSource);
       if (pickedFile != null) {
         _imageFile = pickedFile;
         _sendMassageRemote(
@@ -167,9 +165,9 @@ class ChatDetailsCubit extends Cubit<ChatDetailsStates> {
   /// pick video and send it
   pickVideoImage({required int receiverId}) async {
     try {
-      final ImagePicker _picker = ImagePicker();
+      final ImagePicker picker = ImagePicker();
 
-      final pickedFile = await _picker.pickVideo(source: ImageSource.gallery);
+      final pickedFile = await picker.pickVideo(source: ImageSource.gallery);
       if (pickedFile != null) {
         _imageFile = pickedFile;
         _sendMassageRemote(

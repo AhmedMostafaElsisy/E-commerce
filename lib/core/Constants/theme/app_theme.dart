@@ -14,6 +14,7 @@ ThemeData lightTheme = ThemeData(
   dividerColor: Colors.transparent,
   focusColor: AppConstants.lightGreyColor,
   shadowColor: AppConstants.lightShadowColor,
+  appBarTheme: const AppBarTheme(color: AppConstants.mainColor),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
       elevation: 0, foregroundColor: AppConstants.mainColor),
 

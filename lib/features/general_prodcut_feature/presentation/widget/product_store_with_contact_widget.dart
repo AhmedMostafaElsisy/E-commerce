@@ -7,9 +7,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/shared.dart';
+import '../../../../core/presentation/Routes/route_argument_model.dart';
+import '../../../../core/presentation/Routes/route_names.dart';
 import '../../../../core/presentation/Widgets/common_asset_svg_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_cached_image_widget.dart';
 import '../../../../core/presentation/Widgets/common_title_text.dart';
+import '../../../Chat_Feature/Data/chat_models/chat_user_model.dart';
 import '../../../rating_feature/presentation/screen/rating_screen.dart';
 
 class ProductStoreInformationWithRating extends StatelessWidget {
@@ -55,7 +58,7 @@ class ProductStoreInformationWithRating extends StatelessWidget {
                 getSpaceHeight(AppConstants.smallPadding),
                 CommonTitleText(
                   textKey: model.shopModel!.email!,
-                  textFontSize: AppConstants.smallFontSize,
+                  textFontSize: AppConstants.xSmallFontSize,
                   textWeight: FontWeight.w600,
                   textColor: AppConstants.mainColor,
                 ),
@@ -100,7 +103,13 @@ class ProductStoreInformationWithRating extends StatelessWidget {
                 getSpaceWidth(16),
                 InkWell(
                   onTap: () {
-                    //todo: integrate chat here
+                    Navigator.of(context).pushNamed(
+                      RouteNames.chatPageRoute,
+                      arguments: RouteArgument(
+                        chatUserModel: ChatUserModel.fromUserBaseModel(
+                            model.shopModel!.user!),
+                      ),
+                    );
                   },
                   child: const CommonAssetSvgImageWidget(
                     imageString: "chat.svg",
@@ -126,9 +135,7 @@ class ProductStoreInformationWithRating extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  showReportSheet(
-                      context: context,
-                      storeId: model.id!);
+                  showReportSheet(context: context, storeId: model.id!);
                 },
                 child: Center(
                   child: CommonTitleText(

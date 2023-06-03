@@ -18,7 +18,7 @@ class ChatTimeAndSeenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("is seen ${isSeen}");
+    debugPrint("is seen $isSeen");
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -8,7 +8,7 @@ import '../../../../../core/presentation/Widgets/common_cached_image_widget.dart
 import '../../../../../core/presentation/Widgets/common_file_image_widget.dart';
 
 Widget imageDialog(context, path, {bool? isFile = false}) {
-  log("this image path ${path}- is image from file ${isFile}");
+  log("this image path $path- is image from file $isFile");
   return Dialog(
     backgroundColor: Colors.transparent,
     elevation: 0,

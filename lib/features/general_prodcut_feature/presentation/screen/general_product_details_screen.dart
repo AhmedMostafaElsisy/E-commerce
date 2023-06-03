@@ -191,6 +191,7 @@ class _GeneralProductDetailsScreenState
                                   product: productCubit.product,
                                 ),
                               ),
+                              getSpaceWidth(16),
                               AddProductToCartWithQuantity(
                                 product: productCubit.product,
                               ),

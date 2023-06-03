@@ -28,6 +28,12 @@ void main() async {
   await di.init();
   await DefaultSecuredStorage.initLocalStorage();
   Bloc.observer = MyBlocObserver();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent),
+  );
   runApp(const MyApp());
 }
 

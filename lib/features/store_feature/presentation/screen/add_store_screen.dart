@@ -1,10 +1,13 @@
+import 'package:captien_omda_customer/core/Extensions/iterable_extensions.dart';
 import 'package:captien_omda_customer/core/Helpers/shared.dart';
 import 'package:captien_omda_customer/core/presentation/Routes/route_argument_model.dart';
 import 'package:captien_omda_customer/core/tags_feature/presentation/logic/tags_cubit.dart';
+import 'package:captien_omda_customer/core/tags_feature/presentation/widget/tags_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/Constants/app_constants.dart';
 import '../../../../core/Helpers/Validators/validators.dart';
 import '../../../../core/Helpers/shared_texts.dart';
@@ -22,10 +25,10 @@ import '../../../../core/presentation/Widgets/custom_snack_bar.dart';
 import '../../../../core/presentation/Widgets/select_item_pop_up.dart';
 import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
-import '../logic/my_stores_cubit/store_cubit.dart';
-import '../logic/my_stores_cubit/store_states.dart';
 import '../../../../core/presentation/search_filter_cubit/search_filet_cubit.dart';
 import '../../../Categories_feature/presentation/logic/category_cubit.dart';
+import '../logic/my_stores_cubit/store_cubit.dart';
+import '../logic/my_stores_cubit/store_states.dart';
 
 class AddStoreScreen extends StatefulWidget {
   final RouteArgument argument;
@@ -40,14 +43,18 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
   late StoreCubit _storeCubit;
   final formKey = GlobalKey<FormState>();
   late PickLocationCubit _locationCubit;
+  late TagsCubit tagsCubit;
 
   @override
   void initState() {
     super.initState();
     _storeCubit = BlocProvider.of<StoreCubit>(context);
     _locationCubit = BlocProvider.of<PickLocationCubit>(context);
+    tagsCubit = BlocProvider.of<TagsCubit>(context);
     AllFilterCubit.get(context).clearAll();
     _locationCubit.getCityData(limit: 50);
+    tagsCubit.getTagsData(limit: 50);
+
     _locationCubit.clearAllData();
     _storeCubit.clearAllData();
     _storeCubit.storeNameController = TextEditingController();
@@ -122,8 +129,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                       title: storeState.error.errorMassage!,
                     );
                   } else if (storeState is CreateStoreSuccessStates) {
-                    if(! widget
-                        .argument.firstStoreCreate!){
+                    if (!widget.argument.firstStoreCreate!) {
                       showSnackBar(
                           context: storeCtx,
                           title: AppLocalizations.of(context)!
@@ -132,10 +138,9 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         RouteNames.mainBottomNavPageRoute,
-                            (route) => false,
+                        (route) => false,
                       );
                     }
-
                   }
                 },
                 builder: (storeCtx, storeState) {
@@ -227,10 +232,7 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                           if (value!.isEmpty) {
                                             return AppLocalizations.of(context)!
                                                 .lblNameIsEmpty;
-                                          } else if (nameValidator(value)) {
-                                            return AppLocalizations.of(context)!
-                                                .lblNameBadFormat;
-                                          } else if (value.length < 2) {
+                                          } else if (value.length < 3) {
                                             return AppLocalizations.of(context)!
                                                 .lblNameLength;
                                           } else {
@@ -553,30 +555,21 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                         hintKey: AppLocalizations.of(context)!
                                             .lblSubCategory,
                                         onTap: () {
-                                          advancedSearchPopUP(
-                                            context: context,
-                                            isMultiSelect: true,
-                                            multiSelectData:
-                                                _storeCubit.selectedTag ?? [],
-                                            title: AppLocalizations.of(context)!
-                                                .lblSubCategory,
-                                            isListHaveSearch: true,
-                                            listOfItem:
-                                                BlocProvider.of<TagsCubit>(
-                                                        context)
-                                                    .tagsList,
-                                            onApply: (dynamic) {
-                                              _storeCubit.setSelectedTags(
-                                                  List.from(dynamic));
-                                              _storeCubit
-                                                      .storeSubCategoryController
-                                                      .text =
-                                                  getNameFromList(
-                                                      List.from(dynamic));
-                                              _storeCubit.isDataFount(
-                                                  _storeCubit.controllerList);
-                                            },
-                                          );
+                                          showTagsPopUp(
+                                              context: storeCtx,
+                                              title:
+                                                  AppLocalizations.of(storeCtx)!
+                                                      .lblSubCategory,
+                                              onApply: (model) {
+                                                _storeCubit
+                                                        .storeSubCategoryController
+                                                        .text =
+                                                    model.joinTagsOfList(",");
+                                                _storeCubit
+                                                    .setSelectedTags(model);
+                                                _storeCubit.isDataFount(
+                                                    _storeCubit.controllerList);
+                                              });
                                         },
                                         isReadOnly: true,
                                         keyboardType: TextInputType.text,
@@ -627,13 +620,18 @@ class _AddStoreScreenState extends State<AddStoreScreen> {
                                                   .validate()) {
                                                 FocusScope.of(context)
                                                     .requestFocus(FocusNode());
-                                                if( widget
-                                                    .argument.firstStoreCreate!) {
-                                                  Navigator.of(context).pushNamed(RouteNames.planPageRoute);
-                                                }else {
+                                                if (widget.argument
+                                                    .firstStoreCreate!) {
+                                                  Navigator.of(context)
+                                                      .pushNamed(RouteNames
+                                                          .planPageRoute);
+                                                } else {
                                                   storeCtx
-                                                    .read<StoreCubit>()
-                                                    .createNewStore();
+                                                      .read<StoreCubit>()
+                                                      .createNewStore(
+                                                        planId: widget
+                                                            .argument.pladId,
+                                                      );
                                                 }
                                               }
                                             },

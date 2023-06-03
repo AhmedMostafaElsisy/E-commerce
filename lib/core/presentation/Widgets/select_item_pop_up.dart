@@ -1,7 +1,7 @@
 import 'package:captien_omda_customer/core/presentation/Widgets/pop_up_item.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
 
 import '../../Constants/app_constants.dart';
 import '../../Helpers/shared.dart';
@@ -26,8 +26,8 @@ advancedSearchPopUP({
 }) async {
   AllFilterCubit.get(context).setList(listOfItem);
   if (isMultiSelect!) {
-    AllFilterCubit.get(context).setMultiModelData(multiSelectData!);
-    AllFilterCubit.get(context).setModelMultiSelect(preSelectedData);
+    AllFilterCubit.get(context).setMultiModelData(multiSelectData ?? []);
+    AllFilterCubit.get(context).setModelMultiSelect(preSelectedData ?? []);
   } else {
     if (multiSelectData != null) {
       AllFilterCubit.get(context).setModelSingleSelect(multiSelectData.first);
@@ -88,8 +88,8 @@ advancedSearchPopUP({
                               /// Search filed
 
                               CommonTextFormField(
-                                  hintKey:
-                                      AppLocalizations.of(context)!.lblArea,
+                                  hintKey: AppLocalizations.of(context)!
+                                      .lblSearchHere,
                                   onChanged: (val) {
                                     filterCtx
                                         .read<AllFilterCubit>()

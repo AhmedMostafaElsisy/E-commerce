@@ -12,7 +12,7 @@ class ArchiveChatsRepository extends ArchiveChatsRepositoryInterface {
   Future<BaseModel> getArchiveChats({required int page, int limit = 10}) async {
     try {
       String apiEndPoint = ApiKeys.archiveListKey;
-      debugPrint("here is apiEndPoint Data ${apiEndPoint}");
+      debugPrint("here is apiEndPoint Data $apiEndPoint");
 
       isError = false;
       Response response = await DioHelper.getDate(
@@ -39,9 +39,9 @@ class ArchiveChatsRepository extends ArchiveChatsRepositoryInterface {
     required int chatId,
   }) async {
     try {
-      String apiEndPoint = ApiKeys.chatKey + "/$chatId/archive/delete";
+      String apiEndPoint = "${ApiKeys.chatKey}/$chatId/archive/delete";
       FormData formData = FormData();
-      debugPrint("here is apiEndPoint Data ${apiEndPoint}");
+      debugPrint("here is apiEndPoint Data $apiEndPoint");
 
       isError = false;
       Response response =
@@ -68,8 +68,8 @@ class ArchiveChatsRepository extends ArchiveChatsRepositoryInterface {
     required int chatId,
   }) async {
     try {
-      String apiEndPoint = ApiKeys.chatKey + "/$chatId/archive";
-      debugPrint("here is apiEndPoint Data ${apiEndPoint}");
+      String apiEndPoint = "${ApiKeys.chatKey}/$chatId/archive";
+      debugPrint("here is apiEndPoint Data $apiEndPoint");
 
       FormData formData = FormData();
       isError = false;

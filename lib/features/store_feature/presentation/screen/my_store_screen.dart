@@ -61,34 +61,43 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                   textFontSize: AppConstants.normalFontSize,
                 ),
                 customActionWidget: BlocBuilder<StoreCubit, StoreStates>(
-                builder: (storeCtx,storeState){
-                  return storeCtx
-                      .read<StoreCubit>()
-                      .myStoreList.isEmpty? const SizedBox():InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, RouteNames.addStoresPageRoute,
-                      arguments: RouteArgument(
-                        firstStoreCreate: false
-                      )
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: CommonAssetSvgImageWidget(
-                              imageString: "add.svg", height: 16, width: 16),
-                        ),
-                        CommonTitleText(
-                          textKey: AppLocalizations.of(context)!.lblAddStore,
-                          textColor: AppConstants.lightOrangeColor,
-                          textWeight: FontWeight.w600,
-                          textFontSize: AppConstants.smallFontSize,
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                  builder: (storeCtx, storeState) {
+                    return storeCtx.read<StoreCubit>().myStoreList.isEmpty
+                        ? const SizedBox()
+                        : InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteNames.addStoresPageRoute,
+                                  arguments: RouteArgument(
+                                    firstStoreCreate: false,
+                                    pladId: storeCtx
+                                        .read<StoreCubit>()
+                                        .myStoreList
+                                        .first
+                                        .plansModel!
+                                        .id,
+                                  ));
+                            },
+                            child: Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child: CommonAssetSvgImageWidget(
+                                      imageString: "add.svg",
+                                      height: 16,
+                                      width: 16),
+                                ),
+                                CommonTitleText(
+                                  textKey:
+                                      AppLocalizations.of(context)!.lblAddStore,
+                                  textColor: AppConstants.lightOrangeColor,
+                                  textWeight: FontWeight.w600,
+                                  textFontSize: AppConstants.smallFontSize,
+                                ),
+                              ],
+                            ),
+                          );
+                  },
                 )),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -127,11 +136,10 @@ class _MyStoresListScreenState extends State<MyStoresListScreen> {
                             buttonText:
                                 AppLocalizations.of(context)!.lblAddStore,
                             onTap: () {
-                              Navigator.pushNamed(context, RouteNames.addStoresPageRoute,
-                                  arguments: RouteArgument(
-                                      firstStoreCreate: true
-                                  )
-                              );
+                              Navigator.pushNamed(
+                                  context, RouteNames.addStoresPageRoute,
+                                  arguments:
+                                      RouteArgument(firstStoreCreate: true));
                             },
                             imageWidth: 08);
                       } else {

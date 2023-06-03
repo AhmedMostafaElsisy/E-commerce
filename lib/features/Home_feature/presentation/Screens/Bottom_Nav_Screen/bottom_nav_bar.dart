@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/Constants/app_constants.dart';
+import '../../../../../core/presentation/Widgets/custom_on_will_pop.dart';
 import '../../../../Setting_feature/presentation/setting_screen.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit.dart';
 import '../../logic/Bottom_Nav_Cubit/bottom_nav_cubit_state.dart';
@@ -114,9 +115,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ],
                 ),
               )),
-          body: Center(
-            child: widgetOptions
-                .elementAt(bottomNavCtx.read<BottomNavCubit>().selectedIndex),
+          body: WillPopScope(
+            onWillPop: () async => await onWillPop(context),
+            child: Center(
+              child: widgetOptions
+                  .elementAt(bottomNavCtx.read<BottomNavCubit>().selectedIndex),
+            ),
           ),
         );
       },

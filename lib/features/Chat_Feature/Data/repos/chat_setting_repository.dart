@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/Constants/Keys/api_keys.dart';
 import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
@@ -50,7 +51,7 @@ class ChatSettingRepo extends ChatSettingInterface {
       );
       Response response =
           await DioHelper.postData(url: apiEndPoint, data: staticData);
-      print("response data ${response.data}");
+      debugPrint("response data ${response.data}");
       if (response.statusCode == 200) {
         isError = false;
         baseModel = BaseModel.fromJson(response.data);

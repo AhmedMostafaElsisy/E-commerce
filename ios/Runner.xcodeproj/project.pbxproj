@@ -547,8 +547,6 @@
 					"-framework",
 					"\"image_picker_ios\"",
 					"-framework",
-					"\"path_provider_ios\"",
-					"-framework",
 					"\"permission_handler_apple\"",
 					"-framework",
 					"\"shared_preferences_foundation\"",

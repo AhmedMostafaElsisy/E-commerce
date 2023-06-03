@@ -18,6 +18,7 @@ import '../../../../core/presentation/Widgets/take_photo_widget.dart';
 import '../../../../core/presentation/screen/main_app_page.dart';
 import '../../../core/form_builder_feature/presentation/form_data_screen.dart';
 import '../../../core/form_builder_feature/presentation/logic/form_builder_cubit.dart';
+import '../../../core/form_builder_feature/presentation/logic/form_builder_state.dart';
 import '../../../core/presentation/Routes/route_argument_model.dart';
 import '../../../core/presentation/Routes/route_names.dart';
 import '../../../core/presentation/Widgets/select_item_pop_up.dart';
@@ -454,58 +455,73 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          CommonGlobalButton(
-                                            height: 48,
-                                            buttonBackgroundColor:
-                                                AppConstants.mainColor,
-                                            isEnable:
-                                                _productCubit.isDataFound &&
-                                                    _productCubit
-                                                        .imageXFile.isNotEmpty,
-                                            isLoading: productState
-                                                is AddNewProductLoadingState,
-                                            buttonTextSize: 18,
-                                            buttonTextFontWeight:
-                                                FontWeight.w600,
-                                            buttonText:
-                                                AppLocalizations.of(context)!
-                                                    .lblSave,
-                                            onPressedFunction: () {
-                                              if (formKey.currentState!
-                                                  .validate()) {
-                                                FocusScope.of(context)
-                                                    .requestFocus(FocusNode());
+                                          BlocConsumer<FormBuilderCubit,
+                                                  FormBuilderState>(
+                                              listener: (formCtx, formState) {},
+                                              builder: (formCtx, formState) {
+                                                return CommonGlobalButton(
+                                                  height: 48,
+                                                  buttonBackgroundColor:
+                                                      AppConstants.mainColor,
+                                                  isEnable: _productCubit
+                                                          .isDataFound &&
+                                                      formBuilderCubit.formList
+                                                          .isNotEmpty &&
+                                                      _productCubit.imageXFile
+                                                          .isNotEmpty,
+                                                  isLoading: productState
+                                                          is AddNewProductLoadingState &&
+                                                      formState
+                                                          is GetCategoryFormLoadingStates,
+                                                  buttonTextSize: 18,
+                                                  buttonTextFontWeight:
+                                                      FontWeight.w600,
+                                                  buttonText:
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .lblSave,
+                                                  onPressedFunction: () {
+                                                    if (formKey.currentState!
+                                                        .validate()) {
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              FocusNode());
 
-                                                productCtx.read<ProductCubit>().addNewProduct(
-                                                    formData: formBuilderCubit
-                                                        .formList,
-                                                    productName:
-                                                        adsNameController.text,
-                                                    productMainPrice:
-                                                        adsMainPriceController
-                                                            .text,
-                                                    productDiscountPrice:
-                                                        adsDiscountPriceController
-                                                            .text,
-                                                    productType:
-                                                        storeMainCategoryController
-                                                            .text,
-                                                    productImage: _productCubit
-                                                        .imageXFile,
-                                                    productStates:
-                                                        adsStatesController
-                                                            .text,
-                                                    productBrand: _productCubit
-                                                        .selectedCategory!.id
-                                                        .toString(),
-                                                    productDescription:
-                                                        adsDetailsController
-                                                            .text,
-                                                    shopModel: widget
-                                                        .argument.shopModel!);
-                                              }
-                                            },
-                                          ),
+                                                      productCtx.read<ProductCubit>().addNewProduct(
+                                                          formData:
+                                                              formBuilderCubit
+                                                                  .formList,
+                                                          productName:
+                                                              adsNameController
+                                                                  .text,
+                                                          productMainPrice:
+                                                              adsMainPriceController
+                                                                  .text,
+                                                          productDiscountPrice:
+                                                              adsDiscountPriceController
+                                                                  .text,
+                                                          productType:
+                                                              storeMainCategoryController
+                                                                  .text,
+                                                          productImage: _productCubit
+                                                              .imageXFile,
+                                                          productStates:
+                                                              adsStatesController
+                                                                  .text,
+                                                          productBrand: _productCubit
+                                                              .selectedCategory!
+                                                              .id
+                                                              .toString(),
+                                                          productDescription:
+                                                              adsDetailsController
+                                                                  .text,
+                                                          shopModel: widget
+                                                              .argument
+                                                              .shopModel!);
+                                                    }
+                                                  },
+                                                );
+                                              }),
                                         ],
                                       ),
                                     ],

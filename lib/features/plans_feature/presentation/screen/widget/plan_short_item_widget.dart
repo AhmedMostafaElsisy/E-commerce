@@ -10,8 +10,10 @@ import '../../../../../core/presentation/Widgets/common_title_text.dart';
 
 class PlanShortItemWidget extends StatelessWidget {
   final PlansModel model;
-final bool isSelected;
-  const PlanShortItemWidget({Key? key, required this.model,required this.isSelected}) : super(key: key);
+  final bool isSelected;
+  const PlanShortItemWidget(
+      {Key? key, required this.model, required this.isSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +43,13 @@ final bool isSelected;
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CommonTitleText(
-                        textKey: model.name!,
-                        textColor: AppConstants.mainColor,
-                        textWeight: FontWeight.w700,
-                        textFontSize: AppConstants.normalFontSize,
+                      Expanded(
+                        child: CommonTitleText(
+                          textKey: model.name!,
+                          textColor: AppConstants.mainColor,
+                          textWeight: FontWeight.w700,
+                          textFontSize: AppConstants.normalFontSize,
+                        ),
                       ),
                       getSpaceHeight(AppConstants.smallPadding / 2),
                       CommonTitleText(
@@ -68,7 +72,7 @@ final bool isSelected;
                           color: AppConstants.lightOrangColor,
                           borderRadius: BorderRadius.circular(
                               AppConstants.containerOfListTitleBorderRadius)),
-                      child:  const RotatedBox(
+                      child: const RotatedBox(
                         quarterTurns: -1,
                         child: CommonAssetSvgImageWidget(
                           imageString: "back_arrow_icon.svg",
@@ -84,16 +88,15 @@ final bool isSelected;
             ),
           ),
         ),
-        if(isSelected)
-        Positioned(
-          left: getWidgetWidth(20),
-          child: const CommonAssetSvgImageWidget(
-            imageString: "selected.svg",
-            height: 24,
-            width: 24,
-
+        if (isSelected)
+          Positioned(
+            left: getWidgetWidth(20),
+            child: const CommonAssetSvgImageWidget(
+              imageString: "selected.svg",
+              height: 24,
+              width: 24,
+            ),
           ),
-        ),
       ],
     );
   }

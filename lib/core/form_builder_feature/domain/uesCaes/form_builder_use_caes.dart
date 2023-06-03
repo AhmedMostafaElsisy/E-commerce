@@ -1,6 +1,7 @@
-
 import 'package:captien_omda_customer/core/form_builder_feature/domain/model/form_builder_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../../core/Error_Handling/custom_error.dart';
 import '../repository/form_builder_product_interface.dart';
 
@@ -14,11 +15,12 @@ class FormBuilderUesCases {
     return repositoryInterface
         .getProductForm(categoryId: categoryId)
         .then((value) => value.fold((l) => Left(l), (r) {
-              if(r.data==[]){
-                return right([]);
-              }else{
-                return right(formBuilderListFromJson(r.data["fields"]));
+              debugPrint("response ${r.data}");
 
+              if (r.data.isEmpty) {
+                return right([]);
+              } else {
+                return right(formBuilderListFromJson(r.data["fields"]));
               }
             }));
   }

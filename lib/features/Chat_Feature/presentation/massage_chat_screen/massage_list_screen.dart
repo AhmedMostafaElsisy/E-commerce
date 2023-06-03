@@ -82,7 +82,7 @@ class _MassageListScreenState extends State<MassageListScreen>
             getSpaceHeight(16),
             SizedBox(
               height: SharedText.screenHeight / 0.9,
-              child: ChatListScreen(),
+              child: const ChatListScreen(),
             ),
           ]),
         ),

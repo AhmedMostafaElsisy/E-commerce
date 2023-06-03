@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:captien_omda_customer/core/Constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:photo_view/photo_view.dart';
 
 import '../../features/Auth_feature/Presentation/logic/Login_Cubit/login_cubit.dart';
 import '../Constants/Enums/exception_enums.dart';
@@ -104,3 +106,51 @@ Future<bool> checkPermissionOfMicroPhone() async {
 }
 
 NumberFormat currencyFormat = NumberFormat("#,##0.00", "en_US");
+
+openPhotoDialog(
+  BuildContext context,
+  String path,
+) =>
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          elevation: 0,
+          backgroundColor: AppConstants.transparent,
+          child: Container(
+              color: AppConstants.transparent,
+              child: Stack(
+                children: [
+                  PhotoView(
+                    backgroundDecoration: BoxDecoration(
+                      color: AppConstants.transparent,
+                    ),
+                    enableRotation: false,
+                    heroAttributes:
+                        const PhotoViewHeroAttributes(tag: "someTag"),
+                    imageProvider: NetworkImage(path),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () =>
+                          Navigator.of(context, rootNavigator: true).pop(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppConstants.borderInputColor,
+                            border: Border.all(color: AppConstants.greyColor)),
+                        width: 40,
+                        height: 40,
+                        child: const Center(
+                          child: Icon(Icons.close_outlined,
+                              color: AppConstants.lightWhiteColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+        );
+      },
+    );

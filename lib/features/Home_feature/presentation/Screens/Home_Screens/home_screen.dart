@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: getWidgetHeight(35),
+            vertical: getWidgetHeight(12),
             horizontal: getWidgetWidth(16),
           ),
           child: Row(
@@ -86,10 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               commonAssetImageWidget(
-                imageString: 'side_logo.png',
-                height: 36,
-                width: 100,
-              ),
+                  imageString: 'side_logo.png',
+                  height: 80,
+                  width: 80,
+                  fit: BoxFit.contain),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

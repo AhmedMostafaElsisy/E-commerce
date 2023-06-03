@@ -44,7 +44,11 @@ class _CommonAppBarImageWithCounterState
               Positioned(
                 bottom: 0,
                 child: CommonAssetSvgImageWidget(
-                    imageString: widget.imagePath, height: 22, width: 22),
+                  imageString: widget.imagePath,
+                  height: 22,
+                  width: 22,
+                  fit: BoxFit.contain,
+                ),
               ),
               if (widget.withCounter)
                 Positioned(

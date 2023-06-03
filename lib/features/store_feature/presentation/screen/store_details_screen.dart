@@ -71,17 +71,6 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                 textWeight: FontWeight.w400,
                 textFontSize: AppConstants.normalFontSize,
               ),
-              customActionWidget: InkWell(
-                onTap: () {
-                  //todo:add navigation to filter feature here
-                },
-                child: const CommonAssetSvgImageWidget(
-                  imageString: "filter.svg",
-                  width: 24,
-                  height: 24,
-                  fit: BoxFit.contain,
-                ),
-              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -195,7 +184,7 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
                               titleKey: AppLocalizations.of(context)!
                                   .lblNoProductFound,
                               imageHeight: 80,
-                              withButton: true,
+                              withButton: false,
                               buttonText: AppLocalizations.of(context)!
                                   .lblNoProductFoundDesc,
                               onTap: () {

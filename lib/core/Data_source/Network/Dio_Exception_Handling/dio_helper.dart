@@ -46,7 +46,7 @@ class DioHelper {
     } on DioError catch (exception) {
       /// Get custom massage for the exception
       debugPrint(
-          "here is the error from dio get data ${exception.response!.data["message"]} ");
+          "here is the error from dio get data ${exception.response?.data["message"]} ");
       final errorType = DioExceptions.fromDioError(exception).errorType;
       final errorMessage = DioExceptions.fromDioError(exception).errorMassage;
 
@@ -75,7 +75,7 @@ class DioHelper {
       return response;
     } on DioError catch (exception) {
       debugPrint(
-          "here is the error from dio post data ${exception.response!.data["message"]} ");
+          "here is the error from dio post data ${exception.response?.data["message"]} ");
 
       /// G1et custom massage for the exception
       final errorType = DioExceptions.fromDioError(exception).errorType;
@@ -111,7 +111,7 @@ class DioHelper {
       return response;
     } on DioError catch (exception) {
       debugPrint(
-          "here is the error from dio put data ${exception.response!.data["message"]} ");
+          "here is the error from dio put data ${exception.response?.data["message"]} ");
 
       /// G1et custom massage for the exception
       final errorType = DioExceptions.fromDioError(exception).errorType;
@@ -145,7 +145,7 @@ class DioHelper {
       return response;
     } on DioError catch (exception) {
       debugPrint(
-          "here is the error from dio put data ${exception.response!.data["message"]} ");
+          "here is the error from dio put data ${exception.response?.data["message"]} ");
 
       /// G1et custom massage for the exception
       final errorType = DioExceptions.fromDioError(exception).errorType;

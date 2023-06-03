@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../../core/location_feature/domain/model/location_area_model.dart';
 import '../../../../../core/model/category_model.dart';
 import '../../../../../core/model/shop_model.dart';
@@ -139,7 +140,8 @@ class StoreCubit extends Cubit<StoreStates> {
         ownerName: ownerNameController.text,
         storeNumber: phoneNumberController.text,
         storeEmail: emailAddressController.text,
-        storeAddress: userAddressController.text,
+        storeAddress:
+            "https://www.google.com/maps/place/${userAddressController.text}",
         storeCity: selectedCity!.id.toString(),
         storeArea: selectedArea!.id.toString(),
         storeMainCategory: selectedCategory!.id.toString(),

@@ -12,10 +12,10 @@ class MediaBetweenUserRepository extends MediaBetweenUserRepositoryInterface {
   Future<BaseModel> getMediaOfUserList(
       {required int page, required int userId}) async {
     try {
-      String _notificationUrl = '${ApiKeys.chatMediaKey}/$userId';
+      String notificationUrl = '${ApiKeys.chatMediaKey}/$userId';
       isError = false;
-      debugPrint("_notificationUrl: $_notificationUrl");
-      Response response = await DioHelper.getDate(url: _notificationUrl);
+      debugPrint("_notificationUrl: $notificationUrl");
+      Response response = await DioHelper.getDate(url: notificationUrl);
 
       if (response.statusCode == 200) {
         isError = false;

@@ -39,7 +39,7 @@ class BottomBarItem extends StatelessWidget {
           textWeight: FontWeight.w600,
           textColor:
               isSelected ? AppConstants.mainColor : AppConstants.lightGreyColor,
-          textFontSize: AppConstants.smallFontSize,
+          textFontSize: AppConstants.xSmallFontSize,
         )
       ]),
     );

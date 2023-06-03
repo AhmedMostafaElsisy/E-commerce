@@ -46,7 +46,7 @@ class ShopModel {
       this.rate});
 
   factory ShopModel.fromJson(Map<String, dynamic> json) {
-    log("this json value ${json}");
+    log("this json value $json");
     return ShopModel(
       id: json["id"],
       name: json["name"] ?? "--",

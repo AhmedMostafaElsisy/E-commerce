@@ -7,7 +7,7 @@ class RouteAnimation {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionDuration: const Duration(
-        milliseconds: 350,
+        milliseconds: 100,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         ///start point of the screen
@@ -36,7 +36,7 @@ class RouteAnimation {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionDuration: const Duration(
-        milliseconds: 350,
+        milliseconds: 100,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         ///start point of the screen
@@ -65,7 +65,7 @@ class RouteAnimation {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionDuration: const Duration(
-        milliseconds: 350,
+        milliseconds: 100,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         ///start point of the screen

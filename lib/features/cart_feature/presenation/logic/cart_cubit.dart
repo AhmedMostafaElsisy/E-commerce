@@ -216,9 +216,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   int totalPriceOfCartItems() {
     int totalPrices = 0;
     if (cartItems.isNotEmpty) {
-      cartItems.forEach((element) {
+      for (var element in cartItems) {
         totalPrices += element.total.toInt();
-      });
+      }
       return totalPrices;
     } else {
       return totalPrices;

@@ -46,7 +46,7 @@ class WebsocketCubit extends Cubit<WebsocketStates> {
             case SocketEventEnum.init:
               // TODO: Handle this case.
               break;
-            case SocketEventEnum.connection_established:
+            case SocketEventEnum.connectionEstablished:
               _pingSocketJson();
 
               emit(WebsocketEstablishSuccessStates(
@@ -62,14 +62,14 @@ class WebsocketCubit extends Cubit<WebsocketStates> {
                 },
               );
               break;
-            case SocketEventEnum.client_typing:
+            case SocketEventEnum.clientTyping:
               if (SharedText.currentUserOfChat != null &&
                   SharedText.currentUserOfChat!.id.toString() ==
                       responseOfSocket.eventData?["from_id"]) {
                 emit(WebSocketUserTypingState(socketModel: responseOfSocket));
               }
               break;
-            case SocketEventEnum.client_contactItem:
+            case SocketEventEnum.clientContactItem:
               if (SharedText.currentUserOfChat != null &&
                   SharedText.currentUserOfChat!.id.toString() ==
                       responseOfSocket.eventData?["update_to"].toString()) {

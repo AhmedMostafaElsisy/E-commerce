@@ -32,7 +32,7 @@ class CartDataSourceRemoteImplement implements CartDataSourceRemoteInterface {
       String pathUrl = ApiKeys.editProductQuantity;
       staticData.fields.add(MapEntry("product_id", productId.toString()));
       staticData.fields.add(MapEntry("count", quantity.toString()));
-      debugPrint("here is your endpoint${pathUrl}");
+      debugPrint("here is your endpoint$pathUrl");
       debugPrint("here is your data ${staticData.fields.toString()}");
 
       Response response = await DioHelper.postData(

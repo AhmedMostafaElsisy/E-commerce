@@ -19,11 +19,11 @@ class SocketModel {
       SocketEventEnum getEventType(String type) {
         switch (type) {
           case 'pusher:connection_established':
-            return SocketEventEnum.connection_established;
+            return SocketEventEnum.connectionEstablished;
           case 'client-typing':
-            return SocketEventEnum.client_typing;
+            return SocketEventEnum.clientTyping;
           case 'client-contactItem':
-            return SocketEventEnum.client_contactItem;
+            return SocketEventEnum.clientContactItem;
 
           default:
             return SocketEventEnum.init;

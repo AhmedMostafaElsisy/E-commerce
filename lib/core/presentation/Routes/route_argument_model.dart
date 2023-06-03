@@ -27,6 +27,7 @@ class RouteArgument {
   ///request id
   int? requestId;
   int? userID;
+  int? pladId;
 
   ShopModel? shopModel;
   ProductModel? productModel;
@@ -49,6 +50,7 @@ class RouteArgument {
       this.imagePath,
       this.emailAddress,
       this.userID,
+      this.pladId,
       this.onTap,
       this.otp,
       this.requestId,

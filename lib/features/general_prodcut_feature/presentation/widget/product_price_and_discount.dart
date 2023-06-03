@@ -13,14 +13,19 @@ class ProductPriceAndDiscountWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CommonTitleText(
-              textKey: "${product.price!} ",
-              textColor: AppConstants.mainColor,
-              textWeight: FontWeight.bold,
-              textFontSize: AppConstants.normalFontSize,
+            Expanded(
+              child: CommonTitleText(
+                textKey: "${product.price!} ",
+                textColor: AppConstants.mainColor,
+                textWeight: FontWeight.bold,
+                textAlignment: TextAlign.center,
+                textFontSize: AppConstants.normalFontSize,
+              ),
             ),
             CommonTitleText(
               textKey: AppLocalizations.of(context)!.lblEGP,
@@ -32,12 +37,17 @@ class ProductPriceAndDiscountWidget extends StatelessWidget {
         ),
         if (product.discount != null || product.discount!.isNotEmpty) ...[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CommonTitleText(
-                textKey: "${product.discount!} ",
-                textColor: AppConstants.mainColor,
-                textWeight: FontWeight.bold,
-                textFontSize: AppConstants.normalFontSize,
+              Expanded(
+                child: CommonTitleText(
+                  textKey: "${product.discount!} ",
+                  textColor: AppConstants.mainColor,
+                  textWeight: FontWeight.bold,
+                  textAlignment: TextAlign.center,
+                  textDecoration: TextDecoration.lineThrough,
+                  textFontSize: AppConstants.normalFontSize,
+                ),
               ),
               CommonTitleText(
                 textKey: AppLocalizations.of(context)!.lblEGP,

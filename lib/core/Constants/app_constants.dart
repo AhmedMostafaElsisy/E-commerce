@@ -63,10 +63,10 @@ class AppConstants {
 
   /// Font Sizes
   static const double xxSmallFontSize = 10.0;
-  static const double xSmallFontSize = 12.0;
-  static const double smallFontSize = 14.0;
-  static const double normalFontSize = 16.0;
-  static const double mediumFontSize = 17.0;
+  static const double xSmallFontSize = 14.0;
+  static const double smallFontSize = 16.0;
+  static const double normalFontSize = 18.0;
+  static const double mediumFontSize = 14.0;
   static const double largeFontSize = 18.0;
   static const double xLargeFontSize = 21.0;
   static const double titleFontSize = 23.0;
