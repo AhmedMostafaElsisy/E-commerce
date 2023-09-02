@@ -1,5 +1,4 @@
-
-import '../../../../../Data/Models/base_model.dart';
+import '../../../../../core/model/base_model.dart';
 import '../../../../../core/Error_Handling/custom_error.dart';
 
 abstract class SignUpStates {}
@@ -21,9 +20,9 @@ class UserSignUpLoadingState extends SignUpStates {}
 
 /// Go to home after success
 class UserSignUpSuccessState extends SignUpStates {
-  BaseModel user;
+  String otp;
 
-  UserSignUpSuccessState(this.user);
+  UserSignUpSuccessState(this.otp);
 }
 
 /// Show loader for user login
@@ -41,4 +40,10 @@ class UserSignUpErrorState extends SignUpStates {
     this.error,
   });
 }
+
 class UploadingUserImageLoadingState extends SignUpStates {}
+
+class ShowOrHidePasswordState extends SignUpStates {}
+
+class CheckInputValidationState extends SignUpStates {}
+class LocationSelectedState extends SignUpStates {}

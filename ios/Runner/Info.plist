@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Captien Omda Customer</string>
+	<string>Cezma App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,5 +47,17 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>This app requires access to make my suez able to pick photos to use in profile images and so on </string>
+    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>Always and in usage permissions</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Always permissions</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>When in use permissions</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app requires access to make you able to share videos from gallery</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to make my suez able to pick photos to use in profile images and so on</string>
 </dict>
 </plist>

@@ -3,17 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
-import 'Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_cubit.dart';
-import 'Logic/Bloc_Cubits/Connectivity_Cubit/connectivity_states.dart';
-import 'Logic/Bloc_Cubits/Language_Cubit/language_cubit.dart';
-import 'Logic/Bloc_Cubits/Language_Cubit/language_states.dart';
-import 'Presentation/Routes/route_generator.dart';
-import 'Presentation/Screens/Splash_Screens/splash_screen_home_page.dart';
+import 'core/Connectivity_Cubit/connectivity_cubit.dart';
+import 'core/Connectivity_Cubit/connectivity_states.dart';
 import 'core/Constants/theme/app_theme.dart';
+import 'core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
+import 'core/Data_source/local_source/flutter_secured_storage.dart';
 import 'core/Helpers/Observers/bloc_observer.dart';
 import 'core/Helpers/Responsive_UI/ui_components.dart';
 import 'core/Helpers/shared_texts.dart';
+import 'core/Language_Cubit/language_cubit.dart';
+import 'core/Language_Cubit/language_states.dart';
+import 'core/presentation/Routes/route_generator.dart';
+import 'features/Auth_feature/Presentation/screens/splash_screen_home_page.dart';
 import 'injection_container.dart' as di;
 import 'multi_bloc_provider_page.dart';
 
@@ -25,11 +26,15 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
   await di.init();
-
-  BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-    blocObserver: MyBlocObserver(),
+  await DefaultSecuredStorage.initLocalStorage();
+  Bloc.observer = MyBlocObserver();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent),
   );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -67,7 +72,7 @@ class HomeMaterialApp extends StatelessWidget {
           builder: (langContext, appState) {
             return MaterialApp(
               onGenerateRoute: RouteGenerator.generateRoute,
-              title: 'Captain Omda',
+              title: 'Cezma',
               theme: lightTheme,
               debugShowCheckedModeBanner: false,
               locale: LangCubit.get(langContext).appLocal,

@@ -1,55 +1,25 @@
-import 'dart:convert';
-import '../../../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../Data/local_source/flutter_secured_storage.dart';
-import '../../../../../core/Helpers/shared_texts.dart';
-import '../../../Domain/entities/base_user_entity.dart';
-import '../../../Domain/use_cases/login_use_case.dart';
+import '../../../Data/model/base_user_model.dart';
+import '../../../Domain/use_cases/auth_use_case.dart';
 import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
-  LoginCubit(this._userRepo) : super(LoginStatesInit());
+  LoginCubit(this._userUseCases) : super(LoginStatesInit());
 
-  UserBaseEntity userModel = UserBaseEntity();
+  UserBaseModel userModel = UserBaseModel();
 
-  UserBaseEntity get getUserModel => userModel;
-
-  final LoginUesCase _userRepo;
+  UserBaseModel get getUserModel => userModel;
+  final AuthUserCase _userUseCases;
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
   startApp() async {
     emit(LoginIfFoundLoading());
 
-    var result = await DefaultSecuredStorage.getIsLogged() ?? 'false';
+    var result = await _userUseCases.callStartApp();
 
-    debugPrint("auth result is $result");
-
-    if (result == 'true') {
-      await updateUserDataFromLocalCached();
-
-      SharedText.userToken = (await DefaultSecuredStorage.getAccessToken())!;
-      debugPrint("token from local ${SharedText.userToken}");
-      DioHelper.dio.options.headers
-          .addAll({"Authorization": "Bearer ${SharedText.userToken}"});
-      debugPrint(
-          " here is option header${DioHelper.dio.options.headers.toString()}");
-      emit(LoginSuccess(userModel));
-    } else {
-      emit(LoginFailed());
-    }
-  }
-
-  updateUserDataFromLocalCached() async {
-    final userString = await DefaultSecuredStorage.getUserMap();
-    final baseUserMap = json.decode(userString!);
-    userModel = UserBaseEntity.fromJson(baseUserMap);
-
-    debugPrint("user from local   $userString");
-    SharedText.currentUser = userModel;
-    debugPrint('userModelFrom authentication ${userModel.name}');
+    result.fold((failure) => emit(LoginFailed()),
+        (success) => emit(LoginSuccess(userModel)));
   }
 
   login(
@@ -57,8 +27,8 @@ class LoginCubit extends Cubit<LoginStates> {
       required String password,
       required String token}) async {
     emit(UserLoginLoadingState());
-    var result = await _userRepo.callUserLogin(
-        email: email, password: password, deviceToken:  token);
+    var result = await _userUseCases.callUserLogin(
+        email: email, password: password, deviceToken: token);
 
     result.fold((failure) => emit(UserLoginErrorState(error: failure)),
         (success) => emit(UserLogInSuccessState()));
@@ -67,7 +37,16 @@ class LoginCubit extends Cubit<LoginStates> {
   logOut() async {
     emit(UserLoginLoadingState());
 
-    var result = await _userRepo.callUserLogout();
+    var result = await _userUseCases.callUserLogout();
+
+    result.fold((failure) => emit(UserLoginErrorState(error: failure)),
+        (success) => emit(UserLogoutSuccessState()));
+  }
+
+  deleteAccount() async {
+    emit(UserDeleteAccountLoadingState());
+
+    var result = await _userUseCases.callUserDeleteAccount();
 
     result.fold((failure) => emit(UserLoginErrorState(error: failure)),
         (success) => emit(UserLogoutSuccessState()));

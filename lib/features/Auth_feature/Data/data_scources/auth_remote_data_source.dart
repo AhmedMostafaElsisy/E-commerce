@@ -1,27 +1,40 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../../../Data/Models/base_model.dart';
-import '../../../../Data/Remote_Data/Network/Dio_Exception_Handling/dio_helper.dart';
+
 import '../../../../core/Constants/Keys/api_keys.dart';
+import '../../../../core/Data_source/Network/Dio_Exception_Handling/dio_helper.dart';
 import '../../../../core/Error_Handling/custom_error.dart';
 import '../../../../core/Error_Handling/custom_exception.dart';
+import '../../../../core/model/base_model.dart';
+//todo:need to handel it with cc talks about exceptions
 
 abstract class AuthRemoteDataSourceInterface {
+  ///login user
   Future<Either<CustomError, BaseModel>> loginUser(
       {required String email, required String password, required String token});
 
+  ///log out
   Future<BaseModel> logOut();
 
+  ///log out
+  Future<Either<CustomError, BaseModel>> deleteAccount();
+
   ///User Create A new Account
-  Future<BaseModel> userSingUp(
-      {required String userName,
+  Future<Either<CustomError, BaseModel>> userSingUp(
+      {required String userFirstName,
+      required String userLastName,
       required String emailAddress,
       required String phoneNumber,
       required String password,
       required String confirmPassword,
-      XFile? userImage,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
       required String token});
+
+  void saveAuthToken({required String token});
+
+  void deleteAuthToken();
 }
 
 class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
@@ -32,11 +45,36 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
     staticData.fields.clear();
     String loginUrl = ApiKeys.logOutKey;
 
-    Response response = await DioHelper.getDate(url: loginUrl);
+    Response response =
+        await DioHelper.postData(url: loginUrl, data: FormData());
 
-    DioHelper.dio.options.headers.remove("Authorization");
+    ///delete user token from Auth header
+    deleteAuthToken();
 
     return BaseModel.fromJson(response.data);
+  }
+
+  @override
+  Future<Either<CustomError, BaseModel>> deleteAccount() async {
+    try {
+      FormData staticData = FormData();
+
+      staticData.fields.clear();
+      String loginUrl = ApiKeys.deleteProfileKey;
+
+      Response response =
+          await DioHelper.postData(url: loginUrl, data: FormData());
+
+      ///delete user token from Auth header
+      deleteAuthToken();
+
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
+    }
   }
 
   @override
@@ -48,7 +86,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
       FormData staticData = FormData();
       staticData.fields.clear();
       String loginUrl = ApiKeys.loginKey;
-      staticData.fields.add(MapEntry('email', email));
+      staticData.fields.add(MapEntry('phone_or_email', email));
       staticData.fields.add(MapEntry('password', password));
       staticData.fields.add(MapEntry('device_token', token));
 
@@ -56,37 +94,60 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSourceInterface {
           await DioHelper.postData(url: loginUrl, data: staticData);
 
       ///save user token and cash your data
-      DioHelper.dio.options.headers
-          .addAll({"Authorization": "Bearer ${response.data['token']}"});
+      saveAuthToken(token: response.data["data"]['token']);
       return right(BaseModel.fromJson(response.data));
     } on CustomException catch (ex) {
       return Left(CustomError(
-          type: ex.type, errorMassage: ex.errorMassage, imgPath: ex.imgPath));
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
     }
   }
 
   @override
-  Future<BaseModel> userSingUp(
-      {required String userName,
+  Future<Either<CustomError, BaseModel>> userSingUp(
+      {required String userFirstName,
+      required String userLastName,
       required String emailAddress,
       required String phoneNumber,
       required String password,
       required String confirmPassword,
-      XFile? userImage,
+      required String userAddressDetails,
+      required String userCity,
+      required String userArea,
       required String token}) async {
-    FormData staticData = FormData();
-    staticData.fields.clear();
-    String _pathUrl = ApiKeys.singUpKey;
-    staticData.fields.add(MapEntry('name', userName));
-    staticData.fields.add(MapEntry('email', emailAddress));
-    staticData.fields.add(MapEntry('phone', phoneNumber));
-    staticData.fields.add(MapEntry('password', password));
-    staticData.fields.add(MapEntry('password_confirmation', confirmPassword));
-    staticData.fields.add(MapEntry('device_token', token));
+    try {
+      FormData staticData = FormData();
+      staticData.fields.clear();
+      String pathUrl = ApiKeys.singUpKey;
+      staticData.fields.add(MapEntry('first_name', userFirstName));
+      staticData.fields.add(MapEntry('last_name', userLastName));
+      staticData.fields.add(MapEntry('email', emailAddress));
+      staticData.fields.add(MapEntry('phone', phoneNumber));
+      staticData.fields.add(MapEntry('password', password));
+      staticData.fields.add(MapEntry('password_confirmation', confirmPassword));
+      staticData.fields.add(MapEntry('address', userAddressDetails));
+      staticData.fields.add(MapEntry('city', userCity));
+      staticData.fields.add(MapEntry('area', userArea));
+      staticData.fields.add(MapEntry('device_token', token));
+      Response response =
+          await DioHelper.postData(url: pathUrl, data: staticData);
+      return right(BaseModel.fromJson(response.data));
+    } on CustomException catch (ex) {
+      return Left(CustomError(
+        type: ex.error.type,
+        errorMassage: ex.error.errorMassage,
+      ));
+    }
+  }
 
-    Response response =
-        await DioHelper.postData(url: _pathUrl, data: staticData);
+  @override
+  void deleteAuthToken() {
+    DioHelper.dio.options.headers.remove("Authorization");
+  }
 
-    return BaseModel.fromJson(response.data);
+  @override
+  void saveAuthToken({required String token}) {
+    DioHelper.dio.options.headers.addAll({"Authorization": "Bearer $token"});
   }
 }
