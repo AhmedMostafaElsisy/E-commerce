@@ -1,10 +1,9 @@
 class BaseUrls {
-  ///In need dev Stage
-  ///Todo: change this stage and domain for the new project
-  static String stage = 'In need dev';
-  static String domainUrl = 'https://inneed.queendemos.com/api';
-  static String imageDomainUrl =
-      'https://devineed.emalleg.net/api/customer/storage';
+  ///cezma dev Stage
+  static String stage = 'cezma dev';
+  static String domainUrl = 'https://pre.cezma.com/api';
 
   static String mapPlaceUrl = 'https://maps.googleapis.com/maps/api/place';
+  static String webSocketUrl =
+      'wss://socket.queendemos.com/app/12345?protocol=7&client=js&version=8.0.1&flash=false';
 }

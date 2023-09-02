@@ -9,6 +9,8 @@ enum CustomStatusCodeErrorType {
   sendTimeout,
   badRequest,
   unExcepted,
+  canNotParsing,
   unVerified,
   notFound,
+  quantityNotValid,
 }

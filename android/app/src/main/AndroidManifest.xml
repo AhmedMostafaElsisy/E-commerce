@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.captien_omda_customer">
-   <application
-        android:label="Captain Omda"
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:label="Cezma"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

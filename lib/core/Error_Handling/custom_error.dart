@@ -1,16 +1,13 @@
-
 import '../Constants/Enums/exception_enums.dart';
-
 
 class CustomError {
   CustomStatusCodeErrorType type;
   String? errorMassage;
-  String? imgPath;
 
-  CustomError(
-      {this.type = CustomStatusCodeErrorType.init,
-      this.errorMassage,
-      this.imgPath});
+  CustomError({
+    this.type = CustomStatusCodeErrorType.init,
+    this.errorMassage,
+  });
 
   @override
   String toString() {

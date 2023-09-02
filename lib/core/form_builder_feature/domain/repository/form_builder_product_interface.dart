@@ -1,0 +1,11 @@
+import 'package:dartz/dartz.dart';
+
+import '../../../../../core/Error_Handling/custom_error.dart';
+import '../../../../../core/model/base_model.dart';
+
+abstract class FormBuilderInterface {
+
+
+  Future<Either<CustomError, BaseModel>> getProductForm(
+      {required int categoryId});
+}
